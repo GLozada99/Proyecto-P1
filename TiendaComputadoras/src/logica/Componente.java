@@ -11,7 +11,7 @@ public abstract class Componente {
 	protected float cantMax;
 	protected ArrayList<Precio> precios;
 	
-	public Componente(String modelo, String numeroSerie, String marca, int cantDisponible, float cantMin, float cantMax, ArrayList<Precio> precios) {
+	public Componente(String modelo, String numeroSerie, String marca, int cantDisponible, float cantMin, float cantMax, float precioVentaI, float precioCompraI) {
 		super();
 		this.modelo = modelo;
 		this.numeroSerie = numeroSerie;
@@ -19,7 +19,9 @@ public abstract class Componente {
 		this.cantDisponible = cantDisponible;
 		this.cantMin = cantMin;
 		this.cantMax = cantMax;
-		this.precios = new ArrayList<>();
+		precios=new ArrayList<Precio>();
+		precios.add(new Precio(precioVentaI, precioCompraI, false));
+	
 	}
 
 	public String getModelo() {
@@ -76,6 +78,12 @@ public abstract class Componente {
 
 	public void setPrecios(ArrayList<Precio> precios) {
 		this.precios = precios;
+	}
+	public float getPrecioCompraActual() {
+		return precios.get(precios.size()).getPrecioCompra();
+	}
+	public float getPrecioVentaActual() {
+		return precios.get(precios.size()).getPrecioVenta();
 	}
 	
 }
