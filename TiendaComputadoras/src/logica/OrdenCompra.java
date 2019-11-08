@@ -31,6 +31,7 @@ public class OrdenCompra {
 	public void setRealizada(boolean realizada) {
 		this.realizada = realizada;
 	}
+	
 	public void hacerCompra(Proveedor aux) {
 		compCompra.getPrecios().add(nuevoPrecioCompra);
 		aux.setDebito(cantiCompos*nuevoPrecioCompra.getPrecioCompra());

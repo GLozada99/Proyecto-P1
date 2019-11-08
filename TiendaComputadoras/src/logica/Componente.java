@@ -86,4 +86,6 @@ public abstract class Componente {
 		return precios.get(precios.size()).getPrecioVenta();
 	}
 	
+	
+	
 }

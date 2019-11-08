@@ -5,11 +5,11 @@ public class Cliente extends Persona {
 	private float credito;
 	private float limCredito;
 	
-	public Cliente(String nombre, String telefono, String direccion, String cedula, float limCredito) {
+	public Cliente(String nombre, String telefono, String direccion, String cedula) {
 		super(nombre, telefono, direccion);
 		this.cedula = cedula;
-		this.credito = 0;
-		this.limCredito = limCredito;
+		credito = 0;
+		limCredito = 1000;
 	}
 	
 	public String getCedula() {
@@ -32,9 +32,9 @@ public class Cliente extends Persona {
 		return limCredito;
 	}
 	
-	public void setLimCredito(float limCredito) {
+	/*public void setLimCredito(float limCredito) {
 		this.limCredito = limCredito;
-	}
+	}*/
 
 	
 }
