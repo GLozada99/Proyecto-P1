@@ -36,4 +36,5 @@ public class Cliente extends Persona {
 		this.limCredito = limCredito;
 	}
 
+	
 }

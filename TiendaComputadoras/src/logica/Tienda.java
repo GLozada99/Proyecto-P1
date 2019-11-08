@@ -105,7 +105,7 @@ public class Tienda {
 	public void setGeneradorCodigoComponentes(int generadorCodigoComponentes) {
 		this.generadorCodigoComponentes = generadorCodigoComponentes;
 	}
-
+	
 	public Cliente findClientebyCedula(String cedula) {
 		Cliente clienteFound = null;
 		for (Cliente cliente : losClientes) {
