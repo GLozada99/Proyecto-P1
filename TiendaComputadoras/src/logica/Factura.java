@@ -65,5 +65,4 @@ public class Factura {
 		this.tipo = tipo;
 	}
 	
-
 }
