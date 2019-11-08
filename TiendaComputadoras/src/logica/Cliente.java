@@ -32,9 +32,12 @@ public class Cliente extends Persona {
 		return limCredito;
 	}
 	
-	/*public void setLimCredito(float limCredito) {
-		this.limCredito = limCredito;
-	}*/
-
+	public boolean limCredito(float credito) {
+		boolean type = false;
+		if(credito > limCredito) {
+			type = true;
+		}
+		return type;
+	}
 	
 }

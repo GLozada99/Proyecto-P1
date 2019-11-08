@@ -5,6 +5,7 @@ public class OrdenCompra {
 	private int cantiCompos;
 	private boolean realizada;//es falsa por defecto, se hace verdadera cuando se hace la compra;
 	private Precio nuevoPrecioCompra;
+	
 	public OrdenCompra(Componente compCompra, int cantiCompos, float precioCompra) {
 		super();
 		this.compCompra = compCompra;
@@ -13,21 +14,27 @@ public class OrdenCompra {
 		nuevoPrecioCompra=new Precio(compCompra.getPrecioVentaActual(), precioCompra, false);
 		
 	}
+	
 	public Componente getCompCompra() {
 		return compCompra;
 	}
+	
 	public void setCompCompra(Componente compCompra) {
 		this.compCompra = compCompra;
 	}
+	
 	public int getCantiCompos() {
 		return cantiCompos;
 	}
+	
 	public void setCantiCompos(int cantiCompos) {
 		this.cantiCompos = cantiCompos;
 	}
+	
 	public boolean isRealizada() {
 		return realizada;
 	}
+	
 	public void setRealizada(boolean realizada) {
 		this.realizada = realizada;
 	}
