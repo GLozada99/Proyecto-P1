@@ -12,30 +12,32 @@ public class Tienda {
 	private int generadorCodigoCombo;
 	private int generadorCodigoFactura;
 	private int generadorCodigoComponentes;
-	private static Tienda tienda;
+	private static Tienda tienda=null;
 	
-	public Tienda() {
+	private Tienda() {
 		super();
-		this.losComponentes = losComponentes;
-		this.losClientes = losClientes;
-		this.lasFacturas = lasFacturas;
-		this.elCombo = elCombo;
-		this.losProveedores = losProveedores;
-		this.lasOrdenes = lasOrdenes;
-		this.generadorCodigoCombo = generadorCodigoCombo;
-		this.generadorCodigoFactura = generadorCodigoFactura;
-		this.generadorCodigoComponentes = generadorCodigoComponentes;
-		this.tienda = tienda;
+		losComponentes = new ArrayList<>();
+		losClientes = new ArrayList<>();
+		lasFacturas = new ArrayList<>();
+		elCombo = new ArrayList<>();
+		losProveedores = new ArrayList<>();
+		lasOrdenes = new ArrayList<>();
+		generadorCodigoCombo = 1;
+		generadorCodigoFactura = 1;
+		generadorCodigoComponentes = 1;
 	}
+	
 	public static Tienda getInstance() {
 		if(tienda==null){
 			tienda= new Tienda();
 		}
 		return tienda;
 	}
+	
 	public ArrayList<Componente> getLosComponentes() {
 		return losComponentes;
 	}
+	
 	public void setLosComponentes(ArrayList<Componente> losComponentes) {
 		this.losComponentes = losComponentes;
 	}
@@ -87,12 +89,7 @@ public class Tienda {
 	public void setGeneradorCodigoComponentes(int generadorCodigoComponentes) {
 		this.generadorCodigoComponentes = generadorCodigoComponentes;
 	}
-	public Tienda getTienda() {
-		return tienda;
-	}
-	public void setTienda(Tienda tienda) {
-		this.tienda = tienda;
-	}
+	
 	
 
 }
