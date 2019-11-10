@@ -10,6 +10,7 @@ public class Factura {
 	private Cliente elCliente;
 	private ArrayList<Componente> losComponentes;
 	private ArrayList<Combo> losCombos;
+	private ArrayList<Integer> enteros;
 	private boolean tipo; //si es false, la factura es pagada, si es true, la factura es a credito;
 	
 	public Factura(String codigo, float costo, Date fecha, Cliente elCliente, ArrayList<Componente> losComponentes,
@@ -89,5 +90,27 @@ public class Factura {
 	public void setTipo(boolean tipo) {
 		this.tipo = tipo;
 	}
+	
+	
+		public int getPrecioCompo(Componente aux) {
+			return enteros.get(losComponentes.lastIndexOf(aux));
+		}
+		
+		public void insertComponente(Componente aux, int aux1) {
+			losComponentes.add(aux);
+			enteros.add(aux1);
+		}
+		
+		public void deleteComponente(Componente aux) {
+			losComponentes.remove(aux);
+			enteros.remove(losComponentes.lastIndexOf(aux));
+		}
+	
+			/*for (Componente componente1 : losComponentes) {
+				componente1.setCantDisponible(orden.getCantiCompos()+componente1.getCantDisponible());
+			}*/
+		
+	
+	
 	
 }

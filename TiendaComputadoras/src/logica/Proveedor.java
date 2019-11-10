@@ -48,8 +48,8 @@ public class Proveedor extends Persona {
 		this.preciosCompos = preciosCompos;
 	}
 	
-	public float getPrecioCompo(int i) {
-		return preciosCompos.lastIndexOf(misCompos.get(i));
+	public float getPrecioCompo(Componente aux) {
+		return preciosCompos.get(misCompos.lastIndexOf(aux));
 	}
 	
 	public void insertComponente(Componente aux, float aux1) {

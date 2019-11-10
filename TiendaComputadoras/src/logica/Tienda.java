@@ -105,7 +105,7 @@ public class Tienda {
 	public void setGeneradorCodigoComponentes(int generadorCodigoComponentes) {
 		this.generadorCodigoComponentes = generadorCodigoComponentes;
 	}
-	
+
 	public Cliente findClientebyCedula(String cedula) {
 		Cliente clienteFound = null;
 		for (Cliente cliente : losClientes) {
@@ -113,6 +113,7 @@ public class Tienda {
 				clienteFound = cliente;
 			}
 		}
+		
 		return clienteFound;
 	}
 
@@ -155,13 +156,22 @@ public class Tienda {
 		}
 		return cant;
 	}
-	
-	public float precioTotalComponentes() {
+
+	public float precioTotalComponentes(ArrayList<Componente> aux ) {
 		float precioTotal = 0;
-		for (Componente componente : losComponentes) {
+		for (Componente componente : aux) {
 			precioTotal += componente.getPrecioVentaActual();
 		}
 		return precioTotal;
 	}
+
+	public void pagoDeuda(String cedulaCliente, float monto) {
+		//validar si el cliente no existe
+	             Cliente cliente1=null;
+	             cliente1=findClientebyCedula(cedulaCliente);
+	              cliente1.setCredito(cliente1.getCredito()-monto);
+
+	}
 	
+
 }

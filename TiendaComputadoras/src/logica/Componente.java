@@ -7,11 +7,11 @@ public abstract class Componente {
 	protected String numeroSerie;
 	protected String marca;
 	protected int cantDisponible;
-	protected float cantMin;
-	protected float cantMax;
+	protected int cantMin;
+	protected int cantMax;
 	protected ArrayList<Precio> precios;
 	
-	public Componente(String modelo, String numeroSerie, String marca, int cantDisponible, float cantMin, float cantMax, float precioVentaI, float precioCompraI) {
+	public Componente(String modelo, String numeroSerie, String marca, int cantDisponible, int cantMin, int cantMax, float precioVentaI, float precioCompraI) {
 		super();
 		this.modelo = modelo;
 		this.numeroSerie = numeroSerie;
@@ -40,11 +40,11 @@ public abstract class Componente {
 		return cantDisponible;
 	}
 
-	public float getCantMin() {
+	public int getCantMin() {
 		return cantMin;
 	}
 
-	public float getCantMax() {
+	public int getCantMax() {
 		return cantMax;
 	}
 
@@ -68,11 +68,11 @@ public abstract class Componente {
 		this.cantDisponible = cantDisponible;
 	}
 
-	public void setCantMin(float cantMin) {
+	public void setCantMin(int cantMin) {
 		this.cantMin = cantMin;
 	}
 
-	public void setCantMax(float cantMax) {
+	public void setCantMax(int cantMax) {
 		this.cantMax = cantMax;
 	}
 
