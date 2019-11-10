@@ -108,12 +108,15 @@ public class Tienda {
 
 	public Cliente findClientebyCedula(String cedula) {
 		Cliente clienteFound = null;
-		for (Cliente cliente : losClientes) {
-			if (cliente.getCedula().equalsIgnoreCase(cedula)) {
-				clienteFound = cliente;
+		boolean find = false;
+		int i=0;
+		while (i<losClientes.size()&&!find) {
+			if(losClientes.get(i).getCedula().equalsIgnoreCase(cedula)){
+				clienteFound = losClientes.get(i);
+				find = true;
 			}
+			i++;
 		}
-		
 		return clienteFound;
 	}
 
@@ -127,10 +130,14 @@ public class Tienda {
 
 	public Componente findComponentebyNumeroSerie(String NumeroSerie) {
 		Componente componenteFound = null;
-		for (Componente componente : losComponentes) {
-			if (componente.getNumeroSerie().equalsIgnoreCase(NumeroSerie)) {
-				componenteFound = componente;
+		boolean find = false;
+		int i=0;
+		while (i<losComponentes.size()&&!find) {
+			if(losComponentes.get(i).getNumeroSerie().equalsIgnoreCase(NumeroSerie)){
+				componenteFound = losComponentes.get(i);
+				find = true;
 			}
+			i++;
 		}
 		return componenteFound;
 	}
@@ -167,11 +174,11 @@ public class Tienda {
 
 	public void pagoDeuda(String cedulaCliente, float monto) {
 		//validar si el cliente no existe
-	             Cliente cliente1=null;
-	             cliente1=findClientebyCedula(cedulaCliente);
-	              cliente1.setCredito(cliente1.getCredito()-monto);
+		Cliente cliente1=null;
+		cliente1=findClientebyCedula(cedulaCliente);
+		cliente1.setCredito(cliente1.getCredito()-monto);
 
 	}
-	
+
 
 }
