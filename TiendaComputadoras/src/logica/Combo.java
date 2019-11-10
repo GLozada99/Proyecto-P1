@@ -48,7 +48,7 @@ public class Combo {
 		this.descuento = descuento;
 	}
 	
-	public float PrecioCombo() {
+	public float precioCombo() {
 		float precioCombo=0;
 		 precioCombo= ((100-descuento)/100)*precio;
 		

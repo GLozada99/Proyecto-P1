@@ -113,7 +113,6 @@ public class Tienda {
 				clienteFound = cliente;
 			}
 		}
-		
 		return clienteFound;
 	}
 
@@ -135,7 +134,7 @@ public class Tienda {
 		return componenteFound;
 	}
 
-	public int[]  cantComponentes(){
+	public int[]  cantComponentesTipo(){
 		int[] cant = new int[4];
 		for (int i = 0; i < cant.length; i++) {
 			cant[i]=0;
@@ -159,19 +158,30 @@ public class Tienda {
 
 	public float precioTotalComponentes(ArrayList<Componente> aux ) {
 		float precioTotal = 0;
-		for (Componente componente : aux) {
-			precioTotal += componente.getPrecioVentaActual();
+		if(!aux.isEmpty()) {
+			for (Componente componente : aux) {
+				precioTotal += componente.getPrecioVentaActual();
+			}
+		}
+		return precioTotal;
+	}
+	public float precioTotalCombos(ArrayList<Combo> aux ) {
+		float precioTotal = 0;
+		if(!aux.isEmpty()) {	
+			for (Combo combo : aux) {
+				precioTotal += combo.precioCombo();
+			}
 		}
 		return precioTotal;
 	}
 
 	public void pagoDeuda(String cedulaCliente, float monto) {
 		//validar si el cliente no existe
-	             Cliente cliente1=null;
-	             cliente1=findClientebyCedula(cedulaCliente);
-	              cliente1.setCredito(cliente1.getCredito()-monto);
+		Cliente cliente1=null;
+		cliente1=findClientebyCedula(cedulaCliente);
+		cliente1.setCredito(cliente1.getCredito()-monto);
 
 	}
-	
+
 
 }

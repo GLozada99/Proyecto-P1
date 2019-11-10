@@ -32,9 +32,9 @@ public class Cliente extends Persona {
 		return limCredito;
 	}
 	
-	public boolean limCredito(float credito) {
+	public boolean comprobarLimCredito(float credito) {
 		boolean type = false;
-		if(credito > limCredito) {
+		if(credito+getCredito() > limCredito) {
 			type = true;
 		}
 		return type;

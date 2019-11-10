@@ -52,7 +52,7 @@ public class Proveedor extends Persona {
 		return preciosCompos.get(misCompos.lastIndexOf(aux));
 	}
 	
-	public void insertComponente(Componente aux, float aux1) {
+	public void insertComponenteyPrecio(Componente aux, float aux1) {
 		misCompos.add(aux);
 		preciosCompos.add(aux1);
 	}
