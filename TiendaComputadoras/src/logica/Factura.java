@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Factura {
 	private String codigo;
-	//private float costo;
+	private float costo;
 	private Date fecha;
 	private Cliente elCliente;
 	private ArrayList<Componente> losComponentes;
@@ -14,11 +14,11 @@ public class Factura {
 	private ArrayList<Integer> cantiCombos;
 	private boolean tipo; //si es false, la factura es pagada, si es true, la factura es a credito;
 
-	public Factura(String codigo,/* float costo,*/ Date fecha, Cliente elCliente, ArrayList<Componente> losComponentes,
+	public Factura(String codigo,float costo, Date fecha, Cliente elCliente, ArrayList<Componente> losComponentes,
 			ArrayList<Combo> losCombos,ArrayList<Integer> cantiComponentes, ArrayList<Integer> cantiCombos, boolean tipo) {
 		super();
 		this.codigo = codigo;
-		//this.costo = costo;
+		this.costo = costo;
 		this.fecha = fecha;
 		this.elCliente = elCliente;
 		this.losComponentes = losComponentes;
@@ -46,13 +46,13 @@ public class Factura {
 		this.codigo = codigo;
 	}
 
-	/*public float getCosto() {
+	public float getCosto() {
 		return costo;
 	}
 
 	public void setCosto(float costo) {
 		this.costo = costo;
-	}*/
+	}
 
 	public Date getFecha() {
 		return fecha;

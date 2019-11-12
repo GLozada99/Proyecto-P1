@@ -8,8 +8,8 @@ public class Proveedor extends Persona {
 	private float debito;
 	private ArrayList<Float> preciosCompos;
 	
-	public Proveedor(String nombre, String telefono, String direccion, ArrayList<Componente> misCompos,ArrayList<Float> preciosCompos) {
-		super(nombre, telefono, direccion);
+	public Proveedor(String nombre, String telefono, String direccion, String cedula, ArrayList<Componente> misCompos,ArrayList<Float> preciosCompos) {
+		super(nombre, telefono, direccion, cedula);
 		this.misCompos = misCompos;
 		this.misOrdenes = new ArrayList<>();
 		this.setPreciosCompos(preciosCompos);

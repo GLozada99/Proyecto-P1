@@ -2,11 +2,13 @@ package logica;
 
 public abstract class Persona {
 	protected String nombre;
+	protected String cedula;
 	protected String telefono;
 	protected String direccion;
 	
-	public Persona(String nombre, String telefono, String direccion) {
+	public Persona(String nombre, String telefono, String direccion, String cedula) {
 		super();
+		this.cedula = cedula;
 		this.nombre = nombre;
 		this.telefono = telefono;
 		this.direccion = direccion;
@@ -34,6 +36,13 @@ public abstract class Persona {
 	
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
+	}
+	public String getCedula() {
+		return cedula;
+	}
+
+	public void setCedula(String cedula) {
+		this.cedula = cedula;
 	}
 	
 }

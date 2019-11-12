@@ -144,7 +144,7 @@ public class Tienda {
 
 	public int[]  cantComponentesTipo(){
 		int[] cant = new int[4];
-		for (int i = 0; i < cant.length; i++) {
+		for (int i = 0; i < 4; i++) {
 			cant[i]=0;
 		}
 		for (Componente componente : losComponentes) {
@@ -181,6 +181,10 @@ public class Tienda {
 			}
 		}
 		return precioTotal;
+	}
+	public float costoFactura(ArrayList<Componente> losComponentes,ArrayList<Combo> losCombos) {
+		float total=Tienda.getInstance().precioTotalCombos(losCombos)+Tienda.getInstance().precioTotalComponentes(losComponentes);
+		return total;
 	}
 
 	public void pagoDeuda(String cedulaCliente, float monto) {
