@@ -2,6 +2,8 @@ package logica;
 
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 public class Tienda {
 	private ArrayList<Componente> losComponentes;
 	private ArrayList <Cliente> losClientes;
@@ -120,13 +122,13 @@ public class Tienda {
 		return clienteFound;
 	}
 
-	public void removeComponente(Componente componenteElim) {
+/*	public void removeComponente(Componente componenteElim) {
 		for (Componente componente : losComponentes) {
 			if(componente == componenteElim) {
 				losComponentes.remove(componenteElim);
 			}
 		}
-	}
+	}*/
 
 	public Componente findComponentebyNumeroSerie(String NumeroSerie) {
 		Componente componenteFound = null;
@@ -183,16 +185,18 @@ public class Tienda {
 		return precioTotal;
 	}
 	public float costoFactura(ArrayList<Componente> losComponentes,ArrayList<Combo> losCombos) {
-		float total=Tienda.getInstance().precioTotalCombos(losCombos)+Tienda.getInstance().precioTotalComponentes(losComponentes);
+		float total=precioTotalCombos(losCombos)+precioTotalComponentes(losComponentes);
 		return total;
 	}
 
 	public void pagoDeuda(String cedulaCliente, float monto) {
-		//validar si el cliente no existe
-		Cliente cliente1=null;
-		cliente1=findClientebyCedula(cedulaCliente);
+		Cliente cliente1=findClientebyCedula(cedulaCliente);
+		if (cliente1!=null) {
 		cliente1.setCredito(cliente1.getCredito()-monto);
-
+		}
+		else {
+			JOptionPane.showInternalMessageDialog(null, "Este cliente no existe");
+		}
 	}
 
 

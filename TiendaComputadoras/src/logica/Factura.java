@@ -98,11 +98,6 @@ public class Factura {
 	public int getCantiCompo(Componente aux) {
 		return cantiComponentes.get(losComponentes.lastIndexOf(aux));
 	}
-
-	public float costoTotal() {
-		float total=Tienda.getInstance().precioTotalCombos(losCombos)+Tienda.getInstance().precioTotalComponentes(losComponentes);
-		return total;
-	}
 	/*public void insertComponenteyCant(Componente aux, int aux1) {
 		losComponentes.add(aux);
 		cantiComponentes.add(aux1);
