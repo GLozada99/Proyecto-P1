@@ -198,6 +198,24 @@ public class Tienda {
 			JOptionPane.showInternalMessageDialog(null, "Este cliente no existe");
 		}
 	}
+	
+	public void restaCantiComponentes(ArrayList<Componente> componentes, ArrayList<Combo> combos,ArrayList<Integer> cantiCompo,ArrayList<Integer> cantiCombo) {
+		int i=0;
+		for (Componente componente : componentes) {
+			componente.setCantDisponible(componente.getCantDisponible()-cantiCompo.get(i));
+			i++;
+		}
+		i=0;
+		for (Combo combo : combos) {
+			for (int j = 0; j < cantiCombo.get(j); j++) {
+				for (int k = 0; k < combo.getComponentes().size(); k++) {
+					combo.getComponentes().get(k).setCantDisponible(combo.getComponentes().get(k).getCantDisponible()-1);;	
+				}
+				
+			}
+		}
+	}
+	//public void confirmarLogin(String nombre, String cedula);
 
 
 }

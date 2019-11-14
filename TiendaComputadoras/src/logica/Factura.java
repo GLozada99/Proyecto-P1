@@ -27,15 +27,7 @@ public class Factura {
 		this.cantiCombos=cantiCombos;
 		this.tipo = tipo;
 
-		/*if(this.tipo == true) {
-			if(elCliente.comprobarLimCredito(costo) == false) {
-				elCliente.setCredito(elCliente.getCredito+costo);
-			}
-			if (elCliente.comprobarLimCredito(costo) == true) {
-				System.out.println("El costo excede el límite de credito del cliente");
-			}
-		}para lo visual*/ 
-
+		Tienda.getInstance().restaCantiComponentes(losComponentes, losCombos, cantiComponentes, cantiCombos);
 	}
 
 	public String getCodigo() {
@@ -98,11 +90,11 @@ public class Factura {
 	public int getCantiCompo(Componente aux) {
 		return cantiComponentes.get(losComponentes.lastIndexOf(aux));
 	}
-	public void realizarCompra(int cantidad){
+	/*public void realizarCompra(int cantidad){
 		OrdenCompra ordenar= null;
 		Componente elComponente= null;
 		getCantiCompo(elComponente);
-		
+
 		if(getCantiCompo(elComponente) > elComponente.getCantDisponible()) {
 			System.out.println("La compra no puede ser realizada");
 		}
@@ -112,11 +104,10 @@ public class Factura {
 		}
 		else {
 			elComponente.setCantDisponible(elComponente.getCantDisponible()-getCantiCompo(elComponente));
-			
-		}
-		
-	}
-	
+
+		}		
+	}*/
+
 	/*public void insertComponenteyCant(Componente aux, int aux1) {
 		losComponentes.add(aux);
 		cantiComponentes.add(aux1);
