@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Combo {
 	private ArrayList<Componente> componentes;
+	private int cantidad;
 	private String codigo;
 	private float precio;
 	private int descuento;
@@ -14,6 +15,10 @@ public class Combo {
 		this.codigo = codigo;
 		this.precio = precio;
 		this.descuento = descuento;
+		for (Componente componente : componentes) {
+			componente.setCantDisponible(componente.getCantDisponible()-cantidad);
+		}
+		
 	}
 
 	public ArrayList<Componente> getComponentes() {

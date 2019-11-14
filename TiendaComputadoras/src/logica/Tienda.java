@@ -213,16 +213,56 @@ public class Tienda {
 			componente.setCantDisponible(componente.getCantDisponible()-cantiCompo.get(i));
 			i++;
 		}
-		i=0;
+		/*i=0;
 		for (Combo combo : combos) {
 			for (int j = 0; j < cantiCombo.get(j); j++) {
 				for (int k = 0; k < combo.getComponentes().size(); k++) {
 					combo.getComponentes().get(k).setCantDisponible(combo.getComponentes().get(k).getCantDisponible()-1);;	
 				}
 			}
-		}
+		}*/
 	}
+	public boolean relacionFactura(Cliente elCliente,float precio, ArrayList<Componente> misComponentes, ArrayList<Integer> cantComponentes,ArrayList<Combo> misCombos, ArrayList<Integer> cantCombos, boolean tipo) {
+		boolean cantidad=true;
+		boolean facturar=false;
+		boolean limite= true;
+		
+		for (Componente elComponente : misComponentes) {
+			if(elComponente.getCantDisponible() < cantComponentes.get(misComponentes.lastIndexOf(elComponente))) {
+				cantidad=false;
+			}
+		}
+		if(tipo==true) {
+			if(elCliente.getLimCredito() < precio+ elCliente.getCredito()) {
+				limite=false;
+			}
+		}
+		if(cantidad==true && limite==true) {
+			facturar= true;
+		}
+		return facturar;
+		
+	}
+	
 	//public void confirmarLogin(String nombre, String cedula);
+	
+	/*public boolean relacionFactura(int cantidad){
+	OrdenCompra ordenar= null;
+	Componente elComponente= null;
+	getCantiCompo(elComponente);
+
+	if(getCantiCompo(elComponente) > elComponente.getCantDisponible()) {
+		System.out.println("La compra no puede ser realizada");
+	}
+	if(getCantiCompo(elComponente) < elComponente.getCantDisponible() && elComponente.getCantDisponible() < elComponente.getCantMin()) {
+		ordenar.setRealizada(true);
+		elComponente.setCantDisponible(elComponente.getCantDisponible()-getCantiCompo(elComponente));
+	}
+	else {
+		elComponente.setCantDisponible(elComponente.getCantDisponible()-getCantiCompo(elComponente));
+
+	}		
+}*/
 
 
 }
