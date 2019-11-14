@@ -121,15 +121,7 @@ public class Tienda {
 		}
 		return clienteFound;
 	}
-
-/*	public void removeComponente(Componente componenteElim) {
-		for (Componente componente : losComponentes) {
-			if(componente == componenteElim) {
-				losComponentes.remove(componenteElim);
-			}
-		}
-	}*/
-
+	
 	public Componente findComponentebyNumeroSerie(String NumeroSerie) {
 		Componente componenteFound = null;
 		boolean find = false;
@@ -150,31 +142,33 @@ public class Tienda {
 		for (int i = 0; i < 4; i++) {
 			cant[i]=0;
 		}
-		for (Componente componente : aux) {
-			cant2 = cant1.get(aux.lastIndexOf(componente));
-			if(componente instanceof DiscoDuro){
-				cant[0] += cant2;
-			}
-			if(componente instanceof Micro){
-				cant[1] += cant2;
-			}
-			if(componente instanceof MotherBoard){
-				cant[2] += cant2;
-			}
-			if(componente instanceof RAM){
-				cant[3] += cant2;
+		if(!aux.isEmpty()) {
+			for (Componente componente : aux) {
+				cant2 = cant1.get(aux.lastIndexOf(componente));
+				if(componente instanceof DiscoDuro){
+					cant[0] += cant2;
+				}
+				if(componente instanceof Micro){
+					cant[1] += cant2;
+				}
+				if(componente instanceof MotherBoard){
+					cant[2] += cant2;
+				}
+				if(componente instanceof RAM){
+					cant[3] += cant2;
+				}
 			}
 		}
 		return cant;
 	}
-	
+
 	public int cantCombos(ArrayList<Combo> aux, ArrayList<Integer> cant1) {
 		int cant = 0;
 		int cant2 = 0;
 		if(!aux.isEmpty()) {
 			for (Combo combo : aux) {
-			cant2 = cant1.get(aux.lastIndexOf(combo));
-			cant += cant2;
+				cant2 = cant1.get(aux.lastIndexOf(combo));
+				cant += cant2;
 			}
 		}
 		return cant;
@@ -206,13 +200,13 @@ public class Tienda {
 	public void pagoDeuda(String cedulaCliente, float monto) {
 		Cliente cliente1=findClientebyCedula(cedulaCliente);
 		if (cliente1!=null) {
-		cliente1.setCredito(cliente1.getCredito()-monto);
+			cliente1.setCredito(cliente1.getCredito()-monto);
 		}
 		else {
 			JOptionPane.showInternalMessageDialog(null, "Este cliente no existe");
 		}
 	}
-	
+
 	public void restaCantiComponentes(ArrayList<Componente> componentes, ArrayList<Combo> combos,ArrayList<Integer> cantiCompo,ArrayList<Integer> cantiCombo) {
 		int i=0;
 		for (Componente componente : componentes) {
@@ -225,7 +219,6 @@ public class Tienda {
 				for (int k = 0; k < combo.getComponentes().size(); k++) {
 					combo.getComponentes().get(k).setCantDisponible(combo.getComponentes().get(k).getCantDisponible()-1);;	
 				}
-				
 			}
 		}
 	}
