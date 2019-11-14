@@ -14,12 +14,12 @@ public class Factura {
 	private ArrayList<Integer> cantiCombos;
 	private boolean tipo; //si es false, la factura es pagada, si es true, la factura es a credito;
 
-	public Factura(String codigo,float costo, Date fecha, Cliente elCliente, ArrayList<Componente> losComponentes,
+	public Factura(String codigo,float costo, Cliente elCliente, ArrayList<Componente> losComponentes,
 			ArrayList<Combo> losCombos,ArrayList<Integer> cantiComponentes, ArrayList<Integer> cantiCombos, boolean tipo) {
 		super();
 		this.codigo = codigo;
 		this.costo = costo;
-		this.fecha = fecha;
+		fecha= new Date();
 		this.elCliente = elCliente;
 		this.losComponentes = losComponentes;
 		this.losCombos = losCombos;
@@ -27,7 +27,7 @@ public class Factura {
 		this.cantiCombos=cantiCombos;
 		this.tipo = tipo;
 
-		Tienda.getInstance().restaCantiComponentes(losComponentes, losCombos, cantiComponentes, cantiCombos);
+		Tienda.getInstance().restaCantiComponentes(losComponentes, cantiComponentes);
 	}
 
 	public String getCodigo() {
@@ -90,33 +90,6 @@ public class Factura {
 	public int getCantiCompo(Componente aux) {
 		return cantiComponentes.get(losComponentes.lastIndexOf(aux));
 	}
-	/*public void realizarCompra(int cantidad){
-		OrdenCompra ordenar= null;
-		Componente elComponente= null;
-		getCantiCompo(elComponente);
-
-		if(getCantiCompo(elComponente) > elComponente.getCantDisponible()) {
-			System.out.println("La compra no puede ser realizada");
-		}
-		if(getCantiCompo(elComponente) < elComponente.getCantDisponible() && elComponente.getCantDisponible() < elComponente.getCantMin()) {
-			ordenar.setRealizada(true);
-			elComponente.setCantDisponible(elComponente.getCantDisponible()-getCantiCompo(elComponente));
-		}
-		else {
-			elComponente.setCantDisponible(elComponente.getCantDisponible()-getCantiCompo(elComponente));
-
-		}		
-	}*/
-
-	/*public void insertComponenteyCant(Componente aux, int aux1) {
-		losComponentes.add(aux);
-		cantiComponentes.add(aux1);
-	}*/
-
-	/*public void deleteComponente(Componente aux) {
-		losComponentes.remove(aux);
-		cantiComponentes.remove(losComponentes.lastIndexOf(aux));
-	}*/
 
 	public ArrayList<Integer> getCantiComponentes() {
 		return cantiComponentes;
@@ -134,9 +107,6 @@ public class Factura {
 		this.cantiCombos = cantiCombos;
 	}
 
-	/*for (Componente componente1 : losComponentes) {
-				componente1.setCantDisponible(orden.getCantiCompos()+componente1.getCantDisponible());
-			}*/
 
 
 

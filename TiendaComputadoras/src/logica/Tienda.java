@@ -11,6 +11,7 @@ public class Tienda {
 	private ArrayList<Combo> losCombo;
 	private ArrayList<Proveedor> losProveedores;
 	private ArrayList<OrdenCompra> lasOrdenes;
+	private ArrayList<OrdenCompra> ordenesSinProcesar;
 	private int generadorCodigoCombo;
 	private int generadorCodigoFactura;
 	private int generadorCodigoComponentes;
@@ -24,6 +25,7 @@ public class Tienda {
 		losCombo = new ArrayList<>();
 		losProveedores = new ArrayList<>();
 		lasOrdenes = new ArrayList<>();
+		ordenesSinProcesar = new ArrayList<>();
 		generadorCodigoCombo = 1;
 		generadorCodigoFactura = 1;
 		generadorCodigoComponentes = 1;
@@ -135,33 +137,19 @@ public class Tienda {
 		}
 		return componenteFound;
 	}
-
-	public int[]  cantComponentesTipo(ArrayList<Componente> aux, ArrayList<Integer> cant1){
-		int[] cant = new int[4];
-		int cant2 = 0; 
-		for (int i = 0; i < 4; i++) {
-			cant[i]=0;
-		}
+	
+	public int cantComponentes(ArrayList<Componente> aux, ArrayList<Integer> cant1) {
+		int cant = 0;
+		int cant2 = 0;
 		if(!aux.isEmpty()) {
 			for (Componente componente : aux) {
 				cant2 = cant1.get(aux.lastIndexOf(componente));
-				if(componente instanceof DiscoDuro){
-					cant[0] += cant2;
-				}
-				if(componente instanceof Micro){
-					cant[1] += cant2;
-				}
-				if(componente instanceof MotherBoard){
-					cant[2] += cant2;
-				}
-				if(componente instanceof RAM){
-					cant[3] += cant2;
-				}
+				cant += cant2;
 			}
 		}
 		return cant;
 	}
-
+	
 	public int cantCombos(ArrayList<Combo> aux, ArrayList<Integer> cant1) {
 		int cant = 0;
 		int cant2 = 0;
@@ -207,20 +195,12 @@ public class Tienda {
 		}
 	}
 
-	public void restaCantiComponentes(ArrayList<Componente> componentes, ArrayList<Combo> combos,ArrayList<Integer> cantiCompo,ArrayList<Integer> cantiCombo) {
+	public void restaCantiComponentes(ArrayList<Componente> componentes, ArrayList<Integer> cantiCompo) {
 		int i=0;
 		for (Componente componente : componentes) {
 			componente.setCantDisponible(componente.getCantDisponible()-cantiCompo.get(i));
 			i++;
 		}
-		/*i=0;
-		for (Combo combo : combos) {
-			for (int j = 0; j < cantiCombo.get(j); j++) {
-				for (int k = 0; k < combo.getComponentes().size(); k++) {
-					combo.getComponentes().get(k).setCantDisponible(combo.getComponentes().get(k).getCantDisponible()-1);;	
-				}
-			}
-		}*/
 	}
 	public boolean relacionFactura(Cliente elCliente,float precio, ArrayList<Componente> misComponentes, ArrayList<Integer> cantComponentes,ArrayList<Combo> misCombos, ArrayList<Integer> cantCombos, boolean tipo) {
 		boolean cantidad=true;
@@ -243,26 +223,33 @@ public class Tienda {
 		return facturar;
 		
 	}
-	
-	//public void confirmarLogin(String nombre, String cedula);
-	
-	/*public boolean relacionFactura(int cantidad){
-	OrdenCompra ordenar= null;
-	Componente elComponente= null;
-	getCantiCompo(elComponente);
-
-	if(getCantiCompo(elComponente) > elComponente.getCantDisponible()) {
-		System.out.println("La compra no puede ser realizada");
+	public void hacerCompra(OrdenCompra orden,Proveedor aux) {
+		orden.getCompCompra().getPrecios().add(new Precio(orden.getCompCompra().getPrecioVentaActual(), aux.getPreciosCompos().get(aux.getMisCompos().lastIndexOf(orden.getCompCompra())), false));
+		aux.setDebito(orden.getCantiCompos()*aux.getPreciosCompos().get(aux.getMisCompos().lastIndexOf(orden.getCompCompra())));
+		orden.setRealizada(true);
+		orden.getCompCompra().setCantDisponible(orden.getCompCompra().getCantDisponible()+orden.getCantiCompos());
+		lasOrdenes.add(orden);
+		ordenesSinProcesar.remove(orden);
+		
 	}
-	if(getCantiCompo(elComponente) < elComponente.getCantDisponible() && elComponente.getCantDisponible() < elComponente.getCantMin()) {
-		ordenar.setRealizada(true);
-		elComponente.setCantDisponible(elComponente.getCantDisponible()-getCantiCompo(elComponente));
+	
+	public void comboMas(Combo combo, int cantidad) {
+		combo.setCantidad(combo.getCantidad()+cantidad);
+		for (Componente componente : combo.getComponentes()) {
+			componente.setCantDisponible(componente.getCantDisponible()-cantidad);
+			if(componente.getCantDisponible()<componente.getCantMin()) {
+				OrdenCompra aux = new OrdenCompra(componente, componente.getCantMax()-componente.getCantDisponible());
+				Tienda.getInstance().getOrdenesSinProcesar().add(aux);
+			}
+		}
 	}
-	else {
-		elComponente.setCantDisponible(elComponente.getCantDisponible()-getCantiCompo(elComponente));
 
-	}		
-}*/
+	public ArrayList<OrdenCompra> getOrdenesSinProcesar() {
+		return ordenesSinProcesar;
+	}
 
-
+	public void setOrdenesSinProcesar(ArrayList<OrdenCompra> ordenesSinProcesar) {
+		this.ordenesSinProcesar = ordenesSinProcesar;
+	}
+	
 }

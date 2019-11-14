@@ -9,15 +9,22 @@ public class Combo {
 	private float precio;
 	private int descuento;
 	
-	public Combo(ArrayList<Componente> componentes, String codigo, float precio, int descuento) {
+	public Combo(ArrayList<Componente> componentes, String codigo, float precio, int descuento, int cantidad) {
 		super();
 		this.componentes = componentes;
 		this.codigo = codigo;
 		this.precio = precio;
 		this.descuento = descuento;
+		this.cantidad = cantidad;
+		
 		for (Componente componente : componentes) {
 			componente.setCantDisponible(componente.getCantDisponible()-cantidad);
+			if(componente.getCantDisponible()<componente.getCantMin()) {
+				OrdenCompra aux = new OrdenCompra(componente, componente.getCantMax()-componente.getCantDisponible());
+				Tienda.getInstance().getOrdenesSinProcesar().add(aux);
+			}
 		}
+	
 		
 	}
 
@@ -53,6 +60,14 @@ public class Combo {
 		this.descuento = descuento;
 	}
 	
+	public int getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(int cantidad) {
+		this.cantidad = cantidad;
+	}
+	
 	public float precioCombo() {
 		float precioCombo=0;
 		 precioCombo= ((100-descuento)/100)*precio;
@@ -60,5 +75,7 @@ public class Combo {
 	return precioCombo;
 		
 	}
+
+	
 	
 }
