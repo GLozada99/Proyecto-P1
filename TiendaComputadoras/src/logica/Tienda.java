@@ -144,23 +144,37 @@ public class Tienda {
 		return componenteFound;
 	}
 
-	public int[]  cantComponentesTipo(){
+	public int[]  cantComponentesTipo(ArrayList<Componente> aux, ArrayList<Integer> cant1){
 		int[] cant = new int[4];
+		int cant2 = 0; 
 		for (int i = 0; i < 4; i++) {
 			cant[i]=0;
 		}
-		for (Componente componente : losComponentes) {
+		for (Componente componente : aux) {
+			cant2 = cant1.get(aux.lastIndexOf(componente));
 			if(componente instanceof DiscoDuro){
-				cant[0]++;
+				cant[0] += cant2;
 			}
 			if(componente instanceof Micro){
-				cant[1]++;
+				cant[1] += cant2;
 			}
 			if(componente instanceof MotherBoard){
-				cant[2]++;
+				cant[2] += cant2;
 			}
 			if(componente instanceof RAM){
-				cant[3]++;
+				cant[3] += cant2;
+			}
+		}
+		return cant;
+	}
+	
+	public int cantCombos(ArrayList<Combo> aux, ArrayList<Integer> cant1) {
+		int cant = 0;
+		int cant2 = 0;
+		if(!aux.isEmpty()) {
+			for (Combo combo : aux) {
+			cant2 = cant1.get(aux.lastIndexOf(combo));
+			cant += cant2;
 			}
 		}
 		return cant;
