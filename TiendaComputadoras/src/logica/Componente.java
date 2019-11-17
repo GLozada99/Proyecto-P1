@@ -11,7 +11,7 @@ public abstract class Componente {
 	protected int cantMax;
 	protected ArrayList<Precio> precios;
 	
-	public Componente(String modelo, String numeroSerie, String marca, int cantDisponible, int cantMin, int cantMax, float precioVentaI, float precioCompraI) {
+	public Componente(String numeroSerie, String marca, String modelo, int cantDisponible, int cantMin, int cantMax, float precioVentaI, float precioCompraI) {
 		super();
 		this.modelo = modelo;
 		this.numeroSerie = numeroSerie;

@@ -1,13 +1,15 @@
 package logica;
 
 public class OrdenCompra {
+	private String codigo;
 	private Componente compCompra;
 	private int cantiCompos;
 	private boolean realizada;//es falsa por defecto, se hace verdadera cuando se hace la compra;
 	
 	
-	public OrdenCompra(Componente compCompra, int cantiCompos) {
+	public OrdenCompra(String codigo, Componente compCompra, int cantiCompos) {
 		super();
+		this.codigo = codigo;
 		this.compCompra = compCompra;
 		this.cantiCompos = cantiCompos;
 		realizada = false;
@@ -35,6 +37,14 @@ public class OrdenCompra {
 	
 	public void setRealizada(boolean realizada) {
 		this.realizada = realizada;
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 	
 	

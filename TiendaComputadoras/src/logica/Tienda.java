@@ -15,6 +15,7 @@ public class Tienda {
 	private int generadorCodigoCombo;
 	private int generadorCodigoFactura;
 	private int generadorCodigoComponentes;
+	private int generadorCodigoOrdenCompra;
 	private static Tienda tienda=null;
 
 	private Tienda() {
@@ -29,6 +30,7 @@ public class Tienda {
 		generadorCodigoCombo = 1;
 		generadorCodigoFactura = 1;
 		generadorCodigoComponentes = 1;
+		generadorCodigoOrdenCompra = 1;
 	}
 
 	public static Tienda getInstance() {
@@ -108,6 +110,38 @@ public class Tienda {
 
 	public void setGeneradorCodigoComponentes(int generadorCodigoComponentes) {
 		this.generadorCodigoComponentes = generadorCodigoComponentes;
+	}
+
+	public int getGeneradorCodigoOrdenCompra() {
+		return generadorCodigoOrdenCompra;
+	}
+
+	public void setGeneradorCodigoOrdenCompra(int generadorCodigoOrdenCompra) {
+		this.generadorCodigoOrdenCompra = generadorCodigoOrdenCompra;
+	}
+
+	public void setLosCombo(ArrayList<Combo> losCombo) {
+		this.losCombo = losCombo;
+	}
+	
+	public void agregarComponente(Componente aux) {
+		losComponentes.add(aux);
+		generadorCodigoComponentes++;
+	}
+	
+	public void agregarFactura(Factura aux) {
+		lasFacturas.add(aux);
+		generadorCodigoFactura++;
+	}
+	
+	public void agregarOrden(OrdenCompra aux) {
+		ordenesSinProcesar.add(aux);
+		generadorCodigoOrdenCompra++;
+	}
+	
+	public void agregarCombo(Combo aux) {
+		losCombo.add(aux);
+		generadorCodigoCombo++;
 	}
 
 	public Cliente findClientebyCedula(String cedula) {
@@ -229,6 +263,7 @@ public class Tienda {
 		orden.setRealizada(true);
 		orden.getCompCompra().setCantDisponible(orden.getCompCompra().getCantDisponible()+orden.getCantiCompos());
 		lasOrdenes.add(orden);
+		aux.getMisOrdenes().add(orden);
 		ordenesSinProcesar.remove(orden);
 		
 	}
@@ -238,8 +273,8 @@ public class Tienda {
 		for (Componente componente : combo.getComponentes()) {
 			componente.setCantDisponible(componente.getCantDisponible()-cantidad);
 			if(componente.getCantDisponible()<componente.getCantMin()) {
-				OrdenCompra aux = new OrdenCompra(componente, componente.getCantMax()-componente.getCantDisponible());
-				Tienda.getInstance().getOrdenesSinProcesar().add(aux);
+				OrdenCompra aux = new OrdenCompra("OC"+generadorCodigoOrdenCompra,componente, componente.getCantMax()-componente.getCantDisponible());
+				Tienda.getInstance().agregarOrden(aux);
 			}
 		}
 	}

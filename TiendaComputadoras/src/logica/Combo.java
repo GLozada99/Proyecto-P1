@@ -20,8 +20,8 @@ public class Combo {
 		for (Componente componente : componentes) {
 			componente.setCantDisponible(componente.getCantDisponible()-cantidad);
 			if(componente.getCantDisponible()<componente.getCantMin()) {
-				OrdenCompra aux = new OrdenCompra(componente, componente.getCantMax()-componente.getCantDisponible());
-				Tienda.getInstance().getOrdenesSinProcesar().add(aux);
+				OrdenCompra aux = new OrdenCompra("OC"+Tienda.getInstance().getGeneradorCodigoOrdenCompra(),componente, componente.getCantMax()-componente.getCantDisponible());
+				Tienda.getInstance().agregarOrden(aux);
 			}
 		}
 	

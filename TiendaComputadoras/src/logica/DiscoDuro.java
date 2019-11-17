@@ -3,14 +3,14 @@ package logica;
 public class DiscoDuro extends Componente {
 	private String CapacidadAlma;
 	private String tipoConexion;
-	
-	public DiscoDuro(String modelo, String numeroSerie, String marca, int cantDisponible, int cantMin, int cantMax,
+
+	public DiscoDuro(String numeroSerie, String marca, String modelo, int cantDisponible, int cantMin, int cantMax,
 			float precioVentaI, float precioCompraI, String capacidadAlma, String tipoConexion) {
-		super(modelo, numeroSerie, marca, cantDisponible, cantMin, cantMax, precioVentaI, precioCompraI);
+		super(numeroSerie, marca, modelo, cantDisponible, cantMin, cantMax, precioVentaI, precioCompraI);
 		CapacidadAlma = capacidadAlma;
 		this.tipoConexion = tipoConexion;
 	}
-	
+
 	public String getCapacidadAlma() {
 		return CapacidadAlma;
 	}
