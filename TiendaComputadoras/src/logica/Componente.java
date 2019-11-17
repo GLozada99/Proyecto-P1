@@ -85,6 +85,10 @@ public abstract class Componente {
 	public float getPrecioVentaActual() {
 		return precios.get(precios.size()).getPrecioVenta();
 	}
+	public float ganancia() {
+		float gain = getPrecioVentaActual()-getPrecioCompraActual();
+		return gain;
+	}
 	
 	
 	
