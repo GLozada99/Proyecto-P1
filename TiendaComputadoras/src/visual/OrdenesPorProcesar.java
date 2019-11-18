@@ -37,7 +37,7 @@ public class OrdenesPorProcesar extends JDialog {
 	private static DefaultTableModel model;
 	private static Object[] row;
 	private JButton btnProcesar;
-	//private String codigo="";
+	private String codigo="";
 
 	/**
 	 * Launch the application.
@@ -63,8 +63,9 @@ public class OrdenesPorProcesar extends JDialog {
 		setTitle("Ordenes Por Procesar");
 		
 		setResizable(false);
-		setBounds(100, 100, 582, 353);
+		setBounds(100, 100, 1250, 700);
 		setLocationRelativeTo(null);
+		setResizable(false);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -80,7 +81,7 @@ public class OrdenesPorProcesar extends JDialog {
 				{
 
 					model = new DefaultTableModel();
-					String[] header = {"No. Serie","Tipo de Componente","Marca","Modelo","Cantidad"};
+					String[] header = {"Codigo Orden","No. Serie","Tipo de Componente","Marca","Modelo","Cantidad"};
 					model.setColumnIdentifiers(header);
 					table = new JTable();
 					table.addMouseListener(new MouseAdapter() {
@@ -88,9 +89,10 @@ public class OrdenesPorProcesar extends JDialog {
 						public void mouseClicked(MouseEvent e) {
 							if(table.getSelectedRow()>-1){
 								int index = table.getSelectedRow();
-								
 								btnProcesar.setEnabled(true);
-							//	codigo = String.valueOf(table.getValueAt(index, 0));
+								codigo = String.valueOf(table.getValueAt(index, 0));
+							
+								
 
 
 							}
@@ -110,8 +112,17 @@ public class OrdenesPorProcesar extends JDialog {
 			{
 		
 				btnProcesar = new JButton("Procesar");
+				btnProcesar.setEnabled(false);
 				btnProcesar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						OrdenCompra aux = Tienda.getInstance().findOrdenComprabyCodigo(codigo);
+						SeleccionarProveedor choose = new SeleccionarProveedor(aux);
+						choose.setModal(true);
+						choose.setVisible(true);
+						dispose();
+						OrdenesPorProcesar refresh = new OrdenesPorProcesar();
+						refresh.setModal(true);
+						refresh.setVisible(true);
 					}
 				});
 				buttonPane.add(btnProcesar);
@@ -124,12 +135,12 @@ public class OrdenesPorProcesar extends JDialog {
 			});
 			buttonPane.add(btnAceptar);
 		}
-		cargarClientes();
+		cargarOrdenes();
 	}
 	{
 
 	}
-	public static void cargarClientes() {
+	public static void cargarOrdenes() {
 		model.setRowCount(0);
 		row = new Object[model.getColumnCount()];
 		/*row[0] = "1";
@@ -140,11 +151,12 @@ public class OrdenesPorProcesar extends JDialog {
 		model.addRow(row);*/
 
 		for (OrdenCompra aux : Tienda.getInstance().getOrdenesSinProcesar()) {
-			row[0] = aux.getCompCompra().getNumeroSerie();
-			row[1] = aux.getCompCompra().getClass().getSimpleName();
-			row[2] = aux.getCompCompra().getMarca();
-			row[3] = aux.getCompCompra().getModelo();
-			row[4] = aux.getCantiCompos();
+			row[0] = aux.getCodigo();
+			row[1] = aux.getCompCompra().getNumeroSerie();
+			row[2] = aux.getCompCompra().getClass().getSimpleName();
+			row[3] = aux.getCompCompra().getMarca();
+			row[4] = aux.getCompCompra().getModelo();
+			row[5] = aux.getCantiCompos();
 			model.addRow(row);
 		}
 

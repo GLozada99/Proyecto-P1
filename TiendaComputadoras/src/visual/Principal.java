@@ -1,25 +1,29 @@
 package visual;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 import logica.Cliente;
 import logica.Componente;
 import logica.DiscoDuro;
 import logica.OrdenCompra;
 import logica.Persona;
+import logica.Proveedor;
 import logica.Tienda;
 
-import javax.swing.JMenu;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+public class Principal extends JFrame {
 
-public class Principal {
-
-	private JFrame frame;
+	private JPanel contentPane;
 
 	/**
 	 * Launch the application.
@@ -28,8 +32,8 @@ public class Principal {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Principal window = new Principal();
-					window.frame.setVisible(true);
+					Principal frame = new Principal();
+					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -38,35 +42,39 @@ public class Principal {
 	}
 
 	/**
-	 * Create the application.
+	 * Create the frame.
 	 */
 	public Principal() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
 		//Cosas para probar
 		Persona ho = new Cliente("Juan", "809", "Aqui", "402-1383575-0");
 		Tienda.getInstance().getLosClientes().add((Cliente) ho);
 		
 		Persona ho1 = new Cliente("Juanaa", "809", "Aqui", "402-1111111-0");
 		Tienda.getInstance().getLosClientes().add((Cliente) ho1);
+		ArrayList<Componente> aux = new ArrayList<>();
+		ArrayList<Float> aux2 = new ArrayList<>();
+		aux2.add((float) 250);
 		
 		Componente dd = new DiscoDuro("CMP-"+Tienda.getInstance().getGeneradorCodigoComponentes(), "Seagate", "XS", 5, 3, 10, 1000, 9000, "2TB", "2");
 		OrdenCompra p = new OrdenCompra("OC-"+Tienda.getInstance().getGeneradorCodigoOrdenCompra(),dd, 6);
+		aux.add(dd);
+		
+		Persona pr1 = new Proveedor("Juan", "0192", "Alla", "12123", aux, aux2);
+		Tienda.getInstance().getLosProveedores().add((Proveedor) pr1);
 		Tienda.getInstance().getOrdenesSinProcesar().add(p);
-		//Cierre
+		//Termina
 		
-		
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 1820, 1000);
+		setLocationRelativeTo(null);
+		setResizable(false);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
+		setContentPane(contentPane);
 		
 		JMenuBar menuBar = new JMenuBar();
-		frame.setJMenuBar(menuBar);
+		setJMenuBar(menuBar);
 		
 		JMenu mnAgregar = new JMenu("Agregar");
 		menuBar.add(mnAgregar);
@@ -120,6 +128,9 @@ public class Principal {
 			}
 		});
 		mnFacturacion.add(mntmAsignarOrdenDe);
-		frame.getContentPane().setLayout(null);
+		getContentPane().setLayout(null);
 	}
-}
+		
+	}
+
+

@@ -158,6 +158,20 @@ public class Tienda {
 		return clienteFound;
 	}
 	
+	public Proveedor findProveedrobyRNC(String rnc) {
+		Proveedor proveedorFound = null;
+		boolean find = false;
+		int i=0;
+		while (i<losProveedores.size()&&!find) {
+			if(losProveedores.get(i).getCedula().equalsIgnoreCase(rnc)){
+				proveedorFound = losProveedores.get(i);
+				find = true;
+			}
+			i++;
+		}
+		return proveedorFound;
+	}
+	
 	public Componente findComponentebyNumeroSerie(String NumeroSerie) {
 		Componente componenteFound = null;
 		boolean find = false;
@@ -258,8 +272,8 @@ public class Tienda {
 		
 	}
 	public void hacerCompra(OrdenCompra orden,Proveedor aux) {
-		orden.getCompCompra().getPrecios().add(new Precio(orden.getCompCompra().getPrecioVentaActual(), aux.getPreciosCompos().get(aux.getMisCompos().lastIndexOf(orden.getCompCompra())), false));
-		aux.setDebito(orden.getCantiCompos()*aux.getPreciosCompos().get(aux.getMisCompos().lastIndexOf(orden.getCompCompra())));
+		orden.getCompCompra().getPrecios().add(new Precio(orden.getCompCompra().getPrecioVentaActual(), aux.getPrecioCompo(orden.getCompCompra()),false));//getPreciosCompos().get(aux.getMisCompos().lastIndexOf(orden.getCompCompra())), false));
+		aux.setDebito(orden.getCantiCompos()*aux.getPrecioCompo(orden.getCompCompra()));
 		orden.setRealizada(true);
 		orden.getCompCompra().setCantDisponible(orden.getCompCompra().getCantDisponible()+orden.getCantiCompos());
 		lasOrdenes.add(orden);
@@ -278,6 +292,21 @@ public class Tienda {
 			}
 		}
 	}
+	
+	public OrdenCompra findOrdenComprabyCodigo(String codigo) {
+		OrdenCompra ordenFound = null;
+		boolean find = false;
+		int i=0;
+		while (i<ordenesSinProcesar.size()&&!find) {
+			if(ordenesSinProcesar.get(i).getCodigo().equalsIgnoreCase(codigo)){
+				ordenFound = ordenesSinProcesar.get(i);
+				find = true;
+			}
+			i++;
+		}
+		return ordenFound;
+	}
+	
 
 	public ArrayList<OrdenCompra> getOrdenesSinProcesar() {
 		return ordenesSinProcesar;
