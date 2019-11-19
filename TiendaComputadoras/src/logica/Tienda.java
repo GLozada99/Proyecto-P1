@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 public class Tienda {
 	private ArrayList<Componente> losComponentes;
 	private ArrayList <Cliente> losClientes;
+	private ArrayList <Persona> losUsuarios;
 	private ArrayList<Factura> lasFacturas;
 	private ArrayList<Combo> losCombo;
 	private ArrayList<Proveedor> losProveedores;
@@ -35,7 +36,7 @@ public class Tienda {
 
 	public static Tienda getInstance() {
 		if(tienda==null){
-			tienda= new Tienda();
+			tienda = new Tienda();
 		}
 		return tienda;
 	}
@@ -307,6 +308,25 @@ public class Tienda {
 		return ordenFound;
 	}
 	
+	public Combo findCombobyCodigo(String codigo) {
+		Combo comboFound = null;
+		boolean find = false;
+		int i=0;
+		while (i<losCombo.size()&&!find) {
+			if(losCombo.get(i).getCodigo().equalsIgnoreCase(codigo)){
+				comboFound = losCombo.get(i);
+				find = true;
+			}
+			i++;
+		}
+		return comboFound;
+	}
+	
+	public void primeraOrdenCompra(Componente componente) {
+		OrdenCompra aux = new OrdenCompra("OC"+Tienda.getInstance().getGeneradorCodigoOrdenCompra(), componente, componente.getCantMax()-componente.getCantDisponible());
+		Tienda.getInstance().agregarOrden(aux);
+	}
+	
 
 	public ArrayList<OrdenCompra> getOrdenesSinProcesar() {
 		return ordenesSinProcesar;
@@ -314,6 +334,14 @@ public class Tienda {
 
 	public void setOrdenesSinProcesar(ArrayList<OrdenCompra> ordenesSinProcesar) {
 		this.ordenesSinProcesar = ordenesSinProcesar;
+	}
+
+	public ArrayList <Persona> getLosUsuarios() {
+		return losUsuarios;
+	}
+
+	public void setLosUsuarios(ArrayList <Persona> losUsuarios) {
+		this.losUsuarios = losUsuarios;
 	}
 	
 }

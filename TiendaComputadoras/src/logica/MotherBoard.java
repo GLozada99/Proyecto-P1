@@ -5,9 +5,9 @@ public class MotherBoard extends Componente {
 	private String tipoRAM;
 	//private ArrayList<String> 
 	
-	public MotherBoard(String numeroSerie, String marca, String modelo, int cantDisponible, int cantMin, int cantMax,
+	public MotherBoard(String numeroSerie, String marca, String modelo, int cantMin, int cantMax,
 			float precioVentaI, float precioCompraI, String tipoConector, String tipoRAM) {
-		super(numeroSerie, marca, modelo, cantDisponible, cantMin, cantMax, precioVentaI, precioCompraI);
+		super(numeroSerie, marca, modelo, cantMin, cantMax, precioVentaI, precioCompraI);
 		this.tipoConector = tipoConector;
 		this.tipoRAM = tipoRAM;
 	}
