@@ -122,10 +122,11 @@ public class ListaClientes extends JDialog {
 						ModificarCliente aux = new ModificarCliente(Tienda.getInstance().findClientebyCedula(codigo));
 						aux.setModal(true);
 						aux.setVisible(true);
-						dispose();
+						cargarClientes();
+						/*dispose();
 						ListaClientes refresh = new ListaClientes();
 						refresh.setModal(true);
-						refresh.setVisible(true);
+						refresh.setVisible(true);*/
 					}
 				});
 				buttonPane.add(btnModificar);
@@ -136,10 +137,11 @@ public class ListaClientes extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						Cliente aux = Tienda.getInstance().findClientebyCedula(codigo);
 						Tienda.getInstance().getLosClientes().remove(aux);
-						dispose();
+						cargarClientes();
+						/*dispose();
 						ListaClientes refresh = new ListaClientes();
 						refresh.setModal(true);
-						refresh.setVisible(true);
+						refresh.setVisible(true);*/
 					}
 				});
 				buttonPane.add(btnEliminar);

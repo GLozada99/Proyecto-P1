@@ -119,10 +119,11 @@ public class OrdenesPorProcesar extends JDialog {
 						SeleccionarProveedor choose = new SeleccionarProveedor(aux);
 						choose.setModal(true);
 						choose.setVisible(true);
-						dispose();
+						cargarOrdenes();
+						/*dispose();
 						OrdenesPorProcesar refresh = new OrdenesPorProcesar();
 						refresh.setModal(true);
-						refresh.setVisible(true);
+						refresh.setVisible(true);*/
 					}
 				});
 				buttonPane.add(btnProcesar);
