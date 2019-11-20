@@ -23,6 +23,10 @@ import logica.Tienda;
 
 public class Principal extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
 	/**
@@ -102,6 +106,13 @@ public class Principal extends JFrame {
 		mnListados.add(mntmListaClientes);
 		
 		JMenuItem mntmListaProveedores = new JMenuItem("Lista proveedores");
+		mntmListaProveedores.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListaProveedores aux = new ListaProveedores();
+				aux.setModal(true);
+				aux.setVisible(true);
+			}
+		});
 		mnListados.add(mntmListaProveedores);
 		
 		JMenuItem mntmListaComponentes = new JMenuItem("Lista componentes");

@@ -35,6 +35,10 @@ import javax.swing.JTextField;
 
 public class ListaComponentes extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JTable table;
 	private static DefaultTableModel model;
@@ -43,7 +47,7 @@ public class ListaComponentes extends JDialog {
 	private JButton btnModificar;
 	private JButton btnAceptar;
 	private String codigo;
-	private JComboBox cbxComp;
+	private JComboBox <String> cbxComp;
 	String[] encabezadoDD = {"No. Serie","Marca","Modelo","Precio Venta Act","Precio Compra Act","Cant Real","Cant Min","Cant Max","Almacenamiento","Tipo Conexion" };
 	String[] encabezadoMicro = {"No. Serie","Marca","Modelo","Precio Venta Act","Precio Compra Act","Cant Real","Cant Min","Cant Max","Velocidad","Tipo Conexion" };
 	String[] encabezadoMother = {"No. Serie","Marca","Modelo","Precio Venta Act","Precio Compra Act","Cant Real","Cant Min","Cant Max","Tipo Conector","Tipo RAM" };
@@ -126,7 +130,7 @@ public class ListaComponentes extends JDialog {
 					}
 				}
 			});
-			cbxComp.setModel(new DefaultComboBoxModel(new String[] {"Disco Duro", "Microprocesador", "Mother Board", "RAM"}));
+			cbxComp.setModel(new DefaultComboBoxModel<String>(new String[] {"Disco Duro", "Microprocesador", "Mother Board", "RAM"}));
 			cbxComp.setBounds(12, 26, 169, 22);
 			panelComp.add(cbxComp);
 			cbxComp.setSelectedIndex(0);
@@ -174,9 +178,16 @@ public class ListaComponentes extends JDialog {
 				btnEliminar.setEnabled(false);
 				btnEliminar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						Combo aux = Tienda.getInstance().findCombobyCodigo(codigo);
-						Tienda.getInstance().getLosCombo().remove(aux);
-						cargarComponentesDD();
+						Componente aux = Tienda.getInstance().findComponentebyNumeroSerie(codigo);
+						Tienda.getInstance().getLosComponentes().remove(aux);
+						if (aux instanceof DiscoDuro)
+							cargarComponentesDD();
+						if (aux instanceof Micro)
+							cargarComponentesMicro();
+						if (aux instanceof MotherBoard)
+							cargarComponentesMotherBoard();
+						if (aux instanceof RAM)
+							cargarComponentesRAM();
 					}
 				});
 				btnEliminar.setActionCommand("Cancel");

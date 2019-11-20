@@ -138,10 +138,6 @@ public class ListaClientes extends JDialog {
 						Cliente aux = Tienda.getInstance().findClientebyCedula(codigo);
 						Tienda.getInstance().getLosClientes().remove(aux);
 						cargarClientes();
-						/*dispose();
-						ListaClientes refresh = new ListaClientes();
-						refresh.setModal(true);
-						refresh.setVisible(true);*/
 					}
 				});
 				buttonPane.add(btnEliminar);

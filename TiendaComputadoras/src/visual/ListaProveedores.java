@@ -9,20 +9,20 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import logica.Combo;
-import logica.Componente;
+import logica.Proveedor;
 import logica.Tienda;
 
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
-import javax.swing.ScrollPaneConstants;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 
-public class ListaCombos extends JDialog {
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+public class ListaProveedores extends JDialog {
 
 	/**
 	 * 
@@ -30,19 +30,18 @@ public class ListaCombos extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JTable table;
+	private Object[] row;
 	private static DefaultTableModel model;
-	private static Object[] row;
-	private JButton btnEliminar;
-	private JButton btnModificar;
-	private JButton btnAceptar;
-	private String codigo;
-
+	private String rnc;
+	JButton btnCancelar;
+	JButton btnAceptar;
+	private JButton btnNewButton;
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		try {
-			ListaCombos dialog = new ListaCombos();
+			SeleccionarProveedor dialog = new SeleccionarProveedor();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -53,8 +52,13 @@ public class ListaCombos extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public ListaCombos() {
+	public ListaProveedores() {
+		setTitle("Lista Proveedores");
+		setResizable(false);
 		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 1250, 700);
+		setLocationRelativeTo(null);
+		setResizable(false);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -69,21 +73,22 @@ public class ListaCombos extends JDialog {
 				panel.add(scrollPane, BorderLayout.CENTER);
 				{
 					model = new DefaultTableModel();
-					String[] encabezado = {"Codigo","Cantidad Disponible","Descuento","Precio"};
+					String[] encabezado = {"RNC Proveedor","Nombre Proveedor","Telefono Proveedor","Direccion","Debito"};
 					model.setColumnIdentifiers(encabezado);
 					table = new JTable();
 					table.addMouseListener(new MouseAdapter() {
 						@Override
 						public void mouseClicked(MouseEvent arg0) {
 							int index = table.getSelectedRow();
-							btnEliminar.setEnabled(true);
-							btnModificar.setEnabled(true);
-							codigo = String.valueOf(table.getValueAt(index, 0));
+							btnAceptar.setEnabled(true);
+							rnc = String.valueOf(table.getValueAt(index, 0));
+
+
 						}
 					});
-					scrollPane.setViewportView(table);
 					table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 					table.setModel(model);
+					scrollPane.setViewportView(table);
 				}
 			}
 		}
@@ -95,56 +100,46 @@ public class ListaCombos extends JDialog {
 				btnAceptar = new JButton("Aceptar");
 				btnAceptar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
+						
 						dispose();
 					}
 				});
 				btnAceptar.setActionCommand("OK");
 				buttonPane.add(btnAceptar);
+				getRootPane().setDefaultButton(btnAceptar);
+				{
+					btnNewButton = new JButton("Modificar");
+					btnNewButton.setEnabled(false);
+					buttonPane.add(btnNewButton);
+				}
 			}
 			{
-				btnModificar = new JButton("Modificar");
-				btnModificar.setEnabled(false);
-				btnModificar.addActionListener(new ActionListener() {
+				btnCancelar = new JButton("Eliminar");
+				btnCancelar.setEnabled(false);
+				btnCancelar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-					/*	NuevoCombo aux = new NuevoCombo(Tienda.getInstance().findClientebyCedula(codigo));
-						aux.setModal(true);
-						aux.setVisible(true);
-						cargarClientes();*/
+						dispose();
 					}
 				});
-				btnModificar.setActionCommand("OK");
-				buttonPane.add(btnModificar);
-				getRootPane().setDefaultButton(btnModificar);
+				btnCancelar.setActionCommand("Cancel");
+				buttonPane.add(btnCancelar);
 			}
-			{
-				btnEliminar = new JButton("Eliminar");
-				btnEliminar.setEnabled(false);
-				btnEliminar.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						Combo aux = Tienda.getInstance().findCombobyCodigo(codigo);
-						for (Componente componente : aux.getComponentes()) {
-							componente.setCantDisponible(componente.getCantDisponible()+aux.getCantidad());
-						}
-						Tienda.getInstance().getLosCombo().remove(aux);
-						cargarCombos();
-					}
-				});
-				btnEliminar.setActionCommand("Cancel");
-				buttonPane.add(btnEliminar);
-			}
-		}
-		cargarCombos();
-	}
 
-	public static void cargarCombos() {
+		}
+		cargarProveedores();
+
+
+	}
+	public void cargarProveedores() {
 		model.setRowCount(0);
 		row = new Object[model.getColumnCount()];
 
-		for (Combo combo : Tienda.getInstance().getLosCombo()) {
-			row[0] = combo.getCodigo();
-			row[1] = combo.getCantidad();
-			row[2] = combo.getDescuento();
-			row[3] = combo.precioCombo();
+		for (Proveedor proveedor : Tienda.getInstance().getLosProveedores()) {
+			row[0] = proveedor.getCedula(); 
+			row[1] = proveedor.getNombre();
+			row[2] = proveedor.getTelefono();
+			row[3] = proveedor.getDireccion();
+			row[4] = proveedor.getDebito();
 			model.addRow(row);
 		}
 
