@@ -55,7 +55,7 @@ public class Principal extends JFrame {
 		ArrayList<Float> aux2 = new ArrayList<>();
 		aux2.add((float) 250);
 		
-		Componente dd = new DiscoDuro("CMP-"+Tienda.getInstance().getGeneradorCodigoComponentes(), "Seagate", "XS", 5, 3, 10, 1000, 9000, "2TB", "2");
+		Componente dd = new DiscoDuro("CMP-"+Tienda.getInstance().getGeneradorCodigoComponentes(), "Seagate", "XS", 3, 10, 1000, 9000, "2TB", "2");
 		OrdenCompra p = new OrdenCompra("OC-"+Tienda.getInstance().getGeneradorCodigoOrdenCompra(),dd, 6);
 		aux.add(dd);
 		
@@ -105,9 +105,23 @@ public class Principal extends JFrame {
 		mnListados.add(mntmListaProveedores);
 		
 		JMenuItem mntmListaComponentes = new JMenuItem("Lista componentes");
+		mntmListaComponentes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ListaComponentes aux = new ListaComponentes();
+				aux.setModal(true);
+				aux.setVisible(true);
+			}
+		});
 		mnListados.add(mntmListaComponentes);
 		
 		JMenuItem mntmListaCombos = new JMenuItem("Lista combos");
+		mntmListaCombos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListaCombos aux = new ListaCombos();
+				aux.setModal(true);
+				aux.setVisible(true);
+			}
+		});
 		mnListados.add(mntmListaCombos);
 		
 		JMenuItem mntmHistorialOrdenes = new JMenuItem("Historial ordenes de compra");
