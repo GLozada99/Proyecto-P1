@@ -69,7 +69,7 @@ public class Combo {
 	}
 	
 	public float precioCombo() {
-		float precioC=5;
+		float precioC=0;
 		precioC = ((100-(float)descuento)/100)*precio;
 		
 	return precioC;
