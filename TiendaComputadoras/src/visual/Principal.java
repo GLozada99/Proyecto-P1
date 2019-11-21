@@ -103,9 +103,6 @@ public class Principal extends JFrame {
 		JMenu mnAgregar = new JMenu("Agregar");
 		menuBar.add(mnAgregar);
 		
-		JMenuItem mntmProveedores = new JMenuItem("Proveedores");
-		mnAgregar.add(mntmProveedores);
-		
 		JMenuItem mntmCombos = new JMenuItem("Combos");
 		mnAgregar.add(mntmCombos);
 		
@@ -176,6 +173,13 @@ public class Principal extends JFrame {
 		menuBar.add(mnFacturacion);
 		
 		JMenuItem mntmNuevaFactura = new JMenuItem("Nueva Factura");
+		mntmNuevaFactura.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				NuevaFactura aux = new NuevaFactura();
+				aux.setModal(true);
+				aux.setVisible(true);
+			}
+		});
 		mnFacturacion.add(mntmNuevaFactura);
 		
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Abonar/Saldar Credito Cliente");
@@ -184,7 +188,25 @@ public class Principal extends JFrame {
 		JMenu mnAdministracion = new JMenu("Administracion");
 		menuBar.add(mnAdministracion);
 		
+		JMenuItem mntmComponentes = new JMenuItem("Componentes");
+		mntmComponentes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AgregarComponente aux = new AgregarComponente(true);
+				aux.setModal(true);
+				aux.setVisible(true);
+			}
+		});
+		mnAgregar.add(mntmComponentes);
+
+		
 		JMenuItem mntmAgregarProveedores = new JMenuItem("Agregar  Proveedores");
+		mntmAgregarProveedores.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AgregarProveedor aux = new AgregarProveedor();
+				aux.setModal(true);
+				aux.setVisible(true);
+			}
+		});
 		mnAdministracion.add(mntmAgregarProveedores);
 		
 		JMenuItem mntmNuevoCombo = new JMenuItem("Nuevo Combo");
