@@ -188,6 +188,13 @@ public class Principal extends JFrame {
 		mnAdministracion.add(mntmAgregarProveedores);
 		
 		JMenuItem mntmNuevoCombo = new JMenuItem("Nuevo Combo");
+		mntmNuevoCombo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				NuevoCombo aux = new NuevoCombo();
+				aux.setModal(true);
+				aux.setVisible(true);
+			}
+		});
 		mnAdministracion.add(mntmNuevoCombo);
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Mas Combos");
