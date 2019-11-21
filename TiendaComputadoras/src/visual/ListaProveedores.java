@@ -121,6 +121,7 @@ public class ListaProveedores extends JDialog {
 						dispose();
 					}
 				});
+				
 				btnCancelar.setActionCommand("Cancel");
 				buttonPane.add(btnCancelar);
 			}

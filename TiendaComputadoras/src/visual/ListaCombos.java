@@ -143,7 +143,7 @@ public class ListaCombos extends JDialog {
 		for (Combo combo : Tienda.getInstance().getLosCombo()) {
 			row[0] = combo.getCodigo();
 			row[1] = combo.getCantidad();
-			row[2] = combo.getDescuento();
+			row[2] = combo.getDescuento()+"%";
 			row[3] = combo.precioCombo();
 			model.addRow(row);
 		}

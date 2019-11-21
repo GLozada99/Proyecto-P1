@@ -21,7 +21,9 @@ import javax.swing.table.DefaultTableModel;
 import logica.Cliente;
 import logica.Componente;
 import logica.DiscoDuro;
+import logica.Factura;
 import logica.OrdenCompra;
+import logica.Proveedor;
 import logica.Tienda;
 
 import javax.swing.JScrollPane;
@@ -29,7 +31,7 @@ import javax.swing.ScrollPaneConstants;
 
 
 
-public class OrdenesPorProcesar extends JDialog {
+public class HistorialFacturas extends JDialog {
 
 	/**
 	 * 
@@ -40,9 +42,6 @@ public class OrdenesPorProcesar extends JDialog {
 	private JButton btnAceptar;
 	private static DefaultTableModel model;
 	private static Object[] row;
-	private JButton btnProcesar;
-	private String codigo="";
-	private JButton btnEliminar;
 
 	/**
 	 * Launch the application.
@@ -64,8 +63,8 @@ public class OrdenesPorProcesar extends JDialog {
 
 
 
-	public OrdenesPorProcesar() {
-		setTitle("Ordenes Por Procesar");
+	public HistorialFacturas() {
+		setTitle("Historial Facturas");
 
 		setResizable(false);
 		setBounds(100, 100, 1250, 700);
@@ -86,24 +85,9 @@ public class OrdenesPorProcesar extends JDialog {
 				{
 
 					model = new DefaultTableModel();
-					String[] header = {"Codigo Orden","No. Serie","Tipo de Componente","Marca","Modelo","Cantidad"};
+					String[] header = {"Codigo Factura","Fecha","Cedula Cliente","Nombre Cliente","Cant Total Componentes","Costo Total"};
 					model.setColumnIdentifiers(header);
 					table = new JTable();
-					table.addMouseListener(new MouseAdapter() {
-						@Override
-						public void mouseClicked(MouseEvent e) {
-							if(table.getSelectedRow()>-1){
-								int index = table.getSelectedRow();
-								btnProcesar.setEnabled(true);
-								btnEliminar.setEnabled(true);
-								codigo = String.valueOf(table.getValueAt(index, 0));
-
-
-
-
-							}
-						}
-					});
 					table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 					table.setModel(model);
 					scrollPane.setViewportView(table);
@@ -115,69 +99,31 @@ public class OrdenesPorProcesar extends JDialog {
 			buttonPane.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-
-				btnProcesar = new JButton("Procesar");
-				btnProcesar.setEnabled(false);
-				btnProcesar.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						OrdenCompra aux = Tienda.getInstance().findOrdenComprabyCodigo(codigo);
-						SeleccionarProveedor choose = new SeleccionarProveedor(aux);
-						choose.setModal(true);
-						choose.setVisible(true);
-						cargarOrdenes();
-						/*dispose();
-						OrdenesPorProcesar refresh = new OrdenesPorProcesar();
-						refresh.setModal(true);
-						refresh.setVisible(true);*/
-					}
-				});
-				buttonPane.add(btnProcesar);
-			}
 			btnAceptar = new JButton("Regresar");
 			btnAceptar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					dispose();
 				}
 			});
-			{
-				btnEliminar = new JButton("Eliminar");
-				btnEliminar.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						OrdenCompra aux = Tienda.getInstance().findOrdenComprabyCodigo(codigo);
-						Tienda.getInstance().getOrdenesSinProcesar().remove(aux);
-						cargarOrdenes();
-
-					}
-				});
-				btnEliminar.setEnabled(false);
-				buttonPane.add(btnEliminar);
-			}
 			buttonPane.add(btnAceptar);
 		}
-		cargarOrdenes();
+		cargarFacturas();
 	}
 	{
 
 	}
-	public static void cargarOrdenes() {
+	public static void cargarFacturas() {
 		model.setRowCount(0);
 		row = new Object[model.getColumnCount()];
-		/*row[0] = "1";
-		row[1] = "22";
-		row[2] = "809";
-		row[3] = "Aqui";
-		row[4] = "1000";
-		model.addRow(row);*/
 
-		for (OrdenCompra aux : Tienda.getInstance().getOrdenesSinProcesar()) {
+
+		for (Factura aux : Tienda.getInstance().getLasFacturas()) {
 			row[0] = aux.getCodigo();
-			row[1] = aux.getCompCompra().getNumeroSerie();
-			row[2] = aux.getCompCompra().getClass().getSimpleName();
-			row[3] = aux.getCompCompra().getMarca();
-			row[4] = aux.getCompCompra().getModelo();
-			row[5] = aux.getCantiCompos();
-			model.addRow(row);
+			row[1] = aux.getFecha();
+			row[2] = aux.getElCliente().getCedula();
+			row[3] = aux.getElCliente().getNombre();
+			row[4] = Tienda.getInstance().cantComponentes(aux.getLosComponentes(), aux.getCantiComponentes())+Tienda.getInstance().cantCombos(aux.getLosCombos(), aux.getCantiCombos());
+			row[5] = aux.getCosto();
 		}
 
 	}

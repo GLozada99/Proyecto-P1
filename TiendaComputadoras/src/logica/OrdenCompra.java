@@ -4,6 +4,7 @@ public class OrdenCompra {
 	private String codigo;
 	private Componente compCompra;
 	private int cantiCompos;
+	private float costoTotal;
 	private boolean realizada;//es falsa por defecto, se hace verdadera cuando se hace la compra;
 	
 	
@@ -45,6 +46,14 @@ public class OrdenCompra {
 
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
+	}
+
+	public float getCostoTotal() {
+		return costoTotal;
+	}
+
+	public void setCostoTotal(float costoTotal) {
+		this.costoTotal = costoTotal;
 	}
 	
 	

@@ -20,7 +20,7 @@ public class Combo {
 		for (Componente componente : componentes) {
 			componente.setCantDisponible(componente.getCantDisponible()-cantidad);
 			if(componente.getCantDisponible()<componente.getCantMin()) {
-				OrdenCompra aux = new OrdenCompra("OC"+Tienda.getInstance().getGeneradorCodigoOrdenCompra(),componente, componente.getCantMax()-componente.getCantDisponible());
+				OrdenCompra aux = new OrdenCompra("OC-"+Tienda.getInstance().getGeneradorCodigoOrdenCompra(),componente, componente.getCantMax()-componente.getCantDisponible());
 				Tienda.getInstance().agregarOrden(aux);
 			}
 		}
@@ -69,10 +69,10 @@ public class Combo {
 	}
 	
 	public float precioCombo() {
-		float precioCombo=0;
-		 precioCombo= ((100-descuento)/100)*precio;
+		float precioC=5;
+		precioC = ((100-(float)descuento)/100)*precio;
 		
-	return precioCombo;
+	return precioC;
 		
 	}
 

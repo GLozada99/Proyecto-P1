@@ -118,15 +118,19 @@ public class ListaComponentes extends JDialog {
 				public void actionPerformed(ActionEvent e) {
 					if(cbxComp.getSelectedIndex()==0) {
 						model.setColumnIdentifiers(encabezadoDD);
+						cargarComponentesDD();
 					}
 					if(cbxComp.getSelectedIndex()==1) {
 						model.setColumnIdentifiers(encabezadoMicro);
+						cargarComponentesMicro();
 					}
 					if(cbxComp.getSelectedIndex()==2) {
 						model.setColumnIdentifiers(encabezadoMother);
+						cargarComponentesMotherBoard();
 					}
 					if(cbxComp.getSelectedIndex()==3) {
 						model.setColumnIdentifiers(encabezadoRAM);
+						cargarComponentesRAM();
 					}
 				}
 			});
@@ -210,8 +214,9 @@ public class ListaComponentes extends JDialog {
 				row[4] = componente.getPrecioCompraActual();
 				row[5] = componente.getCantDisponible();
 				row[6] = componente.getCantMin();
-				row[7] = ((DiscoDuro)componente).getCapacidadAlma();
-				row[8] = ((DiscoDuro)componente).getTipoConexion();
+				row[7] = componente.getCantMax();
+				row[8] = ((DiscoDuro)componente).getCapacidadAlma();
+				row[9] = ((DiscoDuro)componente).getTipoConexion();
 				model.addRow(row);
 			}
 		}
@@ -230,8 +235,9 @@ public class ListaComponentes extends JDialog {
 				row[4] = componente.getPrecioCompraActual();
 				row[5] = componente.getCantDisponible();
 				row[6] = componente.getCantMin();
-				row[7] = ((Micro)componente).getVelocidad();
-				row[8] = ((Micro)componente).getTipoConexion();
+				row[7] = componente.getCantMax();
+				row[8] = ((Micro)componente).getVelocidad();
+				row[9] = ((Micro)componente).getTipoConexion();
 				model.addRow(row);
 			}
 		}
@@ -250,8 +256,9 @@ public class ListaComponentes extends JDialog {
 				row[4] = componente.getPrecioCompraActual();
 				row[5] = componente.getCantDisponible();
 				row[6] = componente.getCantMin();
-				row[7] = ((MotherBoard)componente).getTipoConector();
-				row[8] = ((MotherBoard)componente).getTipoRAM();
+				row[7] = componente.getCantMax();
+				row[8] = ((MotherBoard)componente).getTipoConector();
+				row[9] = ((MotherBoard)componente).getTipoRAM();
 				model.addRow(row);
 			}
 		}
@@ -270,8 +277,9 @@ public class ListaComponentes extends JDialog {
 				row[4] = componente.getPrecioCompraActual();
 				row[5] = componente.getCantDisponible();
 				row[6] = componente.getCantMin();
-				row[7] = ((RAM)componente).getCantMemoria();
-				row[8] = ((RAM)componente).getTipoMemoria();
+				row[7] = componente.getCantMax();
+				row[8] = ((RAM)componente).getCantMemoria();
+				row[9] = ((RAM)componente).getTipoMemoria();
 				model.addRow(row);
 			}
 		}

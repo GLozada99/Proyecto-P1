@@ -275,6 +275,7 @@ public class Tienda {
 	public void hacerCompra(OrdenCompra orden,Proveedor aux) {
 		orden.getCompCompra().getPrecios().add(new Precio(orden.getCompCompra().getPrecioVentaActual(), aux.getPrecioCompo(orden.getCompCompra()),false));//getPreciosCompos().get(aux.getMisCompos().lastIndexOf(orden.getCompCompra())), false));
 		aux.setDebito(orden.getCantiCompos()*aux.getPrecioCompo(orden.getCompCompra()));
+		orden.setCostoTotal(orden.getCantiCompos()*aux.getPrecioCompo(orden.getCompCompra()));
 		orden.setRealizada(true);
 		orden.getCompCompra().setCantDisponible(orden.getCompCompra().getCantDisponible()+orden.getCantiCompos());
 		lasOrdenes.add(orden);
@@ -323,7 +324,7 @@ public class Tienda {
 	}
 	
 	public void primeraOrdenCompra(Componente componente) {
-		OrdenCompra aux = new OrdenCompra("OC"+Tienda.getInstance().getGeneradorCodigoOrdenCompra(), componente, componente.getCantMax()-componente.getCantDisponible());
+		OrdenCompra aux = new OrdenCompra("OC-"+Tienda.getInstance().getGeneradorCodigoOrdenCompra(), componente, componente.getCantMax()-componente.getCantDisponible());
 		Tienda.getInstance().agregarOrden(aux);
 	}
 	
