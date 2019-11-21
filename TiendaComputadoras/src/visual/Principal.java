@@ -66,16 +66,16 @@ public class Principal extends JFrame {
 		aux2.add((float) 450);
 		aux2.add((float) 550);
 		
-		Componente dd = new DiscoDuro("CMP-"+Tienda.getInstance().getGeneradorCodigoComponentes(), "Seagate", "XS", 3, 10, 1000, 9000, "2TB", "2");
+		Componente dd = new DiscoDuro("CMP-"+Tienda.getInstance().getGeneradorCodigoComponentes(), "Seagate", "XS", 3, 10, 1000, "2TB", "2");
 		aux.add(dd);Tienda.getInstance().agregarComponente(dd);Tienda.getInstance().primeraOrdenCompra(dd);dd.setCantDisponible(5);
 		
-		Componente ram = new RAM("CMP-"+Tienda.getInstance().getGeneradorCodigoComponentes(), "Dell", "XS", 1, 13, 800, 6000, "No se", "6");
+		Componente ram = new RAM("CMP-"+Tienda.getInstance().getGeneradorCodigoComponentes(), "Dell", "XS", 1, 13, 800, "No se", "6");
 		aux.add(ram);Tienda.getInstance().agregarComponente(ram);Tienda.getInstance().primeraOrdenCompra(ram);ram.setCantDisponible(2);
 		
-		Componente micro = new Micro("CMP-"+Tienda.getInstance().getGeneradorCodigoComponentes(), "Ras", "XS", 4, 16, 750, 5000, "Se menos", "3");
+		Componente micro = new Micro("CMP-"+Tienda.getInstance().getGeneradorCodigoComponentes(), "Ras", "XS", 4, 16, 750,"Se menos", "3");
 		aux.add(micro);Tienda.getInstance().agregarComponente(micro);Tienda.getInstance().primeraOrdenCompra(micro);micro.setCantDisponible(51);
 		
-		Componente mb = new MotherBoard("CMP-"+Tienda.getInstance().getGeneradorCodigoComponentes(), "HP", "XS", 6, 12, 1800, 10000, "Nada", "5");
+		Componente mb = new MotherBoard("CMP-"+Tienda.getInstance().getGeneradorCodigoComponentes(), "HP", "XS", 6, 12, 1800,"Nada", "5");
 		aux.add(mb);Tienda.getInstance().agregarComponente(mb);Tienda.getInstance().primeraOrdenCompra(mb);mb.setCantDisponible(3);
 		
 	//	OrdenCompra p = new OrdenCompra("OC-"+Tienda.getInstance().getGeneradorCodigoOrdenCompra(),dd, 6);

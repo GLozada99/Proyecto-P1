@@ -5,8 +5,8 @@ public class Micro extends Componente {
 	private String velocidad;
 	
 	public Micro(String numeroSerie, String marca, String modelo, int cantMin, int cantMax,
-			float precioVentaI, float precioCompraI, String tipoConexion, String velocidad) {
-		super(numeroSerie, marca, modelo, cantMin, cantMax, precioVentaI, precioCompraI);
+			float precioVentaI, String tipoConexion, String velocidad) {
+		super(numeroSerie, marca, modelo, cantMin, cantMax, precioVentaI);
 		this.tipoConexion = tipoConexion;
 		this.velocidad = velocidad;
 	}
