@@ -47,7 +47,7 @@ public class NuevoCombo extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		try {
 			NuevoCombo dialog = new NuevoCombo();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);

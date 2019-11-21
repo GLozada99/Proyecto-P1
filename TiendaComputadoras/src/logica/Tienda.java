@@ -13,6 +13,7 @@ public class Tienda {
 	private ArrayList<Proveedor> losProveedores;
 	private ArrayList<OrdenCompra> lasOrdenes;
 	private ArrayList<OrdenCompra> ordenesSinProcesar;
+	private Persona usuarioActual;
 	private int generadorCodigoCombo;
 	private int generadorCodigoFactura;
 	private int generadorCodigoComponentes;
@@ -124,22 +125,22 @@ public class Tienda {
 	public void setLosCombo(ArrayList<Combo> losCombo) {
 		this.losCombo = losCombo;
 	}
-	
+
 	public void agregarComponente(Componente aux) {
 		losComponentes.add(aux);
 		generadorCodigoComponentes++;
 	}
-	
+
 	public void agregarFactura(Factura aux) {
 		lasFacturas.add(aux);
 		generadorCodigoFactura++;
 	}
-	
+
 	public void agregarOrden(OrdenCompra aux) {
 		ordenesSinProcesar.add(aux);
 		generadorCodigoOrdenCompra++;
 	}
-	
+
 	public void agregarCombo(Combo aux) {
 		losCombo.add(aux);
 		generadorCodigoCombo++;
@@ -158,7 +159,7 @@ public class Tienda {
 		}
 		return clienteFound;
 	}
-	
+
 	public Proveedor findProveedrobyRNC(String rnc) {
 		Proveedor proveedorFound = null;
 		boolean find = false;
@@ -172,7 +173,7 @@ public class Tienda {
 		}
 		return proveedorFound;
 	}
-	
+
 	public Componente findComponentebyNumeroSerie(String NumeroSerie) {
 		Componente componenteFound = null;
 		boolean find = false;
@@ -186,7 +187,7 @@ public class Tienda {
 		}
 		return componenteFound;
 	}
-	
+
 	public int cantComponentes(ArrayList<Componente> aux, ArrayList<Integer> cant1) {
 		int cant = 0;
 		int cant2 = 0;
@@ -198,7 +199,7 @@ public class Tienda {
 		}
 		return cant;
 	}
-	
+
 	public int cantCombos(ArrayList<Combo> aux, ArrayList<Integer> cant1) {
 		int cant = 0;
 		int cant2 = 0;
@@ -255,7 +256,7 @@ public class Tienda {
 		boolean cantidad=true;
 		boolean facturar=false;
 		boolean limite= true;
-		
+
 		for (Componente elComponente : misComponentes) {
 			if(elComponente.getCantDisponible() < cantComponentes.get(misComponentes.lastIndexOf(elComponente))) {
 				cantidad=false;
@@ -270,7 +271,7 @@ public class Tienda {
 			facturar= true;
 		}
 		return facturar;
-		
+
 	}
 	public void hacerCompra(OrdenCompra orden,Proveedor aux) {
 		orden.getCompCompra().getPrecios().add(new Precio(orden.getCompCompra().getPrecioVentaActual(), aux.getPrecioCompo(orden.getCompCompra()),false));//getPreciosCompos().get(aux.getMisCompos().lastIndexOf(orden.getCompCompra())), false));
@@ -281,9 +282,9 @@ public class Tienda {
 		lasOrdenes.add(orden);
 		aux.getMisOrdenes().add(orden);
 		ordenesSinProcesar.remove(orden);
-		
+
 	}
-	
+
 	public void comboMas(Combo combo, int cantidad) {
 		combo.setCantidad(combo.getCantidad()+cantidad);
 		for (Componente componente : combo.getComponentes()) {
@@ -294,7 +295,7 @@ public class Tienda {
 			}
 		}
 	}
-	
+
 	public OrdenCompra findOrdenComprabyCodigo(String codigo) {
 		OrdenCompra ordenFound = null;
 		boolean find = false;
@@ -308,7 +309,7 @@ public class Tienda {
 		}
 		return ordenFound;
 	}
-	
+
 	public Combo findCombobyCodigo(String codigo) {
 		Combo comboFound = null;
 		boolean find = false;
@@ -322,12 +323,12 @@ public class Tienda {
 		}
 		return comboFound;
 	}
-	
+
 	public void primeraOrdenCompra(Componente componente) {
 		OrdenCompra aux = new OrdenCompra("OC-"+Tienda.getInstance().getGeneradorCodigoOrdenCompra(), componente, componente.getCantMax()-componente.getCantDisponible());
 		Tienda.getInstance().agregarOrden(aux);
 	}
-	
+
 
 	public ArrayList<OrdenCompra> getOrdenesSinProcesar() {
 		return ordenesSinProcesar;
@@ -344,5 +345,26 @@ public class Tienda {
 	public void setLosUsuarios(ArrayList <Persona> losUsuarios) {
 		this.losUsuarios = losUsuarios;
 	}
-	
+
+	public Persona getUsuarioActual() {
+		return usuarioActual;
+	}
+
+	public void setUsuarioActual(Persona usuarioActual) {
+		this.usuarioActual = usuarioActual;
+	}
+/*	public boolean confirmarLogin(String nombre, String contrasena) {
+		boolean login = false;
+		for (Persona usuario : losUsuarios) {
+			if(usuario instanceof Administrador || usuario instanceof Vendedor) {
+				if(usuario.getNombre().equals(nombre)&&((usuario.getcontrasena().equals(text2)){
+					setUsuarioActual(cliente);
+					login = true;
+				}
+			}
+		}
+		//if(login==true) System.out.println("Lo encontro");
+		return login;
+	}*/
+
 }
