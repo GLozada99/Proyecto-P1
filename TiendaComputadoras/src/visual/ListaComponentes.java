@@ -57,20 +57,23 @@ public class ListaComponentes extends JDialog {
 	/**
 	 * Launch the application.
 	 */
+	
+	/*
 	public static void main(String[] args) {
+		
 		try {
-			ListaComponentes dialog = new ListaComponentes();
+			ListaComponentes dialog = new ListaComponentes(boolean);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 	/**
 	 * Create the dialog.
 	 */
-	public ListaComponentes() {
+	public ListaComponentes(boolean p) {
 		setBounds(100, 100, 1253, 461);
 		setLocationRelativeTo(null);
 		setResizable(false);
@@ -149,6 +152,10 @@ public class ListaComponentes extends JDialog {
 				btnAceptar = new JButton("Aceptar");
 				btnAceptar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
+						if(p !=false) {
+							
+							AgregarProveedor.cargarComponentes();
+						}
 						dispose();
 					}
 				});

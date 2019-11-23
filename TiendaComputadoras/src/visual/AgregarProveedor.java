@@ -146,29 +146,29 @@ public class AgregarProveedor extends JDialog {
 						table.setModel(model);
 						scrollPane.setViewportView(table);
 					}
-					
-									JButton btnNuevoCompo = new JButton("Nuevo Comp.");
-									btnNuevoCompo.setBounds(6, 135, 133, 23);
-									panel_Componentes.add(btnNuevoCompo);
-									btnNuevoCompo.addActionListener(new ActionListener() {
-										public void actionPerformed(ActionEvent e) {
-											AgregarComponente aux = new AgregarComponente(false);
-											aux.setModal(true);
-											aux.setVisible(true);
-										}
-									});
-									btnNuevoCompo.setActionCommand("OK");
-									
-									JButton btnListado = new JButton("Listado");
-									btnListado.addActionListener(new ActionListener() {
-										public void actionPerformed(ActionEvent e) {
-											ListaComponentes aux = new ListaComponentes();
-											aux.setModal(true);
-											aux.setVisible(true);
-										}
-									});
-									btnListado.setBounds(144, 135, 133, 23);
-									panel_Componentes.add(btnListado);
+
+					JButton btnNuevoCompo = new JButton("Nuevo Comp.");
+					btnNuevoCompo.setBounds(6, 135, 133, 23);
+					panel_Componentes.add(btnNuevoCompo);
+					btnNuevoCompo.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							AgregarComponente aux = new AgregarComponente(false);
+							aux.setModal(true);
+							aux.setVisible(true);
+						}
+					});
+					btnNuevoCompo.setActionCommand("OK");
+
+					JButton btnListado = new JButton("Listado");
+					btnListado.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							ListaComponentes aux = new ListaComponentes(true);
+							aux.setModal(true);
+							aux.setVisible(true);
+						}
+					});
+					btnListado.setBounds(144, 135, 133, 23);
+					panel_Componentes.add(btnListado);
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}
@@ -204,7 +204,7 @@ public class AgregarProveedor extends JDialog {
 	public static void cargarComponentes() {
 		model.setRowCount(0);
 		row = new Object[model.getColumnCount()];
-			
+
 		for (Componente aux : Tienda.getInstance().getLosComponentes()) {
 			row[0] = aux.getNumeroSerie();
 			row[1] = aux.getMarca();

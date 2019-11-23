@@ -52,7 +52,7 @@ public class ListaProveedores extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public ListaProveedores() {
+	public ListaProveedores(boolean p) {
 		setTitle("Lista Proveedores");
 		setResizable(false);
 		setBounds(100, 100, 450, 300);
@@ -100,7 +100,9 @@ public class ListaProveedores extends JDialog {
 				btnAceptar = new JButton("Aceptar");
 				btnAceptar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						
+						if (p != false) {
+							AgregarComponente.cargarProveedores();
+						}
 						dispose();
 					}
 				});
