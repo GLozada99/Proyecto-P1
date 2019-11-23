@@ -48,10 +48,10 @@ public class ListaComponentes extends JDialog {
 	private JButton btnAceptar;
 	private String codigo;
 	private JComboBox <String> cbxComp;
-	String[] encabezadoDD = {"No. Serie","Marca","Modelo","Precio Venta Act","Precio Compra Act","Cant Real","Cant Min","Cant Max","Almacenamiento","Tipo Conexion" };
-	String[] encabezadoMicro = {"No. Serie","Marca","Modelo","Precio Venta Act","Precio Compra Act","Cant Real","Cant Min","Cant Max","Velocidad","Tipo Conexion" };
-	String[] encabezadoMother = {"No. Serie","Marca","Modelo","Precio Venta Act","Precio Compra Act","Cant Real","Cant Min","Cant Max","Tipo Conector","Tipo RAM" };
-	String[] encabezadoRAM = {"No. Serie","Marca","Modelo","Precio Venta Act","Precio Compra Act","Cant Real","Cant Min","Cant Max","Cant Memoria","Tipo Memoria" };
+	private String[] encabezadoDD = {"No. Serie","Marca","Modelo","Precio Venta Act","Precio Compra Act","Cant Real","Cant Min","Cant Max","Almacenamiento","Tipo Conexion" };
+	private String[] encabezadoMicro = {"No. Serie","Marca","Modelo","Precio Venta Act","Precio Compra Act","Cant Real","Cant Min","Cant Max","Velocidad","Tipo Conexion" };
+	private String[] encabezadoMother = {"No. Serie","Marca","Modelo","Precio Venta Act","Precio Compra Act","Cant Real","Cant Min","Cant Max","Tipo Conector","Tipo RAM" };
+	private String[] encabezadoRAM = {"No. Serie","Marca","Modelo","Precio Venta Act","Precio Compra Act","Cant Real","Cant Min","Cant Max","Cant Memoria","Tipo Memoria" };
 
 
 	/**
@@ -269,7 +269,7 @@ public class ListaComponentes extends JDialog {
 				model.addRow(row);
 			}
 		}
-
+		
 	}
 
 	public static void cargarComponentesRAM() {

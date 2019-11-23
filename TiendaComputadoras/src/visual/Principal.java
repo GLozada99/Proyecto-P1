@@ -80,8 +80,8 @@ public class Principal extends JFrame {
 		
 	//	OrdenCompra p = new OrdenCompra("OC-"+Tienda.getInstance().getGeneradorCodigoOrdenCompra(),dd, 6);
 		
-		Combo comb = new Combo(aux, "Combo3", Tienda.getInstance().precioTotalComponentes(aux), 25, 2);
-		Tienda.getInstance().agregarCombo(comb);
+	//	Combo comb = new Combo(aux, "Combo3", Tienda.getInstance().precioTotalComponentes(aux), 25, 2);
+		//Tienda.getInstance().agregarCombo(comb);
 		
 		Persona pr1 = new Proveedor("Juan", "0192", "Alla", "12123", aux, aux2);
 		Tienda.getInstance().getLosProveedores().add((Proveedor) pr1);

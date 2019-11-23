@@ -252,26 +252,54 @@ public class Tienda {
 			i++;
 		}
 	}
+	public void restaCantiCombos(ArrayList<Combo> combos, ArrayList<Integer> cantiCombo) {
+		for (Combo combo : combos) {
+			for (Componente componente : combo.getComponentes()) {
+				componente.setCantDisponible(componente.getCantDisponible()-1*cantiCombo.get(combos.lastIndexOf(combo)));		
+			}
+		}
+	}
+	
 	public boolean relacionFactura(Cliente elCliente,float precio, ArrayList<Componente> misComponentes, ArrayList<Integer> cantComponentes,ArrayList<Combo> misCombos, ArrayList<Integer> cantCombos, boolean tipo) {
 		boolean cantidad=true;
 		boolean facturar=false;
 		boolean limite= true;
+		ArrayList<Integer> guardarCantidades = new ArrayList<Integer>();
+		
+		for (Combo combo : misCombos) {
+			int i=0;
+			for (Componente componente : combo.getComponentes()) {
+				guardarCantidades.add(componente.getCantDisponible());
+				componente.setCantDisponible(componente.getCantDisponible()-1*cantCombos.get(i));
+				i++;
+			}	
+		}
 
 		for (Componente elComponente : misComponentes) {
 			if(elComponente.getCantDisponible() < cantComponentes.get(misComponentes.lastIndexOf(elComponente))) {
-				cantidad=false;
+				cantidad = false;
 			}
 		}
+		
 		if(tipo==true) {
 			if(elCliente.getLimCredito() < precio+ elCliente.getCredito()) {
-				limite=false;
+				limite = false;
 			}
 		}
-		if(cantidad==true && limite==true) {
-			facturar= true;
+		
+		if(cantidad && limite) {
+			facturar = true;
+		}
+		
+		int i=0;
+		for (Combo combo : misCombos) {
+			for (Componente componente : combo.getComponentes()) {
+				guardarCantidades.add(componente.getCantDisponible());
+				componente.setCantDisponible(guardarCantidades.get(i));
+				i++;	
+			}
 		}
 		return facturar;
-
 	}
 	public void hacerCompra(OrdenCompra orden,Proveedor aux) {
 		orden.getCompCompra().getPrecios().add(new Precio(orden.getCompCompra().getPrecioVentaActual(), aux.getPrecioCompo(orden.getCompCompra()),false));//getPreciosCompos().get(aux.getMisCompos().lastIndexOf(orden.getCompCompra())), false));
@@ -285,7 +313,7 @@ public class Tienda {
 
 	}
 
-	public void comboMas(Combo combo, int cantidad) {
+	/*public void comboMas(Combo combo, int cantidad) {
 		combo.setCantidad(combo.getCantidad()+cantidad);
 		for (Componente componente : combo.getComponentes()) {
 			componente.setCantDisponible(componente.getCantDisponible()-cantidad);
@@ -294,7 +322,7 @@ public class Tienda {
 				Tienda.getInstance().agregarOrden(aux);
 			}
 		}
-	}
+	}*/
 
 	public OrdenCompra findOrdenComprabyCodigo(String codigo) {
 		OrdenCompra ordenFound = null;
