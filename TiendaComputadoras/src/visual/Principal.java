@@ -183,6 +183,13 @@ public class Principal extends JFrame {
 		mnFacturacion.add(mntmNuevaFactura);
 		
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Abonar/Saldar Credito Cliente");
+		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				PagarCuentasCliente aux = new PagarCuentasCliente();
+				aux.setModal(true);
+				aux.setVisible(true);
+			}
+		});
 		mnFacturacion.add(mntmNewMenuItem_1);
 		
 		JMenu mnAdministracion = new JMenu("Administracion");

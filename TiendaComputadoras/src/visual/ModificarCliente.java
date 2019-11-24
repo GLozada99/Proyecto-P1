@@ -1,3 +1,4 @@
+
 package visual;
 
 import java.awt.BorderLayout;
@@ -109,6 +110,7 @@ public class ModificarCliente extends JDialog {
 					mascaraCedula = new MaskFormatter("###-#######-#");
 					mascaraCedula.setPlaceholderCharacter('_');
 					ftxtCedula = new JFormattedTextField(mascaraCedula);
+					ftxtCedula.setEditable(false);
 					ftxtCedula.setFont(new Font("Calibri", Font.PLAIN, 18));
 					ftxtCedula.setBounds(100, 27, 157, 22);
 					panel.add(ftxtCedula);
@@ -178,3 +180,4 @@ public class ModificarCliente extends JDialog {
 		ftxtTelefono.setText("");
 	}*/
 }
+

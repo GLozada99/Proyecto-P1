@@ -101,7 +101,7 @@ public class NuevaFactura extends JDialog {
 
 	public NuevaFactura() {
 		setTitle("Nueva Factura");
-		setBounds(100, 100, 613, 472);
+		setBounds(100, 100, 1191, 733);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -111,35 +111,25 @@ public class NuevaFactura extends JDialog {
 		JPanel DatosCliente = new JPanel();
 		DatosCliente.setLayout(null);
 		DatosCliente.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Datos del Cliente", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		DatosCliente.setBounds(0, 0, 597, 98);
+		DatosCliente.setBounds(12, 540, 618, 98);
 		contentPanel.add(DatosCliente);
 
 		JLabel lblCedula = new JLabel("Cedula: ");
 		lblCedula.setBounds(19, 25, 76, 22);
 		DatosCliente.add(lblCedula);
 
-		JLabel lblNombre = new JLabel("Nombre: ");
-		lblNombre.setBounds(19, 60, 76, 22);
-		DatosCliente.add(lblNombre);
-
-		txtNombre = new JTextField();
-		txtNombre.setFont(new Font("Calibri", Font.PLAIN, 18));
-		txtNombre.setColumns(10);
-		txtNombre.setBounds(90, 58, 185, 22);
-		DatosCliente.add(txtNombre);
-
 		JLabel lblDireccion = new JLabel("Direcci\u00F3n: ");
-		lblDireccion.setBounds(322, 25, 76, 22);
+		lblDireccion.setBounds(335, 59, 76, 22);
 		DatosCliente.add(lblDireccion);
 
 		txtDireccion = new JTextField();
 		txtDireccion.setFont(new Font("Calibri", Font.PLAIN, 18));
 		txtDireccion.setColumns(10);
-		txtDireccion.setBounds(393, 26, 180, 22);
+		txtDireccion.setBounds(399, 60, 207, 22);
 		DatosCliente.add(txtDireccion);
 
 		JLabel lblTelefono = new JLabel("Telefono: ");
-		lblTelefono.setBounds(322, 60, 76, 22);
+		lblTelefono.setBounds(19, 60, 59, 22);
 		DatosCliente.add(lblTelefono);
 
 		{
@@ -151,7 +141,7 @@ public class NuevaFactura extends JDialog {
 				mascaraNumero.setPlaceholderCharacter('_');
 				ftxtTelefono = new JFormattedTextField(mascaraNumero);
 				ftxtTelefono.setFont(new Font("Calibri", Font.PLAIN, 18));
-				ftxtTelefono.setBounds(393, 61, 180, 22);
+				ftxtTelefono.setBounds(85, 60, 200, 22);
 				DatosCliente.add(ftxtTelefono);
 
 
@@ -159,7 +149,7 @@ public class NuevaFactura extends JDialog {
 				mascaraCedula.setPlaceholderCharacter('_');
 				ftxtCedula = new JFormattedTextField(mascaraCedula);
 				ftxtCedula.setFont(new Font("Calibri", Font.PLAIN, 18));
-				ftxtCedula.setBounds(90, 25, 118, 22);
+				ftxtCedula.setBounds(85, 25, 145, 22);
 				DatosCliente.add(ftxtCedula);
 
 			} catch (ParseException e) {
@@ -192,14 +182,24 @@ public class NuevaFactura extends JDialog {
 		});
 		btnBuscar.setIcon(new ImageIcon("C:\\Users\\Oliver\\Desktop\\Lupa.png"));
 		btnBuscar.setActionCommand("Buscar");
-		btnBuscar.setBounds(229, 25, 46, 25);
+		btnBuscar.setBounds(242, 25, 45, 25);
 		DatosCliente.add(btnBuscar);
+		
+				JLabel lblNombre = new JLabel("Nombre: ");
+				lblNombre.setBounds(335, 27, 76, 22);
+				DatosCliente.add(lblNombre);
+				
+						txtNombre = new JTextField();
+						txtNombre.setBounds(399, 25, 207, 22);
+						DatosCliente.add(txtNombre);
+						txtNombre.setFont(new Font("Calibri", Font.PLAIN, 18));
+						txtNombre.setColumns(10);
 
 		JPanel ElementosASeleccionar = new JPanel();
 		ElementosASeleccionar.setForeground(Color.BLACK);
 		ElementosASeleccionar.setLayout(null);
 		ElementosASeleccionar.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Elementos a seleccionar", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		ElementosASeleccionar.setBounds(0, 100, 597, 212);
+		ElementosASeleccionar.setBounds(12, 13, 1149, 514);
 		contentPanel.add(ElementosASeleccionar);
 
 		JButton btnIzquierda = new JButton("<<");
@@ -221,7 +221,7 @@ public class NuevaFactura extends JDialog {
 			}
 		});
 		btnIzquierda.setEnabled(false);
-		btnIzquierda.setBounds(244, 125, 112, 27);
+		btnIzquierda.setBounds(525, 264, 99, 43);
 		ElementosASeleccionar.add(btnIzquierda);
 
 		JButton btnDerecha = new JButton(">>");
@@ -269,12 +269,12 @@ public class NuevaFactura extends JDialog {
 				cargarCbx();
 			}
 		});
-		btnDerecha.setBounds(244, 98, 112, 27);
+		btnDerecha.setBounds(525, 221, 100, 43);
 		ElementosASeleccionar.add(btnDerecha);
 
 		cbxComponentes = new JComboBox<String>();
 		cbxComponentes.setModel(new DefaultComboBoxModel(new String[] {"Componentes", "Combos", "Disco Duro", "Microprocesador", "Mother Board", "RAM"}));
-		cbxComponentes.setBounds(12, 24, 209, 22);
+		cbxComponentes.setBounds(12, 24, 501, 22);
 		ElementosASeleccionar.add(cbxComponentes);
 		cbxComponentes.setSelectedIndex(0);
 
@@ -310,11 +310,11 @@ public class NuevaFactura extends JDialog {
 
 
 		JLabel lblCarritoDeCompras = new JLabel("Carrito de Compras");
-		lblCarritoDeCompras.setBounds(378, 27, 209, 16);
+		lblCarritoDeCompras.setBounds(636, 27, 501, 16);
 		ElementosASeleccionar.add(lblCarritoDeCompras);
 
 		JScrollPane spStock = new JScrollPane();
-		spStock.setBounds(12, 51, 209, 148);
+		spStock.setBounds(12, 59, 501, 442);
 		ElementosASeleccionar.add(spStock);
 
 		model = new DefaultTableModel();
@@ -334,7 +334,7 @@ public class NuevaFactura extends JDialog {
 
 
 		JScrollPane spCarrito = new JScrollPane();
-		spCarrito.setBounds(378, 54, 209, 148);
+		spCarrito.setBounds(636, 59, 501, 442);
 		ElementosASeleccionar.add(spCarrito);
 		
 		model2 = new DefaultTableModel();
@@ -359,46 +359,50 @@ public class NuevaFactura extends JDialog {
 		Factura.setForeground(Color.BLACK);
 		Factura.setLayout(null);
 		Factura.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Factura", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		Factura.setBounds(0, 314, 597, 73);
+		Factura.setBounds(646, 540, 515, 98);
 		contentPanel.add(Factura);
 
 		txtPrecioTotal = new JTextField();
 		txtPrecioTotal.setText("0");
 		txtPrecioTotal.setEditable(false);
 		txtPrecioTotal.setColumns(10);
-		txtPrecioTotal.setBounds(471, 11, 116, 22);
+		txtPrecioTotal.setBounds(391, 63, 116, 22);
 		Factura.add(txtPrecioTotal);
 
 		JLabel lblPrecioTotal = new JLabel("Precio total: ");
-		lblPrecioTotal.setBounds(394, 14, 76, 16);
+		lblPrecioTotal.setBounds(314, 66, 76, 16);
 		Factura.add(lblPrecioTotal);
 
 		txtCodigo = new JTextField();
 		txtCodigo.setText("N\u00BA: "+Tienda.getInstance().getGeneradorCodigoFactura());
 		txtCodigo.setEditable(false);
 		txtCodigo.setColumns(10);
-		txtCodigo.setBounds(511, 44, 76, 20);
+		txtCodigo.setBounds(431, 15, 76, 20);
 		Factura.add(txtCodigo);
 
 		JLabel lblTotalComponentes = new JLabel("Total componentes: ");
-		lblTotalComponentes.setBounds(10, 14, 117, 16);
+		lblTotalComponentes.setBounds(12, 17, 128, 16);
 		Factura.add(lblTotalComponentes);
 
 		txtTotalComponetes = new JTextField();
 		txtTotalComponetes.setEditable(false);
 		txtTotalComponetes.setColumns(10);
-		txtTotalComponetes.setBounds(139, 11, 46, 22);
+		txtTotalComponetes.setBounds(141, 14, 81, 22);
 		Factura.add(txtTotalComponetes);
 
 		JLabel lblTotalCombos = new JLabel("Total combos: ");
-		lblTotalCombos.setBounds(10, 45, 117, 16);
+		lblTotalCombos.setBounds(12, 65, 117, 16);
 		Factura.add(lblTotalCombos);
 
 		txtTotalCombos = new JTextField();
 		txtTotalCombos.setEditable(false);
 		txtTotalCombos.setColumns(10);
-		txtTotalCombos.setBounds(139, 43, 46, 22);
+		txtTotalCombos.setBounds(141, 63, 81, 22);
 		Factura.add(txtTotalCombos);
+		
+		JLabel lblCodigoFactura = new JLabel("Codigo Factura");
+		lblCodigoFactura.setBounds(291, 17, 128, 16);
+		Factura.add(lblCodigoFactura);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
