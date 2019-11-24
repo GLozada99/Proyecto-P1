@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import logica.Administrador;
 import logica.Proveedor;
 import logica.Tienda;
 
@@ -79,11 +80,12 @@ public class ListaProveedores extends JDialog {
 					table.addMouseListener(new MouseAdapter() {
 						@Override
 						public void mouseClicked(MouseEvent arg0) {
-							int index = table.getSelectedRow();
-							btnAceptar.setEnabled(true);
-							rnc = String.valueOf(table.getValueAt(index, 0));
+							if(table.getSelectedRow()>-1&&Tienda.getInstance().getUsuarioActual() instanceof Administrador) {
+								int index = table.getSelectedRow();
+								btnAceptar.setEnabled(true);
+								rnc = String.valueOf(table.getValueAt(index, 0));
 
-
+							}
 						}
 					});
 					table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -123,7 +125,7 @@ public class ListaProveedores extends JDialog {
 						dispose();
 					}
 				});
-				
+
 				btnCancelar.setActionCommand("Cancel");
 				buttonPane.add(btnCancelar);
 			}

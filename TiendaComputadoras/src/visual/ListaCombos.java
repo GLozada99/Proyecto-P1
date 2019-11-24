@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import logica.Administrador;
 import logica.Combo;
 import logica.Componente;
 import logica.Tienda;
@@ -69,16 +70,18 @@ public class ListaCombos extends JDialog {
 				panel.add(scrollPane, BorderLayout.CENTER);
 				{
 					model = new DefaultTableModel();
-					String[] encabezado = {"Codigo","Cantidad Disponible","Descuento","Precio"};
+					String[] encabezado = {"Codigo","Descuento","Precio"};
 					model.setColumnIdentifiers(encabezado);
 					table = new JTable();
 					table.addMouseListener(new MouseAdapter() {
 						@Override
 						public void mouseClicked(MouseEvent arg0) {
-							int index = table.getSelectedRow();
-							btnEliminar.setEnabled(true);
-							btnModificar.setEnabled(true);
-							codigo = String.valueOf(table.getValueAt(index, 0));
+							if(table.getSelectedRow()>-1&&Tienda.getInstance().getUsuarioActual() instanceof Administrador) {
+								int index = table.getSelectedRow();
+								btnEliminar.setEnabled(true);
+								btnModificar.setEnabled(true);
+								codigo = String.valueOf(table.getValueAt(index, 0));
+							}
 						}
 					});
 					scrollPane.setViewportView(table);
@@ -106,7 +109,7 @@ public class ListaCombos extends JDialog {
 				btnModificar.setEnabled(false);
 				btnModificar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-					/*	NuevoCombo aux = new NuevoCombo(Tienda.getInstance().findClientebyCedula(codigo));
+						/*	NuevoCombo aux = new NuevoCombo(Tienda.getInstance().findClientebyCedula(codigo));
 						aux.setModal(true);
 						aux.setVisible(true);
 						cargarClientes();*/
@@ -122,9 +125,6 @@ public class ListaCombos extends JDialog {
 				btnEliminar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						Combo aux = Tienda.getInstance().findCombobyCodigo(codigo);
-						for (Componente componente : aux.getComponentes()) {
-							componente.setCantDisponible(componente.getCantDisponible()+aux.getCantidad());
-						}
 						Tienda.getInstance().getLosCombo().remove(aux);
 						cargarCombos();
 					}
@@ -142,9 +142,8 @@ public class ListaCombos extends JDialog {
 
 		for (Combo combo : Tienda.getInstance().getLosCombo()) {
 			row[0] = combo.getCodigo();
-			row[1] = combo.getCantidad();
-			row[2] = combo.getDescuento()+"%";
-			row[3] = combo.precioCombo();
+			row[1] = combo.getDescuento()+"%";
+			row[2] = combo.precioCombo();
 			model.addRow(row);
 		}
 

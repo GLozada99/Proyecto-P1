@@ -1,6 +1,12 @@
 package logica;
 
-public class OrdenCompra {
+import java.io.Serializable;
+
+public class OrdenCompra implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String codigo;
 	private Componente compCompra;
 	private int cantiCompos;

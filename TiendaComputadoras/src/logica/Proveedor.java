@@ -1,8 +1,13 @@
 package logica;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Proveedor extends Persona {
+public class Proveedor extends Persona implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ArrayList<Componente> misCompos;
 	private ArrayList<OrdenCompra> misOrdenes;
 	private float debito;

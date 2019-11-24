@@ -18,6 +18,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import logica.Administrador;
 import logica.Cliente;
 import logica.Persona;
 import logica.Tienda;
@@ -85,7 +86,7 @@ public class ListaClientes extends JDialog {
 					table.addMouseListener(new MouseAdapter() {
 						@Override
 						public void mouseClicked(MouseEvent e) {
-							if(table.getSelectedRow()>-1){
+							if(table.getSelectedRow()>-1&&Tienda.getInstance().getUsuarioActual() instanceof Administrador){
 								int index = table.getSelectedRow();
 								btnEliminar.setEnabled(true);
 								btnModificar.setEnabled(true);

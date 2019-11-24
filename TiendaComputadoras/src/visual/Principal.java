@@ -4,6 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -36,7 +42,7 @@ public class Principal extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -52,9 +58,29 @@ public class Principal extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Principal() {
+	public Principal(Persona usuarioActual) {
+		Tienda.getInstance().setUsuarioActual(usuarioActual);
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				FileOutputStream tienda2;
+				ObjectOutputStream tiendaWrite;
+				try {
+					tienda2 = new  FileOutputStream("TiendaComputadoras.dat");
+					tiendaWrite = new ObjectOutputStream(tienda2);
+					tiendaWrite.writeObject(Tienda.getInstance());
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		});
 		//Cosas para probar
-		Persona ho = new Cliente("Juan", "809", "Aqui", "402-1383575-0");
+		/*Persona ho = new Cliente("Juan", "809", "Aqui", "402-1383575-0");
 		Tienda.getInstance().getLosClientes().add((Cliente) ho);
 		
 		Persona ho1 = new Cliente("Juanaa", "809", "Aqui", "402-1111111-0");
@@ -84,7 +110,15 @@ public class Principal extends JFrame {
 		//Tienda.getInstance().agregarCombo(comb);
 		
 		Persona pr1 = new Proveedor("Juan", "0192", "Alla", "12123", aux, aux2);
-		Tienda.getInstance().getLosProveedores().add((Proveedor) pr1);
+		Tienda.getInstance().getLosProveedores().add((Proveedor) pr1);*/
+		/*Tienda.getInstance().getLasFacturas().clear();
+		Tienda.getInstance().getLasOrdenes().clear();
+		Tienda.getInstance().getLosClientes().clear();
+		Tienda.getInstance().getLosCombo().clear();
+		Tienda.getInstance().getLosComponentes().clear();
+		Tienda.getInstance().getLosProveedores().clear();
+		Tienda.getInstance().getLosUsuarios().clear();
+		Tienda.getInstance().getOrdenesSinProcesar().clear();*/
 		//Tienda.getInstance().getOrdenesSinProcesar().add(p);
 		//Termina
 		

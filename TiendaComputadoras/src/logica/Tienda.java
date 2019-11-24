@@ -1,10 +1,16 @@
 package logica;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
-public class Tienda {
+public class Tienda implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ArrayList<Componente> losComponentes;
 	private ArrayList <Cliente> losClientes;
 	private ArrayList <Persona> losUsuarios;
@@ -28,11 +34,15 @@ public class Tienda {
 		losCombo = new ArrayList<>();
 		losProveedores = new ArrayList<>();
 		lasOrdenes = new ArrayList<>();
+		losUsuarios = new ArrayList<>();
 		ordenesSinProcesar = new ArrayList<>();
 		generadorCodigoCombo = 1;
 		generadorCodigoFactura = 1;
 		generadorCodigoComponentes = 1;
 		generadorCodigoOrdenCompra = 1;
+		Persona admin = new Administrador("Admin", "000-000-0000", "PUCMM", "000-0000000-0", "Admin");
+		losUsuarios.add(admin);
+
 	}
 
 	public static Tienda getInstance() {
@@ -48,6 +58,14 @@ public class Tienda {
 
 	public void setLosComponentes(ArrayList<Componente> losComponentes) {
 		this.losComponentes = losComponentes;
+	}
+
+	public static Tienda getTienda() {
+		return tienda;
+	}
+
+	public static void setTienda(Tienda tienda) {
+		Tienda.tienda = tienda;
 	}
 
 	public ArrayList<Cliente> getLosClientes() {
@@ -259,13 +277,13 @@ public class Tienda {
 			}
 		}
 	}
-	
+
 	public boolean relacionFactura(Cliente elCliente,float precio, ArrayList<Componente> misComponentes, ArrayList<Integer> cantComponentes,ArrayList<Combo> misCombos, ArrayList<Integer> cantCombos, boolean tipo) {
 		boolean cantidad=true;
 		boolean facturar=false;
 		boolean limite= true;
 		ArrayList<Integer> guardarCantidades = new ArrayList<Integer>();
-		
+
 		for (Combo combo : misCombos) {
 			int i=0;
 			for (Componente componente : combo.getComponentes()) {
@@ -280,17 +298,17 @@ public class Tienda {
 				cantidad = false;
 			}
 		}
-		
+
 		if(tipo==true) {
 			if(elCliente.getLimCredito() < precio+ elCliente.getCredito()) {
 				limite = false;
 			}
 		}
-		
+
 		if(cantidad && limite) {
 			facturar = true;
 		}
-		
+
 		int i=0;
 		for (Combo combo : misCombos) {
 			for (Componente componente : combo.getComponentes()) {
@@ -381,18 +399,20 @@ public class Tienda {
 	public void setUsuarioActual(Persona usuarioActual) {
 		this.usuarioActual = usuarioActual;
 	}
-/*	public boolean confirmarLogin(String nombre, String contrasena) {
+	public boolean confirmarLogin(String nombre, String contrasena) {
 		boolean login = false;
-		for (Persona usuario : losUsuarios) {
+		Persona usuario = null;
+		for (int i = 0; i < losUsuarios.size()&&!login; i++) {
+			usuario = losUsuarios.get(i);
 			if(usuario instanceof Administrador || usuario instanceof Vendedor) {
-				if(usuario.getNombre().equals(nombre)&&((usuario.getcontrasena().equals(text2)){
-					setUsuarioActual(cliente);
+				if(usuario.getNombre().equals(nombre)&&((((Administrador)usuario).getContraseña().equals(contrasena)))){
+					setUsuarioActual(usuario);
 					login = true;
 				}
 			}
 		}
-		//if(login==true) System.out.println("Lo encontro");
+		
 		return login;
-	}*/
+	}
 
 }

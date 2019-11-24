@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import logica.Administrador;
 import logica.Combo;
 import logica.Componente;
 import logica.DiscoDuro;
@@ -57,10 +58,10 @@ public class ListaComponentes extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	
+
 	/*
 	public static void main(String[] args) {
-		
+
 		try {
 			ListaComponentes dialog = new ListaComponentes(boolean);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -99,10 +100,12 @@ public class ListaComponentes extends JDialog {
 					table.addMouseListener(new MouseAdapter() {
 						@Override
 						public void mouseClicked(MouseEvent arg0) {
-							int index = table.getSelectedRow();
-							btnEliminar.setEnabled(true);
-							btnModificar.setEnabled(true);
-							codigo = String.valueOf(table.getValueAt(index, 0));
+							if(table.getSelectedRow()>-1&&Tienda.getInstance().getUsuarioActual() instanceof Administrador) {
+								int index = table.getSelectedRow();
+								btnEliminar.setEnabled(true);
+								btnModificar.setEnabled(true);
+								codigo = String.valueOf(table.getValueAt(index, 0));
+							}
 						}
 					});
 					scrollPane.setViewportView(table);
@@ -153,7 +156,7 @@ public class ListaComponentes extends JDialog {
 				btnAceptar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						if(p !=false) {
-							
+
 							AgregarProveedor.cargarComponentes();
 						}
 						dispose();
@@ -165,7 +168,7 @@ public class ListaComponentes extends JDialog {
 			{
 				btnModificar = new JButton("Modificar");
 				btnModificar.setEnabled(false);
-			/*	btnModificar.addActionListener(new ActionListener() {
+				/*	btnModificar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						NuevoComponente aux = new NuevoComponente(Tienda.getInstance().findComponentebyNumeroSerie(codigo));
 						aux.setModal(true);
@@ -269,7 +272,7 @@ public class ListaComponentes extends JDialog {
 				model.addRow(row);
 			}
 		}
-		
+
 	}
 
 	public static void cargarComponentesRAM() {

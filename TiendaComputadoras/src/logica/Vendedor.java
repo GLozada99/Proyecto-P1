@@ -1,6 +1,12 @@
 package logica;
 
-public class Vendedor extends Persona {
+import java.io.Serializable;
+
+public class Vendedor extends Persona implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String contraseña;
 	
 	public Vendedor(String nombre, String telefono, String direccion, String cedula, String contraseña) {

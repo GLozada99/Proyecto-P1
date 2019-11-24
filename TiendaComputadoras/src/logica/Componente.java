@@ -1,8 +1,13 @@
 package logica;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class Componente {
+public abstract class Componente implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected String modelo;
 	protected String numeroSerie;
 	protected String marca;

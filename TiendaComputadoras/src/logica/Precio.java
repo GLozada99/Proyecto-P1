@@ -1,6 +1,12 @@
 package logica;
 
-public class Precio {
+import java.io.Serializable;
+
+public class Precio implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private float precioVenta;
 	private float precioCompra;
 	private boolean cancelado;

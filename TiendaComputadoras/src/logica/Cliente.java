@@ -1,6 +1,12 @@
 package logica;
 
-public class Cliente extends Persona {
+import java.io.Serializable;
+
+public class Cliente extends Persona implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private float credito;
 	private float limCredito;
 	

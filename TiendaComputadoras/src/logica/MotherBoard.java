@@ -1,6 +1,12 @@
 package logica;
 
-public class MotherBoard extends Componente {
+import java.io.Serializable;
+
+public class MotherBoard extends Componente implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String tipoConector;
 	private String tipoRAM;
 	//private ArrayList<String> 
