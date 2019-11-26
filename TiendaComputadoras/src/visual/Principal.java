@@ -30,6 +30,7 @@ import logica.Persona;
 import logica.Proveedor;
 import logica.RAM;
 import logica.Tienda;
+import java.awt.Toolkit;
 
 public class Principal extends JFrame {
 
