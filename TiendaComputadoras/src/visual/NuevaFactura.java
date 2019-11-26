@@ -180,7 +180,7 @@ public class NuevaFactura extends JDialog {
 				}
 			}
 		});
-		btnBuscar.setIcon(new ImageIcon("C:\\Users\\Oliver\\Desktop\\Lupa.png"));
+		btnBuscar.setIcon(new ImageIcon(NuevaFactura.class.getResource("/Imagenes/Lupa.png")));
 		btnBuscar.setActionCommand("Buscar");
 		btnBuscar.setBounds(242, 25, 45, 25);
 		DatosCliente.add(btnBuscar);

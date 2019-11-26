@@ -90,7 +90,7 @@ public class PagarCuentasCliente extends JDialog {
 					}
 				}
 			});
-			btnBuscar.setIcon(new ImageIcon("C:\\Users\\Oliver\\Desktop\\Lupa.png"));
+			btnBuscar.setIcon(new ImageIcon(PagarCuentasCliente.class.getResource("/Imagenes/Lupa.png")));
 			btnBuscar.setActionCommand("Buscar");
 			btnBuscar.setBounds(190, 27, 45, 22);
 			panel.add(btnBuscar);
