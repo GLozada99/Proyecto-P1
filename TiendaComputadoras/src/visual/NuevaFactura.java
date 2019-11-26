@@ -81,6 +81,8 @@ public class NuevaFactura extends JDialog {
 	private static DefaultTableModel model2;
 	private Integer cantidadC;
 	private Integer cantidad;
+	private Componente auxComponente;
+	private Combo auxCombo;
 	/**
 	 * Launch the application.
 	 */
@@ -229,19 +231,38 @@ public class NuevaFactura extends JDialog {
 		btnDerecha.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(cbxComponentes.getSelectedIndex()==1) {
-					Combo auxCombo = Tienda.getInstance().findCombobyCodigo(codigo);
+					auxCombo = Tienda.getInstance().findCombobyCodigo(codigo);
 					cantidadC = Integer.valueOf(JOptionPane.showInputDialog("Introduzca cantidad deseada"));
-					cantidadesCombo.add(cantidadC);
-					combosVenta.add(auxCombo);
-					cargarCompras();
+					if(combosVenta.contains(auxCombo)) {
+						
+						cantidadesCombo.add(combosVenta.indexOf(auxCombo), cantidadesCombo.get(combosVenta.indexOf(auxCombo))+cantidadC);
+						cantidadesCombo.remove(combosVenta.indexOf(auxCombo)+1);
+						cargarCompras();
+					}
+					else {
+						cantidadesCombo.add(cantidadC);
+						combosVenta.add(auxCombo);
+						cargarCompras();
+					}
+					
 				}
 				else {
-					Componente auxComponente = Tienda.getInstance().findComponentebyNumeroSerie(codigo);
+					
+					auxComponente = Tienda.getInstance().findComponentebyNumeroSerie(codigo);
 					cantidad = Integer.valueOf(JOptionPane.showInputDialog("La cantidad real es de: "+auxComponente.getCantDisponible()+". Introduzca cantidad deseada"));
+					if(componentesVenta.contains(auxComponente)) {
+						
+						cantidadesCompo.add(componentesVenta.indexOf(auxComponente), cantidadesCompo.get(componentesVenta.indexOf(auxComponente))+cantidad);
+						cantidadesCompo.remove(componentesVenta.indexOf(auxComponente)+1);
+						cargarCompras();
+					}
+					else {
 					cantidadesCompo.add(cantidad);
 					componentesVenta.add(auxComponente);
 					cargarCompras();
+					}
 				}
+				txtPrecioTotal.setText(""+Tienda.getInstance().costoFactura(componentesVenta, cantidadesCompo, combosVenta, cantidadesCombo));
 				/*if(cbxComponentes.getSelectedIndex()==0) {
 					model.setColumnIdentifiers(encabezadoCompo);
 					cargarComponentes();
@@ -460,7 +481,7 @@ public class NuevaFactura extends JDialog {
 				row[1] = componente.getClass().getSimpleName();
 				row[2] = componente.getMarca()+" : "+componente.getModelo()+" : "+cantidadesCompo.get(i);
 				i++;
-				model2.addRow(row);		
+				model2.addRow(row);
 				
 			}
 		}

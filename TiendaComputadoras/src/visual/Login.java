@@ -85,35 +85,36 @@ public class Login extends JFrame {
 		setTitle("Iniciar sesi\u00F3n");
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 309, 239);
+		setBounds(100, 100, 302, 196);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
+		setLocationRelativeTo(null);
 		
 		JPanel panel = new JPanel();
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
 		JButton btnLogin = new JButton("Login");
-		btnLogin.setBounds(210, 154, 63, 25);
+		btnLogin.setBounds(178, 101, 86, 25);
 		panel.add(btnLogin);
 		
 		JLabel lblUsuario = new JLabel("Usuario:");
-		lblUsuario.setBounds(28, 57, 63, 14);
+		lblUsuario.setBounds(12, 16, 103, 14);
 		panel.add(lblUsuario);
 		
 		JLabel lblContrasea = new JLabel("Contrase\u00F1a:");
-		lblContrasea.setBounds(28, 93, 68, 14);
+		lblContrasea.setBounds(12, 60, 103, 14);
 		panel.add(lblContrasea);
 		
 		txtUsuario = new JTextField();
-		txtUsuario.setBounds(97, 54, 86, 20);
+		txtUsuario.setBounds(117, 13, 147, 20);
 		panel.add(txtUsuario);
 		txtUsuario.setColumns(10);
 		
 		txtContra = new JTextField();
-		txtContra.setBounds(97, 90, 86, 20);
+		txtContra.setBounds(117, 57, 147, 20);
 		panel.add(txtContra);
 		txtContra.setColumns(10);
 		btnLogin.addActionListener(new ActionListener() {

@@ -242,26 +242,30 @@ public class Tienda implements Serializable {
 		return cant;
 	}
 
-	public float precioTotalComponentes(ArrayList<Componente> aux ) {
+	public float precioTotalComponentes(ArrayList<Componente> aux,ArrayList<Integer> cantidades) {
 		float precioTotal = 0;
+		int i = 0;
 		if(!aux.isEmpty()) {
 			for (Componente componente : aux) {
-				precioTotal += componente.getPrecioVentaActual();
+				precioTotal += componente.getPrecioVentaActual()*cantidades.get(i);
+				i++;
 			}
 		}
 		return precioTotal;
 	}
-	public float precioTotalCombos(ArrayList<Combo> aux ) {
+	public float precioTotalCombos(ArrayList<Combo> aux, ArrayList<Integer> cantidades ) {
 		float precioTotal = 0;
+		int i = 0;
 		if(!aux.isEmpty()) {	
 			for (Combo combo : aux) {
-				precioTotal += combo.precioCombo();
+				precioTotal += combo.precioCombo()*cantidades.get(i);
+				i++;
 			}
 		}
 		return precioTotal;
 	}
-	public float costoFactura(ArrayList<Componente> losComponentes,ArrayList<Combo> losCombos) {
-		float total=precioTotalCombos(losCombos)+precioTotalComponentes(losComponentes);
+	public float costoFactura(ArrayList<Componente> losComponentes,ArrayList<Integer> cantidadesComponentes,ArrayList<Combo> losCombos,ArrayList<Integer> cantidadesCombos) {
+		float total=precioTotalCombos(losCombos,cantidadesComponentes)+precioTotalComponentes(losComponentes,cantidadesCombos);
 		return total;
 	}
 
