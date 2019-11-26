@@ -31,6 +31,7 @@ import logica.Proveedor;
 import logica.RAM;
 import logica.Tienda;
 import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 
 public class Principal extends JFrame {
 
@@ -60,6 +61,7 @@ public class Principal extends JFrame {
 	 * Create the frame.
 	 */
 	public Principal() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/Imagenes/IconPrincipal.png")));
 	
 		addWindowListener(new WindowAdapter() {
 			@Override
@@ -139,6 +141,7 @@ public class Principal extends JFrame {
 		menuBar.add(mnAdministracion);
 		
 		JMenuItem mntmAgregarComponentes = new JMenuItem("Agregar Componentes");
+		mntmAgregarComponentes.setIcon(new ImageIcon(Principal.class.getResource("/Imagenes/IconAgregarComponente.png")));
 		mntmAgregarComponentes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AgregarComponente aux = new AgregarComponente(true,null);
@@ -150,6 +153,7 @@ public class Principal extends JFrame {
 		
 				
 				JMenuItem mntmAgregarProveedores = new JMenuItem("Agregar  Proveedores");
+				mntmAgregarProveedores.setIcon(new ImageIcon(Principal.class.getResource("/Imagenes/IconAdmin.png")));
 				mntmAgregarProveedores.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						AgregarProveedor aux = new AgregarProveedor();
@@ -160,6 +164,7 @@ public class Principal extends JFrame {
 				mnAdministracion.add(mntmAgregarProveedores);
 				
 				JMenuItem mntmNuevoCombo = new JMenuItem("Nuevo Combo");
+				mntmNuevoCombo.setIcon(new ImageIcon(Principal.class.getResource("/Imagenes/IconAgregarCombopng.png")));
 				mntmNuevoCombo.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						NuevoCombo aux = new NuevoCombo();
@@ -170,6 +175,7 @@ public class Principal extends JFrame {
 				mnAdministracion.add(mntmNuevoCombo);
 				
 				JMenuItem mntmAsignarOrdenDe = new JMenuItem("Asignar orden de compra");
+				mntmAsignarOrdenDe.setIcon(new ImageIcon(Principal.class.getResource("/Imagenes/IconOrdenesCompra.png")));
 				mnAdministracion.add(mntmAsignarOrdenDe);
 				mntmAsignarOrdenDe.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -183,6 +189,7 @@ public class Principal extends JFrame {
 		menuBar.add(mnFacturacion);
 		
 		JMenuItem mntmNuevaFactura = new JMenuItem("Nueva Factura");
+		mntmNuevaFactura.setIcon(new ImageIcon(Principal.class.getResource("/Imagenes/IconFacturar.png")));
 		mntmNuevaFactura.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				NuevaFactura aux = new NuevaFactura();
@@ -193,6 +200,7 @@ public class Principal extends JFrame {
 		mnFacturacion.add(mntmNuevaFactura);
 		
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Abonar/Saldar Credito Cliente");
+		mntmNewMenuItem_1.setIcon(new ImageIcon(Principal.class.getResource("/Imagenes/IconAbonarSaldo.png")));
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				PagarCuentasCliente aux = new PagarCuentasCliente();
