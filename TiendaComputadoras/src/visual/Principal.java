@@ -134,18 +134,72 @@ public class Principal extends JFrame {
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
-		JMenu mnAgregar = new JMenu("Agregar");
-		menuBar.add(mnAgregar);
+		JMenu mnAdministracion = new JMenu("Administracion");
+		menuBar.add(mnAdministracion);
 		
-		JMenuItem mntmCombos = new JMenuItem("Combos");
-		mntmCombos.addActionListener(new ActionListener() {
+		JMenuItem mntmAgregarComponentes = new JMenuItem("Agregar Componentes");
+		mntmAgregarComponentes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				NuevoCombo aux = new NuevoCombo();
+				AgregarComponente aux = new AgregarComponente(true,null);
 				aux.setModal(true);
 				aux.setVisible(true);
 			}
 		});
-		mnAgregar.add(mntmCombos);
+		mnAdministracion.add(mntmAgregarComponentes);
+		
+				
+				JMenuItem mntmAgregarProveedores = new JMenuItem("Agregar  Proveedores");
+				mntmAgregarProveedores.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						AgregarProveedor aux = new AgregarProveedor();
+						aux.setModal(true);
+						aux.setVisible(true);
+					}
+				});
+				mnAdministracion.add(mntmAgregarProveedores);
+				
+				JMenuItem mntmNuevoCombo = new JMenuItem("Nuevo Combo");
+				mntmNuevoCombo.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						NuevoCombo aux = new NuevoCombo();
+						aux.setModal(true);
+						aux.setVisible(true);
+					}
+				});
+				mnAdministracion.add(mntmNuevoCombo);
+				
+				JMenuItem mntmAsignarOrdenDe = new JMenuItem("Asignar orden de compra");
+				mnAdministracion.add(mntmAsignarOrdenDe);
+				mntmAsignarOrdenDe.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						OrdenesPorProcesar aux = new OrdenesPorProcesar();
+						aux.setModal(true);
+						aux.setVisible(true);
+					}
+				});
+		
+		JMenu mnFacturacion = new JMenu("Facturaci\u00F3n");
+		menuBar.add(mnFacturacion);
+		
+		JMenuItem mntmNuevaFactura = new JMenuItem("Nueva Factura");
+		mntmNuevaFactura.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				NuevaFactura aux = new NuevaFactura();
+				aux.setModal(true);
+				aux.setVisible(true);
+			}
+		});
+		mnFacturacion.add(mntmNuevaFactura);
+		
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Abonar/Saldar Credito Cliente");
+		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				PagarCuentasCliente aux = new PagarCuentasCliente();
+				aux.setModal(true);
+				aux.setVisible(true);
+			}
+		});
+		mnFacturacion.add(mntmNewMenuItem_1);
 		
 		JMenu mnListados = new JMenu("Listados");
 		menuBar.add(mnListados);
@@ -209,76 +263,6 @@ public class Principal extends JFrame {
 			}
 		});
 		mnListados.add(mntmHistorialOrdenes);
-		
-		JMenu mnFacturacion = new JMenu("Facturaci\u00F3n");
-		menuBar.add(mnFacturacion);
-		
-		JMenuItem mntmNuevaFactura = new JMenuItem("Nueva Factura");
-		mntmNuevaFactura.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				NuevaFactura aux = new NuevaFactura();
-				aux.setModal(true);
-				aux.setVisible(true);
-			}
-		});
-		mnFacturacion.add(mntmNuevaFactura);
-		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Abonar/Saldar Credito Cliente");
-		mntmNewMenuItem_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				PagarCuentasCliente aux = new PagarCuentasCliente();
-				aux.setModal(true);
-				aux.setVisible(true);
-			}
-		});
-		mnFacturacion.add(mntmNewMenuItem_1);
-		
-		JMenu mnAdministracion = new JMenu("Administracion");
-		menuBar.add(mnAdministracion);
-		
-		JMenuItem mntmComponentes = new JMenuItem("Componentes");
-		mntmComponentes.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				AgregarComponente aux = new AgregarComponente(true,null);
-				aux.setModal(true);
-				aux.setVisible(true);
-			}
-		});
-		mnAgregar.add(mntmComponentes);
-
-		
-		JMenuItem mntmAgregarProveedores = new JMenuItem("Agregar  Proveedores");
-		mntmAgregarProveedores.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				AgregarProveedor aux = new AgregarProveedor();
-				aux.setModal(true);
-				aux.setVisible(true);
-			}
-		});
-		mnAdministracion.add(mntmAgregarProveedores);
-		
-		JMenuItem mntmNuevoCombo = new JMenuItem("Nuevo Combo");
-		mntmNuevoCombo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				NuevoCombo aux = new NuevoCombo();
-				aux.setModal(true);
-				aux.setVisible(true);
-			}
-		});
-		mnAdministracion.add(mntmNuevoCombo);
-		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Mas Combos");
-		mnAdministracion.add(mntmNewMenuItem);
-		
-		JMenuItem mntmAsignarOrdenDe = new JMenuItem("Asignar orden de compra");
-		mnAdministracion.add(mntmAsignarOrdenDe);
-		mntmAsignarOrdenDe.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				OrdenesPorProcesar aux = new OrdenesPorProcesar();
-				aux.setModal(true);
-				aux.setVisible(true);
-			}
-		});
 		getContentPane().setLayout(null);
 	}
 		

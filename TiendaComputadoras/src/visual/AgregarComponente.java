@@ -228,14 +228,14 @@ public class AgregarComponente extends JDialog {
 		panel_DiscoDuro.setVisible(false);
 
 		try {
-			mascaraVelocidad = new MaskFormatter("##.##");
-			mascaraVelocidad.setPlaceholder("_____");
+			mascaraVelocidad = new MaskFormatter("##.# GHz");
+			//mascaraVelocidad.setPlaceholder("_____");
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 		try {
-			mascaraCantMemoria = new MaskFormatter("##.##");
-			mascaraCantMemoria.setPlaceholder("_____");
+			mascaraCantMemoria = new MaskFormatter("##.#");
+			//mascaraCantMemoria.setPlaceholder("_____");
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
