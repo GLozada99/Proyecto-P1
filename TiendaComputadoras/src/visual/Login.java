@@ -18,6 +18,9 @@ import logica.Tienda;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 public class Login extends JFrame {
 
@@ -26,6 +29,8 @@ public class Login extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JTextField txtUsuario;
+	private JTextField txtContra;
 
 	/**
 	 * Launch the application.
@@ -77,9 +82,10 @@ public class Login extends JFrame {
 	 * Create the frame.
 	 */
 	public Login() {
+		setTitle("Iniciar sesi\u00F3n");
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 309, 239);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -90,20 +96,38 @@ public class Login extends JFrame {
 		panel.setLayout(null);
 		
 		JButton btnLogin = new JButton("Login");
-		btnLogin.setBounds(178, 109, 63, 25);
+		btnLogin.setBounds(210, 154, 63, 25);
 		panel.add(btnLogin);
+		
+		JLabel lblUsuario = new JLabel("Usuario:");
+		lblUsuario.setBounds(28, 57, 63, 14);
+		panel.add(lblUsuario);
+		
+		JLabel lblContrasea = new JLabel("Contrase\u00F1a:");
+		lblContrasea.setBounds(28, 93, 68, 14);
+		panel.add(lblContrasea);
+		
+		txtUsuario = new JTextField();
+		txtUsuario.setBounds(97, 54, 86, 20);
+		panel.add(txtUsuario);
+		txtUsuario.setColumns(10);
+		
+		txtContra = new JTextField();
+		txtContra.setBounds(97, 90, 86, 20);
+		panel.add(txtContra);
+		txtContra.setColumns(10);
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				setVisible(false);
-				Tienda.getInstance().setUsuarioActual(Tienda.getInstance().getLosUsuarios().get(0));
-				Principal frame = new Principal();
-				dispose();
-				frame.setVisible(true);
-				
+				if (Tienda.getInstance().confirmarLogin(txtUsuario.getText(), txtContra.getText())) {
+					setVisible(false);
+					Principal frame = new Principal();
+					dispose();
+					frame.setVisible(true);
+				}
+				JOptionPane.showInternalMessageDialog(null, "El usuario o la contraseña son incorrectos");
 			}
 		});
 		
 		
 	}
-
 }
