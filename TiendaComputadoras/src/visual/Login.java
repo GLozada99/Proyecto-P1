@@ -124,7 +124,9 @@ public class Login extends JFrame {
 					dispose();
 					frame.setVisible(true);
 				}
-				JOptionPane.showInternalMessageDialog(null, "El usuario o la contraseña son incorrectos");
+				else {
+				JOptionPane.showMessageDialog(null, "El usuario o la contraseña son incorrectos");
+				}
 			}
 		});
 		
