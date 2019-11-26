@@ -58,8 +58,8 @@ public class Principal extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Principal(Persona usuarioActual) {
-		Tienda.getInstance().setUsuarioActual(usuarioActual);
+	public Principal() {
+	
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {

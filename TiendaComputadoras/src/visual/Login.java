@@ -96,7 +96,7 @@ public class Login extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				setVisible(false);
 				Tienda.getInstance().setUsuarioActual(Tienda.getInstance().getLosUsuarios().get(0));
-				Principal frame = new Principal(Tienda.getInstance().getUsuarioActual());
+				Principal frame = new Principal();
 				dispose();
 				frame.setVisible(true);
 				
