@@ -232,7 +232,7 @@ public class Principal extends JFrame {
 		JMenuItem mntmComponentes = new JMenuItem("Componentes");
 		mntmComponentes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AgregarComponente aux = new AgregarComponente(true);
+				AgregarComponente aux = new AgregarComponente(true,null);
 				aux.setModal(true);
 				aux.setVisible(true);
 			}

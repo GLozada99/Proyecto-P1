@@ -15,9 +15,11 @@ public abstract class Componente implements Serializable{
 	protected int cantMin;
 	protected int cantMax;
 	protected ArrayList<Precio> precios;
+	protected ArrayList<Proveedor> losQueVenden;
 
 	public Componente(String numeroSerie, String marca, String modelo, int cantMin, int cantMax, float precioVentaI) {
 		super();
+		
 		this.modelo = modelo;
 		this.numeroSerie = numeroSerie;
 		this.marca = marca;
@@ -26,6 +28,7 @@ public abstract class Componente implements Serializable{
 		this.cantMax = cantMax;
 		precios=new ArrayList<Precio>();
 		precios.add(new Precio(precioVentaI, 0, false));
+		losQueVenden = new ArrayList<Proveedor>();
 	}
 
 	public String getModelo() {
@@ -83,6 +86,14 @@ public abstract class Componente implements Serializable{
 	public void setPrecios(ArrayList<Precio> precios) {
 		this.precios = precios;
 	}
+	public ArrayList<Proveedor> getLosQueVenden() {
+		return losQueVenden;
+	}
+
+	public void setLosQueVenden(ArrayList<Proveedor> losQueVenden) {
+		this.losQueVenden = losQueVenden;
+	}
+
 	public float getPrecioCompraActual() {
 		return precios.get(precios.size()-1).getPrecioCompra();
 	}

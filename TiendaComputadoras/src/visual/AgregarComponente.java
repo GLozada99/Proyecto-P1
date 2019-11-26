@@ -7,6 +7,12 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
 import javax.swing.border.TitledBorder;
@@ -91,10 +97,16 @@ public class AgregarComponente extends JDialog {
 	 * Create the dialog.
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public AgregarComponente(boolean b) {
+	public AgregarComponente(boolean b, Componente auxComp) {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				Tienda.getInstance().getLosQueVendenTemp().clear();	
+			}
+		});
 		setLocationRelativeTo(null);
 		setTitle("Crear Componente");
-		setBounds(100, 100, 460, 492);
+		setBounds(100, 100, 575, 503);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -103,7 +115,7 @@ public class AgregarComponente extends JDialog {
 
 		JPanel panel_DatosGeneralesComponentes = new JPanel();
 		panel_DatosGeneralesComponentes.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Datos generales del componente", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_DatosGeneralesComponentes.setBounds(10, 11, 216, 161);
+		panel_DatosGeneralesComponentes.setBounds(10, 11, 266, 161);
 		contentPanel.add(panel_DatosGeneralesComponentes);
 		panel_DatosGeneralesComponentes.setLayout(null);
 
@@ -139,7 +151,7 @@ public class AgregarComponente extends JDialog {
 
 		JPanel panel_TipoComponente = new JPanel();
 		panel_TipoComponente.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Tipo de componente", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_TipoComponente.setBounds(10, 183, 216, 150);
+		panel_TipoComponente.setBounds(10, 183, 266, 150);
 		contentPanel.add(panel_TipoComponente);
 		panel_TipoComponente.setLayout(null);
 
@@ -225,7 +237,7 @@ public class AgregarComponente extends JDialog {
 		}
 		panel_DiscoDuro.setLayout(null);
 		panel_DiscoDuro.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Especificaciones", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_DiscoDuro.setBounds(10, 344, 424, 70);
+		panel_DiscoDuro.setBounds(10, 344, 535, 70);
 		contentPanel.add(panel_DiscoDuro);
 
 		lblAlmacenamiento = new JLabel("Almacenamiento: ");
@@ -233,17 +245,17 @@ public class AgregarComponente extends JDialog {
 		panel_DiscoDuro.add(lblAlmacenamiento);
 
 		lblTipoConexion = new JLabel("Tipo Conexi\u00F3n:");
-		lblTipoConexion.setBounds(207, 27, 91, 14);
+		lblTipoConexion.setBounds(316, 27, 91, 14);
 		panel_DiscoDuro.add(lblTipoConexion);
 
 		cbxAlmacenamiento = new JComboBox();
 		cbxAlmacenamiento.setModel(new DefaultComboBoxModel(new String[] {"<Escoja>", "256 GB", "512 GB", "1 TB", "2 TB"}));
-		cbxAlmacenamiento.setBounds(115, 23, 80, 22);
+		cbxAlmacenamiento.setBounds(128, 23, 80, 22);
 		panel_DiscoDuro.add(cbxAlmacenamiento);
 
 		cbxTipoConexionDD = new JComboBox();
 		cbxTipoConexionDD.setModel(new DefaultComboBoxModel(new String[] {"<Escoja>", "IDE", "SATA", "SCSI", "SAS"}));
-		cbxTipoConexionDD.setBounds(303, 23, 104, 22);
+		cbxTipoConexionDD.setBounds(419, 23, 104, 22);
 		panel_DiscoDuro.add(cbxTipoConexionDD);
 		panel_DiscoDuro.setVisible(true);
 
@@ -328,7 +340,7 @@ public class AgregarComponente extends JDialog {
 		JPanel panel_DatosTienda = new JPanel();
 		panel_DatosTienda.setLayout(null);
 		panel_DatosTienda.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Datos de la Tienda", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_DatosTienda.setBounds(230, 11, 204, 161);
+		panel_DatosTienda.setBounds(288, 11, 266, 161);
 		contentPanel.add(panel_DatosTienda);
 
 		JLabel lblCantidadMin = new JLabel("Cantidad Min:");
@@ -358,6 +370,20 @@ public class AgregarComponente extends JDialog {
 		spnCantMin.setBounds(105, 27, 64, 22);
 		panel_DatosTienda.add(spnCantMin);
 
+		if(auxComp!=null) {
+			txtNoSerie.setText(auxComp.getNumeroSerie());txtNoSerie.setEnabled(false);
+			txtModelo.setText(auxComp.getModelo());txtModelo.setEnabled(true);
+			txtMarca.setText(auxComp.getMarca());txtMarca.setEnabled(true);
+			spnCantMax.setValue(auxComp.getCantMax());spnCantMax.setEnabled(true);
+			spnCantMin.setValue(auxComp.getCantMin());spnCantMin.setEnabled(true);
+			spnPrecioVenta.setValue(auxComp.getPrecioVentaActual());spnPrecioVenta.setEnabled(true);
+			if(!auxComp.getLosQueVenden().isEmpty()) {
+				Tienda.getInstance().getLosQueVendenTemp().addAll(auxComp.getLosQueVenden());
+			} 
+			
+
+		}
+
 
 
 		rdbtnDiscoDuro.setSelected(true);
@@ -367,7 +393,7 @@ public class AgregarComponente extends JDialog {
 
 		panel_Proveedor = new JPanel();
 		panel_Proveedor.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Proveedor", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_Proveedor.setBounds(230, 183, 204, 150);
+		panel_Proveedor.setBounds(288, 183, 266, 150);
 		contentPanel.add(panel_Proveedor);
 		panel_Proveedor.setLayout(new BorderLayout(0, 0));
 
@@ -382,6 +408,7 @@ public class AgregarComponente extends JDialog {
 		panel_Proveedor.add(btnAgregarVendedor, BorderLayout.SOUTH);
 
 		scrollPane = new JScrollPane();
+		scrollPane.setSize(266, 102);
 		panel_Proveedor.add(scrollPane, BorderLayout.CENTER);
 
 		table = new JTable();
@@ -397,6 +424,7 @@ public class AgregarComponente extends JDialog {
 		}
 
 		{
+
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
@@ -411,6 +439,7 @@ public class AgregarComponente extends JDialog {
 						int cantMax = new Integer(spnCantMax.getValue().toString());  
 						int cantMin = new Integer(spnCantMin.getValue().toString());
 						float precioVentaI = new Float(spnPrecioVenta.getValue().toString());
+
 
 						if (cantMax>=cantMin) {
 							if (rdbtnDiscoDuro.isSelected()) {
@@ -458,8 +487,31 @@ public class AgregarComponente extends JDialog {
 						} else {
 							JOptionPane.showMessageDialog(null, "Coloque una cantidad máxima superior a la mínima","Notificación", JOptionPane.INFORMATION_MESSAGE);
 						}
+						if(auxComp!=null) {
+							Tienda.getInstance().getLosComponentes().remove(auxComp);
+						}
+						//Esta en veremos/////////////////////////////
+						aux.getLosQueVenden().addAll(Tienda.getInstance().getLosQueVendenTemp());
+						int i=0;
+						for (Proveedor proveedor : aux.getLosQueVenden()) {
+							proveedor.getPreciosCompos().add(Tienda.getInstance().getPreciosLosQueVendenTemp().get(i));
+							
+						}
+						//////////////////////////////////
+						
 						Tienda.getInstance().agregarComponente(aux);
+						Tienda.getInstance().primeraOrdenCompra(aux);
+						Tienda.getInstance().getLosQueVendenTemp().clear();
+						
+						//////////////////////////Tambien
+						Tienda.getInstance().getPreciosLosQueVendenTemp().clear();
+						//////////////////////////////////
+						if(auxComp!=null) {
+							dispose();
+							
+						}
 					}
+
 				});
 				btnCrear.setActionCommand("OK");
 				buttonPane.add(btnCrear);
@@ -476,22 +528,24 @@ public class AgregarComponente extends JDialog {
 				buttonPane.add(btnCancelar);			}
 		}
 
-		if(b != true) {
-			panel_Proveedor.setEnabled(b);
-			btnAgregarVendedor.setEnabled(b);
+		if(!b) {
+			panel_Proveedor.setEnabled(false);
+			btnAgregarVendedor.setEnabled(false);
 		}
+		cargarProveedoresVentaComp();
 
 	}
 
-	public static void cargarProveedores() {
+	public static void cargarProveedoresVentaComp() {
 		model.setRowCount(0);
 		row = new Object[model.getColumnCount()];
-
-		for (Proveedor aux : Tienda.getInstance().getLosProveedores()) {
-			row[0] = aux.getCedula();
-			row[1] = aux.getNombre();
-			row[2] = aux.getPreciosCompos();
-			model.addRow(row);
+		if(!Tienda.getInstance().getLosQueVendenTemp().isEmpty()) {
+			for (Proveedor aux : Tienda.getInstance().getLosQueVendenTemp()) {
+				row[0] = aux.getCedula();
+				row[1] = aux.getNombre();
+				row[2] = aux.getPreciosCompos();
+				model.addRow(row);
+			}
 		}
 	}
 

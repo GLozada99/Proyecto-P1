@@ -152,7 +152,7 @@ public class AgregarProveedor extends JDialog {
 					panel_Componentes.add(btnNuevoCompo);
 					btnNuevoCompo.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-							AgregarComponente aux = new AgregarComponente(false);
+							AgregarComponente aux = new AgregarComponente(false,null);
 							aux.setModal(true);
 							aux.setVisible(true);
 						}

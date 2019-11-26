@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -34,9 +35,9 @@ public class ListaProveedores extends JDialog {
 	private Object[] row;
 	private static DefaultTableModel model;
 	private String rnc;
-	JButton btnCancelar;
+	JButton btnEliminar;
 	JButton btnAceptar;
-	private JButton btnNewButton;
+	private JButton btnModificar;
 	/**
 	 * Launch the application.
 	 */
@@ -53,7 +54,7 @@ public class ListaProveedores extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public ListaProveedores(boolean p) {
+	public ListaProveedores(boolean agregarProvComponentes) {
 		setTitle("Lista Proveedores");
 		setResizable(false);
 		setBounds(100, 100, 450, 300);
@@ -79,12 +80,12 @@ public class ListaProveedores extends JDialog {
 					table = new JTable();
 					table.addMouseListener(new MouseAdapter() {
 						@Override
-						public void mouseClicked(MouseEvent arg0) {
+						public void mouseClicked(MouseEvent e) {
 							if(table.getSelectedRow()>-1&&Tienda.getInstance().getUsuarioActual() instanceof Administrador) {
 								int index = table.getSelectedRow();
-								btnAceptar.setEnabled(true);
+								btnModificar.setEnabled(true);
+								btnEliminar.setEnabled(true);
 								rnc = String.valueOf(table.getValueAt(index, 0));
-
 							}
 						}
 					});
@@ -100,34 +101,47 @@ public class ListaProveedores extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				btnAceptar = new JButton("Aceptar");
+				btnAceptar.setEnabled(true);
 				btnAceptar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						if (p != false) {
-							AgregarComponente.cargarProveedores();
+						if (agregarProvComponentes) {
+							Proveedor aux = Tienda.getInstance().findProveedrobyRNC(rnc);
+							if(!Tienda.getInstance().getLosQueVendenTemp().contains(aux)) {
+							Tienda.getInstance().getLosQueVendenTemp().add(aux);
+							AgregarComponente.cargarProveedoresVentaComp();
+							dispose();
+							}
+							else {
+								JOptionPane.showInternalMessageDialog(null, "El Proveedor seleccionado ya se encuentra en la lista");
+							}
 						}
-						dispose();
+						
 					}
 				});
 				btnAceptar.setActionCommand("OK");
 				buttonPane.add(btnAceptar);
 				getRootPane().setDefaultButton(btnAceptar);
 				{
-					btnNewButton = new JButton("Modificar");
-					btnNewButton.setEnabled(false);
-					buttonPane.add(btnNewButton);
+					btnModificar = new JButton("Modificar");
+					btnModificar.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+						}
+					});
+					btnModificar.setEnabled(false);
+					buttonPane.add(btnModificar);
 				}
 			}
 			{
-				btnCancelar = new JButton("Eliminar");
-				btnCancelar.setEnabled(false);
-				btnCancelar.addActionListener(new ActionListener() {
+				btnEliminar = new JButton("Eliminar");
+				btnEliminar.setEnabled(false);
+				btnEliminar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						dispose();
 					}
 				});
 
-				btnCancelar.setActionCommand("Cancel");
-				buttonPane.add(btnCancelar);
+				btnEliminar.setActionCommand("Cancel");
+				buttonPane.add(btnEliminar);
 			}
 
 		}

@@ -15,6 +15,8 @@ public class Tienda implements Serializable {
 	private ArrayList <Cliente> losClientes;
 	private ArrayList <Persona> losUsuarios;
 	private ArrayList<Factura> lasFacturas;
+	private ArrayList<Proveedor> losQueVendenTemp;
+	private ArrayList<Float> preciosLosQueVendenTemp;
 	private ArrayList<Combo> losCombo;
 	private ArrayList<Proveedor> losProveedores;
 	private ArrayList<OrdenCompra> lasOrdenes;
@@ -36,6 +38,8 @@ public class Tienda implements Serializable {
 		lasOrdenes = new ArrayList<>();
 		losUsuarios = new ArrayList<>();
 		ordenesSinProcesar = new ArrayList<>();
+		losQueVendenTemp = new ArrayList<>();
+		preciosLosQueVendenTemp = new ArrayList<>();
 		generadorCodigoCombo = 1;
 		generadorCodigoFactura = 1;
 		generadorCodigoComponentes = 1;
@@ -106,6 +110,14 @@ public class Tienda implements Serializable {
 
 	public void setLasOrdenes(ArrayList<OrdenCompra> lasOrdenes) {
 		this.lasOrdenes = lasOrdenes;
+	}
+
+	public ArrayList<Proveedor> getLosQueVendenTemp() {
+		return losQueVendenTemp;
+	}
+
+	public void setLosQueVendenTemp(ArrayList<Proveedor> losQueVendenTemp) {
+		this.losQueVendenTemp = losQueVendenTemp;
 	}
 
 	public int getGeneradorCodigoCombo() {
@@ -413,6 +425,14 @@ public class Tienda implements Serializable {
 		}
 		
 		return login;
+	}
+
+	public ArrayList<Float> getPreciosLosQueVendenTemp() {
+		return preciosLosQueVendenTemp;
+	}
+
+	public void setPreciosLosQueVendenTemp(ArrayList<Float> preciosLosQueVendenTemp) {
+		this.preciosLosQueVendenTemp = preciosLosQueVendenTemp;
 	}
 
 }

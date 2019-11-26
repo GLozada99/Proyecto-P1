@@ -122,6 +122,8 @@ public class ListaComponentes extends JDialog {
 			cbxComp = new JComboBox();
 			cbxComp.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					
+					
 					if(cbxComp.getSelectedIndex()==0) {
 						model.setColumnIdentifiers(encabezadoDD);
 						cargarComponentesDD();
@@ -138,6 +140,8 @@ public class ListaComponentes extends JDialog {
 						model.setColumnIdentifiers(encabezadoRAM);
 						cargarComponentesRAM();
 					}
+				//	btnModificar.setEnabled(false);
+					//btnEliminar.setEnabled(false);
 				}
 			});
 			cbxComp.setModel(new DefaultComboBoxModel<String>(new String[] {"Disco Duro", "Microprocesador", "Mother Board", "RAM"}));
@@ -156,7 +160,6 @@ public class ListaComponentes extends JDialog {
 				btnAceptar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						if(p !=false) {
-
 							AgregarProveedor.cargarComponentes();
 						}
 						dispose();
@@ -167,6 +170,29 @@ public class ListaComponentes extends JDialog {
 			}
 			{
 				btnModificar = new JButton("Modificar");
+				btnModificar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Componente auxComp = Tienda.getInstance().findComponentebyNumeroSerie(codigo);
+						AgregarComponente aux = new AgregarComponente(true,auxComp);
+						aux.setModal(true);
+						aux.setVisible(true);
+						if(cbxComp.getSelectedIndex()==0) {
+							cargarComponentesDD();
+						}
+						if(cbxComp.getSelectedIndex()==1) {
+							cargarComponentesMicro();
+						}
+						if(cbxComp.getSelectedIndex()==2) {
+							cargarComponentesMotherBoard();
+						}
+						if(cbxComp.getSelectedIndex()==3) {
+							cargarComponentesRAM();
+						}
+
+
+
+					}
+				});
 				btnModificar.setEnabled(false);
 				/*	btnModificar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
