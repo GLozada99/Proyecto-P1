@@ -46,7 +46,7 @@ public class Login extends JFrame {
 					tiendaRead.close();
 				} catch(FileNotFoundException e) {
 					try {
-						tienda2 = new  FileOutputStream("empresa.dat");
+						tienda2 = new  FileOutputStream("TiendaComputadoras.dat");
 						tiendaWrite = new ObjectOutputStream(tienda2);
 						tiendaWrite.writeObject(Tienda.getInstance());
 						tienda.close();
