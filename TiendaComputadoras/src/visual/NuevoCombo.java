@@ -28,6 +28,7 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class NuevoCombo extends JDialog {
@@ -41,6 +42,9 @@ public class NuevoCombo extends JDialog {
 	private JComboBox cbxMicro;
 	private JComboBox cbxRAM;
 	private JComboBox cbxMotherBoard;
+	private JSpinner spnPrecio;
+	private JSpinner spnDescuento;
+	private ArrayList<Componente> comboComponente;
 
 
 
@@ -96,13 +100,13 @@ public class NuevoCombo extends JDialog {
 		panel.add(txtCodigo);
 		txtCodigo.setColumns(10);
 		
-		JSpinner spinner = new JSpinner();
-		spinner.setBounds(63, 47, 89, 20);
-		panel.add(spinner);
+	    spnPrecio = new JSpinner();
+		spnPrecio.setBounds(66, 47, 83, 20);
+		panel.add(spnPrecio);
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new TitledBorder(null, "Componentes del Combo", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_1.setBounds(5, 91, 541, 211);
+		panel_1.setBounds(5, 91, 496, 211);
 		contentPanel.add(panel_1);
 		panel_1.setLayout(null);
 
@@ -149,8 +153,10 @@ public class NuevoCombo extends JDialog {
 				JButton btnCrear = new JButton("Crear");
 				btnCrear.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						//Combo combo1= new Combo(, txtCodigo.getText(), spnPrec, descuento, cantidad);
-
+						//new Combo(componentes, codigo, precio, descuento)
+					   
+						Combo combo1= new Combo( componenteDevolver(),txtCodigo.getText(), Float.valueOf(spnPrecio.getValue().toString()), Integer.valueOf(spnDescuento.getValue().toString()));
+					   
 					}
 				});
 				btnCrear.setActionCommand("OK");
@@ -173,7 +179,43 @@ public class NuevoCombo extends JDialog {
 			RAMCbx();
 
 		}
-	}		
+	}	
+	private ArrayList<Componente> componenteDevolver() {
+		int iDD=0;
+		int iMicro=0;
+		int iRAM=0;
+		int iMB=0;
+		ArrayList<Componente> miComponente= null;
+		
+		for (Componente elComponente : Tienda.getInstance().getLosComponentes()) {
+			if(elComponente instanceof DiscoDuro){
+				if(cbxDiscoDuro.getSelectedIndex()==iDD) {
+					miComponente.add(0,elComponente);
+			}
+				iDD++;
+				}
+			if(elComponente instanceof Micro){
+				if(cbxMicro.getSelectedIndex()==iMicro) {
+					miComponente.add(1,elComponente);
+			}
+				iMicro++;
+				}
+			if(elComponente instanceof RAM){
+				if(cbxRAM.getSelectedIndex()==iRAM) {
+					miComponente.add(2,elComponente);
+			}
+				iRAM++;
+				}
+			if(elComponente instanceof MotherBoard){
+				if(cbxMotherBoard.getSelectedIndex()==iMB) {
+					miComponente.add(3,elComponente);
+			}
+				iMB++;
+				}
+		}
+		return miComponente;
+		
+	}
 	private void DiscoDuroCbx(){
 		cbxDiscoDuro.removeAllItems();
 	
