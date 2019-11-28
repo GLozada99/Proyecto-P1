@@ -33,6 +33,7 @@ import javax.swing.UIManager;
 import java.awt.Color;
 import javax.swing.BoxLayout;
 import javax.swing.border.LineBorder;
+import java.awt.Toolkit;
 
 public class AgregarProveedor extends JDialog {
 
@@ -63,6 +64,7 @@ public class AgregarProveedor extends JDialog {
 	 * Create the dialog.
 	 */
 	public AgregarProveedor() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(AgregarProveedor.class.getResource("/Imagenes/IconAdmin.png")));
 		setTitle("Agregar Proveedor");
 		setBounds(100, 100, 560, 256);
 		getContentPane().setLayout(new BorderLayout());

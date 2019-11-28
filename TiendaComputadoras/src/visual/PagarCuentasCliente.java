@@ -26,6 +26,7 @@ import javax.swing.UIManager;
 import java.awt.Color;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+import java.awt.Toolkit;
 
 public class PagarCuentasCliente extends JDialog {
 
@@ -57,6 +58,7 @@ public class PagarCuentasCliente extends JDialog {
 	 * Create the dialog.
 	 */
 	public PagarCuentasCliente() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(PagarCuentasCliente.class.getResource("/Imagenes/IconAbonarSaldo.png")));
 		setBounds(100, 100, 503, 291);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

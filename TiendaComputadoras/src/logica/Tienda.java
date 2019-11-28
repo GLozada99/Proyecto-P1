@@ -43,12 +43,20 @@ public class Tienda implements Serializable {
 		generadorCodigoCombo = 1;
 		generadorCodigoFactura = 1;
 		generadorCodigoComponentes = 1;
-		generadorCodigoOrdenCompra = 1;
+		generadorCodigoOrdenCompra = 1; 
 		Persona admin = new Administrador("Admin", "000-000-0000", "PUCMM", "000-0000000-0", "Admin");
-		losUsuarios.add(admin);
+		Tienda.getInstance().getLosUsuarios().add(admin);
+		Tienda.getInstance().getLosUsuarios().get(0).setCodigo("Admin");
+		System.out.println(admin.getCodigo());
+		System.out.println(admin.getDireccion());
+		System.out.println(admin.getNombre());
+		System.out.println(admin.getTelefono());
+		
+		
+		System.out.println(Tienda.getInstance().getLosUsuarios().get(0).getCodigo());
 
 	}
-
+	
 	public static Tienda getInstance() {
 		if(tienda==null){
 			tienda = new Tienda();
@@ -421,7 +429,7 @@ public class Tienda implements Serializable {
 		for (int i = 0; i < losUsuarios.size()&&!login; i++) {
 			usuario = losUsuarios.get(i);
 			if(usuario instanceof Administrador || usuario instanceof Vendedor) {
-				if(usuario.getCodigo().equals(codigo)&&((((Administrador)usuario).getContraseña().equals(contrasena)))){
+				if(usuario.getNombre().equals(codigo)&&((((Administrador)usuario).getContraseña().equals(contrasena)))){
 					setUsuarioActual(usuario);
 					login = true;
 				}

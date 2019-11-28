@@ -45,6 +45,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTable;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Toolkit;
 
 public class NuevaFactura extends JDialog {
 
@@ -102,12 +103,14 @@ public class NuevaFactura extends JDialog {
 	 */
 
 	public NuevaFactura() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(NuevaFactura.class.getResource("/Imagenes/IconFacturar.png")));
 		setTitle("Nueva Factura");
 		setBounds(100, 100, 1191, 733);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
+		setLocationRelativeTo(null);
 
 
 		JPanel DatosCliente = new JPanel();

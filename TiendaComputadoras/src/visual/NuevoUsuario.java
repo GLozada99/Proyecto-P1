@@ -57,50 +57,51 @@ public class NuevoUsuario extends JDialog {
 	 * Create the dialog.
 	 */
 	public NuevoUsuario() {
-		setBounds(100, 100, 265, 386);
+		setBounds(100, 100, 265, 356);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		setLocationRelativeTo(null);
 		contentPanel.setLayout(null);
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Datos del Usuario", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(10, 0, 235, 209);
+		panel.setBounds(10, 11, 235, 209);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblNombre = new JLabel("Nombre:");
-		lblNombre.setBounds(10, 47, 46, 14);
+		lblNombre.setBounds(10, 23, 74, 14);
 		panel.add(lblNombre);
 		
-		JLabel lblCdula = new JLabel("C\u00E9dula:");
-		lblCdula.setBounds(10, 75, 46, 14);
-		panel.add(lblCdula);
+		JLabel lblCodigo = new JLabel("C\u00F3digo:");
+		lblCodigo.setBounds(10, 60, 74, 14);
+		panel.add(lblCodigo);
 		
 		JLabel lblTelfono = new JLabel("Tel\u00E9fono:");
-		lblTelfono.setBounds(10, 107, 46, 14);
+		lblTelfono.setBounds(10, 97, 74, 14);
 		panel.add(lblTelfono);
 		
 		JLabel lblDireccin = new JLabel("Direcci\u00F3n:");
-		lblDireccin.setBounds(10, 135, 74, 14);
+		lblDireccin.setBounds(10, 134, 74, 14);
 		panel.add(lblDireccin);
 		
 		JLabel lblContrasea = new JLabel("Contrase\u00F1a:");
-		lblContrasea.setBounds(10, 162, 74, 14);
+		lblContrasea.setBounds(10, 171, 74, 14);
 		panel.add(lblContrasea);
 		
 		txtContra = new JTextField();
-		txtContra.setBounds(83, 159, 97, 20);
+		txtContra.setBounds(83, 168, 142, 20);
 		panel.add(txtContra);
 		txtContra.setColumns(10);
 		
 		txtNombre = new JTextField();
-		txtNombre.setBounds(83, 44, 97, 20);
+		txtNombre.setBounds(83, 20, 142, 20);
 		panel.add(txtNombre);
 		txtNombre.setColumns(10);
 		
 		txtDireccion = new JTextField();
-		txtDireccion.setBounds(83, 132, 97, 20);
+		txtDireccion.setBounds(83, 131, 142, 20);
 		panel.add(txtDireccion);
 		txtDireccion.setColumns(10);
 		{
@@ -112,7 +113,7 @@ public class NuevoUsuario extends JDialog {
 				mascaraNumero.setPlaceholderCharacter('_');
 				JFormattedTextField ftxtTelefono = new JFormattedTextField(mascaraNumero);
 				ftxtTelefono.setFont(new Font("Calibri", Font.PLAIN, 18));
-				ftxtTelefono.setBounds(83, 102, 97, 22);
+				ftxtTelefono.setBounds(83, 93, 142, 22);
 				panel.add(ftxtTelefono);
 
 
@@ -120,12 +121,12 @@ public class NuevoUsuario extends JDialog {
 				mascaraCedula.setPlaceholderCharacter('_');
 				ftxtCedula = new JFormattedTextField(mascaraCedula);
 				ftxtCedula.setFont(new Font("Calibri", Font.PLAIN, 18));
-				ftxtCedula.setBounds(83, 70, 97, 22);
+				ftxtCedula.setBounds(83, 56, 142, 22);
 				panel.add(ftxtCedula);
 				
 				JPanel panel_1 = new JPanel();
 				panel_1.setBorder(new TitledBorder(null, "Tipo de Usuario", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-				panel_1.setBounds(10, 220, 235, 95);
+				panel_1.setBounds(10, 224, 235, 57);
 				contentPanel.add(panel_1);
 				panel_1.setLayout(null);
 				
@@ -137,7 +138,7 @@ public class NuevoUsuario extends JDialog {
 						
 					}
 				});
-				rdnAdministrador.setBounds(6, 29, 91, 23);
+				rdnAdministrador.setBounds(6, 16, 106, 23);
 				panel_1.add(rdnAdministrador);
 				
 				 rdnVendedor = new JRadioButton("Vendedor");
@@ -148,7 +149,7 @@ public class NuevoUsuario extends JDialog {
 						
 					}
 				});
-				rdnVendedor.setBounds(6, 66, 71, 23);
+				rdnVendedor.setBounds(114, 16, 115, 23);
 				panel_1.add(rdnVendedor);
 
 			} catch (ParseException e) {

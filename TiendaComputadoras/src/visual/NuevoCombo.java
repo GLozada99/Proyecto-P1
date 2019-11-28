@@ -30,6 +30,7 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class NuevoCombo extends JDialog {
 
@@ -65,11 +66,13 @@ public class NuevoCombo extends JDialog {
 	 * Create the dialog.
 	 */
 	public NuevoCombo() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(NuevoCombo.class.getResource("/Imagenes/IconAgregarCombopng.png")));
 		setTitle("Nuevo Combo");
 		setBounds(100, 100, 527, 405);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		setLocationRelativeTo(null);
 		contentPanel.setLayout(null);
 
 		JPanel panel = new JPanel();

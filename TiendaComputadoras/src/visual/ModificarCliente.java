@@ -22,6 +22,9 @@ import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import javax.swing.border.EtchedBorder;
+import java.awt.Color;
+import java.awt.Toolkit;
 
 public class ModificarCliente extends JDialog {
 
@@ -52,6 +55,7 @@ public class ModificarCliente extends JDialog {
 	 * Create the dialog.
 	 */
 	public ModificarCliente(Cliente aux) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ModificarCliente.class.getResource("/Imagenes/IconCliente.png")));
 		setBounds(100, 100, 297, 259);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -60,7 +64,7 @@ public class ModificarCliente extends JDialog {
 		setLocationRelativeTo(null);
 		{
 			JPanel panel = new JPanel();
-			panel.setBorder(new TitledBorder(null, "Registro de Cliente", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Modificaci\u00F3n de Cliente", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
 			{
@@ -142,7 +146,7 @@ public class ModificarCliente extends JDialog {
 							JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios");
 						}
 						else {
-						aux.setCedula(ftxtCedula.getText());
+						aux.setCodigo(ftxtCedula.getText());
 						aux.setNombre(txtNombre.getText());
 						aux.setDireccion(txtDireccion.getText());
 						aux.setTelefono(ftxtTelefono.getText());

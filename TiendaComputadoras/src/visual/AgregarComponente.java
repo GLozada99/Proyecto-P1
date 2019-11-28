@@ -41,6 +41,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JScrollPane;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTable;
+import java.awt.Toolkit;
 
 
 public class AgregarComponente extends JDialog {
@@ -100,6 +101,7 @@ public class AgregarComponente extends JDialog {
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public AgregarComponente(boolean b, Componente auxComp) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(AgregarComponente.class.getResource("/Imagenes/IconAgregarComponente.png")));
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {

@@ -26,6 +26,7 @@ import logica.Tienda;
 
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import java.awt.Toolkit;
 
 
 
@@ -65,6 +66,7 @@ public class OrdenesPorProcesar extends JDialog {
 
 
 	public OrdenesPorProcesar() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(OrdenesPorProcesar.class.getResource("/Imagenes/IconOrdenesCompra.png")));
 		setTitle("Ordenes Por Procesar");
 
 		setResizable(false);

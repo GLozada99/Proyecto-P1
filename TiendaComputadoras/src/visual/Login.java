@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import logica.Administrador;
+
 import logica.Tienda;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -21,6 +21,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import java.awt.Toolkit;
 
 public class Login extends JFrame {
 
@@ -67,7 +68,7 @@ public class Login extends JFrame {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			
+
 				try {
 					Login frame = new Login();
 					frame.setVisible(true);
@@ -75,6 +76,7 @@ public class Login extends JFrame {
 					e.printStackTrace();
 				}
 			}
+
 		});
 	}
 
@@ -82,8 +84,9 @@ public class Login extends JFrame {
 	 * Create the frame.
 	 */
 	public Login() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/Imagenes/IconPrincipal.png")));
 		setTitle("Iniciar sesi\u00F3n");
-		
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 302, 196);
 		contentPane = new JPanel();
@@ -91,28 +94,28 @@ public class Login extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setLocationRelativeTo(null);
-		
+
 		JPanel panel = new JPanel();
 		contentPane.add(panel);
 		panel.setLayout(null);
-		
+
 		JButton btnLogin = new JButton("Login");
 		btnLogin.setBounds(178, 101, 86, 25);
 		panel.add(btnLogin);
-		
+
 		JLabel lblUsuario = new JLabel("Usuario:");
 		lblUsuario.setBounds(12, 16, 103, 14);
 		panel.add(lblUsuario);
-		
+
 		JLabel lblContrasea = new JLabel("Contrase\u00F1a:");
 		lblContrasea.setBounds(12, 60, 103, 14);
 		panel.add(lblContrasea);
-		
+
 		txtUsuario = new JTextField();
 		txtUsuario.setBounds(117, 13, 147, 20);
 		panel.add(txtUsuario);
 		txtUsuario.setColumns(10);
-		
+
 		txtContra = new JTextField();
 		txtContra.setBounds(117, 57, 147, 20);
 		panel.add(txtContra);
@@ -126,11 +129,11 @@ public class Login extends JFrame {
 					frame.setVisible(true);
 				}
 				else {
-				JOptionPane.showMessageDialog(null, "El usuario o la contraseña son incorrectos");
+					JOptionPane.showMessageDialog(null, "El usuario o la contraseña son incorrectos");
 				}
 			}
 		});
-		
-		
+
+
 	}
 }

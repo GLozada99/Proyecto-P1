@@ -1,6 +1,7 @@
 package visual;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -40,6 +41,7 @@ public class Principal extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private Dimension dim;
 
 	/**
 	 * Launch the application.
@@ -125,6 +127,8 @@ public class Principal extends JFrame {
 		//Tienda.getInstance().getOrdenesSinProcesar().add(p);
 		//Termina
 		
+		dim = super.getToolkit().getScreenSize(); 
+		super.setSize(dim.width, dim.height);//-100);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1820, 1000);
 		setLocationRelativeTo(null);

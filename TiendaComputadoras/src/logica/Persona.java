@@ -47,8 +47,8 @@ public abstract class Persona implements Serializable {
 		return codigo;
 	}
 
-	public void setCedula(String cedula) {
-		this.codigo = cedula;
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 	
 }
