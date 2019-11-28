@@ -13,7 +13,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-
+import logica.Administrador;
+import logica.Persona;
 import logica.Tienda;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -54,6 +55,8 @@ public class Login extends JFrame {
 					try {
 						tienda2 = new  FileOutputStream("TiendaComputadoras.dat");
 						tiendaWrite = new ObjectOutputStream(tienda2);
+						Persona admin = new Administrador("Admin1", "000-000-0000", "PUCMM", "Admin", "Admin");
+						Tienda.getInstance().getLosUsuarios().add(0,admin);
 						tiendaWrite.writeObject(Tienda.getInstance());
 						tienda2.close();
 						tiendaWrite.close();

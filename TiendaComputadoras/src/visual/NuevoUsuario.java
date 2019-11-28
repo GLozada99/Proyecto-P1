@@ -29,6 +29,10 @@ import java.awt.Label;
 
 public class NuevoUsuario extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtContra;
 	private JTextField txtNombre;
@@ -111,7 +115,7 @@ public class NuevoUsuario extends JDialog {
 
 				mascaraNumero = new MaskFormatter("(###) ###-####");
 				mascaraNumero.setPlaceholderCharacter('_');
-				JFormattedTextField ftxtTelefono = new JFormattedTextField(mascaraNumero);
+			    ftxtTelefono = new JFormattedTextField(mascaraNumero);
 				ftxtTelefono.setFont(new Font("Calibri", Font.PLAIN, 18));
 				ftxtTelefono.setBounds(83, 93, 142, 22);
 				panel.add(ftxtTelefono);
@@ -174,12 +178,13 @@ public class NuevoUsuario extends JDialog {
 								JOptionPane.showMessageDialog(null, "Seleccione su tipo de usuario");
 							}
 						if(rdnAdministrador.isSelected()) {
-							usuario1= new Administrador(txtNombre.getText(), ftxtTelefono.getText(), txtDireccion.getText(), ftxtCedula.getText(), txtContra.getText());    
+							usuario1= new Administrador(txtNombre.getText(), ftxtTelefono.getText(), txtDireccion.getText(), ftxtCedula.getText(), txtContra.getText());
 						}
 						if(rdnVendedor.isSelected()) {
 							usuario1= new Vendedor(txtNombre.getText(), ftxtTelefono.getText(), txtDireccion.getText() , ftxtCedula.getText(), txtContra.getText());
 						}
 						Tienda.getInstance().getLosUsuarios().add(usuario1);
+						JOptionPane.showMessageDialog(null, "Usuario registrado con exito");
 						}
 					}
 				});

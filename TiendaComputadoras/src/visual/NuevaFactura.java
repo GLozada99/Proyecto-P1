@@ -15,8 +15,10 @@ import logica.Cliente;
 import logica.Combo;
 import logica.Componente;
 import logica.DiscoDuro;
+import logica.Factura;
 import logica.Micro;
 import logica.MotherBoard;
+import logica.Queseria;
 import logica.RAM;
 import logica.Tienda;
 
@@ -46,6 +48,7 @@ import javax.swing.JTable;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Toolkit;
+import javax.swing.JRadioButton;
 
 public class NuevaFactura extends JDialog {
 
@@ -84,6 +87,7 @@ public class NuevaFactura extends JDialog {
 	private Integer cantidad;
 	private Componente auxComponente;
 	private Combo auxCombo;
+	private JRadioButton rdbtnCredito;
 	/**
 	 * Launch the application.
 	 */
@@ -189,16 +193,16 @@ public class NuevaFactura extends JDialog {
 		btnBuscar.setActionCommand("Buscar");
 		btnBuscar.setBounds(242, 25, 45, 25);
 		DatosCliente.add(btnBuscar);
-		
-				JLabel lblNombre = new JLabel("Nombre: ");
-				lblNombre.setBounds(335, 27, 76, 22);
-				DatosCliente.add(lblNombre);
-				
-						txtNombre = new JTextField();
-						txtNombre.setBounds(399, 25, 207, 22);
-						DatosCliente.add(txtNombre);
-						txtNombre.setFont(new Font("Calibri", Font.PLAIN, 18));
-						txtNombre.setColumns(10);
+
+		JLabel lblNombre = new JLabel("Nombre: ");
+		lblNombre.setBounds(335, 27, 76, 22);
+		DatosCliente.add(lblNombre);
+
+		txtNombre = new JTextField();
+		txtNombre.setBounds(399, 25, 207, 22);
+		DatosCliente.add(txtNombre);
+		txtNombre.setFont(new Font("Calibri", Font.PLAIN, 18));
+		txtNombre.setColumns(10);
 
 		JPanel ElementosASeleccionar = new JPanel();
 		ElementosASeleccionar.setForeground(Color.BLACK);
@@ -214,7 +218,7 @@ public class NuevaFactura extends JDialog {
 					Combo auxCombo = Tienda.getInstance().findCombobyCodigo(codigo);
 					cantidadesCombo.remove(combosVenta.lastIndexOf(auxCombo));
 					combosVenta.remove(auxCombo);
-					
+
 				}
 				else {
 					Componente auxComponente = Tienda.getInstance().findComponentebyNumeroSerie(codigo);
@@ -237,7 +241,7 @@ public class NuevaFactura extends JDialog {
 					auxCombo = Tienda.getInstance().findCombobyCodigo(codigo);
 					cantidadC = Integer.valueOf(JOptionPane.showInputDialog("Introduzca cantidad deseada"));
 					if(combosVenta.contains(auxCombo)) {
-						
+
 						cantidadesCombo.add(combosVenta.indexOf(auxCombo), cantidadesCombo.get(combosVenta.indexOf(auxCombo))+cantidadC);
 						cantidadesCombo.remove(combosVenta.indexOf(auxCombo)+1);
 						cargarCompras();
@@ -247,22 +251,22 @@ public class NuevaFactura extends JDialog {
 						combosVenta.add(auxCombo);
 						cargarCompras();
 					}
-					
+
 				}
 				else {
-					
+
 					auxComponente = Tienda.getInstance().findComponentebyNumeroSerie(codigo);
 					cantidad = Integer.valueOf(JOptionPane.showInputDialog("La cantidad real es de: "+auxComponente.getCantDisponible()+". Introduzca cantidad deseada"));
 					if(componentesVenta.contains(auxComponente)) {
-						
+
 						cantidadesCompo.add(componentesVenta.indexOf(auxComponente), cantidadesCompo.get(componentesVenta.indexOf(auxComponente))+cantidad);
 						cantidadesCompo.remove(componentesVenta.indexOf(auxComponente)+1);
 						cargarCompras();
 					}
 					else {
-					cantidadesCompo.add(cantidad);
-					componentesVenta.add(auxComponente);
-					cargarCompras();
+						cantidadesCompo.add(cantidad);
+						componentesVenta.add(auxComponente);
+						cargarCompras();
 					}
 				}
 				txtPrecioTotal.setText(""+Tienda.getInstance().costoFactura(componentesVenta, cantidadesCompo, combosVenta, cantidadesCombo));
@@ -360,7 +364,7 @@ public class NuevaFactura extends JDialog {
 		JScrollPane spCarrito = new JScrollPane();
 		spCarrito.setBounds(636, 59, 501, 442);
 		ElementosASeleccionar.add(spCarrito);
-		
+
 		model2 = new DefaultTableModel();
 		tablaCompra = new JTable();
 		tablaCompra.addMouseListener(new MouseAdapter() {
@@ -377,7 +381,7 @@ public class NuevaFactura extends JDialog {
 		tablaCompra.setModel(model2);
 		model2.setColumnIdentifiers(encabezadoCompra);
 		cargarCompras();
-		
+
 
 		JPanel Factura = new JPanel();
 		Factura.setForeground(Color.BLACK);
@@ -405,209 +409,265 @@ public class NuevaFactura extends JDialog {
 		Factura.add(txtCodigo);
 
 		JLabel lblTotalComponentes = new JLabel("Total componentes: ");
-		lblTotalComponentes.setBounds(12, 17, 128, 16);
+		lblTotalComponentes.setBounds(12, 22, 128, 16);
 		Factura.add(lblTotalComponentes);
 
 		txtTotalComponetes = new JTextField();
 		txtTotalComponetes.setEditable(false);
 		txtTotalComponetes.setColumns(10);
-		txtTotalComponetes.setBounds(141, 14, 81, 22);
+		txtTotalComponetes.setBounds(141, 19, 81, 22);
 		Factura.add(txtTotalComponetes);
 
 		JLabel lblTotalCombos = new JLabel("Total combos: ");
-		lblTotalCombos.setBounds(12, 65, 117, 16);
+		lblTotalCombos.setBounds(12, 60, 117, 16);
 		Factura.add(lblTotalCombos);
 
 		txtTotalCombos = new JTextField();
 		txtTotalCombos.setEditable(false);
 		txtTotalCombos.setColumns(10);
-		txtTotalCombos.setBounds(141, 63, 81, 22);
+		txtTotalCombos.setBounds(141, 57, 81, 22);
 		Factura.add(txtTotalCombos);
-		
+
 		JLabel lblCodigoFactura = new JLabel("Codigo Factura");
 		lblCodigoFactura.setBounds(291, 17, 128, 16);
 		Factura.add(lblCodigoFactura);
+
+		rdbtnCredito = new JRadioButton("Credito");
+		rdbtnCredito.setBounds(291, 42, 210, 23);
+		Factura.add(rdbtnCredito);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton btnFacturar = new JButton("Facturar");
-				btnFacturar.setActionCommand("OK");
-				buttonPane.add(btnFacturar);
-				getRootPane().setDefaultButton(btnFacturar);
-			}
-			{
-				JButton cancelButton = new JButton("Cancel");
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
-			}
+				btnFacturar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						ArrayList<Componente> ayudaComponente=new ArrayList<>();
+						ArrayList<Combo> ayudaCombos=new ArrayList<>();
+						ayudaComponente.addAll(0, componentesVenta);
+						ayudaCombos.addAll(0, combosVenta);
+						ArrayList<Integer> ayudaCantiComponente=new ArrayList<>();
+						ArrayList<Integer> ayudaCantiCombos=new ArrayList<>();
+						ayudaCantiComponente.addAll(0, cantidadesCompo);
+						ayudaCantiCombos.addAll(0, cantidadesCombo);
+						if ((Tienda.getInstance().findClientebyCedula(ftxtCedula.getText())==null)) {
+							if(ftxtCedula.getText().equalsIgnoreCase("___-_______-_")||txtNombre.getText().isEmpty()||txtDireccion.getText().isEmpty()||ftxtTelefono.getText().equalsIgnoreCase("(___) ___-____")) {
+								JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios");
+							}
+
+							else if(Tienda.getInstance().relacionFactura(Tienda.getInstance().findClientebyCedula(ftxtCedula.getText()), Float.valueOf(txtPrecioTotal.getText()), ayudaComponente, ayudaCantiComponente, ayudaCombos, ayudaCantiCombos, rdbtnCredito.isSelected())) {
+								Factura aux= new Factura(txtCodigo.getText(), Float.valueOf(txtPrecioTotal.getText()), Tienda.getInstance().findClientebyCedula(ftxtCedula.getText()), ayudaComponente, ayudaCombos, ayudaCantiComponente, ayudaCantiCombos, rdbtnCredito.isSelected());
+								Tienda.getInstance().agregarFactura(aux);
+								clean();
+								ayudaComponente.clear();
+								ayudaCombos.clear();
+								ayudaCantiComponente.clear();
+								ayudaCantiCombos.clear();
+								JOptionPane.showMessageDialog(null, "La compra fue realizada con exito");
+							}
+							else {
+								JOptionPane.showMessageDialog(null, "Este cliente no cumple con los requisitos para realizar la compra");
+						}}
+						else {
+							Factura aux=new Factura(txtCodigoFac.getText(), Queseria.getInstance().clientebyCedula(ftxtCedula.getText()), ayuda);
+
+							Queseria.getInstance().anadirFactura(aux);
+							clean();
+							eliminarQuesos();
+							quesosCompraQ.clear();
+							quesosCompra.clear();
+							JOptionPane.showMessageDialog(null, "La compra fue realizada con exito");
+						}
+
+					}
+				});
+			});
+			btnFacturar.setActionCommand("OK");
+			buttonPane.add(btnFacturar);
+			getRootPane().setDefaultButton(btnFacturar);
 		}
+		{
+			JButton cancelButton = new JButton("Cancel");
+			cancelButton.setActionCommand("Cancel");
+			buttonPane.add(cancelButton);
+		}
+	}
+	model.setColumnIdentifiers(encabezadoCompo);
+	cargarComponentes();
+}
+
+public void cargarCbx(){
+	if(cbxComponentes.getSelectedIndex()==0) {
 		model.setColumnIdentifiers(encabezadoCompo);
 		cargarComponentes();
 	}
-	
-	public void cargarCbx(){
-		if(cbxComponentes.getSelectedIndex()==0) {
-			model.setColumnIdentifiers(encabezadoCompo);
-			cargarComponentes();
-		}
-		if(cbxComponentes.getSelectedIndex()==1) {
-			model.setColumnIdentifiers(encabezadoCombo);
-			cargarCombos();
-		}
-		if(cbxComponentes.getSelectedIndex()==2) {
-			model.setColumnIdentifiers(encabezadoDD);
-			cargarComponentesDD();
-		}
-		if(cbxComponentes.getSelectedIndex()==3) {
-			model.setColumnIdentifiers(encabezadoMicro);
-			cargarComponentesMicro();
-		}
-		if(cbxComponentes.getSelectedIndex()==4) {
-			model.setColumnIdentifiers(encabezadoMother);
-			cargarComponentesMotherBoard();
-		}
-		if(cbxComponentes.getSelectedIndex()==5) {
-			model.setColumnIdentifiers(encabezadoRAM);
-			cargarComponentesRAM();
+	if(cbxComponentes.getSelectedIndex()==1) {
+		model.setColumnIdentifiers(encabezadoCombo);
+		cargarCombos();
+	}
+	if(cbxComponentes.getSelectedIndex()==2) {
+		model.setColumnIdentifiers(encabezadoDD);
+		cargarComponentesDD();
+	}
+	if(cbxComponentes.getSelectedIndex()==3) {
+		model.setColumnIdentifiers(encabezadoMicro);
+		cargarComponentesMicro();
+	}
+	if(cbxComponentes.getSelectedIndex()==4) {
+		model.setColumnIdentifiers(encabezadoMother);
+		cargarComponentesMotherBoard();
+	}
+	if(cbxComponentes.getSelectedIndex()==5) {
+		model.setColumnIdentifiers(encabezadoRAM);
+		cargarComponentesRAM();
+	}
+}
+
+public static void cargarCompras() {
+	model2.setRowCount(0);
+	row = new Object[model.getColumnCount()];
+	if(!componentesVenta.isEmpty()) {
+		int i = 0;
+		for (Componente componente : componentesVenta) {
+			row[0] = componente.getNumeroSerie();
+			row[1] = componente.getClass().getSimpleName();
+			row[2] = componente.getMarca()+" : "+componente.getModelo()+" : "+cantidadesCompo.get(i);
+			i++;
+			model2.addRow(row);
+
 		}
 	}
-	
-	public static void cargarCompras() {
-		model2.setRowCount(0);
-		row = new Object[model.getColumnCount()];
-		if(!componentesVenta.isEmpty()) {
-			int i = 0;
-			for (Componente componente : componentesVenta) {
+
+
+}
+public static void cargarComponentes() {
+	model.setRowCount(0);
+	row = new Object[model.getColumnCount()];
+	if(!Tienda.getInstance().getLosComponentes().isEmpty()) {
+		for (Componente componente : Tienda.getInstance().getLosComponentes()) {
+			if (componente instanceof DiscoDuro) {
 				row[0] = componente.getNumeroSerie();
-				row[1] = componente.getClass().getSimpleName();
-				row[2] = componente.getMarca()+" : "+componente.getModelo()+" : "+cantidadesCompo.get(i);
-				i++;
-				model2.addRow(row);
-				
-			}
-		}
-		
-
-	}
-	public static void cargarComponentes() {
-		model.setRowCount(0);
-		row = new Object[model.getColumnCount()];
-		if(!Tienda.getInstance().getLosComponentes().isEmpty()) {
-			for (Componente componente : Tienda.getInstance().getLosComponentes()) {
-				if (componente instanceof DiscoDuro) {
-					row[0] = componente.getNumeroSerie();
-					row[1] = componente.getMarca();
-					row[2] = componente.getModelo();
-					row[3] = componente.getPrecioVentaActual();
-					model.addRow(row);
-				}
-			}
-		}
-
-	}
-
-	public static void cargarCombos() {
-		model.setRowCount(0);
-		row = new Object[model.getColumnCount()];
-		if(!Tienda.getInstance().getLosCombo().isEmpty()) {
-			for (Combo combo : Tienda.getInstance().getLosCombo()) {
-				row[0] = combo.getCodigo();
-				for (Componente componente : combo.getComponentes()) {
-					if(componente instanceof DiscoDuro) {
-						row[1] = componente.getMarca() +" : "+ componente.getModelo();
-					}
-					if(componente instanceof Micro) {
-						row[2] = componente.getMarca() +" : "+ componente.getModelo();
-					}
-					if(componente instanceof MotherBoard) {
-						row[3] = componente.getMarca() +" : "+ componente.getModelo();
-					}
-					if(componente instanceof RAM) {
-						row[4] = componente.getMarca() +" : "+ componente.getModelo();
-					}
-				}
-				row[5] = combo.getDescuento()+"%";
+				row[1] = componente.getMarca();
+				row[2] = componente.getModelo();
+				row[3] = componente.getPrecioVentaActual();
 				model.addRow(row);
 			}
 		}
-
 	}
 
-	public static void cargarComponentesDD() {
-		model.setRowCount(0);
-		row = new Object[model.getColumnCount()];
-		if(!Tienda.getInstance().getLosComponentes().isEmpty()) {
-			for (Componente componente : Tienda.getInstance().getLosComponentes()) {
-				if (componente instanceof DiscoDuro) {
-					row[0] = componente.getNumeroSerie();
-					row[1] = componente.getMarca();
-					row[2] = componente.getModelo();
-					row[3] = componente.getPrecioVentaActual();
-					row[4] = ((DiscoDuro)componente).getCapacidadAlma();
-					row[5] = ((DiscoDuro)componente).getTipoConexion();
-					model.addRow(row);
+}
+
+public static void cargarCombos() {
+	model.setRowCount(0);
+	row = new Object[model.getColumnCount()];
+	if(!Tienda.getInstance().getLosCombo().isEmpty()) {
+		for (Combo combo : Tienda.getInstance().getLosCombo()) {
+			row[0] = combo.getCodigo();
+			for (Componente componente : combo.getComponentes()) {
+				if(componente instanceof DiscoDuro) {
+					row[1] = componente.getMarca() +" : "+ componente.getModelo();
+				}
+				if(componente instanceof Micro) {
+					row[2] = componente.getMarca() +" : "+ componente.getModelo();
+				}
+				if(componente instanceof MotherBoard) {
+					row[3] = componente.getMarca() +" : "+ componente.getModelo();
+				}
+				if(componente instanceof RAM) {
+					row[4] = componente.getMarca() +" : "+ componente.getModelo();
 				}
 			}
+			row[5] = combo.getDescuento()+"%";
+			model.addRow(row);
 		}
-
 	}
 
-	public static void cargarComponentesMicro() {
-		model.setRowCount(0);
-		row = new Object[model.getColumnCount()];
-		if(!Tienda.getInstance().getLosComponentes().isEmpty()) {
-			for (Componente componente : Tienda.getInstance().getLosComponentes()) {
-				if (componente instanceof Micro) {
-					row[0] = componente.getNumeroSerie();
-					row[1] = componente.getMarca();
-					row[2] = componente.getModelo();
-					row[3] = componente.getPrecioVentaActual();
-					row[4] = ((Micro)componente).getVelocidad();
-					row[5] = ((Micro)componente).getTipoConexion();
-					model.addRow(row);
-				}
+}
+
+public static void cargarComponentesDD() {
+	model.setRowCount(0);
+	row = new Object[model.getColumnCount()];
+	if(!Tienda.getInstance().getLosComponentes().isEmpty()) {
+		for (Componente componente : Tienda.getInstance().getLosComponentes()) {
+			if (componente instanceof DiscoDuro) {
+				row[0] = componente.getNumeroSerie();
+				row[1] = componente.getMarca();
+				row[2] = componente.getModelo();
+				row[3] = componente.getPrecioVentaActual();
+				row[4] = ((DiscoDuro)componente).getCapacidadAlma();
+				row[5] = ((DiscoDuro)componente).getTipoConexion();
+				model.addRow(row);
 			}
 		}
-
 	}
 
-	public static void cargarComponentesMotherBoard() {
-		model.setRowCount(0);
-		row = new Object[model.getColumnCount()];
-		if(!Tienda.getInstance().getLosComponentes().isEmpty()) {
-			for (Componente componente : Tienda.getInstance().getLosComponentes()) {
-				if (componente instanceof MotherBoard) {
-					row[0] = componente.getNumeroSerie();
-					row[1] = componente.getMarca();
-					row[2] = componente.getModelo();
-					row[3] = componente.getPrecioVentaActual();
-					row[4] = ((MotherBoard)componente).getTipoConector();
-					row[5] = ((MotherBoard)componente).getTipoRAM();
-					model.addRow(row);
-				}
+}
+
+public static void cargarComponentesMicro() {
+	model.setRowCount(0);
+	row = new Object[model.getColumnCount()];
+	if(!Tienda.getInstance().getLosComponentes().isEmpty()) {
+		for (Componente componente : Tienda.getInstance().getLosComponentes()) {
+			if (componente instanceof Micro) {
+				row[0] = componente.getNumeroSerie();
+				row[1] = componente.getMarca();
+				row[2] = componente.getModelo();
+				row[3] = componente.getPrecioVentaActual();
+				row[4] = ((Micro)componente).getVelocidad();
+				row[5] = ((Micro)componente).getTipoConexion();
+				model.addRow(row);
 			}
 		}
-
 	}
 
-	public static void cargarComponentesRAM() {
-		model.setRowCount(0);
-		row = new Object[model.getColumnCount()];
-		if(!Tienda.getInstance().getLosComponentes().isEmpty()) {
-			for (Componente componente : Tienda.getInstance().getLosComponentes()) {
-				if (componente instanceof RAM) {
-					row[0] = componente.getNumeroSerie();
-					row[1] = componente.getMarca();
-					row[2] = componente.getModelo();
-					row[3] = componente.getPrecioVentaActual();
-					row[4] = ((RAM)componente).getCantMemoria();
-					row[5] = ((RAM)componente).getTipoMemoria();
-					model.addRow(row);
-				}
+}
+
+public static void cargarComponentesMotherBoard() {
+	model.setRowCount(0);
+	row = new Object[model.getColumnCount()];
+	if(!Tienda.getInstance().getLosComponentes().isEmpty()) {
+		for (Componente componente : Tienda.getInstance().getLosComponentes()) {
+			if (componente instanceof MotherBoard) {
+				row[0] = componente.getNumeroSerie();
+				row[1] = componente.getMarca();
+				row[2] = componente.getModelo();
+				row[3] = componente.getPrecioVentaActual();
+				row[4] = ((MotherBoard)componente).getTipoConector();
+				row[5] = ((MotherBoard)componente).getTipoRAM();
+				model.addRow(row);
 			}
 		}
-
 	}
+
+}
+
+public static void cargarComponentesRAM() {
+	model.setRowCount(0);
+	row = new Object[model.getColumnCount()];
+	if(!Tienda.getInstance().getLosComponentes().isEmpty()) {
+		for (Componente componente : Tienda.getInstance().getLosComponentes()) {
+			if (componente instanceof RAM) {
+				row[0] = componente.getNumeroSerie();
+				row[1] = componente.getMarca();
+				row[2] = componente.getModelo();
+				row[3] = componente.getPrecioVentaActual();
+				row[4] = ((RAM)componente).getCantMemoria();
+				row[5] = ((RAM)componente).getTipoMemoria();
+				model.addRow(row);
+			}
+		}
+	}
+
+}
+protected void clean() {
+	ftxtCedula.setText("");
+	txtNombre.setText("");
+	txtDireccion.setText("");
+	ftxtTelefono.setText("");
+	cbxComponentes.setSelectedIndex(0);
+	//model2.;
+	txtPrecioTotal.setText("0");
+	txtCodigo.setText("F-"+Tienda.getInstance().getGeneradorCodigoFactura());
+}
 }

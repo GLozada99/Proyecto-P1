@@ -178,6 +178,16 @@ public class Principal extends JFrame {
 				});
 				mnAdministracion.add(mntmNuevoCombo);
 				
+				JMenuItem mntmNuevoUsuario = new JMenuItem("Nuevo Usuario");
+				mntmNuevoUsuario.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						NuevoUsuario aux = new NuevoUsuario();
+						aux.setModal(true);
+						aux.setVisible(true);
+					}
+				});
+				mnAdministracion.add(mntmNuevoUsuario);
+				
 				JMenuItem mntmAsignarOrdenDe = new JMenuItem("Asignar orden de compra");
 				mntmAsignarOrdenDe.setIcon(new ImageIcon(Principal.class.getResource("/Imagenes/IconOrdenesCompra.png")));
 				mnAdministracion.add(mntmAsignarOrdenDe);
