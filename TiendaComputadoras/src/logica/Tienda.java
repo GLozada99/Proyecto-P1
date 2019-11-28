@@ -242,7 +242,7 @@ public class Tienda implements Serializable {
 	public float precioTotalComponentes(ArrayList<Componente> aux,ArrayList<Integer> cantidades) {
 		float precioTotal = 0;
 		int i = 0;
-		if(!aux.isEmpty()) {
+		if(!aux.isEmpty()&&!cantidades.isEmpty()) {
 			for (Componente componente : aux) {
 				precioTotal += componente.getPrecioVentaActual()*cantidades.get(i);
 				i++;
@@ -253,7 +253,7 @@ public class Tienda implements Serializable {
 	public float precioTotalCombos(ArrayList<Combo> aux, ArrayList<Integer> cantidades ) {
 		float precioTotal = 0;
 		int i = 0;
-		if(!aux.isEmpty()) {	
+		if(!aux.isEmpty()&&!cantidades.isEmpty()) {	
 			for (Combo combo : aux) {
 				precioTotal += combo.precioCombo()*cantidades.get(i);
 				i++;
@@ -262,7 +262,7 @@ public class Tienda implements Serializable {
 		return precioTotal;
 	}
 	public float costoFactura(ArrayList<Componente> losComponentes,ArrayList<Integer> cantidadesComponentes,ArrayList<Combo> losCombos,ArrayList<Integer> cantidadesCombos) {
-		float total=precioTotalCombos(losCombos,cantidadesComponentes)+precioTotalComponentes(losComponentes,cantidadesCombos);
+		float total=precioTotalCombos(losCombos,cantidadesCombos)+precioTotalComponentes(losComponentes,cantidadesComponentes);
 		return total;
 	}
 

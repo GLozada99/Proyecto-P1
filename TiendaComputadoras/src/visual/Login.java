@@ -23,6 +23,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.Toolkit;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Login extends JFrame {
 
@@ -102,6 +104,7 @@ public class Login extends JFrame {
 		panel.setLayout(null);
 
 		JButton btnLogin = new JButton("Login");
+		getRootPane().setDefaultButton(btnLogin);;
 		btnLogin.setBounds(178, 101, 86, 25);
 		panel.add(btnLogin);
 

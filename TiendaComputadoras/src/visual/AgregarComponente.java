@@ -342,7 +342,7 @@ public class AgregarComponente extends JDialog {
 		panel_DiscoDuro.add(cbxTipoConexionDD);
 		panel_DiscoDuro.setVisible(true);
 
-		
+
 
 		JPanel panel_DatosTienda = new JPanel();
 		panel_DatosTienda.setLayout(null);
@@ -498,11 +498,13 @@ public class AgregarComponente extends JDialog {
 							Tienda.getInstance().getLosComponentes().remove(auxComp);
 						}
 						//Esta en veremos/////////////////////////////
-						aux.getLosQueVenden().addAll(Tienda.getInstance().getLosQueVendenTemp());
-						int i=0;
-						for (Proveedor proveedor : aux.getLosQueVenden()) {
-							proveedor.getPreciosCompos().add(Tienda.getInstance().getPreciosLosQueVendenTemp().get(i));
+						if(!aux.getLosQueVenden().isEmpty()) {
+							aux.getLosQueVenden().addAll(Tienda.getInstance().getLosQueVendenTemp());
+							int i=0;
+							for (Proveedor proveedor : aux.getLosQueVenden()) {
+								proveedor.getPreciosCompos().add(Tienda.getInstance().getPreciosLosQueVendenTemp().get(i));
 
+							}
 						}
 						//////////////////////////////////
 

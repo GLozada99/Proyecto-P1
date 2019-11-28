@@ -18,7 +18,6 @@ import logica.DiscoDuro;
 import logica.Factura;
 import logica.Micro;
 import logica.MotherBoard;
-import logica.Queseria;
 import logica.RAM;
 import logica.Tienda;
 
@@ -451,7 +450,7 @@ public class NuevaFactura extends JDialog {
 						ArrayList<Integer> ayudaCantiCombos=new ArrayList<>();
 						ayudaCantiComponente.addAll(0, cantidadesCompo);
 						ayudaCantiCombos.addAll(0, cantidadesCombo);
-						if ((Tienda.getInstance().findClientebyCedula(ftxtCedula.getText())==null)) {
+						if ((Tienda.getInstance().findClientebyCedula(ftxtCedula.getText())!=null)) {
 							if(ftxtCedula.getText().equalsIgnoreCase("___-_______-_")||txtNombre.getText().isEmpty()||txtDireccion.getText().isEmpty()||ftxtTelefono.getText().equalsIgnoreCase("(___) ___-____")) {
 								JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios");
 							}
@@ -459,6 +458,8 @@ public class NuevaFactura extends JDialog {
 							else if(Tienda.getInstance().relacionFactura(Tienda.getInstance().findClientebyCedula(ftxtCedula.getText()), Float.valueOf(txtPrecioTotal.getText()), ayudaComponente, ayudaCantiComponente, ayudaCombos, ayudaCantiCombos, rdbtnCredito.isSelected())) {
 								Factura aux= new Factura(txtCodigo.getText(), Float.valueOf(txtPrecioTotal.getText()), Tienda.getInstance().findClientebyCedula(ftxtCedula.getText()), ayudaComponente, ayudaCombos, ayudaCantiComponente, ayudaCantiCombos, rdbtnCredito.isSelected());
 								Tienda.getInstance().agregarFactura(aux);
+								Tienda.getInstance().restaCantiCombos(ayudaCombos, ayudaCantiCombos);
+								Tienda.getInstance().restaCantiComponentes(ayudaComponente, ayudaCantiComponente);
 								clean();
 								ayudaComponente.clear();
 								ayudaCombos.clear();
@@ -468,21 +469,26 @@ public class NuevaFactura extends JDialog {
 							}
 							else {
 								JOptionPane.showMessageDialog(null, "Este cliente no cumple con los requisitos para realizar la compra");
-						}}
-						else {
-							Factura aux=new Factura(txtCodigoFac.getText(), Queseria.getInstance().clientebyCedula(ftxtCedula.getText()), ayuda);
-
-							Queseria.getInstance().anadirFactura(aux);
+							}
+						}
+						else if(Tienda.getInstance().relacionFactura(Tienda.getInstance().findClientebyCedula(ftxtCedula.getText()), Float.valueOf(txtPrecioTotal.getText()), ayudaComponente, ayudaCantiComponente, ayudaCombos, ayudaCantiCombos, rdbtnCredito.isSelected())) {
+							Cliente auxCli = new Cliente(txtNombre.getText(), ftxtTelefono.getText(), txtDireccion.getText(), ftxtCedula.getText());
+							Factura aux = new Factura(txtCodigo.getText(), Float.valueOf(txtPrecioTotal.getText()), auxCli, ayudaComponente, ayudaCombos, ayudaCantiComponente, ayudaCantiCombos, rdbtnCredito.isSelected());
+							Tienda.getInstance().getLosClientes().add(auxCli);
+							Tienda.getInstance().agregarFactura(aux);
+							Tienda.getInstance().restaCantiCombos(ayudaCombos, ayudaCantiCombos);
+							Tienda.getInstance().restaCantiComponentes(ayudaComponente, ayudaCantiComponente);
 							clean();
-							eliminarQuesos();
-							quesosCompraQ.clear();
-							quesosCompra.clear();
+							ayudaComponente.clear();
+							ayudaCombos.clear();
+							ayudaCantiComponente.clear();
+							ayudaCantiCombos.clear();
 							JOptionPane.showMessageDialog(null, "La compra fue realizada con exito");
 						}
 
 					}
 				});
-			});
+			
 			btnFacturar.setActionCommand("OK");
 			buttonPane.add(btnFacturar);
 			getRootPane().setDefaultButton(btnFacturar);
@@ -546,13 +552,12 @@ public static void cargarComponentes() {
 	row = new Object[model.getColumnCount()];
 	if(!Tienda.getInstance().getLosComponentes().isEmpty()) {
 		for (Componente componente : Tienda.getInstance().getLosComponentes()) {
-			if (componente instanceof DiscoDuro) {
 				row[0] = componente.getNumeroSerie();
 				row[1] = componente.getMarca();
 				row[2] = componente.getModelo();
 				row[3] = componente.getPrecioVentaActual();
 				model.addRow(row);
-			}
+			
 		}
 	}
 
