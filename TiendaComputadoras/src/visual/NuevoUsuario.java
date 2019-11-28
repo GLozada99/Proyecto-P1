@@ -2,23 +2,43 @@ package visual;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.Font;
+import java.text.ParseException;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.MaskFormatter;
+
+import logica.Administrador;
+import logica.Persona;
+import logica.Tienda;
+import logica.Vendedor;
+
+import javax.swing.JFormattedTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Panel;
+import javax.swing.JRadioButton;
+import java.awt.Label;
 
 public class NuevoUsuario extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
+	private JTextField txtContra;
+	private JTextField txtNombre;
+	private JTextField txtDireccion;
+	private JFormattedTextField ftxtTelefono;
+	private JFormattedTextField ftxtCedula;
+	private JRadioButton rdnAdministrador;
+	private JRadioButton rdnVendedor;
+	
+
 
 	/**
 	 * Launch the application.
@@ -37,7 +57,7 @@ public class NuevoUsuario extends JDialog {
 	 * Create the dialog.
 	 */
 	public NuevoUsuario() {
-		setBounds(100, 100, 544, 272);
+		setBounds(100, 100, 265, 386);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -45,7 +65,7 @@ public class NuevoUsuario extends JDialog {
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(null, "Datos del Usuario", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(0, 0, 518, 116);
+		panel.setBounds(10, 0, 235, 209);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		
@@ -58,54 +78,113 @@ public class NuevoUsuario extends JDialog {
 		panel.add(lblCdula);
 		
 		JLabel lblTelfono = new JLabel("Tel\u00E9fono:");
-		lblTelfono.setBounds(163, 47, 46, 14);
+		lblTelfono.setBounds(10, 107, 46, 14);
 		panel.add(lblTelfono);
 		
 		JLabel lblDireccin = new JLabel("Direcci\u00F3n:");
-		lblDireccin.setBounds(163, 75, 74, 14);
+		lblDireccin.setBounds(10, 135, 74, 14);
 		panel.add(lblDireccin);
 		
 		JLabel lblContrasea = new JLabel("Contrase\u00F1a:");
-		lblContrasea.setBounds(329, 60, 74, 14);
+		lblContrasea.setBounds(10, 162, 74, 14);
 		panel.add(lblContrasea);
 		
-		textField = new JTextField();
-		textField.setBounds(408, 57, 86, 20);
-		panel.add(textField);
-		textField.setColumns(10);
+		txtContra = new JTextField();
+		txtContra.setBounds(83, 159, 97, 20);
+		panel.add(txtContra);
+		txtContra.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(56, 44, 86, 20);
-		panel.add(textField_1);
-		textField_1.setColumns(10);
+		txtNombre = new JTextField();
+		txtNombre.setBounds(83, 44, 97, 20);
+		panel.add(txtNombre);
+		txtNombre.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(56, 72, 86, 20);
-		panel.add(textField_2);
-		textField_2.setColumns(10);
-		
-		textField_3 = new JTextField();
-		textField_3.setBounds(222, 44, 86, 20);
-		panel.add(textField_3);
-		textField_3.setColumns(10);
-		
-		textField_4 = new JTextField();
-		textField_4.setBounds(222, 72, 86, 20);
-		panel.add(textField_4);
-		textField_4.setColumns(10);
-		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(0, 127, 518, 73);
-		contentPanel.add(panel_1);
+		txtDireccion = new JTextField();
+		txtDireccion.setBounds(83, 132, 97, 20);
+		panel.add(txtDireccion);
+		txtDireccion.setColumns(10);
+		{
+			MaskFormatter mascaraNumero;
+			MaskFormatter mascaraCedula;
+			try {
+
+				mascaraNumero = new MaskFormatter("(###) ###-####");
+				mascaraNumero.setPlaceholderCharacter('_');
+				JFormattedTextField ftxtTelefono = new JFormattedTextField(mascaraNumero);
+				ftxtTelefono.setFont(new Font("Calibri", Font.PLAIN, 18));
+				ftxtTelefono.setBounds(83, 102, 97, 22);
+				panel.add(ftxtTelefono);
+
+
+				mascaraCedula = new MaskFormatter("######");
+				mascaraCedula.setPlaceholderCharacter('_');
+				ftxtCedula = new JFormattedTextField(mascaraCedula);
+				ftxtCedula.setFont(new Font("Calibri", Font.PLAIN, 18));
+				ftxtCedula.setBounds(83, 70, 97, 22);
+				panel.add(ftxtCedula);
+				
+				JPanel panel_1 = new JPanel();
+				panel_1.setBorder(new TitledBorder(null, "Tipo de Usuario", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+				panel_1.setBounds(10, 220, 235, 95);
+				contentPanel.add(panel_1);
+				panel_1.setLayout(null);
+				
+				 rdnAdministrador = new JRadioButton("Administrador");
+				rdnAdministrador.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						rdnAdministrador.setSelected(true);
+						rdnVendedor.setSelected(false);
+						
+					}
+				});
+				rdnAdministrador.setBounds(6, 29, 91, 23);
+				panel_1.add(rdnAdministrador);
+				
+				 rdnVendedor = new JRadioButton("Vendedor");
+				rdnVendedor.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						rdnAdministrador.setSelected(false);
+						rdnVendedor.setSelected(true);
+						
+					}
+				});
+				rdnVendedor.setBounds(6, 66, 71, 23);
+				panel_1.add(rdnVendedor);
+
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+
+		}
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
+				JButton btnRegistrar = new JButton("Registrar");
+				btnRegistrar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						Persona usuario1=null;
+						if(Tienda.getInstance().getLosUsuarios().contains(Tienda.getInstance().findClientebyCedula(ftxtCedula.getText()))) {
+							JOptionPane.showMessageDialog(null, "El usuario ingresado ya está registrado");
+						}
+						else {
+							if(!rdnAdministrador.isSelected() && !rdnVendedor.isSelected()) {
+								JOptionPane.showMessageDialog(null, "Seleccione su tipo de usuario");
+							}
+						if(rdnAdministrador.isSelected()) {
+							usuario1= new Administrador(txtNombre.getText(), ftxtTelefono.getText(), txtDireccion.getText(), ftxtCedula.getText(), txtContra.getText());    
+						}
+						if(rdnVendedor.isSelected()) {
+							usuario1= new Vendedor(txtNombre.getText(), ftxtTelefono.getText(), txtDireccion.getText() , ftxtCedula.getText(), txtContra.getText());
+						}
+						Tienda.getInstance().getLosUsuarios().add(usuario1);
+						}
+					}
+				});
+				btnRegistrar.setActionCommand("OK");
+				buttonPane.add(btnRegistrar);
+				getRootPane().setDefaultButton(btnRegistrar);
 			}
 			{
 				JButton cancelButton = new JButton("Cancel");
