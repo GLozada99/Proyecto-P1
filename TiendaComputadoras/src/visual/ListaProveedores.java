@@ -154,7 +154,7 @@ public class ListaProveedores extends JDialog {
 		row = new Object[model.getColumnCount()];
 
 		for (Proveedor proveedor : Tienda.getInstance().getLosProveedores()) {
-			row[0] = proveedor.getCedula(); 
+			row[0] = proveedor.getCodigo(); 
 			row[1] = proveedor.getNombre();
 			row[2] = proveedor.getTelefono();
 			row[3] = proveedor.getDireccion();

@@ -131,7 +131,7 @@ public class SeleccionarProveedor extends JDialog {
 		for (Proveedor proveedor : Tienda.getInstance().getLosProveedores()) {
 			if(proveedor.getMisCompos().contains(aux.getCompCompra())) {
 			
-				row[0] = proveedor.getCedula(); 
+				row[0] = proveedor.getCodigo(); 
 				row[1] = proveedor.getNombre();
 				row[2] = proveedor.getTelefono();
 				row[3] = proveedor.getPrecioCompo(aux.getCompCompra());

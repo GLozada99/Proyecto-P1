@@ -160,7 +160,7 @@ public class ListaClientes extends JDialog {
 		model.addRow(row);*/
 		
 		for (Cliente aux : Tienda.getInstance().getLosClientes()) {
-			row[0] = aux.getCedula();
+			row[0] = aux.getCodigo();
 			row[1] = aux.getNombre();
 			row[2] = aux.getTelefono();
 			row[3] = aux.getDireccion();

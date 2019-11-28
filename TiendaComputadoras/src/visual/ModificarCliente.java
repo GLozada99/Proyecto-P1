@@ -131,7 +131,7 @@ public class ModificarCliente extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						boolean igual=false;
 						for (Cliente cliente : Tienda.getInstance().getLosClientes()) {
-							if (ftxtCedula.getText().equalsIgnoreCase(cliente.getCedula())&&!ftxtCedula.getText().equalsIgnoreCase(aux.getCedula())) {
+							if (ftxtCedula.getText().equalsIgnoreCase(cliente.getCodigo())&&!ftxtCedula.getText().equalsIgnoreCase(aux.getCodigo())) {
 								igual=true;
 							}
 						}
@@ -166,7 +166,7 @@ public class ModificarCliente extends JDialog {
 				buttonPane.add(btnCancelar);
 			}
 		}
-		ftxtCedula.setText(aux.getCedula());
+		ftxtCedula.setText(aux.getCodigo());
 		txtNombre.setText(aux.getNombre());
 		txtDireccion.setText(aux.getDireccion());
 		ftxtTelefono.setText(aux.getTelefono());

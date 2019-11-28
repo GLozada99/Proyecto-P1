@@ -550,7 +550,7 @@ public class AgregarComponente extends JDialog {
 		row = new Object[model.getColumnCount()];
 		if(!Tienda.getInstance().getLosQueVendenTemp().isEmpty()) {
 			for (Proveedor aux : Tienda.getInstance().getLosQueVendenTemp()) {
-				row[0] = aux.getCedula();
+				row[0] = aux.getCodigo();
 				row[1] = aux.getNombre();
 				row[2] = aux.getPreciosCompos();
 				model.addRow(row);

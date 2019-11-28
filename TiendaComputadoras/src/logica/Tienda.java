@@ -181,7 +181,7 @@ public class Tienda implements Serializable {
 		boolean find = false;
 		int i=0;
 		while (i<losClientes.size()&&!find) {
-			if(losClientes.get(i).getCedula().equalsIgnoreCase(cedula)){
+			if(losClientes.get(i).getCodigo().equalsIgnoreCase(cedula)){
 				clienteFound = losClientes.get(i);
 				find = true;
 			}
@@ -195,7 +195,7 @@ public class Tienda implements Serializable {
 		boolean find = false;
 		int i=0;
 		while (i<losProveedores.size()&&!find) {
-			if(losProveedores.get(i).getCedula().equalsIgnoreCase(rnc)){
+			if(losProveedores.get(i).getCodigo().equalsIgnoreCase(rnc)){
 				proveedorFound = losProveedores.get(i);
 				find = true;
 			}

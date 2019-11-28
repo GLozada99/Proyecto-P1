@@ -125,7 +125,7 @@ public class HistorialOrdenes extends JDialog {
 			while(i<Tienda.getInstance().getLosProveedores().size()&&!encontrado) {
 				prov = Tienda.getInstance().getLosProveedores().get(i);
 				if (prov.getMisOrdenes().contains(aux)) {
-					row[6] = prov.getCedula();
+					row[6] = prov.getCodigo();
 					encontrado=true;
 				}
 			}

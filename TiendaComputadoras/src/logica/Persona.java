@@ -8,13 +8,13 @@ public abstract class Persona implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	protected String nombre;
-	protected String cedula;
+	protected String codigo;
 	protected String telefono;
 	protected String direccion;
 	
-	public Persona(String nombre, String telefono, String direccion, String cedula) {
+	public Persona(String nombre, String telefono, String direccion, String codigo) {
 		super();
-		this.cedula = cedula;
+		this.codigo = codigo;
 		this.nombre = nombre;
 		this.telefono = telefono;
 		this.direccion = direccion;
@@ -43,12 +43,12 @@ public abstract class Persona implements Serializable {
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
-	public String getCedula() {
-		return cedula;
+	public String getCodigo() {
+		return codigo;
 	}
 
 	public void setCedula(String cedula) {
-		this.cedula = cedula;
+		this.codigo = cedula;
 	}
 	
 }
