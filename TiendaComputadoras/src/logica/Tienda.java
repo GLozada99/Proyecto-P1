@@ -415,13 +415,13 @@ public class Tienda implements Serializable {
 	public void setUsuarioActual(Persona usuarioActual) {
 		this.usuarioActual = usuarioActual;
 	}
-	public boolean confirmarLogin(String nombre, String contrasena) {
+	public boolean confirmarLogin(String codigo, String contrasena) {
 		boolean login = false;
 		Persona usuario = null;
 		for (int i = 0; i < losUsuarios.size()&&!login; i++) {
 			usuario = losUsuarios.get(i);
 			if(usuario instanceof Administrador || usuario instanceof Vendedor) {
-				if(usuario.getNombre().equals(nombre)&&((((Administrador)usuario).getContraseña().equals(contrasena)))){
+				if(usuario.getCodigo().equals(codigo)&&((((Administrador)usuario).getContraseña().equals(contrasena)))){
 					setUsuarioActual(usuario);
 					login = true;
 				}
