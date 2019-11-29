@@ -186,6 +186,19 @@ public class Tienda implements Serializable {
 		}
 		return clienteFound;
 	}
+	public Persona usuarioByCodigo(String cedula) {
+		Persona usuarioFound = null;
+		boolean find = false;
+		int i=0;
+		while (i<losUsuarios.size()&&!find) {
+			if(losUsuarios.get(i).getCodigo().equalsIgnoreCase(cedula)){
+				usuarioFound = losUsuarios.get(i);
+				find = true;
+			}
+			i++;
+		}
+		return usuarioFound;
+	}
 
 	public Proveedor findProveedrobyRNC(String rnc) {
 		Proveedor proveedorFound = null;

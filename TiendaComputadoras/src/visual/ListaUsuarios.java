@@ -115,14 +115,10 @@ public class ListaUsuarios extends JDialog {
 				btnModificar.setEnabled(false);
 				btnModificar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						ModificarCliente aux = new ModificarCliente(Tienda.getInstance().findClientebyCedula(codigo));
+						NuevoUsuario aux = new NuevoUsuario(Tienda.getInstance().usuarioByCodigo(codigo));
 						aux.setModal(true);
 						aux.setVisible(true);
-						cargarClientes();
-						/*dispose();
-						ListaClientes refresh = new ListaClientes();
-						refresh.setModal(true);
-						refresh.setVisible(true);*/
+						cargarUsuarios();
 					}
 				});
 				buttonPane.add(btnModificar);
@@ -131,21 +127,20 @@ public class ListaUsuarios extends JDialog {
 				btnEliminar.setEnabled(false);
 				btnEliminar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-/*						Usuario aux = Tienda.getInstance().findClientebyCedula(codigo);
-						Tienda.getInstance().getLosClientes().remove(aux);
-						cargarClientes();
-						*/
+					Persona aux = Tienda.getInstance().usuarioByCodigo(codigo);
+						Tienda.getInstance().getLosUsuarios().remove(aux);
+						cargarUsuarios();	
 					}
 				});
 				buttonPane.add(btnEliminar);
 			}
 		}
-		cargarClientes();
+		cargarUsuarios();
 	}
 	{
 
 	}
-	public static void cargarClientes() {
+	public static void cargarUsuarios() {
 		model.setRowCount(0);
 		row = new Object[model.getColumnCount()];
 

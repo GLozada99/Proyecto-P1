@@ -183,7 +183,7 @@ public class Principal extends JFrame {
 		mntmNuevoUsuario.setIcon(new ImageIcon(Principal.class.getResource("/Imagenes/IconUsuario.png")));
 		mntmNuevoUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				NuevoUsuario aux = new NuevoUsuario();
+				NuevoUsuario aux = new NuevoUsuario(null);
 				aux.setModal(true);
 				aux.setVisible(true);
 			}
