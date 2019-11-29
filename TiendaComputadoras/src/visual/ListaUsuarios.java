@@ -22,6 +22,7 @@ import logica.Administrador;
 import logica.Cliente;
 import logica.Persona;
 import logica.Tienda;
+import logica.Vendedor;
 
 public class ListaUsuarios extends JDialog {
 	private final JPanel contentPanel = new JPanel();
@@ -154,7 +155,12 @@ public class ListaUsuarios extends JDialog {
 			row[1] = aux.getNombre();
 			row[2] = aux.getTelefono();
 			row[3] = aux.getDireccion();
-			row[4] = ((Administrador)aux).getContraseña();
+			try {
+				row[4] = ((Administrador)aux).getContraseña();
+			} catch (ClassCastException e) {
+				row[4] = ((Vendedor)aux).getContraseña();
+			}
+			
 			if (aux instanceof Administrador) {
 				row[5] = "Administrador";
 			}else {
