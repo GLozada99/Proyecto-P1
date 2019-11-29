@@ -46,6 +46,10 @@ import java.awt.Toolkit;
 
 public class AgregarComponente extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JRadioButton rdbtnDiscoDuro;
 	private JRadioButton rdbtnMicro;
@@ -497,25 +501,23 @@ public class AgregarComponente extends JDialog {
 						if(auxComp!=null) {
 							Tienda.getInstance().getLosComponentes().remove(auxComp);
 						}
-						//Esta en veremos/////////////////////////////
 						if(!aux.getLosQueVenden().isEmpty()) {
 							aux.getLosQueVenden().addAll(Tienda.getInstance().getLosQueVendenTemp());
 							int i=0;
 							for (Proveedor proveedor : aux.getLosQueVenden()) {
 								proveedor.getPreciosCompos().add(Tienda.getInstance().getPreciosLosQueVendenTemp().get(i));
-
 							}
 						}
-						//////////////////////////////////
-
 						Tienda.getInstance().agregarComponente(aux);
 						Tienda.getInstance().primeraOrdenCompra(aux);
-						Tienda.getInstance().getLosQueVendenTemp().clear();
+						if(!b) {
+							Tienda.getInstance().getLosCompTemp().add(aux);
+							AgregarProveedor.cargarComponentes();
+						}
+						
+							Tienda.getInstance().getLosQueVendenTemp().clear();
 						clean();
-
-						//////////////////////////Tambien
 						Tienda.getInstance().getPreciosLosQueVendenTemp().clear();
-						//////////////////////////////////
 						if(auxComp!=null) {
 							dispose();
 							JOptionPane.showMessageDialog(null, "Cliente modificado con exito","Notificación", JOptionPane.INFORMATION_MESSAGE);	

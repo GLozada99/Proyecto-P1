@@ -11,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import logica.Administrador;
+import logica.Componente;
 import logica.Proveedor;
 import logica.Tienda;
 
@@ -125,6 +126,10 @@ public class ListaProveedores extends JDialog {
 					btnModificar = new JButton("Modificar");
 					btnModificar.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
+							Proveedor auxProv = Tienda.getInstance().findProveedrobyRNC(rnc);
+							AgregarProveedor aux = new AgregarProveedor(true,auxProv);
+							aux.setModal(true);
+							aux.setVisible(true);
 						}
 					});
 					btnModificar.setEnabled(false);
@@ -136,7 +141,7 @@ public class ListaProveedores extends JDialog {
 				btnEliminar.setEnabled(false);
 				btnEliminar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						dispose();
+						
 					}
 				});
 

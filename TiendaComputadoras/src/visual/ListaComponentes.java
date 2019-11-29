@@ -15,6 +15,7 @@ import logica.Componente;
 import logica.DiscoDuro;
 import logica.Micro;
 import logica.MotherBoard;
+import logica.Proveedor;
 import logica.RAM;
 import logica.Tienda;
 
@@ -32,6 +33,7 @@ import java.awt.Color;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 public class ListaComponentes extends JDialog {
@@ -74,7 +76,7 @@ public class ListaComponentes extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public ListaComponentes(boolean p) {
+	public ListaComponentes(boolean AgregarCompProveedores) {
 		setBounds(100, 100, 1253, 461);
 		setLocationRelativeTo(null);
 		setResizable(false);
@@ -159,10 +161,17 @@ public class ListaComponentes extends JDialog {
 				btnAceptar = new JButton("Aceptar");
 				btnAceptar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						if(p !=false) {
+						if (AgregarCompProveedores) {
+							Componente aux = Tienda.getInstance().findComponentebyNumeroSerie(codigo);
+							if(!Tienda.getInstance().getLosCompTemp().contains(aux)) {
+							Tienda.getInstance().getLosCompTemp().add(aux);
 							AgregarProveedor.cargarComponentes();
+							dispose();
+							}
+							else {
+								JOptionPane.showInternalMessageDialog(null, "El Componente seleccionado ya se encuentra en la lista");
+							}
 						}
-						dispose();
 					}
 				});
 				btnAceptar.setActionCommand("OK");

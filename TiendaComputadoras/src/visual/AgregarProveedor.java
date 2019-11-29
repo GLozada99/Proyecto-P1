@@ -12,8 +12,10 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
+import logica.Administrador;
 import logica.Cliente;
 import logica.Componente;
+import logica.Proveedor;
 import logica.Tienda;
 
 import javax.swing.JLabel;
@@ -37,6 +39,10 @@ import java.awt.Toolkit;
 
 public class AgregarProveedor extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtNombre;
 	private JTextField txtDireccion;
@@ -46,11 +52,16 @@ public class AgregarProveedor extends JDialog {
 	private static Object[] row;
 	private String codigo="";
 	private JTable table;
+	private JButton btnListado;
+	private JButton btnNuevoCompo;
+	private JPanel panel_Componentes;
+	private int index;
+	private JButton btnAsignarPrecio;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		try {
 			AgregarProveedor dialog = new AgregarProveedor();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -63,10 +74,10 @@ public class AgregarProveedor extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public AgregarProveedor() {
+	public AgregarProveedor(boolean b,Proveedor auxProv) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(AgregarProveedor.class.getResource("/Imagenes/IconAdmin.png")));
 		setTitle("Agregar Proveedor");
-		setBounds(100, 100, 560, 256);
+		setBounds(100, 100, 654, 282);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -74,38 +85,38 @@ public class AgregarProveedor extends JDialog {
 		contentPanel.setLayout(null);
 		{
 			JPanel panel_RegistroProveedor = new JPanel();
-			panel_RegistroProveedor.setBounds(7, 5, 234, 164);
+			panel_RegistroProveedor.setBounds(7, 5, 234, 195);
 			panel_RegistroProveedor.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Registro de Proveedor", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			contentPanel.add(panel_RegistroProveedor);
 			panel_RegistroProveedor.setLayout(null);
 			{
 				JLabel lblRNC = new JLabel("RNC:");
-				lblRNC.setBounds(12, 27, 76, 22);
+				lblRNC.setBounds(12, 21, 76, 22);
 				panel_RegistroProveedor.add(lblRNC);
 			}
 
 			JLabel lblNombre = new JLabel("Nombre");
-			lblNombre.setBounds(12, 62, 76, 22);
+			lblNombre.setBounds(12, 64, 76, 22);
 			panel_RegistroProveedor.add(lblNombre);
 
 			txtNombre = new JTextField();
 			txtNombre.setFont(new Font("Calibri", Font.PLAIN, 18));
-			txtNombre.setBounds(100, 62, 124, 22);
+			txtNombre.setBounds(100, 64, 124, 22);
 			panel_RegistroProveedor.add(txtNombre);
 			txtNombre.setColumns(10);
 
 			JLabel lblDireccion = new JLabel("Direccion");
-			lblDireccion.setBounds(12, 97, 76, 22);
+			lblDireccion.setBounds(12, 107, 76, 22);
 			panel_RegistroProveedor.add(lblDireccion);
 
 			txtDireccion = new JTextField();
 			txtDireccion.setFont(new Font("Calibri", Font.PLAIN, 18));
 			txtDireccion.setColumns(10);
-			txtDireccion.setBounds(100, 97, 124, 22);
+			txtDireccion.setBounds(100, 107, 124, 22);
 			panel_RegistroProveedor.add(txtDireccion);
 
 			JLabel lblTelefono = new JLabel("Telefono");
-			lblTelefono.setBounds(12, 132, 76, 22);
+			lblTelefono.setBounds(12, 150, 76, 22);
 			panel_RegistroProveedor.add(lblTelefono);
 
 
@@ -118,7 +129,7 @@ public class AgregarProveedor extends JDialog {
 					mascaraNumero.setPlaceholderCharacter('_');
 					ftxtTelefono = new JFormattedTextField(mascaraNumero);
 					ftxtTelefono.setFont(new Font("Calibri", Font.PLAIN, 18));
-					ftxtTelefono.setBounds(100, 132, 124, 22);
+					ftxtTelefono.setBounds(100, 150, 124, 22);
 					panel_RegistroProveedor.add(ftxtTelefono);
 
 
@@ -126,31 +137,41 @@ public class AgregarProveedor extends JDialog {
 					mascaraCedula.setPlaceholderCharacter('_');
 					ftxtRNC = new JFormattedTextField(mascaraCedula);
 					ftxtRNC.setFont(new Font("Calibri", Font.PLAIN, 18));
-					ftxtRNC.setBounds(100, 27, 124, 22);
+					ftxtRNC.setBounds(100, 21, 124, 22);
 					panel_RegistroProveedor.add(ftxtRNC);
 
-					JPanel panel_Componentes = new JPanel();
+					panel_Componentes = new JPanel();
 					panel_Componentes.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Componentes Proporcionados", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-					panel_Componentes.setBounds(251, 5, 283, 164);
+					panel_Componentes.setBounds(245, 5, 379, 195);
 					contentPanel.add(panel_Componentes);
 					panel_Componentes.setLayout(null);
 
 					JScrollPane scrollPane = new JScrollPane();
-					scrollPane.setBounds(6, 16, 271, 114);
+					scrollPane.setBounds(12, 16, 355, 140);
 					panel_Componentes.add(scrollPane);
 					{
-
 						model = new DefaultTableModel();
-						String[] header = {"N° de serie","Marca","Modelo"};
+						String[] header = {"N° de serie","Tipo","Marca","Modelo","Precio"};
 						model.setColumnIdentifiers(header);
 						table = new JTable();
+						table.addMouseListener(new MouseAdapter() {
+							@Override
+							public void mouseClicked(MouseEvent arg0) {
+								if(table.getSelectedRow()>-1) {
+									index = table.getSelectedRow();
+									btnAsignarPrecio.setEnabled(true);
+
+									codigo = String.valueOf(table.getValueAt(index, 0));
+								}
+							}
+						});
 						table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 						table.setModel(model);
 						scrollPane.setViewportView(table);
 					}
 
-					JButton btnNuevoCompo = new JButton("Nuevo Comp.");
-					btnNuevoCompo.setBounds(6, 135, 133, 23);
+					btnNuevoCompo = new JButton("Nuevo Comp.");
+					btnNuevoCompo.setBounds(9, 159, 114, 23);
 					panel_Componentes.add(btnNuevoCompo);
 					btnNuevoCompo.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
@@ -161,7 +182,7 @@ public class AgregarProveedor extends JDialog {
 					});
 					btnNuevoCompo.setActionCommand("OK");
 
-					JButton btnListado = new JButton("Listado");
+					btnListado = new JButton("Listado");
 					btnListado.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							ListaComponentes aux = new ListaComponentes(true);
@@ -169,14 +190,35 @@ public class AgregarProveedor extends JDialog {
 							aux.setVisible(true);
 						}
 					});
-					btnListado.setBounds(144, 135, 133, 23);
+					btnListado.setBounds(132, 159, 114, 23);
 					panel_Componentes.add(btnListado);
+
+					btnAsignarPrecio = new JButton("Asignar Precio");
+					btnAsignarPrecio.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent arg0) {
+							boolean bien=false;
+							Float num=(float) 0;
+							while(!bien) {
+								String ayuda = JOptionPane.showInputDialog("Introduzca el precio del componente");
+								try {
+									num = Float.parseFloat(ayuda);
+								} catch (NumberFormatException e) {
+									JOptionPane.showMessageDialog(null, "Debe introducir un numero");
+								}	
+							}
+							Tienda.getInstance().getPreciosCadaCompTemp().add(num);
+
+						}
+					});
+					btnAsignarPrecio.setBounds(255, 158, 114, 23);
+					panel_Componentes.add(btnAsignarPrecio);
 				} catch (ParseException e) {
 					e.printStackTrace();
 				}
 
 			}
 		}
+
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -185,6 +227,8 @@ public class AgregarProveedor extends JDialog {
 				JButton btnRegistrar = new JButton("Registrar");
 				btnRegistrar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+
+						//	Proveedor aux = new Proveedor(txtNombre.getText(), ftxtTelefono.getText(), txtDireccion.getText(), ftxtRNC.getText(), Tienda.getInstance().getLosCompTemp(), preciosCompos)
 					}
 				});
 				btnRegistrar.setActionCommand("OK");
@@ -202,17 +246,33 @@ public class AgregarProveedor extends JDialog {
 				buttonPane.add(btnCancelar);
 			}
 		}
+		if(!b) {
+			panel_Componentes.setEnabled(false);
+			btnNuevoCompo.setEnabled(false);
+			btnListado.setEnabled(false);
+		}
+		cargarComponentes();
 	}
 	public static void cargarComponentes() {
 		model.setRowCount(0);
 		row = new Object[model.getColumnCount()];
-
-		for (Componente aux : Tienda.getInstance().getLosComponentes()) {
-			row[0] = aux.getNumeroSerie();
-			row[1] = aux.getMarca();
-			row[2] = aux.getModelo();
-			model.addRow(row);
+		int i=0;
+		if(!Tienda.getInstance().getLosCompTemp().isEmpty()) {
+			for (Componente aux : Tienda.getInstance().getLosCompTemp()) {
+				row[0] = aux.getNumeroSerie();
+				row[1] = aux.getClass().getSimpleName();
+				row[2] = aux.getMarca();
+				row[3] = aux.getModelo();
+				try {
+					row[4] = Tienda.getInstance().getPreciosCadaCompTemp().get(i).toString();
+				} catch (IndexOutOfBoundsException e) {
+					row[4] = "";
+				}
+				i++;
+				model.addRow(row);
+			}
 		}
+
 	}
 
 	protected void limpiar() {
@@ -220,5 +280,6 @@ public class AgregarProveedor extends JDialog {
 		txtNombre.setText("");
 		txtDireccion.setText("");
 		ftxtTelefono.setText("");
+
 	}
 }

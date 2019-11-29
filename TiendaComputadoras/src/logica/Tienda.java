@@ -12,11 +12,13 @@ public class Tienda implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Componente> losComponentes;
+	private ArrayList<Componente> losCompTemp;
 	private ArrayList <Cliente> losClientes;
 	private ArrayList <Persona> losUsuarios;
 	private ArrayList<Factura> lasFacturas;
 	private ArrayList<Proveedor> losQueVendenTemp;
 	private ArrayList<Float> preciosLosQueVendenTemp;
+	private ArrayList<Float> preciosCadaCompTemp;
 	private ArrayList<Combo> losCombo;
 	private ArrayList<Proveedor> losProveedores;
 	private ArrayList<OrdenCompra> lasOrdenes;
@@ -38,6 +40,8 @@ public class Tienda implements Serializable {
 		lasOrdenes = new ArrayList<>();
 		losUsuarios = new ArrayList<>();
 		ordenesSinProcesar = new ArrayList<>();
+		losCompTemp=new ArrayList<>();
+		preciosCadaCompTemp = new ArrayList<>();
 		losQueVendenTemp = new ArrayList<>();
 		preciosLosQueVendenTemp = new ArrayList<>();
 		generadorCodigoCombo = 1;
@@ -456,6 +460,22 @@ public class Tienda implements Serializable {
 
 	public void setPreciosLosQueVendenTemp(ArrayList<Float> preciosLosQueVendenTemp) {
 		this.preciosLosQueVendenTemp = preciosLosQueVendenTemp;
+	}
+
+	public ArrayList<Componente> getLosCompTemp() {
+		return losCompTemp;
+	}
+
+	public void setLosCompTemp(ArrayList<Componente> losCompTemp) {
+		this.losCompTemp = losCompTemp;
+	}
+
+	public ArrayList<Float> getPreciosCadaCompTemp() {
+		return preciosCadaCompTemp;
+	}
+
+	public void setPreciosCadaCompTemp(ArrayList<Float> preciosCadaCompTemp) {
+		this.preciosCadaCompTemp = preciosCadaCompTemp;
 	}
 
 }

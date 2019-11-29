@@ -158,11 +158,11 @@ public class Principal extends JFrame {
 		mnAdministracion.add(mntmAgregarComponentes);
 
 
-		JMenuItem mntmAgregarProveedores = new JMenuItem("Agregar  Proveedores");
+		JMenuItem mntmAgregarProveedores = new JMenuItem("Agregar Proveedores");
 		mntmAgregarProveedores.setIcon(new ImageIcon(Principal.class.getResource("/Imagenes/IconAdmin.png")));
 		mntmAgregarProveedores.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AgregarProveedor aux = new AgregarProveedor();
+				AgregarProveedor aux = new AgregarProveedor(true, null);
 				aux.setModal(true);
 				aux.setVisible(true);
 			}
