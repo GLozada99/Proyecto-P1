@@ -25,6 +25,8 @@ import javax.swing.JTextField;
 import java.awt.Toolkit;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.JPasswordField;
+import java.awt.TextField;
 
 public class Login extends JFrame {
 
@@ -34,8 +36,8 @@ public class Login extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtUsuario;
-	private JTextField txtContra;
-
+	private TextField txtContra;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -121,10 +123,12 @@ public class Login extends JFrame {
 		panel.add(txtUsuario);
 		txtUsuario.setColumns(10);
 
-		txtContra = new JTextField();
+		txtContra = new TextField();
 		txtContra.setBounds(117, 57, 147, 20);
+		txtContra.setEchoChar('*');
 		panel.add(txtContra);
 		txtContra.setColumns(10);
+		
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (Tienda.getInstance().confirmarLogin(txtUsuario.getText(), txtContra.getText())) {

@@ -350,11 +350,11 @@ public class AgregarComponente extends JDialog {
 		panel_DatosTienda.setBounds(288, 11, 266, 161);
 		contentPanel.add(panel_DatosTienda);
 
-		JLabel lblCantidadMin = new JLabel("Cantidad Min:");
+		JLabel lblCantidadMin = new JLabel("Cantidad M\u00EDnima:");
 		lblCantidadMin.setBounds(10, 33, 96, 14);
 		panel_DatosTienda.add(lblCantidadMin);
 
-		JLabel lblCantidadMax = new JLabel("Cantidad Max: ");
+		JLabel lblCantidadMax = new JLabel("Cantidad M\u00E1ximo: ");
 		lblCantidadMax.setBounds(10, 80, 96, 14);
 		panel_DatosTienda.add(lblCantidadMax);
 
@@ -364,17 +364,17 @@ public class AgregarComponente extends JDialog {
 
 		spnPrecioVenta = new JSpinner();
 		spnPrecioVenta.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
-		spnPrecioVenta.setBounds(105, 125, 64, 22);
+		spnPrecioVenta.setBounds(192, 123, 64, 22);
 		panel_DatosTienda.add(spnPrecioVenta);
 
 		spnCantMax = new JSpinner();
 		spnCantMax.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));		
-		spnCantMax.setBounds(105, 76, 64, 22);
+		spnCantMax.setBounds(192, 76, 64, 22);
 		panel_DatosTienda.add(spnCantMax);
 
 		spnCantMin = new JSpinner();
 		spnCantMin.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
-		spnCantMin.setBounds(105, 27, 64, 22);
+		spnCantMin.setBounds(192, 29, 64, 22);
 		panel_DatosTienda.add(spnCantMin);
 
 		if(auxComp!=null) {
