@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class Tienda implements Serializable {
-	
+
 	/**
 	 * 
 	 */
@@ -45,7 +45,7 @@ public class Tienda implements Serializable {
 		generadorCodigoComponentes = 1;
 		generadorCodigoOrdenCompra = 1; 
 	}
-	
+
 	public static Tienda getInstance() {
 		if(tienda==null){
 			tienda = new Tienda();
@@ -418,13 +418,22 @@ public class Tienda implements Serializable {
 		for (int i = 0; i < losUsuarios.size()&&!login; i++) {
 			usuario = losUsuarios.get(i);
 			if(usuario instanceof Administrador || usuario instanceof Vendedor) {
-				if(usuario.getCodigo().equals(codigo)&&((((Administrador)usuario).getContraseña().equals(contrasena)))){
-					setUsuarioActual(usuario);
-					login = true;
+				try {
+					if(usuario.getCodigo().equals(codigo)&&((((Administrador)usuario).getContraseña().equals(contrasena)))){
+						setUsuarioActual(usuario);
+						login = true;
+					}
+				}
+				catch (ClassCastException e) {
+					if(usuario.getCodigo().equals(codigo)&&((((Vendedor)usuario).getContraseña().equals(contrasena)))){
+						setUsuarioActual(usuario);
+						login = true;
+					}
+
 				}
 			}
 		}
-		
+
 		return login;
 	}
 
