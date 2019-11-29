@@ -231,6 +231,7 @@ public class Principal extends JFrame {
 		menuBar.add(mnListados);
 
 		JMenuItem mntmListaClientes = new JMenuItem("Lista Clientes");
+		mntmListaClientes.setIcon(new ImageIcon(Principal.class.getResource("/Imagenes/IconListaClientes.png")));
 		mntmListaClientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ListaClientes aux = new ListaClientes();
