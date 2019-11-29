@@ -3,6 +3,7 @@ package visual;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.text.ParseException;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -36,6 +37,8 @@ import java.awt.Color;
 import javax.swing.BoxLayout;
 import javax.swing.border.LineBorder;
 import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class AgregarProveedor extends JDialog {
 
@@ -75,6 +78,13 @@ public class AgregarProveedor extends JDialog {
 	 * Create the dialog.
 	 */
 	public AgregarProveedor(boolean b,Proveedor auxProv) {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				//Tienda.getInstance().getLosCompTemp().clear();
+				//Tienda.getInstance().getPreciosCadaCompTemp().clear();
+			}
+		});
 		setIconImage(Toolkit.getDefaultToolkit().getImage(AgregarProveedor.class.getResource("/Imagenes/IconAdmin.png")));
 		setTitle("Agregar Proveedor");
 		setBounds(100, 100, 654, 282);
@@ -202,12 +212,14 @@ public class AgregarProveedor extends JDialog {
 								String ayuda = JOptionPane.showInputDialog("Introduzca el precio del componente");
 								try {
 									num = Float.parseFloat(ayuda);
+									bien = true;
 								} catch (NumberFormatException e) {
 									JOptionPane.showMessageDialog(null, "Debe introducir un numero");
 								}	
 							}
-							Tienda.getInstance().getPreciosCadaCompTemp().add(num);
 
+							Tienda.getInstance().getPreciosCadaCompTemp().add(num);
+							cargarComponentes();
 						}
 					});
 					btnAsignarPrecio.setBounds(255, 158, 114, 23);
@@ -227,8 +239,20 @@ public class AgregarProveedor extends JDialog {
 				JButton btnRegistrar = new JButton("Registrar");
 				btnRegistrar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						ArrayList<Componente> ayudaComp = Tienda.getInstance().getLosCompTemp();
+						ArrayList<Float> ayudaPrecio = Tienda.getInstance().getPreciosCadaCompTemp();
+						if(ftxtRNC.getText().equalsIgnoreCase("___-_______")||txtNombre.getText().isEmpty()||txtDireccion.getText().isEmpty()||ftxtTelefono.getText().equalsIgnoreCase("(___) ___-____")) {
+							JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios");
+						}
+						else {
+							Proveedor aux = new Proveedor(txtNombre.getText(), ftxtTelefono.getText(), txtDireccion.getText(), ftxtRNC.getText(), ayudaComp, ayudaPrecio);
+							Tienda.getInstance().getLosProveedores().add(aux);
+							//Tienda.getInstance().getLosCompTemp().clear();
+							//Tienda.getInstance().getPreciosCadaCompTemp().clear();
+							limpiar();
+							JOptionPane.showMessageDialog(null, "Proveedor añadido con exito");
+						}
 
-						//	Proveedor aux = new Proveedor(txtNombre.getText(), ftxtTelefono.getText(), txtDireccion.getText(), ftxtRNC.getText(), Tienda.getInstance().getLosCompTemp(), preciosCompos)
 					}
 				});
 				btnRegistrar.setActionCommand("OK");
@@ -239,6 +263,7 @@ public class AgregarProveedor extends JDialog {
 				JButton btnCancelar = new JButton("Cancelar");
 				btnCancelar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						System.out.println(Tienda.getInstance().getLosProveedores().get(5));
 						dispose();
 					}
 				});
@@ -251,7 +276,10 @@ public class AgregarProveedor extends JDialog {
 			btnNuevoCompo.setEnabled(false);
 			btnListado.setEnabled(false);
 		}
-		cargarComponentes();
+		if(!Tienda.getInstance().getLosCompTemp().isEmpty()) {
+			cargarComponentes();
+		}
+
 	}
 	public static void cargarComponentes() {
 		model.setRowCount(0);

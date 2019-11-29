@@ -169,7 +169,7 @@ public class ListaComponentes extends JDialog {
 							dispose();
 							}
 							else {
-								JOptionPane.showInternalMessageDialog(null, "El Componente seleccionado ya se encuentra en la lista");
+								JOptionPane.showMessageDialog(null, "El Componente seleccionado ya se encuentra en la lista");
 							}
 						}
 					}

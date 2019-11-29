@@ -123,6 +123,7 @@ public class SeleccionarProveedor extends JDialog {
 			}
 		}
 		cargarProveedores(aux);
+		//System.out.println(aux.getCompCompra().getMarca()+" y "+aux.getCompCompra().getModelo());
 	}
 	public void cargarProveedores(OrdenCompra aux) {
 		model.setRowCount(0);
@@ -130,7 +131,6 @@ public class SeleccionarProveedor extends JDialog {
 
 		for (Proveedor proveedor : Tienda.getInstance().getLosProveedores()) {
 			if(proveedor.getMisCompos().contains(aux.getCompCompra())) {
-			
 				row[0] = proveedor.getCodigo(); 
 				row[1] = proveedor.getNombre();
 				row[2] = proveedor.getTelefono();
