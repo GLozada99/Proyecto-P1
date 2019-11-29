@@ -21,11 +21,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 import java.awt.Toolkit;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import javax.swing.JPasswordField;
 import java.awt.TextField;
 
 public class Login extends JFrame {
@@ -35,7 +31,7 @@ public class Login extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField txtUsuario;
+	private TextField txtUsuario;
 	private TextField txtContra;
 	
 	/**
@@ -105,9 +101,9 @@ public class Login extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 
-		JButton btnLogin = new JButton("Login");
+		JButton btnLogin = new JButton("Iniciar Sesion");
 		getRootPane().setDefaultButton(btnLogin);;
-		btnLogin.setBounds(178, 101, 86, 25);
+		btnLogin.setBounds(68, 100, 135, 25);
 		panel.add(btnLogin);
 
 		JLabel lblUsuario = new JLabel("Usuario:");
@@ -118,7 +114,7 @@ public class Login extends JFrame {
 		lblContrasea.setBounds(12, 60, 103, 14);
 		panel.add(lblContrasea);
 
-		txtUsuario = new JTextField();
+		txtUsuario = new TextField();
 		txtUsuario.setBounds(117, 13, 147, 20);
 		panel.add(txtUsuario);
 		txtUsuario.setColumns(10);
