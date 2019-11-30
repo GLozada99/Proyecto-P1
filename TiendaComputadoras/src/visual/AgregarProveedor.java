@@ -60,6 +60,8 @@ public class AgregarProveedor extends JDialog {
 	private JPanel panel_Componentes;
 	private int index;
 	private JButton btnAsignarPrecio;
+	private ArrayList<Componente> ayudaComp = new ArrayList<Componente>();
+	private ArrayList<Float> ayudaPrecio = new ArrayList<Float>();
 
 	/**
 	 * Launch the application.
@@ -228,7 +230,12 @@ public class AgregarProveedor extends JDialog {
 									JOptionPane.showMessageDialog(null, "Debe introducir un numero");
 								}	
 							}
-							Tienda.getInstance().getPreciosCadaCompTemp().add(index,num);
+							try {
+								Tienda.getInstance().getPreciosCadaCompTemp().add(index,num);
+							} catch (Exception e) {
+								JOptionPane.showMessageDialog(null, "Los Precios deben ser ingresados en orden");
+							}
+							
 							try {
 								Tienda.getInstance().getPreciosCadaCompTemp().remove(index+1);
 							} catch (IndexOutOfBoundsException e) {
@@ -254,27 +261,21 @@ public class AgregarProveedor extends JDialog {
 				JButton btnRegistrar = new JButton("Registrar");
 				btnRegistrar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						
+						ayudaComp=arregloComponentes();
+						ayudaPrecio=arregloPrecios();
 						if (model.getRowCount() != Tienda.getInstance().getPreciosCadaCompTemp().size()) {
 							System.out.println(model.getRowCount()+"     "+ Tienda.getInstance().getPreciosCadaCompTemp().size());
 							JOptionPane.showMessageDialog(null, "Todos los componentes deben tener un precio");
 						}else {
-							ArrayList<Componente> ayudaComp=new ArrayList<Componente>();
-							ArrayList<Float> ayudaPrecio = new ArrayList<Float>();
-							int i=0;
-							while (i<Tienda.getInstance().getPreciosCadaCompTemp().size()) {
-								ayudaComp.add(Tienda.getInstance().getLosCompTemp().remove(i));
-								ayudaPrecio.add(Tienda.getInstance().getPreciosCadaCompTemp().remove(i));
-								i++;
-							}
-							
-							
 							if(ftxtRNC.getText().equalsIgnoreCase("___-_______")||txtNombre.getText().isEmpty()||txtDireccion.getText().isEmpty()||ftxtTelefono.getText().equalsIgnoreCase("(___) ___-____")) {
 								JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios");
 							}
 							else {
 								Proveedor aux = new Proveedor(txtNombre.getText(), ftxtTelefono.getText(), txtDireccion.getText(), ftxtRNC.getText(), ayudaComp, ayudaPrecio);
 								Tienda.getInstance().getLosProveedores().add(aux);
+								Tienda.getInstance().getLosCompTemp().clear();
+								Tienda.getInstance().getPreciosCadaCompTemp().clear();
+								cargarComponentes();
 								limpiar();
 								JOptionPane.showMessageDialog(null, "Proveedor añadido con exito");
 							}
@@ -290,6 +291,8 @@ public class AgregarProveedor extends JDialog {
 				JButton btnCancelar = new JButton("Cancelar");
 				btnCancelar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						Tienda.getInstance().getLosCompTemp().clear();
+						Tienda.getInstance().getPreciosCadaCompTemp().clear();
 						dispose();
 					}
 				});
@@ -306,6 +309,15 @@ public class AgregarProveedor extends JDialog {
 			cargarComponentes();
 		}
 
+	}
+	public static ArrayList<Componente> arregloComponentes() {
+		ArrayList<Componente> compos = (ArrayList<Componente>) Tienda.getInstance().getLosCompTemp().clone();
+		return compos;
+	}
+	
+	public static ArrayList<Float> arregloPrecios() {
+		ArrayList<Float> precios = (ArrayList<Float>)Tienda.getInstance().getPreciosCadaCompTemp().clone() ;
+		return precios;
 	}
 	public static void cargarComponentes() {
 		model.setRowCount(0);
