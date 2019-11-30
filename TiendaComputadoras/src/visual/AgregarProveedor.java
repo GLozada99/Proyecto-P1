@@ -266,7 +266,11 @@ public class AgregarProveedor extends JDialog {
 						if (model.getRowCount() != Tienda.getInstance().getPreciosCadaCompTemp().size()) {
 							System.out.println(model.getRowCount()+"     "+ Tienda.getInstance().getPreciosCadaCompTemp().size());
 							JOptionPane.showMessageDialog(null, "Todos los componentes deben tener un precio");
-						}else {
+						}
+						else if(Tienda.getInstance().findProveedrobyRNC(ftxtRNC.getText())!=null) {
+							JOptionPane.showMessageDialog(null, "Ya existe un proveedor registrado con este RNC");
+						}
+						else {
 							if(ftxtRNC.getText().equalsIgnoreCase("___-_______")||txtNombre.getText().isEmpty()||txtDireccion.getText().isEmpty()||ftxtTelefono.getText().equalsIgnoreCase("(___) ___-____")) {
 								JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios");
 							}
@@ -291,6 +295,7 @@ public class AgregarProveedor extends JDialog {
 				JButton btnCancelar = new JButton("Cancelar");
 				btnCancelar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						
 						Tienda.getInstance().getLosCompTemp().clear();
 						Tienda.getInstance().getPreciosCadaCompTemp().clear();
 						dispose();

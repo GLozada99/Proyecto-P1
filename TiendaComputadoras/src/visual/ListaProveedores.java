@@ -36,8 +36,8 @@ public class ListaProveedores extends JDialog {
 	private Object[] row;
 	private static DefaultTableModel model;
 	private String rnc;
-	JButton btnEliminar;
-	JButton btnAceptar;
+	private JButton btnEliminar;
+	private JButton btnAceptar;
 	private JButton btnModificar;
 	/**
 	 * Launch the application.
@@ -108,15 +108,15 @@ public class ListaProveedores extends JDialog {
 						if (agregarProvComponentes) {
 							Proveedor aux = Tienda.getInstance().findProveedrobyRNC(rnc);
 							if(!Tienda.getInstance().getLosQueVendenTemp().contains(aux)) {
-							Tienda.getInstance().getLosQueVendenTemp().add(aux);
-							AgregarComponente.cargarProveedoresVentaComp();
-							dispose();
+								Tienda.getInstance().getLosQueVendenTemp().add(aux);
+								AgregarComponente.cargarProveedoresVentaComp();
+								dispose();
 							}
 							else {
-								JOptionPane.showInternalMessageDialog(null, "El Proveedor seleccionado ya se encuentra en la lista");
+								JOptionPane.showMessageDialog(null, "El Proveedor seleccionado ya se encuentra en la lista");
 							}
 						}
-						
+
 					}
 				});
 				btnAceptar.setActionCommand("OK");
@@ -141,7 +141,15 @@ public class ListaProveedores extends JDialog {
 				btnEliminar.setEnabled(false);
 				btnEliminar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						
+						Proveedor auxProv = Tienda.getInstance().findProveedrobyRNC(rnc);
+						int i=1;
+							i = JOptionPane.showConfirmDialog(null, "Está seguro que desea eliminar al proveedor "+auxProv.getNombre()+"?");
+						if(i==0) {
+							Tienda.getInstance().getLosProveedores().remove(auxProv);
+							JOptionPane.showMessageDialog(null, "Proveedor eliminado con exito");
+							cargarProveedores();
+							btnEliminar.setEnabled(false);
+						}
 					}
 				});
 

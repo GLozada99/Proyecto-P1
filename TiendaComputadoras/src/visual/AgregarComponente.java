@@ -14,11 +14,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
+import logica.Administrador;
 import logica.Componente;
 import logica.DiscoDuro;
 import logica.Micro;
@@ -42,6 +44,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JFormattedTextField;
 import javax.swing.JTable;
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 public class AgregarComponente extends JDialog {
@@ -84,6 +88,8 @@ public class AgregarComponente extends JDialog {
 	private JTable table;
 	private MaskFormatter mascaraVelocidad;
 	private MaskFormatter mascaraCantMemoria;
+	private JButton btnAsignarPrecio;
+	private int index;
 
 
 	/**
@@ -234,13 +240,13 @@ public class AgregarComponente extends JDialog {
 		panel_DiscoDuro.setVisible(false);
 
 		try {
-			mascaraVelocidad = new MaskFormatter("##.# GHz");
+			mascaraVelocidad = new MaskFormatter("#.##");
 			//mascaraVelocidad.setPlaceholder("_____");
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 		try {
-			mascaraCantMemoria = new MaskFormatter("##.#");
+			mascaraCantMemoria = new MaskFormatter("##");
 			//mascaraCantMemoria.setPlaceholder("_____");
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -248,14 +254,40 @@ public class AgregarComponente extends JDialog {
 
 		panel_MotherBoard = new JPanel();
 		panel_MotherBoard.setVisible(false);
-
-		panel_RAM = new JPanel();
-		panel_RAM.setVisible(false);
 		ftxtVelocidad = new JFormattedTextField(mascaraVelocidad);
 		ftxtVelocidad.setBounds(94, 25, 65, 20);
 
 		panel_Micro = new JPanel();
 		panel_Micro.setVisible(false);
+
+		panel_RAM = new JPanel();
+		panel_RAM.setVisible(false);
+		panel_RAM.setBounds(10, 344, 535, 70);
+		contentPanel.add(panel_RAM);
+		panel_RAM.setLayout(null);
+		panel_RAM.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Especificaciones", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+
+		JLabel lblTipo = new JLabel("Tipo:");
+		lblTipo.setBounds(347, 28, 49, 14);
+		panel_RAM.add(lblTipo);
+
+		JLabel lblCantidadDeMemoria = new JLabel("Cantidad de Memoria: ");
+		lblCantidadDeMemoria.setBounds(12, 32, 131, 14);
+		panel_RAM.add(lblCantidadDeMemoria);
+
+		cbxTipo = new JComboBox();
+		cbxTipo.setModel(new DefaultComboBoxModel(new String[] {"<Escoja>", "DDR SDRAM", "DDR2 SDRAM", "DDR3 SDRAM ", "DDR4 SDRAM"}));
+		cbxTipo.setBounds(396, 24, 127, 22);
+		panel_RAM.add(cbxTipo);
+		ftxtCantMemoria = new JFormattedTextField(mascaraCantMemoria);
+		ftxtCantMemoria.setBounds(155, 28, 58, 22);
+
+		panel_RAM.add(ftxtCantMemoria);
+
+		JLabel lblGb = new JLabel("GB");
+		lblGb.setBounds(225, 32, 39, 14);
+		panel_RAM.add(lblGb);
+		panel_RAM.setVisible(false);
 		panel_Micro.setLayout(null);
 		panel_Micro.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Especificaciones", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel_Micro.setBounds(10, 344, 535, 70);
@@ -276,29 +308,11 @@ public class AgregarComponente extends JDialog {
 
 
 		panel_Micro.add(ftxtVelocidad);
+
+		JLabel lblGhz = new JLabel("GHz");
+		lblGhz.setBounds(160, 28, 30, 14);
+		panel_Micro.add(lblGhz);
 		panel_Micro.setVisible(false);
-		panel_RAM.setBounds(10, 344, 535, 70);
-		contentPanel.add(panel_RAM);
-		panel_RAM.setLayout(null);
-		panel_RAM.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Especificaciones", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-
-		JLabel lblTipo = new JLabel("Tipo:");
-		lblTipo.setBounds(12, 27, 49, 14);
-		panel_RAM.add(lblTipo);
-
-		JLabel lblCantidadDeMemoria = new JLabel("Cantidad de Memoria: ");
-		lblCantidadDeMemoria.setBounds(311, 27, 142, 14);
-		panel_RAM.add(lblCantidadDeMemoria);
-
-		cbxTipo = new JComboBox();
-		cbxTipo.setModel(new DefaultComboBoxModel(new String[] {"<Escoja>", "DDR SDRAM", "DDR2 SDRAM", "DDR3 SDRAM ", "DDR4 SDRAM"}));
-		cbxTipo.setBounds(61, 23, 127, 22);
-		panel_RAM.add(cbxTipo);
-		ftxtCantMemoria = new JFormattedTextField(mascaraCantMemoria);
-		ftxtCantMemoria.setBounds(465, 23, 58, 22);
-
-		panel_RAM.add(ftxtCantMemoria);
-		panel_RAM.setVisible(false);
 		panel_MotherBoard.setLayout(null);
 		panel_MotherBoard.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Especificaciones", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel_MotherBoard.setBounds(10, 344, 535, 70);
@@ -406,9 +420,9 @@ public class AgregarComponente extends JDialog {
 		panel_Proveedor.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Proveedor", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel_Proveedor.setBounds(288, 183, 266, 150);
 		contentPanel.add(panel_Proveedor);
-		panel_Proveedor.setLayout(new BorderLayout(0, 0));
 
-		btnAgregarVendedor = new JButton("Lista de Proveedores");
+		btnAgregarVendedor = new JButton("Lista Proveedores");
+		btnAgregarVendedor.setBounds(5, 120, 133, 25);
 		btnAgregarVendedor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ListaProveedores aux = new ListaProveedores(true);
@@ -416,11 +430,24 @@ public class AgregarComponente extends JDialog {
 				aux.setVisible(true);
 			}
 		});
-		panel_Proveedor.add(btnAgregarVendedor, BorderLayout.SOUTH);
+		panel_Proveedor.setLayout(null);
+		panel_Proveedor.add(btnAgregarVendedor);
 
 		scrollPane = new JScrollPane();
-		scrollPane.setSize(266, 102);
-		panel_Proveedor.add(scrollPane, BorderLayout.CENTER);
+		scrollPane.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if(table.getSelectedRow()>-1){
+					int index = table.getSelectedRow();
+
+					btnAsignarPrecio.setEnabled(true);
+					codigo = String.valueOf(table.getValueAt(index, 0));
+				}
+			}
+		});
+		scrollPane.setLocation(5, 18);
+		scrollPane.setSize(256, 102);
+		panel_Proveedor.add(scrollPane);
 
 		table = new JTable();
 		scrollPane.setViewportView(table);
@@ -428,11 +455,42 @@ public class AgregarComponente extends JDialog {
 			model = new DefaultTableModel();
 			String[] header = {"RNC","Nombre", "Precio"};
 			model.setColumnIdentifiers(header);
-			table = new JTable();
 			table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			table.setModel(model);
 			scrollPane.setViewportView(table);
 		}
+
+		btnAsignarPrecio = new JButton("Asignar Precio");
+		btnAsignarPrecio.setEnabled(false);
+		btnAsignarPrecio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				boolean bien=false;
+				Float num=(float) 0;
+				while(!bien) {
+
+					try {
+						num = Float.valueOf(JOptionPane.showInputDialog("Introduzca el precio del componente"));
+						bien = true;
+						btnAsignarPrecio.setEnabled(false);
+					} catch (NumberFormatException  | NullPointerException e2) {
+						JOptionPane.showMessageDialog(null, "Debe introducir un numero");
+					}	
+				}
+				try {
+					Tienda.getInstance().getPreciosLosQueVendenTemp().add(index,num);
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, "Los Precios deben ser ingresados en orden");
+				}
+
+				try {
+					Tienda.getInstance().getPreciosLosQueVendenTemp().remove(index+1);
+				} catch (IndexOutOfBoundsException e) {
+				}
+				cargarProveedoresVentaComp();
+			}
+		});
+		btnAsignarPrecio.setBounds(137, 120, 124, 25);
+		panel_Proveedor.add(btnAsignarPrecio);
 
 		{
 
@@ -500,12 +558,13 @@ public class AgregarComponente extends JDialog {
 						}
 						if(auxComp!=null) {
 							Tienda.getInstance().getLosComponentes().remove(auxComp);
+
 						}
-						if(!aux.getLosQueVenden().isEmpty()) {
-							aux.getLosQueVenden().addAll(Tienda.getInstance().getLosQueVendenTemp());
+						if(aux.getLosQueVenden().isEmpty()) {
+							aux.getLosQueVenden().addAll((ArrayList<Proveedor>)Tienda.getInstance().getLosQueVendenTemp().clone());
 							int i=0;
 							for (Proveedor proveedor : aux.getLosQueVenden()) {
-								proveedor.getPreciosCompos().add(Tienda.getInstance().getPreciosLosQueVendenTemp().get(i));
+								proveedor.getPreciosCompos().add(((ArrayList<Float>) Tienda.getInstance().getPreciosLosQueVendenTemp().clone()).get(i));
 							}
 						}
 						Tienda.getInstance().agregarComponente(aux);
@@ -514,8 +573,8 @@ public class AgregarComponente extends JDialog {
 							Tienda.getInstance().getLosCompTemp().add(aux);
 							AgregarProveedor.cargarComponentes();
 						}
-						
-							Tienda.getInstance().getLosQueVendenTemp().clear();
+
+						Tienda.getInstance().getLosQueVendenTemp().clear();
 						clean();
 						Tienda.getInstance().getPreciosLosQueVendenTemp().clear();
 						if(auxComp!=null) {
@@ -554,12 +613,20 @@ public class AgregarComponente extends JDialog {
 	public static void cargarProveedoresVentaComp() {
 		model.setRowCount(0);
 		row = new Object[model.getColumnCount()];
+		int i=0;
 		if(!Tienda.getInstance().getLosQueVendenTemp().isEmpty()) {
 			for (Proveedor aux : Tienda.getInstance().getLosQueVendenTemp()) {
-				row[0] = aux.getCodigo();
-				row[1] = aux.getNombre();
-				row[2] = aux.getPreciosCompos();
-				model.addRow(row);
+				if (aux != null) {
+					row[0] = aux.getCodigo();
+					row[1] = aux.getNombre();
+					try {
+						row[2] = Tienda.getInstance().getPreciosLosQueVendenTemp().get(i).toString();
+					} catch (IndexOutOfBoundsException e) {
+						row[2] = "";
+					}
+					i++;
+					model.addRow(row);
+				}
 			}
 		}
 	}
