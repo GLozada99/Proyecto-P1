@@ -35,8 +35,8 @@ public class SeleccionarProveedor extends JDialog {
 	private Object[] row;
 	private static DefaultTableModel model;
 	private String rnc;
-	JButton btnCancelar;
-	JButton btnAceptar;
+	private JButton btnCancelar;
+	private JButton btnAceptar;
 	/**
 	 * Launch the application.
 	 */

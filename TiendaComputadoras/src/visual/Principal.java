@@ -184,6 +184,7 @@ public class Principal extends JFrame {
 		mntmNuevoUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				NuevoUsuario aux = new NuevoUsuario(null);
+				System.out.println("Why?");
 				aux.setModal(true);
 				aux.setVisible(true);
 			}

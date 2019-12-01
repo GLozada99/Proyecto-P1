@@ -123,7 +123,7 @@ public class NuevoUsuario extends JDialog {
 
 
 				mascaraCedula = new MaskFormatter("######");
-				mascaraCedula.setPlaceholderCharacter('_');
+				//mascaraCedula.setPlaceholderCharacter('_');
 				ftxtCedula = new JFormattedTextField(mascaraCedula);
 				ftxtCedula.setFont(new Font("Calibri", Font.PLAIN, 18));
 				ftxtCedula.setBounds(83, 56, 142, 22);
@@ -190,21 +190,22 @@ public class NuevoUsuario extends JDialog {
 							}
 							else {
 								JOptionPane.showMessageDialog(null, "Usuario modificado con exito");
-								
+
 							}
 						}
 					}
 				});
-				ftxtCedula.setText(aux.getCodigo());
-				txtNombre.setText(aux.getNombre());
-				txtDireccion.setText(aux.getDireccion());
-				ftxtTelefono.setText(aux.getTelefono());
-				try {
-					txtContra.setText(((Administrador)aux).getContraseña());	
-				} catch (ClassCastException e) {
-					txtContra.setText(((Vendedor)aux).getContraseña());	
+				if(aux!=null) {
+					ftxtCedula.setText(aux.getCodigo());
+					txtNombre.setText(aux.getNombre());
+					txtDireccion.setText(aux.getDireccion());
+					ftxtTelefono.setText(aux.getTelefono());
+					try {
+						txtContra.setText(((Administrador)aux).getContraseña());	
+					} catch (ClassCastException e) {
+						txtContra.setText(((Vendedor)aux).getContraseña());	
+					}
 				}
-				
 
 				btnRegistrar.setActionCommand("OK");
 				buttonPane.add(btnRegistrar);
