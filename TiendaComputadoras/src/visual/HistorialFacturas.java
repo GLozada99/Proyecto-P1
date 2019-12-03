@@ -116,7 +116,6 @@ public class HistorialFacturas extends JDialog {
 		model.setRowCount(0);
 		row = new Object[model.getColumnCount()];
 
-
 		for (Factura aux : Tienda.getInstance().getLasFacturas()) {
 			row[0] = aux.getCodigo();
 			row[1] = aux.getFecha();
@@ -124,6 +123,7 @@ public class HistorialFacturas extends JDialog {
 			row[3] = aux.getElCliente().getNombre();
 			row[4] = Tienda.getInstance().cantComponentes(aux.getLosComponentes(), aux.getCantiComponentes())+Tienda.getInstance().cantCombos(aux.getLosCombos(), aux.getCantiCombos());
 			row[5] = aux.getCosto();
+			model.addRow(row);
 		}
 
 	}

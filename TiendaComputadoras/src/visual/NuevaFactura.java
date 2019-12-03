@@ -472,6 +472,10 @@ public class NuevaFactura extends JDialog {
 							}
 						}
 						else if(Tienda.getInstance().relacionFactura(Tienda.getInstance().findClientebyCedula(ftxtCedula.getText()), Float.valueOf(txtPrecioTotal.getText()), ayudaComponente, ayudaCantiComponente, ayudaCombos, ayudaCantiCombos, rdbtnCredito.isSelected())) {
+							if(ftxtCedula.getText().equalsIgnoreCase("___-_______-_")||txtNombre.getText().isEmpty()||txtDireccion.getText().isEmpty()||ftxtTelefono.getText().equalsIgnoreCase("(___) ___-____")) {
+								JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios");
+							}
+							else if(Tienda.getInstance().relacionFactura(Tienda.getInstance().findClientebyCedula(ftxtCedula.getText()), Float.valueOf(txtPrecioTotal.getText()), ayudaComponente, ayudaCantiComponente, ayudaCombos, ayudaCantiCombos, rdbtnCredito.isSelected())) {
 							Cliente auxCli = new Cliente(txtNombre.getText(), ftxtTelefono.getText(), txtDireccion.getText(), ftxtCedula.getText());
 							Factura aux = new Factura(txtCodigo.getText(), Float.valueOf(txtPrecioTotal.getText()), auxCli, ayudaComponente, ayudaCombos, ayudaCantiComponente, ayudaCantiCombos, rdbtnCredito.isSelected());
 							Tienda.getInstance().getLosClientes().add(auxCli);
@@ -484,6 +488,11 @@ public class NuevaFactura extends JDialog {
 							ayudaCantiComponente.clear();
 							ayudaCantiCombos.clear();
 							JOptionPane.showMessageDialog(null, "La compra fue realizada con exito");
+							}
+							
+							else {
+								JOptionPane.showMessageDialog(null, "Este cliente no cumple con los requisitos para realizar la compra");
+							}
 						}
 
 					}
