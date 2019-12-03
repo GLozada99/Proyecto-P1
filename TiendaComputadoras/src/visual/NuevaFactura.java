@@ -30,6 +30,7 @@ import javax.swing.ListSelectionModel;
 import java.awt.Font;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.swing.JFormattedTextField;
 
@@ -257,7 +258,6 @@ public class NuevaFactura extends JDialog {
 					auxComponente = Tienda.getInstance().findComponentebyNumeroSerie(codigo);
 					cantidad = Integer.valueOf(JOptionPane.showInputDialog("La cantidad real es de: "+auxComponente.getCantDisponible()+". Introduzca cantidad deseada"));
 					if(componentesVenta.contains(auxComponente)) {
-
 						cantidadesCompo.add(componentesVenta.indexOf(auxComponente), cantidadesCompo.get(componentesVenta.indexOf(auxComponente))+cantidad);
 						cantidadesCompo.remove(componentesVenta.indexOf(auxComponente)+1);
 						cargarCompras();
@@ -444,12 +444,12 @@ public class NuevaFactura extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						ArrayList<Componente> ayudaComponente=new ArrayList<>();
 						ArrayList<Combo> ayudaCombos=new ArrayList<>();
-						ayudaComponente.addAll(0, componentesVenta);
-						ayudaCombos.addAll(0, combosVenta);
+						ayudaComponente.addAll(0, (Collection<? extends Componente>) componentesVenta.clone());
+						ayudaCombos.addAll(0, (Collection<? extends Combo>) combosVenta.clone());
 						ArrayList<Integer> ayudaCantiComponente=new ArrayList<>();
 						ArrayList<Integer> ayudaCantiCombos=new ArrayList<>();
-						ayudaCantiComponente.addAll(0, cantidadesCompo);
-						ayudaCantiCombos.addAll(0, cantidadesCombo);
+						ayudaCantiComponente.addAll(0, (Collection<? extends Integer>) cantidadesCompo.clone());
+						ayudaCantiCombos.addAll(0, (Collection<? extends Integer>) cantidadesCombo.clone());
 						if ((Tienda.getInstance().findClientebyCedula(ftxtCedula.getText())!=null)) {
 							if(ftxtCedula.getText().equalsIgnoreCase("___-_______-_")||txtNombre.getText().isEmpty()||txtDireccion.getText().isEmpty()||ftxtTelefono.getText().equalsIgnoreCase("(___) ___-____")) {
 								JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios");
@@ -465,6 +465,10 @@ public class NuevaFactura extends JDialog {
 								ayudaCombos.clear();
 								ayudaCantiComponente.clear();
 								ayudaCantiCombos.clear();
+								componentesVenta.clear();
+								combosVenta.clear();
+								cantidadesCompo.clear();
+								cantidadesCombo.clear();
 								JOptionPane.showMessageDialog(null, "La compra fue realizada con exito");
 							}
 							else {
@@ -487,6 +491,10 @@ public class NuevaFactura extends JDialog {
 							ayudaCombos.clear();
 							ayudaCantiComponente.clear();
 							ayudaCantiCombos.clear();
+							componentesVenta.clear();
+							combosVenta.clear();
+							cantidadesCompo.clear();
+							cantidadesCombo.clear();
 							JOptionPane.showMessageDialog(null, "La compra fue realizada con exito");
 							}
 							

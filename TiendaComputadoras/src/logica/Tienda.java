@@ -298,7 +298,12 @@ public class Tienda implements Serializable {
 		for (Componente componente : componentes) {
 			componente.setCantDisponible(componente.getCantDisponible()-cantiCompo.get(i));
 			i++;
+			if(componente.getCantDisponible()<componente.getCantMin()) {
+				OrdenCompra aux = new OrdenCompra("OC-"+Tienda.getInstance().getGeneradorCodigoOrdenCompra(), componente, componente.getCantMax()-componente.getCantDisponible());
+				Tienda.getInstance().agregarOrden(aux);
+			}
 		}
+	
 	}
 	public void restaCantiCombos(ArrayList<Combo> combos, ArrayList<Integer> cantiCombo) {
 		for (Combo combo : combos) {
