@@ -249,11 +249,63 @@ public class AgregarComponente extends JDialog {
 			e.printStackTrace();
 		}
 
+		panel_DiscoDuro = new JPanel();
+		panel_DiscoDuro.setVisible(false);
+
 		panel_RAM = new JPanel();
 		panel_RAM.setVisible(false);
 
-		panel_DiscoDuro = new JPanel();
-		panel_DiscoDuro.setVisible(false);
+		panel_MotherBoard = new JPanel();
+		panel_MotherBoard.setVisible(false);
+		panel_MotherBoard.setLayout(null);
+		panel_MotherBoard.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Especificaciones", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_MotherBoard.setBounds(10, 344, 535, 70);
+		contentPanel.add(panel_MotherBoard);
+
+		JLabel lblTipoConector = new JLabel("Tipo Conector");
+		lblTipoConector.setBounds(12, 27, 88, 14);
+		panel_MotherBoard.add(lblTipoConector);
+
+		JLabel lblTipoRam = new JLabel("Tipo RAM");
+		lblTipoRam.setBounds(332, 27, 65, 14);
+		panel_MotherBoard.add(lblTipoRam);
+
+		cbxTipoConectorMB = new JComboBox();
+		cbxTipoConectorMB.setModel(new DefaultComboBoxModel(new String[] {"<Escoja>"}));
+		cbxTipoConectorMB.setBounds(112, 23, 104, 22);
+		panel_MotherBoard.add(cbxTipoConectorMB);
+
+		cbxTipoRAM = new JComboBox();
+		cbxTipoRAM.setModel(new DefaultComboBoxModel(new String[] {"<Escoja>", "VESA", "PCI", "AMR", "CNR", "AGP", "PCIe"}));
+		cbxTipoRAM.setBounds(409, 23, 114, 22);
+		panel_MotherBoard.add(cbxTipoRAM);
+		panel_MotherBoard.setVisible(false);
+		panel_RAM.setBounds(10, 344, 535, 70);
+		contentPanel.add(panel_RAM);
+		panel_RAM.setLayout(null);
+		panel_RAM.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Especificaciones", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+
+		JLabel lblTipo = new JLabel("Tipo:");
+		lblTipo.setBounds(347, 28, 49, 14);
+		panel_RAM.add(lblTipo);
+
+		JLabel lblCantidadDeMemoria = new JLabel("Cantidad de Memoria: ");
+		lblCantidadDeMemoria.setBounds(12, 32, 131, 14);
+		panel_RAM.add(lblCantidadDeMemoria);
+
+		cbxTipo = new JComboBox();
+		cbxTipo.setModel(new DefaultComboBoxModel(new String[] {"<Escoja>", "DDR SDRAM", "DDR2 SDRAM", "DDR3 SDRAM ", "DDR4 SDRAM"}));
+		cbxTipo.setBounds(396, 24, 127, 22);
+		panel_RAM.add(cbxTipo);
+		ftxtCantMemoria = new JFormattedTextField(mascaraCantMemoria);
+		ftxtCantMemoria.setBounds(155, 28, 58, 22);
+
+		panel_RAM.add(ftxtCantMemoria);
+
+		JLabel lblGb = new JLabel("GB");
+		lblGb.setBounds(225, 32, 39, 14);
+		panel_RAM.add(lblGb);
+		panel_RAM.setVisible(false);
 		panel_DiscoDuro.setLayout(null);
 		panel_DiscoDuro.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Especificaciones", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel_DiscoDuro.setBounds(10, 344, 535, 70);
@@ -307,58 +359,6 @@ public class AgregarComponente extends JDialog {
 		lblGhz.setBounds(160, 28, 30, 14);
 		panel_Micro.add(lblGhz);
 		panel_Micro.setVisible(false);
-
-		panel_MotherBoard = new JPanel();
-		panel_MotherBoard.setVisible(false);
-		panel_MotherBoard.setLayout(null);
-		panel_MotherBoard.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Especificaciones", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_MotherBoard.setBounds(10, 344, 535, 70);
-		contentPanel.add(panel_MotherBoard);
-
-		JLabel lblTipoConector = new JLabel("Tipo Conector");
-		lblTipoConector.setBounds(12, 27, 88, 14);
-		panel_MotherBoard.add(lblTipoConector);
-
-		JLabel lblTipoRam = new JLabel("Tipo RAM");
-		lblTipoRam.setBounds(332, 27, 65, 14);
-		panel_MotherBoard.add(lblTipoRam);
-
-		cbxTipoConectorMB = new JComboBox();
-		cbxTipoConectorMB.setModel(new DefaultComboBoxModel(new String[] {"<Escoja>"}));
-		cbxTipoConectorMB.setBounds(112, 23, 104, 22);
-		panel_MotherBoard.add(cbxTipoConectorMB);
-
-		cbxTipoRAM = new JComboBox();
-		cbxTipoRAM.setModel(new DefaultComboBoxModel(new String[] {"<Escoja>"}));
-		cbxTipoRAM.setBounds(409, 23, 114, 22);
-		panel_MotherBoard.add(cbxTipoRAM);
-		panel_MotherBoard.setVisible(false);
-		panel_RAM.setBounds(10, 344, 535, 70);
-		contentPanel.add(panel_RAM);
-		panel_RAM.setLayout(null);
-		panel_RAM.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Especificaciones", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-
-		JLabel lblTipo = new JLabel("Tipo:");
-		lblTipo.setBounds(347, 28, 49, 14);
-		panel_RAM.add(lblTipo);
-
-		JLabel lblCantidadDeMemoria = new JLabel("Cantidad de Memoria: ");
-		lblCantidadDeMemoria.setBounds(12, 32, 131, 14);
-		panel_RAM.add(lblCantidadDeMemoria);
-
-		cbxTipo = new JComboBox();
-		cbxTipo.setModel(new DefaultComboBoxModel(new String[] {"<Escoja>", "DDR SDRAM", "DDR2 SDRAM", "DDR3 SDRAM ", "DDR4 SDRAM"}));
-		cbxTipo.setBounds(396, 24, 127, 22);
-		panel_RAM.add(cbxTipo);
-		ftxtCantMemoria = new JFormattedTextField(mascaraCantMemoria);
-		ftxtCantMemoria.setBounds(155, 28, 58, 22);
-
-		panel_RAM.add(ftxtCantMemoria);
-
-		JLabel lblGb = new JLabel("GB");
-		lblGb.setBounds(225, 32, 39, 14);
-		panel_RAM.add(lblGb);
-		panel_RAM.setVisible(false);
 
 
 
@@ -600,7 +600,7 @@ public class AgregarComponente extends JDialog {
 						}
 
 						Tienda.getInstance().getLosQueVendenTemp().clear();
-						
+
 						Tienda.getInstance().getPreciosLosQueVendenTemp().clear();
 						cargarProveedoresVentaComp();
 						clean();
