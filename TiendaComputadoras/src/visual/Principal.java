@@ -134,9 +134,10 @@ public class Principal extends JFrame {
 		dim = super.getToolkit().getScreenSize(); 
 		super.setSize(dim.width, dim.height);//-100);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1820, 1000);
+		setBounds(100, 100, 1416, 837);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
+		contentPane.setBackground(Color.LIGHT_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 
@@ -340,19 +341,19 @@ public class Principal extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel1 = new JPanel();
-		panel1.setBounds(10, 11, 642, 353);
+		panel1.setBounds(16, 17, 642, 353);
 		contentPane.add(panel1);
 		
 		JPanel panel2 = new JPanel();
-		panel2.setBounds(662, 11, 708, 353);
+		panel2.setBounds(674, 17, 708, 353);
 		contentPane.add(panel2);
 		
 		JPanel panel3 = new JPanel();
-		panel3.setBounds(10, 375, 642, 352);
+		panel3.setBounds(16, 387, 642, 352);
 		contentPane.add(panel3);
 		
 		JPanel panel4 = new JPanel();
-		panel4.setBounds(662, 375, 708, 352);
+		panel4.setBounds(674, 387, 708, 352);
 		contentPane.add(panel4);
 	}
 }
