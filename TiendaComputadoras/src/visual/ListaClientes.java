@@ -30,6 +30,10 @@ import javax.swing.ScrollPaneConstants;
 
 public class ListaClientes extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JTable table;
 	private JButton btnAceptar;

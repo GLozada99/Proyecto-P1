@@ -123,7 +123,7 @@ public class NuevoUsuario extends JDialog {
 
 
 				mascaraCedula = new MaskFormatter("######");
-				//mascaraCedula.setPlaceholderCharacter('_');
+				mascaraCedula.setPlaceholderCharacter('_');
 				ftxtCedula = new JFormattedTextField(mascaraCedula);
 				ftxtCedula.setFont(new Font("Calibri", Font.PLAIN, 18));
 				ftxtCedula.setBounds(83, 56, 142, 22);
