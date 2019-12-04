@@ -67,7 +67,9 @@ public class Principal extends JFrame {
 	 * Create the frame.
 	 */
 	public Principal() {
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
+		//setExtendedState(JFrame.MAXIMIZED_BOTH);
+		 Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		setSize(screenSize.width, screenSize.height);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/Imagenes/IconPrincipal.png")));
 
 		addWindowListener(new WindowAdapter() {
@@ -135,7 +137,7 @@ public class Principal extends JFrame {
 		dim = super.getToolkit().getScreenSize(); 
 		super.setSize(dim.width, dim.height);//-100);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1937, 1045);
+		setBounds(0, 0, 1937, 1045);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.LIGHT_GRAY);
