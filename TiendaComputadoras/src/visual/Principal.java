@@ -37,6 +37,7 @@ import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Rectangle;
 
 public class Principal extends JFrame {
 
@@ -67,8 +68,8 @@ public class Principal extends JFrame {
 	 * Create the frame.
 	 */
 	public Principal() {
-		//setExtendedState(JFrame.MAXIMIZED_BOTH);
-		 Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		setSize(screenSize.width, screenSize.height);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/Imagenes/IconPrincipal.png")));
 
@@ -134,12 +135,13 @@ public class Principal extends JFrame {
 		//Tienda.getInstance().getOrdenesSinProcesar().add(p);
 		//Termina
 
-		dim = super.getToolkit().getScreenSize(); 
-		super.setSize(dim.width, dim.height);//-100);
+	//	dim = super.getToolkit().getScreenSize(); 
+		//super.setSize(dim.width, dim.height);//-100);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(0, 0, 1937, 1045);
+		//setBounds(0, 0, 1937, 1045);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
+		contentPane.setBounds(new Rectangle(0, 0, screenSize.width-100, screenSize.width-75));
 		contentPane.setBackground(Color.LIGHT_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -342,6 +344,7 @@ public class Principal extends JFrame {
 		mnListados.add(mntmHistorialOrdenes);
 		getContentPane().setLayout(null);
 		contentPane.setLayout(null);
+		
 		
 		JPanel panel1 = new JPanel();
 		panel1.setBounds(13, 14, 940, 461);
