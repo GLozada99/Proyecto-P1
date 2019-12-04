@@ -339,20 +339,20 @@ public class Principal extends JFrame {
 		getContentPane().setLayout(null);
 		contentPane.setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setBounds(10, 11, 642, 353);
-		contentPane.add(panel);
+		JPanel panel1 = new JPanel();
+		panel1.setBounds(10, 11, 642, 353);
+		contentPane.add(panel1);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(662, 11, 708, 353);
-		contentPane.add(panel_1);
+		JPanel panel2 = new JPanel();
+		panel2.setBounds(662, 11, 708, 353);
+		contentPane.add(panel2);
 		
-		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(10, 375, 642, 352);
-		contentPane.add(panel_2);
+		JPanel panel3 = new JPanel();
+		panel3.setBounds(10, 375, 642, 352);
+		contentPane.add(panel3);
 		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBounds(662, 375, 708, 352);
-		contentPane.add(panel_3);
+		JPanel panel4 = new JPanel();
+		panel4.setBounds(662, 375, 708, 352);
+		contentPane.add(panel4);
 	}
 }
