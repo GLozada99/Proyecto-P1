@@ -67,6 +67,7 @@ public class Principal extends JFrame {
 	 * Create the frame.
 	 */
 	public Principal() {
+		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/Imagenes/IconPrincipal.png")));
 
 		addWindowListener(new WindowAdapter() {
@@ -134,7 +135,7 @@ public class Principal extends JFrame {
 		dim = super.getToolkit().getScreenSize(); 
 		super.setSize(dim.width, dim.height);//-100);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1416, 837);
+		setBounds(100, 100, 1937, 1045);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.LIGHT_GRAY);
@@ -341,19 +342,19 @@ public class Principal extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panel1 = new JPanel();
-		panel1.setBounds(16, 17, 642, 353);
+		panel1.setBounds(13, 14, 940, 461);
 		contentPane.add(panel1);
 		
 		JPanel panel2 = new JPanel();
-		panel2.setBounds(674, 17, 708, 353);
+		panel2.setBounds(966, 14, 940, 461);
 		contentPane.add(panel2);
 		
 		JPanel panel3 = new JPanel();
-		panel3.setBounds(16, 387, 642, 352);
+		panel3.setBounds(13, 489, 940, 461);
 		contentPane.add(panel3);
 		
 		JPanel panel4 = new JPanel();
-		panel4.setBounds(674, 387, 708, 352);
+		panel4.setBounds(966, 489, 940, 461);
 		contentPane.add(panel4);
 	}
 }
