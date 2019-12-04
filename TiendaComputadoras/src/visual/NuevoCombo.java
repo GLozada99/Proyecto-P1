@@ -31,6 +31,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
+import java.awt.Color;
 
 public class NuevoCombo extends JDialog {
 
@@ -74,12 +75,14 @@ public class NuevoCombo extends JDialog {
 		setTitle("Nuevo Combo");
 		setBounds(100, 100, 527, 405);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(new Color(234, 238, 249));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		setLocationRelativeTo(null);
 		contentPanel.setLayout(null);
 
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(234, 238, 249));
 		panel.setBorder(new TitledBorder(null, "Datos del Combo", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setBounds(5, 5, 496, 85);
 		contentPanel.add(panel);
@@ -112,6 +115,7 @@ public class NuevoCombo extends JDialog {
 		panel.add(spnPrecio);
 
 		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(234, 238, 249));
 		panel_1.setBorder(new TitledBorder(null, "Componentes del Combo", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_1.setBounds(5, 91, 496, 211);
 		contentPanel.add(panel_1);
@@ -154,6 +158,7 @@ public class NuevoCombo extends JDialog {
 		panel_1.add(cbxMotherBoard);
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(new Color(234, 238, 249));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{

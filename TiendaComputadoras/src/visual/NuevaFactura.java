@@ -107,10 +107,12 @@ public class NuevaFactura extends JDialog {
 	 */
 
 	public NuevaFactura() {
+		setBackground(new Color(169, 169, 169));
 		setIconImage(Toolkit.getDefaultToolkit().getImage(NuevaFactura.class.getResource("/Imagenes/IconFacturar.png")));
 		setTitle("Nueva Factura");
 		setBounds(100, 100, 1191, 733);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(new Color(234, 238, 249));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
@@ -118,12 +120,13 @@ public class NuevaFactura extends JDialog {
 
 
 		JPanel DatosCliente = new JPanel();
+		DatosCliente.setBackground(new Color(234, 238, 249));
 		DatosCliente.setLayout(null);
 		DatosCliente.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Datos del Cliente", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		DatosCliente.setBounds(12, 540, 618, 98);
 		contentPanel.add(DatosCliente);
 
-		JLabel lblCedula = new JLabel("Cedula: ");
+		JLabel lblCedula = new JLabel("C\u00E9dula: ");
 		lblCedula.setBounds(19, 25, 76, 22);
 		DatosCliente.add(lblCedula);
 
@@ -137,7 +140,7 @@ public class NuevaFactura extends JDialog {
 		txtDireccion.setBounds(399, 60, 207, 22);
 		DatosCliente.add(txtDireccion);
 
-		JLabel lblTelefono = new JLabel("Telefono: ");
+		JLabel lblTelefono = new JLabel("Tel\u00E9fono: ");
 		lblTelefono.setBounds(19, 60, 59, 22);
 		DatosCliente.add(lblTelefono);
 
@@ -205,6 +208,7 @@ public class NuevaFactura extends JDialog {
 		txtNombre.setColumns(10);
 
 		JPanel ElementosASeleccionar = new JPanel();
+		ElementosASeleccionar.setBackground(new Color(234, 238, 249));
 		ElementosASeleccionar.setForeground(Color.BLACK);
 		ElementosASeleccionar.setLayout(null);
 		ElementosASeleccionar.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Elementos a seleccionar", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -383,6 +387,7 @@ public class NuevaFactura extends JDialog {
 
 
 		JPanel Factura = new JPanel();
+		Factura.setBackground(new Color(234, 238, 249));
 		Factura.setForeground(Color.BLACK);
 		Factura.setLayout(null);
 		Factura.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Factura", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -397,10 +402,11 @@ public class NuevaFactura extends JDialog {
 		Factura.add(txtPrecioTotal);
 
 		JLabel lblPrecioTotal = new JLabel("Precio total: ");
-		lblPrecioTotal.setBounds(314, 66, 76, 16);
+		lblPrecioTotal.setBounds(291, 66, 76, 16);
 		Factura.add(lblPrecioTotal);
 
 		txtCodigo = new JTextField();
+		txtCodigo.setBackground(new Color(234, 238, 249));
 		txtCodigo.setText("N\u00BA: "+Tienda.getInstance().getGeneradorCodigoFactura());
 		txtCodigo.setEditable(false);
 		txtCodigo.setColumns(10);
@@ -427,15 +433,17 @@ public class NuevaFactura extends JDialog {
 		txtTotalCombos.setBounds(141, 57, 81, 22);
 		Factura.add(txtTotalCombos);
 
-		JLabel lblCodigoFactura = new JLabel("Codigo Factura");
+		JLabel lblCodigoFactura = new JLabel("C\u00F3digo Factura");
 		lblCodigoFactura.setBounds(291, 17, 128, 16);
 		Factura.add(lblCodigoFactura);
 
 		rdbtnCredito = new JRadioButton("Credito");
-		rdbtnCredito.setBounds(291, 42, 210, 23);
+		rdbtnCredito.setBackground(new Color(234, 238, 249));
+		rdbtnCredito.setBounds(291, 36, 210, 23);
 		Factura.add(rdbtnCredito);
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(new Color(234, 238, 249));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{

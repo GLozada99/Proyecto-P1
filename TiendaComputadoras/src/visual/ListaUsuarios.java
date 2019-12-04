@@ -23,6 +23,7 @@ import logica.Cliente;
 import logica.Persona;
 import logica.Tienda;
 import logica.Vendedor;
+import java.awt.Color;
 
 public class ListaUsuarios extends JDialog {
 	/**
@@ -65,6 +66,7 @@ public class ListaUsuarios extends JDialog {
 		setBounds(100, 100, 582, 353);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(new Color(234, 238, 249));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
@@ -103,6 +105,7 @@ public class ListaUsuarios extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(new Color(234, 238, 249));
 			buttonPane.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);

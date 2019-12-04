@@ -68,9 +68,8 @@ public class Principal extends JFrame {
 	 * Create the frame.
 	 */
 	public Principal() {
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		setSize(screenSize.width, screenSize.height);
+		setSize(1373, 739);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/Imagenes/IconPrincipal.png")));
 
 		addWindowListener(new WindowAdapter() {
@@ -152,7 +151,7 @@ public class Principal extends JFrame {
 
 		JMenu mnAdministracion = new JMenu("Administracion");
 		mnAdministracion.setForeground(new Color(255, 255, 255));
-		mnAdministracion.setIcon(new ImageIcon(Principal.class.getResource("/Imagenes/gear_in.png")));
+		mnAdministracion.setIcon(new ImageIcon(Principal.class.getResource("/Imagenes/IconAdministrador.png")));
 		mnAdministracion.setEnabled(false);
 		menuBar.add(mnAdministracion);
 
@@ -347,19 +346,19 @@ public class Principal extends JFrame {
 		
 		
 		JPanel panel1 = new JPanel();
-		panel1.setBounds(13, 14, 940, 461);
+		panel1.setBounds(29, 18, 635, 303);
 		contentPane.add(panel1);
 		
 		JPanel panel2 = new JPanel();
-		panel2.setBounds(966, 14, 940, 461);
+		panel2.setBounds(693, 18, 635, 303);
 		contentPane.add(panel2);
 		
 		JPanel panel3 = new JPanel();
-		panel3.setBounds(13, 489, 940, 461);
+		panel3.setBounds(29, 339, 635, 303);
 		contentPane.add(panel3);
 		
 		JPanel panel4 = new JPanel();
-		panel4.setBounds(966, 489, 940, 461);
+		panel4.setBounds(693, 339, 635, 303);
 		contentPane.add(panel4);
 	}
 }

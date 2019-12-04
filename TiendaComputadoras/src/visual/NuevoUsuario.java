@@ -27,6 +27,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Panel;
 import javax.swing.JRadioButton;
 import java.awt.Label;
+import java.awt.Color;
 
 public class NuevoUsuario extends JDialog {
 
@@ -64,12 +65,14 @@ public class NuevoUsuario extends JDialog {
 	public NuevoUsuario(Persona aux) {
 		setBounds(100, 100, 285, 391);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(new Color(234, 238, 249));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		setLocationRelativeTo(null);
 		contentPanel.setLayout(null);
 
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(234, 238, 249));
 		panel.setBorder(new TitledBorder(null, "Datos del Usuario", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel.setBounds(10, 11, 245, 222);
 		contentPanel.add(panel);
@@ -130,6 +133,7 @@ public class NuevoUsuario extends JDialog {
 				panel.add(ftxtCedula);
 
 				JPanel panel_1 = new JPanel();
+				panel_1.setBackground(new Color(234, 238, 249));
 				panel_1.setBorder(new TitledBorder(null, "Tipo de Usuario", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 				panel_1.setBounds(10, 239, 245, 57);
 				contentPanel.add(panel_1);
@@ -164,6 +168,7 @@ public class NuevoUsuario extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(new Color(234, 238, 249));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{

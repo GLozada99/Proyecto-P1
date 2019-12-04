@@ -81,6 +81,7 @@ public class ListaComponentes extends JDialog {
 		setLocationRelativeTo(null);
 		setResizable(false);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(new Color(234, 238, 249));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
@@ -116,6 +117,7 @@ public class ListaComponentes extends JDialog {
 				}
 			}
 			JPanel panelComp = new JPanel();
+			panelComp.setBackground(new Color(234, 238, 249));
 			panelComp.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), " Componente", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			panelComp.setBounds(15, 5, 1219, 63);
 			contentPanel.add(panelComp);
@@ -155,6 +157,7 @@ public class ListaComponentes extends JDialog {
 
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(new Color(234, 238, 249));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{

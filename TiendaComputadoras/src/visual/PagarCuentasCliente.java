@@ -59,15 +59,17 @@ public class PagarCuentasCliente extends JDialog {
 	 */
 	public PagarCuentasCliente() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(PagarCuentasCliente.class.getResource("/Imagenes/IconAbonarSaldo.png")));
-		setBounds(100, 100, 503, 291);
+		setBounds(100, 100, 503, 279);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(new Color(234, 238, 249));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		setLocationRelativeTo(null);
 		contentPanel.setLayout(null);
 		{
 			JPanel panel = new JPanel();
-			panel.setBounds(12, 5, 461, 104);
+			panel.setBackground(new Color(234, 238, 249));
+			panel.setBounds(10, 9, 467, 104);
 			panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Datos de Cliente", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			contentPanel.add(panel);
 			panel.setLayout(null);
@@ -162,6 +164,7 @@ public class PagarCuentasCliente extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(new Color(234, 238, 249));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
@@ -199,7 +202,8 @@ public class PagarCuentasCliente extends JDialog {
 		}
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(12, 122, 461, 74);
+		panel.setBackground(new Color(234, 238, 249));
+		panel.setBounds(12, 122, 465, 74);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		

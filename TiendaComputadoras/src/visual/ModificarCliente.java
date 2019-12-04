@@ -58,12 +58,15 @@ public class ModificarCliente extends JDialog {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ModificarCliente.class.getResource("/Imagenes/IconCliente.png")));
 		setBounds(100, 100, 297, 259);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(new Color(234, 238, 249));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		setLocationRelativeTo(null);
 		{
 			JPanel panel = new JPanel();
+			panel.setForeground(new Color(0, 128, 128));
+			panel.setBackground(new Color(234, 238, 249));
 			panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Modificaci\u00F3n de Cliente", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
@@ -127,6 +130,7 @@ public class ModificarCliente extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(new Color(234, 238, 249));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
@@ -146,12 +150,12 @@ public class ModificarCliente extends JDialog {
 							JOptionPane.showMessageDialog(null, "Todos los campos son obligatorios");
 						}
 						else {
-						aux.setCodigo(ftxtCedula.getText());
-						aux.setNombre(txtNombre.getText());
-						aux.setDireccion(txtDireccion.getText());
-						aux.setTelefono(ftxtTelefono.getText());
-						JOptionPane.showMessageDialog(null, "Modificacion Realizada","Notificación", JOptionPane.INFORMATION_MESSAGE);
-						dispose();
+							aux.setCodigo(ftxtCedula.getText());
+							aux.setNombre(txtNombre.getText());
+							aux.setDireccion(txtDireccion.getText());
+							aux.setTelefono(ftxtTelefono.getText());
+							JOptionPane.showMessageDialog(null, "Modificacion Realizada","Notificación", JOptionPane.INFORMATION_MESSAGE);
+							dispose();
 						}
 					}
 				});
@@ -175,7 +179,7 @@ public class ModificarCliente extends JDialog {
 		txtDireccion.setText(aux.getDireccion());
 		ftxtTelefono.setText(aux.getTelefono());
 	}
-	
+
 
 	/*protected void limpiar() {
 		ftxtCedula.setText("");

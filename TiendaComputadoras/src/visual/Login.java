@@ -23,6 +23,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import java.awt.Toolkit;
 import java.awt.TextField;
+import java.awt.Color;
+import javax.swing.ImageIcon;
+import java.awt.Button;
 
 public class Login extends JFrame {
 
@@ -92,36 +95,40 @@ public class Login extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 302, 196);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(234, 238, 249));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setLocationRelativeTo(null);
 
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(234, 238, 249));
 		contentPane.add(panel);
 		panel.setLayout(null);
 
-		JButton btnLogin = new JButton("Iniciar Sesion");
+		JButton btnLogin = new JButton("Iniciar Sesi\u00F3n");
 		getRootPane().setDefaultButton(btnLogin);;
 		btnLogin.setBounds(68, 100, 135, 25);
 		panel.add(btnLogin);
 
 		JLabel lblUsuario = new JLabel("Usuario:");
-		lblUsuario.setBounds(12, 16, 103, 14);
+		lblUsuario.setIcon(new ImageIcon(Login.class.getResource("/Imagenes/user.png")));
+		lblUsuario.setBounds(10, 20, 103, 20);
 		panel.add(lblUsuario);
 
 		JLabel lblContrasea = new JLabel("Contrase\u00F1a:");
-		lblContrasea.setBounds(12, 60, 103, 14);
+		lblContrasea.setIcon(new ImageIcon(Login.class.getResource("/Imagenes/IconContrase\u00F1a.png")));
+		lblContrasea.setBounds(10, 60, 103, 20);
 		panel.add(lblContrasea);
 
 		txtUsuario = new TextField();
-		txtUsuario.setBounds(117, 13, 147, 20);
+		txtUsuario.setBounds(115, 20, 147, 20);
 		panel.add(txtUsuario);
 		txtUsuario.setColumns(10);
 
 		txtContra = new TextField();
-		txtContra.setBounds(117, 57, 147, 20);
-		txtContra.setEchoChar('*');
+		txtContra.setBounds(115, 60, 147, 20);
+		txtContra.setEchoChar('•');
 		panel.add(txtContra);
 		txtContra.setColumns(10);
 		
