@@ -404,8 +404,8 @@ public class AgregarComponente extends JDialog {
 			spnCantMax.setValue(auxComp.getCantMax());spnCantMax.setEnabled(true);
 			spnCantMin.setValue(auxComp.getCantMin());spnCantMin.setEnabled(true);
 			spnPrecioVenta.setValue(auxComp.getPrecioVentaActual());spnPrecioVenta.setEnabled(true);
-			Tienda.getInstance().getLosQueVendenTemp().addAll(auxComp.getLosQueVenden());
-			cargarProveedoresVentaComp();
+			//Tienda.getInstance().getLosQueVendenTemp().addAll(auxComp.getLosQueVenden());
+		
 			
 			if(!auxComp.getLosQueVenden().isEmpty()) {
 				Tienda.getInstance().getLosQueVendenTemp().addAll(auxComp.getLosQueVenden());
@@ -435,6 +435,7 @@ public class AgregarComponente extends JDialog {
 				rdbtnMotherBoard.setSelected(false);
 				rdbtnRAM.setSelected(true);
 			}
+			cargarProveedoresVentaComp();
 		}
 
 
