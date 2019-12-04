@@ -50,6 +50,8 @@ public class NuevoCombo extends JDialog {
 	private JComboBox<String> cbxMotherBoard;
 	private ArrayList<Componente> comboComponente;
 	private JTextField txtPrecio;
+	private ArrayList<Integer> cantisUtil=new ArrayList<Integer>();
+
 
 
 
@@ -70,6 +72,7 @@ public class NuevoCombo extends JDialog {
 	 * Create the dialog.
 	 */
 	public NuevoCombo() {
+
 		setIconImage(Toolkit.getDefaultToolkit().getImage(NuevoCombo.class.getResource("/Imagenes/IconAgregarCombopng.png")));
 		setTitle("Nuevo Combo");
 		setBounds(100, 100, 576, 405);
@@ -104,11 +107,11 @@ public class NuevoCombo extends JDialog {
 		txtNombre.setBounds(128, 22, 86, 20);
 		panel.add(txtNombre);
 		txtNombre.setColumns(10);
-		
+
 		JLabel lblPrecio = new JLabel("Precio:");
 		lblPrecio.setBounds(22, 55, 65, 14);
 		panel.add(lblPrecio);
-		
+
 		txtPrecio = new JTextField();
 		txtPrecio.setEditable(false);
 		txtPrecio.setColumns(10);
@@ -123,13 +126,18 @@ public class NuevoCombo extends JDialog {
 		panel_1.setLayout(null);
 
 		JLabel lblDiscoDuro = new JLabel("Disco Duro:");
-		lblDiscoDuro.setBounds(13, 34, 99, 14);
+		lblDiscoDuro.setBounds(10, 34, 99, 14);
 		panel_1.add(lblDiscoDuro);
 
 		cbxDiscoDuro = new JComboBox();
 		cbxDiscoDuro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			//	if(cbxDiscoDuro)
+				ArrayList<Integer> cantisUtil=new ArrayList<Integer>();
+				if(cbxDiscoDuro.getSelectedIndex()!=0&&cbxMicro.getSelectedIndex()!=0&&cbxMotherBoard.getSelectedIndex()!=0&&cbxRAM.getSelectedIndex()!=0) {
+					cantisUtil.add(1);cantisUtil.add(1);cantisUtil.add(1);cantisUtil.add(1);
+					txtPrecio.setText(""+Tienda.getInstance().precioTotalComponentes(componenteDevolver(), cantisUtil));
+
+				}
 			}
 		});
 		cbxDiscoDuro.setModel(new DefaultComboBoxModel(new String[] {"C\u00F3digo   :    Marca    :    Modelo   :   Cantidad    :     Capacidad   "}));
@@ -171,10 +179,10 @@ public class NuevoCombo extends JDialog {
 				JButton btnCrear = new JButton("Crear");
 				btnCrear.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						//new Combo(componentes, codigo, precio, descuento)
-					   
-					//	Combo aux= new Combo(componenteDevolver(),txtNombre.getText(), Integer.valueOf(spnDescuento.getValue().toString()), defaultCloseOperation);
-					   
+						if(cbxDiscoDuro.getSelectedIndex()!=0&&cbxMicro.getSelectedIndex()!=0&&cbxMotherBoard.getSelectedIndex()!=0&&cbxRAM.getSelectedIndex()!=0) {
+						Combo aux= new Combo(componenteDevolver(),txtNombre.getText(), Integer.valueOf(spnDescuento.getValue().toString()), Integer.valueOf(txtPrecio.getText()));
+						Tienda.getInstance().agregarCombo(aux);
+						}
 					}
 				});
 				btnCrear.setActionCommand("OK");
@@ -204,39 +212,40 @@ public class NuevoCombo extends JDialog {
 		int iRAM=0;
 		int iMB=0;
 		ArrayList<Componente> miComponente= new ArrayList<Componente>();
-		
-		for (Componente elComponente : Tienda.getInstance().getLosComponentes()) {
-			if(elComponente instanceof DiscoDuro){
-				if(cbxDiscoDuro.getSelectedIndex()==iDD) {
-					miComponente.add(0,elComponente);
-			}
-				iDD++;
+		if(cbxDiscoDuro.getSelectedIndex()!=0&&cbxMicro.getSelectedIndex()!=0&&cbxMotherBoard.getSelectedIndex()!=0&&cbxRAM.getSelectedIndex()!=0) {
+			for (Componente elComponente : Tienda.getInstance().getLosComponentes()) {
+				if(elComponente instanceof DiscoDuro){
+					if(cbxDiscoDuro.getSelectedIndex()==iDD) {
+						miComponente.add(0,elComponente);
+					}
+					iDD++;
 				}
-			if(elComponente instanceof Micro){
-				if(cbxMicro.getSelectedIndex()==iMicro) {
-					miComponente.add(1,elComponente);
-			}
-				iMicro++;
+				if(elComponente instanceof Micro){
+					if(cbxMicro.getSelectedIndex()==iMicro) {
+						miComponente.add(1,elComponente);
+					}
+					iMicro++;
 				}
-			if(elComponente instanceof RAM){
-				if(cbxRAM.getSelectedIndex()==iRAM) {
-					miComponente.add(2,elComponente);
-			}
-				iRAM++;
+				if(elComponente instanceof RAM){
+					if(cbxRAM.getSelectedIndex()==iRAM) {
+						miComponente.add(2,elComponente);
+					}
+					iRAM++;
 				}
-			if(elComponente instanceof MotherBoard){
-				if(cbxMotherBoard.getSelectedIndex()==iMB) {
-					miComponente.add(3,elComponente);
-			}
-				iMB++;
+				if(elComponente instanceof MotherBoard){
+					if(cbxMotherBoard.getSelectedIndex()==iMB) {
+						miComponente.add(3,elComponente);
+					}
+					iMB++;
 				}
+			}
 		}
 		return miComponente;
-		
+
 	}
 	private void DiscoDuroCbx(){
 		cbxDiscoDuro.removeAllItems();
-	
+
 		for (Componente elComponente : Tienda.getInstance().getLosComponentes() ) {
 			if(elComponente instanceof DiscoDuro) {
 				cbxDiscoDuro.addItem(new String(elComponente.getNumeroSerie()+" : "+elComponente.getMarca()+" : "+elComponente.getModelo()+" : "+elComponente.getCantDisponible()+" : "+((DiscoDuro)elComponente).getCapacidadAlma()));
@@ -246,17 +255,17 @@ public class NuevoCombo extends JDialog {
 	}
 	private void MicroCbx(){
 		cbxMicro.removeAllItems();
-		
+
 		for (Componente elComponente : Tienda.getInstance().getLosComponentes() ) {
 			if(elComponente instanceof Micro) {
 				cbxMicro.addItem(new String(elComponente.getNumeroSerie()+" : "+elComponente.getMarca()+" : "+elComponente.getModelo()+" : "+elComponente.getCantDisponible()+" : "+((Micro)elComponente).getVelocidad()));
 			}}
-	    cbxMicro.insertItemAt(new String("Código   :    Marca    :    Modelo   :     Cantidad   :    Velocidad"),0);
+		cbxMicro.insertItemAt(new String("Código   :    Marca    :    Modelo   :     Cantidad   :    Velocidad"),0);
 		cbxMicro.setSelectedIndex(0);
 	}
 	private void RAMCbx(){
 		cbxRAM.removeAllItems();
-		
+
 		for (Componente elComponente : Tienda.getInstance().getLosComponentes() ) {
 			if(elComponente instanceof RAM) {
 				cbxRAM.addItem(new String(elComponente.getNumeroSerie()+" : "+elComponente.getMarca()+" : "+elComponente.getModelo()+" : "+elComponente.getCantDisponible()+" : "+((RAM)elComponente).getCantMemoria()));
@@ -266,7 +275,7 @@ public class NuevoCombo extends JDialog {
 	}
 	private void MotherBoardCbx(){
 		cbxMotherBoard.removeAllItems();
-		
+
 		for (Componente elComponente : Tienda.getInstance().getLosComponentes() ) {
 			if(elComponente instanceof MotherBoard) {
 				cbxMotherBoard.addItem(new String(elComponente.getNumeroSerie()+" : "+elComponente.getMarca()+" : "+elComponente.getModelo()+" : "+elComponente.getCantDisponible()+" : "+((MotherBoard)elComponente).getTipoRAM()));

@@ -593,7 +593,7 @@ public static void cargarCombos() {
 	row = new Object[model.getColumnCount()];
 	if(!Tienda.getInstance().getLosCombo().isEmpty()) {
 		for (Combo combo : Tienda.getInstance().getLosCombo()) {
-			row[0] = combo.getCodigo();
+			row[0] = combo.getNombre();
 			for (Componente componente : combo.getComponentes()) {
 				if(componente instanceof DiscoDuro) {
 					row[1] = componente.getMarca() +" : "+ componente.getModelo();

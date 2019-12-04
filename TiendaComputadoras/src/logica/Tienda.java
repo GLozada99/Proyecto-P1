@@ -396,7 +396,7 @@ public class Tienda implements Serializable {
 		boolean find = false;
 		int i=0;
 		while (i<losCombo.size()&&!find) {
-			if(losCombo.get(i).getCodigo().equalsIgnoreCase(codigo)){
+			if(losCombo.get(i).getNombre().equalsIgnoreCase(codigo)){
 				comboFound = losCombo.get(i);
 				find = true;
 			}

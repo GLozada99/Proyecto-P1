@@ -72,7 +72,7 @@ public class ListaCombos extends JDialog {
 				panel.add(scrollPane, BorderLayout.CENTER);
 				{
 					model = new DefaultTableModel();
-					String[] encabezado = {"Codigo","Descuento","Precio"};
+					String[] encabezado = {"Nombre","Descuento","Precio"};
 					model.setColumnIdentifiers(encabezado);
 					table = new JTable();
 					table.addMouseListener(new MouseAdapter() {
@@ -144,7 +144,7 @@ public class ListaCombos extends JDialog {
 		row = new Object[model.getColumnCount()];
 
 		for (Combo combo : Tienda.getInstance().getLosCombo()) {
-			row[0] = combo.getCodigo();
+			row[0] = combo.getNombre();
 			row[1] = combo.getDescuento()+"%";
 			row[2] = combo.precioCombo();
 			model.addRow(row);
