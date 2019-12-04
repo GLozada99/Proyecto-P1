@@ -40,17 +40,16 @@ public class NuevoCombo extends JDialog {
 	 */
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
-	private JTextField txtCodigo;
+	private JTextField txtNombre;
 	private static DefaultTableModel tableModel;
 	private static Object[] fila;
 	private static JTable table;
-	private JComboBox cbxDiscoDuro;
-	private JComboBox cbxMicro;
-	private JComboBox cbxRAM;
-	private JComboBox cbxMotherBoard;
-	private JSpinner spnPrecio;
-	private JSpinner spnDescuento;
+	private JComboBox<String> cbxDiscoDuro;
+	private JComboBox<String> cbxMicro;
+	private JComboBox<String> cbxRAM;
+	private JComboBox<String> cbxMotherBoard;
 	private ArrayList<Componente> comboComponente;
+	private JTextField txtPrecio;
 
 
 
@@ -73,7 +72,7 @@ public class NuevoCombo extends JDialog {
 	public NuevoCombo() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(NuevoCombo.class.getResource("/Imagenes/IconAgregarCombopng.png")));
 		setTitle("Nuevo Combo");
-		setBounds(100, 100, 527, 405);
+		setBounds(100, 100, 576, 405);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(234, 238, 249));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -84,40 +83,42 @@ public class NuevoCombo extends JDialog {
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(234, 238, 249));
 		panel.setBorder(new TitledBorder(null, "Datos del Combo", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(5, 5, 496, 85);
+		panel.setBounds(5, 5, 541, 85);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 
-		JLabel lblCdigo = new JLabel("C\u00F3digo:");
-		lblCdigo.setBounds(10, 25, 46, 14);
+		JLabel lblCdigo = new JLabel("Nombre:");
+		lblCdigo.setBounds(22, 25, 65, 14);
 		panel.add(lblCdigo);
 
-		JLabel lblPrecio = new JLabel("Precio:");
-		lblPrecio.setBounds(10, 50, 46, 14);
-		panel.add(lblPrecio);
-
 		JLabel lblPorcentajeDeDescuento = new JLabel("Porcentaje de descuento: ");
-		lblPorcentajeDeDescuento.setBounds(231, 50, 158, 14);
+		lblPorcentajeDeDescuento.setBounds(255, 25, 158, 14);
 		panel.add(lblPorcentajeDeDescuento);
 
 		JSpinner spnDescuento = new JSpinner();
 		spnDescuento.setModel(new SpinnerNumberModel(1, 1, 100, 1));
-		spnDescuento.setBounds(399, 47, 44, 20);
+		spnDescuento.setBounds(454, 22, 44, 20);
 		panel.add(spnDescuento);
 
-		txtCodigo = new JTextField();
-		txtCodigo.setBounds(63, 22, 86, 20);
-		panel.add(txtCodigo);
-		txtCodigo.setColumns(10);
+		txtNombre = new JTextField();
+		txtNombre.setBounds(128, 22, 86, 20);
+		panel.add(txtNombre);
+		txtNombre.setColumns(10);
 		
-	    spnPrecio = new JSpinner();
-		spnPrecio.setBounds(66, 47, 83, 20);
-		panel.add(spnPrecio);
+		JLabel lblPrecio = new JLabel("Precio:");
+		lblPrecio.setBounds(22, 55, 65, 14);
+		panel.add(lblPrecio);
+		
+		txtPrecio = new JTextField();
+		txtPrecio.setEditable(false);
+		txtPrecio.setColumns(10);
+		txtPrecio.setBounds(128, 52, 86, 20);
+		panel.add(txtPrecio);
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(234, 238, 249));
 		panel_1.setBorder(new TitledBorder(null, "Componentes del Combo", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_1.setBounds(5, 91, 496, 211);
+		panel_1.setBounds(5, 91, 541, 211);
 		contentPanel.add(panel_1);
 		panel_1.setLayout(null);
 
@@ -126,8 +127,13 @@ public class NuevoCombo extends JDialog {
 		panel_1.add(lblDiscoDuro);
 
 		cbxDiscoDuro = new JComboBox();
+		cbxDiscoDuro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			//	if(cbxDiscoDuro)
+			}
+		});
 		cbxDiscoDuro.setModel(new DefaultComboBoxModel(new String[] {"C\u00F3digo   :    Marca    :    Modelo   :   Cantidad    :     Capacidad   "}));
-		cbxDiscoDuro.setBounds(122, 31, 371, 20);
+		cbxDiscoDuro.setBounds(122, 31, 407, 20);
 		panel_1.add(cbxDiscoDuro);
 
 		JLabel lblMemoriaRam = new JLabel("Memoria RAM:");
@@ -136,7 +142,7 @@ public class NuevoCombo extends JDialog {
 
 		cbxMicro = new JComboBox();
 		cbxMicro.setModel(new DefaultComboBoxModel(new String[] {"C\u00F3digo   :    Marca    :    Modelo   :     Cantidad   :    Velocidad"}));
-		cbxMicro.setBounds(122, 77, 371, 20);
+		cbxMicro.setBounds(122, 77, 407, 20);
 		panel_1.add(cbxMicro);
 
 		JLabel lblMicroprocesador = new JLabel("Microprocesador:");
@@ -145,7 +151,7 @@ public class NuevoCombo extends JDialog {
 
 		cbxRAM = new JComboBox();
 		cbxRAM.setModel(new DefaultComboBoxModel(new String[] {"C\u00F3digo   :    Marca    :    Modelo   :     Cantidad   :    Memoria"}));
-		cbxRAM.setBounds(122, 123, 371, 20);
+		cbxRAM.setBounds(122, 123, 407, 20);
 		panel_1.add(cbxRAM);
 
 		JLabel lblTarjetaMadre = new JLabel("Tarjeta Madre:");
@@ -154,7 +160,7 @@ public class NuevoCombo extends JDialog {
 
 		cbxMotherBoard = new JComboBox();
 		cbxMotherBoard.setModel(new DefaultComboBoxModel(new String[] {"C\u00F3digo   :    Marca    :    Modelo   :     Cantidad   :    Tipo RAM"}));
-		cbxMotherBoard.setBounds(122, 169, 371, 20);
+		cbxMotherBoard.setBounds(122, 169, 407, 20);
 		panel_1.add(cbxMotherBoard);
 		{
 			JPanel buttonPane = new JPanel();
@@ -167,7 +173,7 @@ public class NuevoCombo extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						//new Combo(componentes, codigo, precio, descuento)
 					   
-						Combo combo1= new Combo( componenteDevolver(),txtCodigo.getText(), Float.valueOf(spnPrecio.getValue().toString()), Integer.valueOf(spnDescuento.getValue().toString()));
+					//	Combo aux= new Combo(componenteDevolver(),txtNombre.getText(), Integer.valueOf(spnDescuento.getValue().toString()), defaultCloseOperation);
 					   
 					}
 				});
@@ -197,7 +203,7 @@ public class NuevoCombo extends JDialog {
 		int iMicro=0;
 		int iRAM=0;
 		int iMB=0;
-		ArrayList<Componente> miComponente= null;
+		ArrayList<Componente> miComponente= new ArrayList<Componente>();
 		
 		for (Componente elComponente : Tienda.getInstance().getLosComponentes()) {
 			if(elComponente instanceof DiscoDuro){

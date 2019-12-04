@@ -90,6 +90,8 @@ public class AgregarComponente extends JDialog {
 	private MaskFormatter mascaraCantMemoria;
 	private JButton btnAsignarPrecio;
 	private int index;
+	private JButton btnCrear;
+	private int cantReal;
 
 
 	/**
@@ -402,10 +404,13 @@ public class AgregarComponente extends JDialog {
 			spnCantMax.setValue(auxComp.getCantMax());spnCantMax.setEnabled(true);
 			spnCantMin.setValue(auxComp.getCantMin());spnCantMin.setEnabled(true);
 			spnPrecioVenta.setValue(auxComp.getPrecioVentaActual());spnPrecioVenta.setEnabled(true);
+			Tienda.getInstance().getLosQueVendenTemp().addAll(auxComp.getLosQueVenden());
+			cargarProveedoresVentaComp();
+			
 			if(!auxComp.getLosQueVenden().isEmpty()) {
 				Tienda.getInstance().getLosQueVendenTemp().addAll(auxComp.getLosQueVenden());
 			}
-			/*
+
 			if(auxComp instanceof DiscoDuro) {
 				rdbtnDiscoDuro.setSelected(true);
 				rdbtnMicro.setSelected(false);
@@ -429,7 +434,7 @@ public class AgregarComponente extends JDialog {
 				rdbtnMicro.setSelected(false);
 				rdbtnMotherBoard.setSelected(false);
 				rdbtnRAM.setSelected(true);
-			}*/
+			}
 		}
 
 
@@ -521,7 +526,12 @@ public class AgregarComponente extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton btnCrear = new JButton("Crear");
+				if(auxComp != null) {
+					btnCrear = new JButton("Modificar");
+				}
+				else {
+					btnCrear = new JButton("Crear");
+				}
 				btnCrear.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						Componente aux = null;
@@ -531,6 +541,10 @@ public class AgregarComponente extends JDialog {
 						int cantMax = new Integer(spnCantMax.getValue().toString());  
 						int cantMin = new Integer(spnCantMin.getValue().toString());
 						float precioVentaI = new Float(spnPrecioVenta.getValue().toString());
+						if (auxComp !=null) {
+							cantReal = auxComp.getCantDisponible();
+						}
+
 
 
 						if (cantMax>=cantMin) {
@@ -575,7 +589,8 @@ public class AgregarComponente extends JDialog {
 								}else {
 									JOptionPane.showMessageDialog(null, "Escoja una cantidad de memoria ó un tipo validos","Notificación", JOptionPane.INFORMATION_MESSAGE);
 								}
-							}	
+							}
+							
 						} else {
 							JOptionPane.showMessageDialog(null, "Coloque una cantidad máxima superior a la mínima","Notificación", JOptionPane.INFORMATION_MESSAGE);
 						}
@@ -583,7 +598,7 @@ public class AgregarComponente extends JDialog {
 							Tienda.getInstance().getLosComponentes().remove(auxComp);
 
 						}
-						if(aux.getLosQueVenden().isEmpty()&&!Tienda.getInstance().getLosQueVendenTemp().isEmpty()) {
+						if(aux!=null&&aux.getLosQueVenden().isEmpty()&&!Tienda.getInstance().getLosQueVendenTemp().isEmpty()) {
 							aux.getLosQueVenden().addAll((ArrayList<Proveedor>)Tienda.getInstance().getLosQueVendenTemp().clone());
 							int i=0;
 							for (Proveedor proveedor : aux.getLosQueVenden()) {
@@ -591,25 +606,28 @@ public class AgregarComponente extends JDialog {
 								proveedor.getPreciosCompos().add(((ArrayList<Float>) Tienda.getInstance().getPreciosLosQueVendenTemp().clone()).get(i));
 							}
 						}
-						Tienda.getInstance().agregarComponente(aux);
-						Tienda.getInstance().primeraOrdenCompra(aux);
-						if(!b) {
-							Tienda.getInstance().getLosCompTemp().add(aux);
-							AgregarProveedor.cargarComponentes();
-							dispose();
-						}
+						if(aux!=null) {
+							aux.setCantDisponible(cantReal);
+							Tienda.getInstance().agregarComponente(aux);
+							Tienda.getInstance().primeraOrdenCompra(aux);
+							if(!b) {
+								Tienda.getInstance().getLosCompTemp().add(aux);
+								AgregarProveedor.cargarComponentes();
+								dispose();
+							}
 
-						Tienda.getInstance().getLosQueVendenTemp().clear();
+							Tienda.getInstance().getLosQueVendenTemp().clear();
 
-						Tienda.getInstance().getPreciosLosQueVendenTemp().clear();
-						cargarProveedoresVentaComp();
-						clean();
-						if(auxComp!=null) {
-							dispose();
-							JOptionPane.showMessageDialog(null, "Componente modificado con exito","Notificación", JOptionPane.INFORMATION_MESSAGE);	
-						}
-						else {
-							JOptionPane.showMessageDialog(null, "Componente añadido con exito","Notificación", JOptionPane.INFORMATION_MESSAGE);	
+							Tienda.getInstance().getPreciosLosQueVendenTemp().clear();
+							
+							clean();
+							if(auxComp!=null) {
+								dispose();
+								JOptionPane.showMessageDialog(null, "Componente modificado con exito","Notificación", JOptionPane.INFORMATION_MESSAGE);	
+							}
+							else {
+								JOptionPane.showMessageDialog(null, "Componente añadido con exito","Notificación", JOptionPane.INFORMATION_MESSAGE);	
+							}
 						}
 					}
 
@@ -633,7 +651,7 @@ public class AgregarComponente extends JDialog {
 			panel_Proveedor.setEnabled(false);
 			btnAgregarVendedor.setEnabled(false);
 		}
-		cargarProveedoresVentaComp();
+		
 
 	}
 	public static ArrayList<Proveedor> arregloProveedores() {
