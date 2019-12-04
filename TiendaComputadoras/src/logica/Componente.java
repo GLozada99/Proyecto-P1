@@ -16,6 +16,7 @@ public abstract class Componente implements Serializable{
 	protected int cantMax;
 	protected ArrayList<Precio> precios;
 	protected ArrayList<Proveedor> losQueVenden;
+	protected int cantidadVentas;
 
 	public Componente(String numeroSerie, String marca, String modelo, int cantMin, int cantMax, float precioVentaI) {
 		super();
@@ -29,6 +30,7 @@ public abstract class Componente implements Serializable{
 		precios=new ArrayList<Precio>();
 		precios.add(new Precio(precioVentaI, 0, false));
 		losQueVenden = new ArrayList<Proveedor>();
+		cantidadVentas= 0;
 	}
 
 	public String getModelo() {
@@ -103,6 +105,18 @@ public abstract class Componente implements Serializable{
 	public float ganancia() {
 		float gain = getPrecioVentaActual()-getPrecioCompraActual();
 		return gain;
+	}
+
+	public int getCantidadVentas() {
+		return cantidadVentas;
+	}
+
+	public void setCantidadVentas(int cantidadVentas) {
+		this.cantidadVentas = cantidadVentas;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 	
 
