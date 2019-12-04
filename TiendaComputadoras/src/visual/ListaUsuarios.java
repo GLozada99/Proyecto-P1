@@ -25,6 +25,10 @@ import logica.Tienda;
 import logica.Vendedor;
 
 public class ListaUsuarios extends JDialog {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JTable table;
 	private JButton btnAceptar;

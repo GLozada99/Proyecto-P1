@@ -34,6 +34,10 @@ import java.awt.Toolkit;
 
 public class NuevoCombo extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtCodigo;
 	private static DefaultTableModel tableModel;
