@@ -607,10 +607,13 @@ public class AgregarComponente extends JDialog {
 								proveedor.getPreciosCompos().add(((ArrayList<Float>) Tienda.getInstance().getPreciosLosQueVendenTemp().clone()).get(i));
 							}
 						}
-						if(aux!=null) {
-							aux.setCantDisponible(cantReal);
+						if(aux==null) {
 							Tienda.getInstance().agregarComponente(aux);
 							Tienda.getInstance().primeraOrdenCompra(aux);
+						}
+						if(aux!=null) {
+							aux.setCantDisponible(cantReal);
+							
 							if(!b) {
 								Tienda.getInstance().getLosCompTemp().add(aux);
 								AgregarProveedor.cargarComponentes();
