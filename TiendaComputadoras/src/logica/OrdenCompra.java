@@ -9,7 +9,7 @@ public class OrdenCompra implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String codigo;
 	private Componente compCompra;
-	private int cantiCompos;
+	private int cantiCompos; 
 	private float costoTotal;
 	private boolean realizada;//es falsa por defecto, se hace verdadera cuando se hace la compra;
 	
