@@ -109,6 +109,7 @@ public class SeleccionarProveedor extends JDialog {
 						Tienda.getInstance().hacerCompra(aux, prov);
 						JOptionPane.showMessageDialog(null, "La Orden fue procesada exitosamente");
 						btnAceptar.setEnabled(false);
+						dispose();
 					}
 				});
 				btnAceptar.setActionCommand("OK");

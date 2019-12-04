@@ -466,8 +466,6 @@ public class NuevaFactura extends JDialog {
 							else if(Tienda.getInstance().relacionFactura(Tienda.getInstance().findClientebyCedula(ftxtCedula.getText()), Float.valueOf(txtPrecioTotal.getText()), ayudaComponente, ayudaCantiComponente, ayudaCombos, ayudaCantiCombos, rdbtnCredito.isSelected())) {
 								Factura aux= new Factura(txtCodigo.getText(), Float.valueOf(txtPrecioTotal.getText()), Tienda.getInstance().findClientebyCedula(ftxtCedula.getText()), ayudaComponente, ayudaCombos, ayudaCantiComponente, ayudaCantiCombos, rdbtnCredito.isSelected());
 								Tienda.getInstance().agregarFactura(aux);
-								Tienda.getInstance().restaCantiCombos(ayudaCombos, ayudaCantiCombos);
-								Tienda.getInstance().restaCantiComponentes(ayudaComponente, ayudaCantiComponente);
 								clean();
 								ayudaComponente.clear();
 								ayudaCombos.clear();
@@ -492,8 +490,6 @@ public class NuevaFactura extends JDialog {
 							Factura aux = new Factura(txtCodigo.getText(), Float.valueOf(txtPrecioTotal.getText()), auxCli, ayudaComponente, ayudaCombos, ayudaCantiComponente, ayudaCantiCombos, rdbtnCredito.isSelected());
 							Tienda.getInstance().getLosClientes().add(auxCli);
 							Tienda.getInstance().agregarFactura(aux);
-							Tienda.getInstance().restaCantiCombos(ayudaCombos, ayudaCantiCombos);
-							Tienda.getInstance().restaCantiComponentes(ayudaComponente, ayudaCantiComponente);
 							clean();
 							ayudaComponente.clear();
 							ayudaCombos.clear();
