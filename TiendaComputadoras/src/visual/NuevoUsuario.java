@@ -126,7 +126,7 @@ public class NuevoUsuario extends JDialog {
 
 
 				mascaraCedula = new MaskFormatter("######");
-				mascaraCedula.setPlaceholderCharacter('_');
+				//mascaraCedula.setPlaceholderCharacter('_');
 				ftxtCedula = new JFormattedTextField(mascaraCedula);
 				ftxtCedula.setFont(new Font("Calibri", Font.PLAIN, 18));
 				ftxtCedula.setBounds(83, 56, 142, 22);
@@ -176,7 +176,7 @@ public class NuevoUsuario extends JDialog {
 				btnRegistrar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						Persona usuario1=null;
-						if(Tienda.getInstance().getLosUsuarios().contains(Tienda.getInstance().findClientebyCedula(ftxtCedula.getText()))) {
+						if(Tienda.getInstance().getLosUsuarios().contains(Tienda.getInstance().usuarioByCodigo(ftxtCedula.getText()))) {
 							JOptionPane.showMessageDialog(null, "El usuario ingresado ya está registrado");
 						}
 						else {
