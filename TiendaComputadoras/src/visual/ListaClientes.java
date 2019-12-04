@@ -68,7 +68,7 @@ public class ListaClientes extends JDialog {
 		setTitle("Lista Clientes");
 
 		setResizable(false);
-		setBounds(100, 100, 582, 353);
+		setBounds(100, 100, 1250, 700);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(234, 238, 249));
