@@ -143,6 +143,7 @@ public class Principal extends JFrame {
 		setJMenuBar(menuBar);
 
 		JMenu mnAdministracion = new JMenu("Administracion");
+		mnAdministracion.setIcon(new ImageIcon(Principal.class.getResource("/Imagenes/gear_in.png")));
 		mnAdministracion.setEnabled(false);
 		menuBar.add(mnAdministracion);
 
@@ -204,10 +205,11 @@ public class Principal extends JFrame {
 		});
 
 		JMenu mnFacturacion = new JMenu("Facturaci\u00F3n");
+		mnFacturacion.setIcon(new ImageIcon(Principal.class.getResource("/Imagenes/IconFacturar.png")));
 		menuBar.add(mnFacturacion);
 
 		JMenuItem mntmNuevaFactura = new JMenuItem("Nueva Factura");
-		mntmNuevaFactura.setIcon(new ImageIcon(Principal.class.getResource("/Imagenes/IconFacturar.png")));
+		mntmNuevaFactura.setIcon(new ImageIcon(Principal.class.getResource("/Imagenes/IconFactura.png")));
 		mntmNuevaFactura.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				NuevaFactura aux = new NuevaFactura();
@@ -229,6 +231,7 @@ public class Principal extends JFrame {
 		mnFacturacion.add(mntmNewMenuItem_1);
 
 		JMenu mnListados = new JMenu("Listados");
+		mnListados.setIcon(new ImageIcon(Principal.class.getResource("/Imagenes/IconLista.png")));
 		menuBar.add(mnListados);
 
 		JMenuItem mntmListaClientes = new JMenuItem("Lista Clientes");
