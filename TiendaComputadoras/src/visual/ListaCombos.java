@@ -56,7 +56,8 @@ public class ListaCombos extends JDialog {
 	 * Create the dialog.
 	 */
 	public ListaCombos() {
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 1250, 700);
+		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(234, 238, 249));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

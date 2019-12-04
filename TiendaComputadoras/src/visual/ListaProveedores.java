@@ -59,7 +59,6 @@ public class ListaProveedores extends JDialog {
 	public ListaProveedores(boolean agregarProvComponentes) {
 		setTitle("Lista Proveedores");
 		setResizable(false);
-		setBounds(100, 100, 450, 300);
 		setBounds(100, 100, 1250, 700);
 		setLocationRelativeTo(null);
 		setResizable(false);

@@ -193,7 +193,7 @@ public class AgregarProveedor extends JDialog {
 					}
 
 					btnNuevoCompo = new JButton("Nuevo Comp.");
-					btnNuevoCompo.setBounds(9, 159, 114, 23);
+					btnNuevoCompo.setBounds(12, 158, 121, 23);
 					panel_Componentes.add(btnNuevoCompo);
 					btnNuevoCompo.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
@@ -212,7 +212,7 @@ public class AgregarProveedor extends JDialog {
 							aux.setVisible(true);
 						}
 					});
-					btnListado.setBounds(132, 159, 114, 23);
+					btnListado.setBounds(138, 158, 106, 23);
 					panel_Componentes.add(btnListado);
 
 					btnAsignarPrecio = new JButton("Asignar Precio");
@@ -243,7 +243,7 @@ public class AgregarProveedor extends JDialog {
 							cargarComponentes();
 						}
 					});
-					btnAsignarPrecio.setBounds(255, 158, 114, 23);
+					btnAsignarPrecio.setBounds(248, 158, 121, 23);
 					panel_Componentes.add(btnAsignarPrecio);
 					btnAsignarPrecio.setEnabled(false);
 				} catch (ParseException e) {

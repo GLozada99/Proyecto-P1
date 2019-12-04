@@ -91,53 +91,7 @@ public class Principal extends JFrame {
 
 			}
 		});
-		//Cosas para probar
-		/*Persona ho = new Cliente("Juan", "809", "Aqui", "402-1383575-0");
-		Tienda.getInstance().getLosClientes().add((Cliente) ho);
-
-		Persona ho1 = new Cliente("Juanaa", "809", "Aqui", "402-1111111-0");
-		Tienda.getInstance().getLosClientes().add((Cliente) ho1);
-		ArrayList<Componente> aux = new ArrayList<>();
-		ArrayList<Float> aux2 = new ArrayList<>();
-		aux2.add((float) 250);
-		aux2.add((float) 350);
-		aux2.add((float) 450);
-		aux2.add((float) 550);
-
-		Componente dd = new DiscoDuro("CMP-"+Tienda.getInstance().getGeneradorCodigoComponentes(), "Seagate", "XS", 3, 10, 1000, "2TB", "2");
-		aux.add(dd);Tienda.getInstance().agregarComponente(dd);Tienda.getInstance().primeraOrdenCompra(dd);dd.setCantDisponible(5);
-
-		Componente ram = new RAM("CMP-"+Tienda.getInstance().getGeneradorCodigoComponentes(), "Dell", "XS", 1, 13, 800, "No se", "6");
-		aux.add(ram);Tienda.getInstance().agregarComponente(ram);Tienda.getInstance().primeraOrdenCompra(ram);ram.setCantDisponible(2);
-
-		Componente micro = new Micro("CMP-"+Tienda.getInstance().getGeneradorCodigoComponentes(), "Ras", "XS", 4, 16, 750,"Se menos", "3");
-		aux.add(micro);Tienda.getInstance().agregarComponente(micro);Tienda.getInstance().primeraOrdenCompra(micro);micro.setCantDisponible(51);
-
-		Componente mb = new MotherBoard("CMP-"+Tienda.getInstance().getGeneradorCodigoComponentes(), "HP", "XS", 6, 12, 1800,"Nada", "5");
-		aux.add(mb);Tienda.getInstance().agregarComponente(mb);Tienda.getInstance().primeraOrdenCompra(mb);mb.setCantDisponible(3);
-
-	//	OrdenCompra p = new OrdenCompra("OC-"+Tienda.getInstance().getGeneradorCodigoOrdenCompra(),dd, 6);
-
-	//	Combo comb = new Combo(aux, "Combo3", Tienda.getInstance().precioTotalComponentes(aux), 25, 2);
-		//Tienda.getInstance().agregarCombo(comb);
-
-		Persona pr1 = new Proveedor("Juan", "0192", "Alla", "12123", aux, aux2);
-		Tienda.getInstance().getLosProveedores().add((Proveedor) pr1);*/
-		/*Tienda.getInstance().getLasFacturas().clear();
-		Tienda.getInstance().getLasOrdenes().clear();
-		Tienda.getInstance().getLosClientes().clear();
-		Tienda.getInstance().getLosCombo().clear();
-		Tienda.getInstance().getLosComponentes().clear();
-		Tienda.getInstance().getLosProveedores().clear();
-		Tienda.getInstance().getLosUsuarios().clear();
-		Tienda.getInstance().getOrdenesSinProcesar().clear();*/
-		//Tienda.getInstance().getOrdenesSinProcesar().add(p);
-		//Termina
-
-	//	dim = super.getToolkit().getScreenSize(); 
-		//super.setSize(dim.width, dim.height);//-100);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//setBounds(0, 0, 1937, 1045);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBounds(new Rectangle(0, 0, screenSize.width-100, screenSize.width-75));
