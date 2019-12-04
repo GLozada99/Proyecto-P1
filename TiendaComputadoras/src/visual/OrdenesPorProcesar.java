@@ -149,7 +149,6 @@ public class OrdenesPorProcesar extends JDialog {
 						OrdenCompra aux = Tienda.getInstance().findOrdenComprabyCodigo(codigo);
 						Tienda.getInstance().getOrdenesSinProcesar().remove(aux);
 						cargarOrdenes();
-
 					}
 				});
 				btnEliminar.setEnabled(false);

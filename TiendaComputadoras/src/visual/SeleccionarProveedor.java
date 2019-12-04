@@ -99,12 +99,13 @@ public class SeleccionarProveedor extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				btnAceptar = new JButton("Aceptar");
+				btnAceptar.setEnabled(false);
 				btnAceptar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						Proveedor prov = Tienda.getInstance().findProveedrobyRNC(rnc);
 						Tienda.getInstance().hacerCompra(aux, prov);
 						JOptionPane.showMessageDialog(null, "La Orden fue procesada exitosamente");
-						dispose();
+						btnAceptar.setEnabled(false);
 					}
 				});
 				btnAceptar.setActionCommand("OK");

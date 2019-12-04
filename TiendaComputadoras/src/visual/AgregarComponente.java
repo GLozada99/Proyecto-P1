@@ -583,7 +583,7 @@ public class AgregarComponente extends JDialog {
 							Tienda.getInstance().getLosComponentes().remove(auxComp);
 
 						}
-						if(aux.getLosQueVenden().isEmpty()) {
+						if(aux.getLosQueVenden().isEmpty()&&!Tienda.getInstance().getLosQueVendenTemp().isEmpty()) {
 							aux.getLosQueVenden().addAll((ArrayList<Proveedor>)Tienda.getInstance().getLosQueVendenTemp().clone());
 							int i=0;
 							for (Proveedor proveedor : aux.getLosQueVenden()) {
