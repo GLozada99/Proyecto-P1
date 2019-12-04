@@ -405,8 +405,8 @@ public class AgregarComponente extends JDialog {
 			spnCantMin.setValue(auxComp.getCantMin());spnCantMin.setEnabled(true);
 			spnPrecioVenta.setValue(auxComp.getPrecioVentaActual());spnPrecioVenta.setEnabled(true);
 			//Tienda.getInstance().getLosQueVendenTemp().addAll(auxComp.getLosQueVenden());
-		
-			
+
+
 			if(!auxComp.getLosQueVenden().isEmpty()) {
 				Tienda.getInstance().getLosQueVendenTemp().addAll(auxComp.getLosQueVenden());
 			}
@@ -591,7 +591,7 @@ public class AgregarComponente extends JDialog {
 									JOptionPane.showMessageDialog(null, "Escoja una cantidad de memoria ó un tipo validos","Notificación", JOptionPane.INFORMATION_MESSAGE);
 								}
 							}
-							
+
 						} else {
 							JOptionPane.showMessageDialog(null, "Coloque una cantidad máxima superior a la mínima","Notificación", JOptionPane.INFORMATION_MESSAGE);
 						}
@@ -607,13 +607,13 @@ public class AgregarComponente extends JDialog {
 								proveedor.getPreciosCompos().add(((ArrayList<Float>) Tienda.getInstance().getPreciosLosQueVendenTemp().clone()).get(i));
 							}
 						}
-						if(aux==null) {
-							Tienda.getInstance().agregarComponente(aux);
+						if(auxComp==null) {
 							Tienda.getInstance().primeraOrdenCompra(aux);
 						}
-						if(aux!=null) {
+						if(auxComp!=null) {
 							aux.setCantDisponible(cantReal);
-							
+
+
 							if(!b) {
 								Tienda.getInstance().getLosCompTemp().add(aux);
 								AgregarProveedor.cargarComponentes();
@@ -623,17 +623,19 @@ public class AgregarComponente extends JDialog {
 							Tienda.getInstance().getLosQueVendenTemp().clear();
 
 							Tienda.getInstance().getPreciosLosQueVendenTemp().clear();
-							
+
 							clean();
-							if(auxComp!=null) {
-								dispose();
-								JOptionPane.showMessageDialog(null, "Componente modificado con exito","Notificación", JOptionPane.INFORMATION_MESSAGE);	
-							}
-							else {
-								JOptionPane.showMessageDialog(null, "Componente añadido con exito","Notificación", JOptionPane.INFORMATION_MESSAGE);	
-							}
+						}
+						Tienda.getInstance().agregarComponente(aux);
+						if(auxComp!=null) {
+							dispose();
+							JOptionPane.showMessageDialog(null, "Componente modificado con exito","Notificación", JOptionPane.INFORMATION_MESSAGE);	
+						}
+						else {
+							JOptionPane.showMessageDialog(null, "Componente añadido con exito","Notificación", JOptionPane.INFORMATION_MESSAGE);	
 						}
 					}
+
 
 				});
 				btnCrear.setActionCommand("OK");
@@ -655,7 +657,7 @@ public class AgregarComponente extends JDialog {
 			panel_Proveedor.setEnabled(false);
 			btnAgregarVendedor.setEnabled(false);
 		}
-		
+
 
 	}
 	public static ArrayList<Proveedor> arregloProveedores() {
@@ -689,7 +691,7 @@ public class AgregarComponente extends JDialog {
 	}
 
 	private void clean() {
-		txtNoSerie.setText("N°-"+Tienda.getInstance().getGeneradorCodigoComponentes());
+		txtNoSerie.setText("CMP-"+Tienda.getInstance().getGeneradorCodigoComponentes());
 		txtModelo.setText("");
 		txtMarca.setText("");
 		spnCantMax.setValue(1);  
