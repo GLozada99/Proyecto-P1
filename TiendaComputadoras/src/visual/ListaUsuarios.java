@@ -81,7 +81,7 @@ public class ListaUsuarios extends JDialog {
 				{
 
 					model = new DefaultTableModel();
-					String[] header = {"Codigo","Nombre","Telefono","Direccion","Contraseña", "Tipo"};
+					String[] header = {"Código","Nombre","Teléfono","Dirección","Contraseña", "Tipo"};
 					model.setColumnIdentifiers(header);
 					table = new JTable();
 					table.addMouseListener(new MouseAdapter() {

@@ -87,7 +87,7 @@ public class HistorialFacturas extends JDialog {
 				{
 
 					model = new DefaultTableModel();
-					String[] header = {"Codigo Factura","Fecha","Cedula Cliente","Nombre Cliente","Cant Total Componentes","Costo Total"};
+					String[] header = {"Código Factura","Fecha","Cédula Cliente","Nombre Cliente","Cant. Total Componentes","Costo Total"};
 					model.setColumnIdentifiers(header);
 					table = new JTable();
 					table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

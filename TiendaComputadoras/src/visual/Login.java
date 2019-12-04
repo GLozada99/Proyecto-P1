@@ -106,7 +106,7 @@ public class Login extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 
-		JButton btnLogin = new JButton("Iniciar Sesi\u00F3n");
+		JButton btnLogin = new JButton("Iniciar Sesión");
 		getRootPane().setDefaultButton(btnLogin);;
 		btnLogin.setBounds(68, 100, 135, 25);
 		panel.add(btnLogin);

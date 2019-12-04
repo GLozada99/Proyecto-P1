@@ -51,10 +51,10 @@ public class ListaComponentes extends JDialog {
 	private JButton btnAceptar;
 	private String codigo;
 	private JComboBox <String> cbxComp;
-	private String[] encabezadoDD = {"No. Serie","Marca","Modelo","Precio Venta Act","Precio Compra Act","Cant Real","Cant Min","Cant Max","Almacenamiento","Tipo Conexion" };
-	private String[] encabezadoMicro = {"No. Serie","Marca","Modelo","Precio Venta Act","Precio Compra Act","Cant Real","Cant Min","Cant Max","Velocidad","Tipo Conexion" };
-	private String[] encabezadoMother = {"No. Serie","Marca","Modelo","Precio Venta Act","Precio Compra Act","Cant Real","Cant Min","Cant Max","Tipo Conector","Tipo RAM" };
-	private String[] encabezadoRAM = {"No. Serie","Marca","Modelo","Precio Venta Act","Precio Compra Act","Cant Real","Cant Min","Cant Max","Cant Memoria","Tipo Memoria" };
+	private String[] encabezadoDD = {"No. Serie","Marca","Modelo","Precio Venta Act.","Precio Compra Act.","Cant. Real","Cant. Min","Cant. Max","Almacenamiento","Tipo Conexión" };
+	private String[] encabezadoMicro = {"No. Serie","Marca","Modelo","Precio Venta Act.","Precio Compra Act.","Cant. Real","Cant. Min","Cant. Max","Velocidad","Tipo Conexión" };
+	private String[] encabezadoMother = {"No. Serie","Marca","Modelo","Precio Venta Act.","Precio Compra Act.","Cant. Real","Cant. Min","Cant. Max","Tipo Conector","Tipo RAM" };
+	private String[] encabezadoRAM = {"No. Serie","Marca","Modelo","Precio Venta Act.","Precio Compra Act.","Cant. Real","Cant. Min","Cant. Max","Cant Memoria","Tipo Memoria" };
 
 
 	/**
@@ -77,6 +77,7 @@ public class ListaComponentes extends JDialog {
 	 * Create the dialog.
 	 */
 	public ListaComponentes(boolean AgregarCompProveedores) {
+		setTitle("Lista Componentes");
 		setBounds(100, 100, 1253, 461);
 		setLocationRelativeTo(null);
 		setResizable(false);
@@ -206,21 +207,6 @@ public class ListaComponentes extends JDialog {
 					}
 				});
 				btnModificar.setEnabled(false);
-				/*	btnModificar.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						NuevoComponente aux = new NuevoComponente(Tienda.getInstance().findComponentebyNumeroSerie(codigo));
-						aux.setModal(true);
-						aux.setVisible(true);
-						if (aux instanceof DiscoDuro)
-							cargarComponentesDD();
-						if (aux instanceof Micro)
-							cargarComponentesMicro();
-						if (aux instanceof MotherBoard)
-							cargarComponentesMotherBoard();
-						if (aux instanceof RAM)
-							cargarComponentesRAM();
-					}
-				});*/
 				btnModificar.setActionCommand("OK");
 				buttonPane.add(btnModificar);
 				getRootPane().setDefaultButton(btnModificar);

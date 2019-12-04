@@ -77,7 +77,7 @@ public class ListaProveedores extends JDialog {
 				panel.add(scrollPane, BorderLayout.CENTER);
 				{
 					model = new DefaultTableModel();
-					String[] encabezado = {"RNC Proveedor","Nombre Proveedor","Telefono Proveedor","Direccion","Debito"};
+					String[] encabezado = {"RNC","Nombre","Telefono","Dirección","Débito"};
 					model.setColumnIdentifiers(encabezado);
 					table = new JTable();
 					table.addMouseListener(new MouseAdapter() {

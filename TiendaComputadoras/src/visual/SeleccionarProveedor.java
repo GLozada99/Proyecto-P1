@@ -76,7 +76,7 @@ public class SeleccionarProveedor extends JDialog {
 				panel.add(scrollPane, BorderLayout.CENTER);
 				{
 					model = new DefaultTableModel();
-					String[] encabezado = {"RNC Proveedor","Nombre Proveedor","Telefono Proveedor","Costo Unidad","Costo Total"};
+					String[] encabezado = {"RNC","Nombre","Teléfono","Costo Unidad","Costo Total"};
 					model.setColumnIdentifiers(encabezado);
 					table = new JTable();
 					table.addMouseListener(new MouseAdapter() {
@@ -107,7 +107,7 @@ public class SeleccionarProveedor extends JDialog {
 					public void actionPerformed(ActionEvent arg0) {
 						Proveedor prov = Tienda.getInstance().findProveedrobyRNC(rnc);
 						Tienda.getInstance().hacerCompra(aux, prov);
-						JOptionPane.showMessageDialog(null, "La Orden fue procesada exitosamente");
+						JOptionPane.showMessageDialog(null, "La orden fue procesada exitosamente");
 						btnAceptar.setEnabled(false);
 					}
 				});

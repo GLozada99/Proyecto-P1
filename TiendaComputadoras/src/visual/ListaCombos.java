@@ -56,6 +56,8 @@ public class ListaCombos extends JDialog {
 	 * Create the dialog.
 	 */
 	public ListaCombos() {
+		setTitle("Lista Combos");
+		setResizable(false);
 		setBounds(100, 100, 1250, 700);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());

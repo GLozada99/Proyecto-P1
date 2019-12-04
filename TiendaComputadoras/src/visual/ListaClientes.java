@@ -86,7 +86,7 @@ public class ListaClientes extends JDialog {
 				{
 
 					model = new DefaultTableModel();
-					String[] header = {"Cedula","Nombre","Telefono","Direccion","Credito"};
+					String[] header = {"Cédula","Nombre","Teléfono","Dirección","Crédito"};
 					model.setColumnIdentifiers(header);
 					table = new JTable();
 					table.addMouseListener(new MouseAdapter() {
@@ -159,13 +159,6 @@ public class ListaClientes extends JDialog {
 	public static void cargarClientes() {
 		model.setRowCount(0);
 		row = new Object[model.getColumnCount()];
-		/*row[0] = "1";
-		row[1] = "22";
-		row[2] = "809";
-		row[3] = "Aqui";
-		row[4] = "1000";
-		model.addRow(row);*/
-		
 		for (Cliente aux : Tienda.getInstance().getLosClientes()) {
 			row[0] = aux.getCodigo();
 			row[1] = aux.getNombre();

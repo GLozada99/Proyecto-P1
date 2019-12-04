@@ -90,7 +90,7 @@ public class OrdenesPorProcesar extends JDialog {
 				{
 
 					model = new DefaultTableModel();
-					String[] header = {"Codigo Orden","No. Serie","Tipo de Componente","Marca","Modelo","Cantidad"};
+					String[] header = {"Código","No. Serie","Tipo de Componente","Marca","Modelo","Cantidad"};
 					model.setColumnIdentifiers(header);
 					table = new JTable();
 					table.addMouseListener(new MouseAdapter() {
