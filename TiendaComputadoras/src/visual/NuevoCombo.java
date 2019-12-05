@@ -217,7 +217,7 @@ public class NuevoCombo extends JDialog {
 								JOptionPane.showMessageDialog(null, "Ya existe un combo con ese nombre");
 							}
 							else {
-								Combo aux= new Combo(componenteDevolver(),txtNombre.getText(), Integer.valueOf(spnDescuento.getValue().toString()), Integer.valueOf(txtPrecio.getText()));
+								Combo aux= new Combo(componenteDevolver(),txtNombre.getText(), Float.valueOf(txtPrecio.getText()), Integer.valueOf(spnDescuento.getValue().toString()));
 								Tienda.getInstance().agregarCombo(aux);
 								cbxDiscoDuro.setSelectedIndex(0);cbxMicro.setSelectedIndex(0);cbxMotherBoard.setSelectedIndex(0);cbxRAM.setSelectedIndex(0);
 								JOptionPane.showMessageDialog(null, "Combo creado con exito");
@@ -256,25 +256,25 @@ public class NuevoCombo extends JDialog {
 				spnDescuento.setValue(Integer.valueOf(aux.getDescuento()));
 				for (Componente componente : aux.getComponentes()) {
 					for (int i = 0; i < cbxDiscoDuro.getItemCount(); i++) {
-						Componente auxComp= Tienda.getInstance().findComponentebyNumeroSerie(cbxDiscoDuro.getItemAt(i).split(":")[0]);
+						Componente auxComp= Tienda.getInstance().findComponentebyNumeroSerie(cbxDiscoDuro.getItemAt(i).split(" ")[0]);
 						if(componente.equals(auxComp)) {
 							cbxDiscoDuro.setSelectedIndex(i);
 						}
 					}
 					for (int i = 0; i < cbxMicro.getItemCount(); i++) {
-						Componente auxComp= Tienda.getInstance().findComponentebyNumeroSerie(cbxMicro.getItemAt(i).split(":")[0]);
+						Componente auxComp= Tienda.getInstance().findComponentebyNumeroSerie(cbxMicro.getItemAt(i).split(" ")[0]);
 						if(componente.equals(auxComp)) {
 							cbxMicro.setSelectedIndex(i);
 						}
 					}
 					for (int i = 0; i < cbxRAM.getItemCount(); i++) {
-						Componente auxComp= Tienda.getInstance().findComponentebyNumeroSerie(cbxRAM.getItemAt(i).split(":")[0]);
+						Componente auxComp= Tienda.getInstance().findComponentebyNumeroSerie(cbxRAM.getItemAt(i).split(" ")[0]);
 						if(componente.equals(auxComp)) {
 							cbxRAM.setSelectedIndex(i);
 						}
 					}
 					for (int i = 0; i < cbxMotherBoard.getItemCount(); i++) {
-						Componente auxComp= Tienda.getInstance().findComponentebyNumeroSerie(cbxMotherBoard.getItemAt(i).split(":")[0]);
+						Componente auxComp= Tienda.getInstance().findComponentebyNumeroSerie(cbxMotherBoard.getItemAt(i).split(" ")[0]);
 						if(componente.equals(auxComp)) {
 							cbxMotherBoard.setSelectedIndex(i);
 						}
@@ -292,10 +292,10 @@ public class NuevoCombo extends JDialog {
 		int iMB=0;
 		ArrayList<Componente> miComponente= new ArrayList<Componente>();
 		if(cbxDiscoDuro.getSelectedIndex()!=0&&cbxMicro.getSelectedIndex()!=0&&cbxMotherBoard.getSelectedIndex()!=0&&cbxRAM.getSelectedIndex()!=0) {
-			Componente auxCompDD= Tienda.getInstance().findComponentebyNumeroSerie(cbxDiscoDuro.getItemAt(cbxDiscoDuro.getSelectedIndex()).split(":")[0]);
-			Componente auxCompMicro= Tienda.getInstance().findComponentebyNumeroSerie(cbxDiscoDuro.getItemAt(cbxMicro.getSelectedIndex()).split(":")[0]);
-			Componente auxCompMotherboard= Tienda.getInstance().findComponentebyNumeroSerie(cbxDiscoDuro.getItemAt(cbxMotherBoard.getSelectedIndex()).split(":")[0]);
-			Componente auxCompRam= Tienda.getInstance().findComponentebyNumeroSerie(cbxDiscoDuro.getItemAt(cbxRAM.getSelectedIndex()).split(":")[0]);
+			Componente auxCompDD= Tienda.getInstance().findComponentebyNumeroSerie(cbxDiscoDuro.getItemAt(cbxDiscoDuro.getSelectedIndex()).split(" ")[0]);
+			Componente auxCompMicro= Tienda.getInstance().findComponentebyNumeroSerie(cbxDiscoDuro.getItemAt(cbxMicro.getSelectedIndex()).split(" ")[0]);
+			Componente auxCompMotherboard= Tienda.getInstance().findComponentebyNumeroSerie(cbxDiscoDuro.getItemAt(cbxMotherBoard.getSelectedIndex()).split(" ")[0]);
+			Componente auxCompRam= Tienda.getInstance().findComponentebyNumeroSerie(cbxDiscoDuro.getItemAt(cbxRAM.getSelectedIndex()).split(" ")[0]);
 			
 			miComponente.add(auxCompDD);miComponente.add(auxCompMicro);
 			miComponente.add(auxCompMotherboard);miComponente.add(auxCompRam);
