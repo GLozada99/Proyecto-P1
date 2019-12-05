@@ -278,7 +278,7 @@ public class AgregarComponente extends JDialog {
 		panel_MotherBoard.add(lblTipoRam);
 
 		cbxTipoConectorMB = new JComboBox();
-		cbxTipoConectorMB.setModel(new DefaultComboBoxModel(new String[] {"<Escoja>"}));
+		cbxTipoConectorMB.setModel(new DefaultComboBoxModel(new String[] {"<Escoja>", "Socket 423", "Socket mPGA478", "Socket 479", "Socket A", "Socket 754", "Socket 939"}));
 		cbxTipoConectorMB.setBounds(112, 23, 104, 22);
 		panel_MotherBoard.add(cbxTipoConectorMB);
 
