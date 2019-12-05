@@ -187,7 +187,7 @@ public class NuevoUsuario extends JDialog {
 								usuario1= new Administrador(txtNombre.getText(), ftxtTelefono.getText(), txtDireccion.getText(), ftxtCedula.getText(), txtContra.getText());
 							}
 							else if(rdnVendedor.isSelected()) {
-								usuario1= new Vendedor(txtNombre.getText(), ftxtTelefono.getText(), txtDireccion.getText() , ftxtCedula.getText(), txtContra.getText());
+								usuario1= new Vendedor(txtNombre.getText(), ftxtTelefono.getText(), txtDireccion.getText() , ftxtCedula.getText(), txtContra.getText(), 0);
 							}
 							if(aux==null) {
 								Tienda.getInstance().getLosUsuarios().add(usuario1);

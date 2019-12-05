@@ -20,6 +20,7 @@ import logica.Micro;
 import logica.MotherBoard;
 import logica.RAM;
 import logica.Tienda;
+import logica.Vendedor;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -489,6 +490,11 @@ public class NuevaFactura extends JDialog {
 								cantidadesCompo.clear();
 								cantidadesCombo.clear();
 								JOptionPane.showMessageDialog(null, "La compra fue realizada con exito");
+								
+								if(Tienda.getInstance().getUsuarioActual() instanceof Vendedor) {
+									((Vendedor)Tienda.getInstance().getUsuarioActual()).setVentas(((Vendedor) Tienda.getInstance().getUsuarioActual()).getVentas()+Float.valueOf(txtPrecioTotal.getText()));
+								}
+									
 							}
 							else {
 								JOptionPane.showMessageDialog(null, "El cliente no cumple con los requisitos para la compra o no existen suficientes existencias de los componentes selecionados ");
@@ -513,6 +519,10 @@ public class NuevaFactura extends JDialog {
 							cantidadesCompo.clear();
 							cantidadesCombo.clear();
 							JOptionPane.showMessageDialog(null, "La compra fue realizada con exito");
+							
+							if(Tienda.getInstance().getUsuarioActual() instanceof Vendedor) {
+								((Vendedor)Tienda.getInstance().getUsuarioActual()).setVentas(((Vendedor) Tienda.getInstance().getUsuarioActual()).getVentas()+Float.valueOf(txtPrecioTotal.getText()));
+							}
 							}
 							
 							else {
