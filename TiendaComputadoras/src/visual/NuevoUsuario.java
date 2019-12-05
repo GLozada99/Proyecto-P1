@@ -176,7 +176,7 @@ public class NuevoUsuario extends JDialog {
 				btnRegistrar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						Persona usuario1=null;
-						if(Tienda.getInstance().getLosUsuarios().contains(Tienda.getInstance().usuarioByCodigo(ftxtCedula.getText()))) {
+						if(Tienda.getInstance().getLosUsuarios().contains(Tienda.getInstance().usuarioByCodigo(ftxtCedula.getText()))&&aux==null) {
 							JOptionPane.showMessageDialog(null, "El usuario ingresado ya está registrado");
 						}
 						else {
@@ -192,9 +192,13 @@ public class NuevoUsuario extends JDialog {
 							if(aux==null) {
 								Tienda.getInstance().getLosUsuarios().add(usuario1);
 								JOptionPane.showMessageDialog(null, "Usuario registrado con exito");
+								clean();
 							}
 							else {
+								Tienda.getInstance().getLosUsuarios().add(Tienda.getInstance().getLosUsuarios().indexOf(aux), usuario1);
+								Tienda.getInstance().getLosUsuarios().remove(Tienda.getInstance().getLosUsuarios().lastIndexOf(aux));
 								JOptionPane.showMessageDialog(null, "Usuario modificado con exito");
+								dispose();
 
 							}
 						}
@@ -222,5 +226,35 @@ public class NuevoUsuario extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		if(aux!=null){
+			txtNombre.setText(aux.getNombre());
+			ftxtCedula.setText(aux.getCodigo());ftxtCedula.setEditable(false);
+			ftxtTelefono.setText(aux.getTelefono());
+			try {
+				txtContra.setText(((Administrador)aux).getContraseña());
+				rdnAdministrador.setSelected(true);
+				rdnVendedor.setSelected(false);
+			} catch (Exception e) {
+				txtContra.setText(((Vendedor)aux).getContraseña());
+				rdnAdministrador.setSelected(false);
+				rdnVendedor.setSelected(true);
+			}
+			txtDireccion.setText(aux.getDireccion());
+			rdnAdministrador.setSelected(false);
+			rdnVendedor.setSelected(false);
+		}
 	}
+
+
+
+	public void clean() {
+		txtNombre.setText("");
+		ftxtCedula.setText("");
+		ftxtTelefono.setText("");
+		txtContra.setText("");
+		txtDireccion.setText("");
+		rdnAdministrador.setSelected(false);
+		rdnVendedor.setSelected(false);
+	}
+	
 }

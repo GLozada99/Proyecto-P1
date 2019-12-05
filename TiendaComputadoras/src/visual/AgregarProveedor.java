@@ -241,7 +241,7 @@ public class AgregarProveedor extends JDialog {
 								Tienda.getInstance().getPreciosCadaCompTemp().remove(index+1);
 							} catch (IndexOutOfBoundsException e) {
 							}
-							cargarComponentes(auxProv);
+							cargarComponentes();
 						}
 					});
 					btnAsignarPrecio.setBounds(248, 158, 121, 23);
@@ -287,7 +287,7 @@ public class AgregarProveedor extends JDialog {
 								}
 								Tienda.getInstance().getLosCompTemp().clear();
 								Tienda.getInstance().getPreciosCadaCompTemp().clear();
-								cargarComponentes(auxProv);
+								cargarComponentes();
 								limpiar();
 								JOptionPane.showMessageDialog(null, "Proveedor añadido con exito");
 							}
@@ -319,7 +319,7 @@ public class AgregarProveedor extends JDialog {
 			btnListado.setEnabled(false);
 		}
 		if(!Tienda.getInstance().getLosCompTemp().isEmpty()) {
-			cargarComponentes(auxProv);
+			cargarComponentes();
 		}
 		if(auxProv!=null) {
 			ftxtRNC.setText(auxProv.getCodigo());ftxtRNC.setEnabled(false);
@@ -328,7 +328,7 @@ public class AgregarProveedor extends JDialog {
 			txtNombre.setText(auxProv.getNombre());
 			Tienda.getInstance().getLosCompTemp().addAll((Collection<? extends Componente>) auxProv.getMisCompos().clone());
 			Tienda.getInstance().getPreciosCadaCompTemp().addAll((Collection<? extends Float>) auxProv.getPreciosCompos().clone());
-			cargarComponentes(auxProv);
+			cargarComponentes();
 			
 		}
 
@@ -342,7 +342,7 @@ public class AgregarProveedor extends JDialog {
 		ArrayList<Float> precios = (ArrayList<Float>)Tienda.getInstance().getPreciosCadaCompTemp().clone() ;
 		return precios;
 	}
-	public static void cargarComponentes(Proveedor auxProv) {
+	public static void cargarComponentes() {
 		model.setRowCount(0);
 		row = new Object[model.getColumnCount()];
 		int i=0;
