@@ -169,7 +169,7 @@ public class ListaComponentes extends JDialog {
 							Componente aux = Tienda.getInstance().findComponentebyNumeroSerie(codigo);
 							if(!Tienda.getInstance().getLosCompTemp().contains(aux)) {
 							Tienda.getInstance().getLosCompTemp().add(aux);
-							AgregarProveedor.cargarComponentes();
+							AgregarProveedor.cargarComponentes(null);
 							dispose();
 							}
 							else {
