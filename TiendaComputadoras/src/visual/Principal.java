@@ -28,31 +28,21 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.CategoryPlot;
-import org.jfree.chart.plot.PiePlot3D;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
-import org.jfree.util.Rotation;
 
 import logica.Administrador;
-import logica.Cliente;
-import logica.Combo;
-import logica.Componente;
-import logica.DiscoDuro;
-import logica.Micro;
-import logica.MotherBoard;
-import logica.OrdenCompra;
+
 import logica.Persona;
-import logica.Proveedor;
-import logica.RAM;
+
 import logica.Tienda;
 import logica.Vendedor;
 
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import java.awt.Color;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+
 import java.awt.Rectangle;
 import java.awt.SystemColor;
 
@@ -175,7 +165,6 @@ public class Principal extends JFrame implements  Runnable  {
 		mntmNuevoUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				NuevoUsuario aux = new NuevoUsuario(null);
-				System.out.println("Why?");
 				aux.setModal(true);
 				aux.setVisible(true);
 			}
@@ -332,7 +321,7 @@ public class Principal extends JFrame implements  Runnable  {
 				while (true) {
 
 					try {
-						Thread.sleep(100);
+						Thread.sleep(10000);
 						if(i>3) {
 							data.clear();
 							i=-1;
@@ -358,7 +347,7 @@ public class Principal extends JFrame implements  Runnable  {
 				while (true) {
 
 					try {
-						Thread.sleep(100);
+						Thread.sleep(10000);
 						if(i>3) {
 							dataset.clear();
 							i=-1;
@@ -374,7 +363,7 @@ public class Principal extends JFrame implements  Runnable  {
 
 		}.start();
 		showGraf2();
-		}
+	}
 
 
 	private void showGraf1() {
@@ -432,7 +421,7 @@ public class Principal extends JFrame implements  Runnable  {
 
 
 		// Fuente de Datos
-		
+
 		ArrayList<Persona> vendedores = Tienda.getInstance().vendedoresMasVentas();
 		try {
 			dataset.addValue(((Vendedor)vendedores.get(0)).getVentas(),vendedores.get(0).getNombre(),"");
@@ -455,17 +444,15 @@ public class Principal extends JFrame implements  Runnable  {
 			// TODO: handle exception
 		}
 		try {
-			
+
 			dataset.addValue(((Vendedor)vendedores.get(4)).getVentas(), vendedores.get(4).getNombre(),"" );
 		} catch (NullPointerException |IndexOutOfBoundsException e) {
 			// TODO: handle exception
 		}
-		
+
 
 		// Creando el Grafico
-		JFreeChart chart = ChartFactory.createBarChart3D
-				("Vendedores con mas ventas","", "Nombre", 
-						dataset, PlotOrientation.VERTICAL, true,true, false);
+		JFreeChart chart = ChartFactory.createBarChart3D("Vendedores con más ventas","", "Ventas", dataset, PlotOrientation.VERTICAL, true,true, false);
 		chart.setBackgroundPaint(SystemColor.inactiveCaption);
 		chart.getTitle().setPaint(Color.black); 
 		CategoryPlot p = chart.getCategoryPlot(); 
@@ -487,22 +474,15 @@ public class Principal extends JFrame implements  Runnable  {
 		Calendar calendario = new GregorianCalendar();
 		hora =calendario.get(Calendar.HOUR_OF_DAY);
 		minutos = calendario.get(Calendar.MINUTE);
-		segundos = calendario.get(Calendar.SECOND);
-
-
-		
-			}
-
+		segundos = calendario.get(Calendar.SECOND);		
+	}
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
 	}
 
-		
-
-	}
+}
 
 
 

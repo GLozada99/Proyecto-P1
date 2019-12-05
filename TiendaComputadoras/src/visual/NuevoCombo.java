@@ -134,8 +134,9 @@ public class NuevoCombo extends JDialog {
 		cbxDiscoDuro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				ArrayList<Integer> cantisUtil=new ArrayList<Integer>();
+				int i=1;
 				if(cbxDiscoDuro.getSelectedIndex()!=0&&cbxMicro.getSelectedIndex()!=0&&cbxMotherBoard.getSelectedIndex()!=0&&cbxRAM.getSelectedIndex()!=0) {
-					cantisUtil.add(1);cantisUtil.add(1);cantisUtil.add(1);cantisUtil.add(1);
+					cantisUtil.add(i);cantisUtil.add(i);cantisUtil.add(i);cantisUtil.add(i);
 					txtPrecio.setText(""+Tienda.getInstance().precioTotalComponentes(componenteDevolver(), cantisUtil));
 
 				}
@@ -150,6 +151,17 @@ public class NuevoCombo extends JDialog {
 		panel_1.add(lblMemoriaRam);
 
 		cbxMicro = new JComboBox();
+		cbxMicro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {				
+				ArrayList<Integer> cantisUtil=new ArrayList<Integer>();
+				int i=1;
+				if(cbxDiscoDuro.getSelectedIndex()!=0&&cbxMicro.getSelectedIndex()!=0&&cbxMotherBoard.getSelectedIndex()!=0&&cbxRAM.getSelectedIndex()!=0) {
+					cantisUtil.add(i);cantisUtil.add(i);cantisUtil.add(i);cantisUtil.add(i);
+					txtPrecio.setText(""+Tienda.getInstance().precioTotalComponentes(componenteDevolver(), cantisUtil));
+				}
+			}
+
+		});
 		cbxMicro.setModel(new DefaultComboBoxModel(new String[] {"C\u00F3digo   :    Marca    :    Modelo   :     Cantidad   :    Velocidad"}));
 		cbxMicro.setBounds(122, 77, 407, 20);
 		panel_1.add(cbxMicro);
@@ -159,6 +171,16 @@ public class NuevoCombo extends JDialog {
 		panel_1.add(lblMicroprocesador);
 
 		cbxRAM = new JComboBox();
+		cbxRAM.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ArrayList<Integer> cantisUtil=new ArrayList<Integer>();
+				int i=1;
+				if(cbxDiscoDuro.getSelectedIndex()!=0&&cbxMicro.getSelectedIndex()!=0&&cbxMotherBoard.getSelectedIndex()!=0&&cbxRAM.getSelectedIndex()!=0) {
+					cantisUtil.add(i);cantisUtil.add(i);cantisUtil.add(i);cantisUtil.add(i);
+					txtPrecio.setText(""+Tienda.getInstance().precioTotalComponentes(componenteDevolver(), cantisUtil));
+				}
+			}
+		});
 		cbxRAM.setModel(new DefaultComboBoxModel(new String[] {"C\u00F3digo   :    Marca    :    Modelo   :     Cantidad   :    Memoria"}));
 		cbxRAM.setBounds(122, 123, 407, 20);
 		panel_1.add(cbxRAM);
@@ -168,6 +190,16 @@ public class NuevoCombo extends JDialog {
 		panel_1.add(lblTarjetaMadre);
 
 		cbxMotherBoard = new JComboBox();
+		cbxMotherBoard.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ArrayList<Integer> cantisUtil=new ArrayList<Integer>();
+				int i=1;
+				if(cbxDiscoDuro.getSelectedIndex()!=0&&cbxMicro.getSelectedIndex()!=0&&cbxMotherBoard.getSelectedIndex()!=0&&cbxRAM.getSelectedIndex()!=0) {
+					cantisUtil.add(i);cantisUtil.add(i);cantisUtil.add(i);cantisUtil.add(i);
+					txtPrecio.setText(""+Tienda.getInstance().precioTotalComponentes(componenteDevolver(), cantisUtil));
+				}
+			}
+		});
 		cbxMotherBoard.setModel(new DefaultComboBoxModel(new String[] {"C\u00F3digo   :    Marca    :    Modelo   :     Cantidad   :    Tipo RAM"}));
 		cbxMotherBoard.setBounds(122, 169, 407, 20);
 		panel_1.add(cbxMotherBoard);
@@ -198,8 +230,6 @@ public class NuevoCombo extends JDialog {
 								
 							}
 						}
-
-
 					}
 				});
 				btnCrear.setActionCommand("OK");
@@ -262,7 +292,14 @@ public class NuevoCombo extends JDialog {
 		int iMB=0;
 		ArrayList<Componente> miComponente= new ArrayList<Componente>();
 		if(cbxDiscoDuro.getSelectedIndex()!=0&&cbxMicro.getSelectedIndex()!=0&&cbxMotherBoard.getSelectedIndex()!=0&&cbxRAM.getSelectedIndex()!=0) {
-			for (Componente elComponente : Tienda.getInstance().getLosComponentes()) {
+			Componente auxCompDD= Tienda.getInstance().findComponentebyNumeroSerie(cbxDiscoDuro.getItemAt(cbxDiscoDuro.getSelectedIndex()).split(":")[0]);
+			Componente auxCompMicro= Tienda.getInstance().findComponentebyNumeroSerie(cbxDiscoDuro.getItemAt(cbxMicro.getSelectedIndex()).split(":")[0]);
+			Componente auxCompMotherboard= Tienda.getInstance().findComponentebyNumeroSerie(cbxDiscoDuro.getItemAt(cbxMotherBoard.getSelectedIndex()).split(":")[0]);
+			Componente auxCompRam= Tienda.getInstance().findComponentebyNumeroSerie(cbxDiscoDuro.getItemAt(cbxRAM.getSelectedIndex()).split(":")[0]);
+			
+			miComponente.add(auxCompDD);miComponente.add(auxCompMicro);
+			miComponente.add(auxCompMotherboard);miComponente.add(auxCompRam);
+			/*for (Componente elComponente : Tienda.getInstance().getLosComponentes()) {
 				if(elComponente instanceof DiscoDuro){
 					if(cbxDiscoDuro.getSelectedIndex()==iDD) {
 						miComponente.add(0,elComponente);
@@ -287,10 +324,9 @@ public class NuevoCombo extends JDialog {
 					}
 					iMB++;
 				}
-			}
+			}*/
 		}
 		return miComponente;
-
 	}
 	private void DiscoDuroCbx(){
 		cbxDiscoDuro.removeAllItems();

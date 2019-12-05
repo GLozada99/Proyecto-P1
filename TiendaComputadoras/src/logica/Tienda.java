@@ -597,6 +597,7 @@ public class Tienda implements Serializable {
 		for (Persona vendedor : losVendedores) {
 			if(i<5) {
 				organizados.add(vendedor);
+				i++;
 			}
 			else {
 				if(((Vendedor)vendedor).getVentas()>((Vendedor)organizados.get(0)).getVentas()){
