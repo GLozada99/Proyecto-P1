@@ -278,6 +278,7 @@ public class AgregarProveedor extends JDialog {
 							else {
 								Proveedor aux = new Proveedor(txtNombre.getText(), ftxtTelefono.getText(), txtDireccion.getText(), ftxtRNC.getText(), ayudaComp, ayudaPrecio);
 								if(auxProv!=null) {
+									aux.setDebito(auxProv.getDebito());
 								int posicion = Tienda.getInstance().getLosProveedores().indexOf(auxProv);
 								Tienda.getInstance().getLosProveedores().add(posicion,aux);
 								Tienda.getInstance().getLosProveedores().remove(posicion+1);
@@ -290,6 +291,9 @@ public class AgregarProveedor extends JDialog {
 								cargarComponentes();
 								limpiar();
 								JOptionPane.showMessageDialog(null, "Proveedor añadido con exito");
+								if(auxProv!=null) {
+									dispose();
+								}
 							}
 
 						}
