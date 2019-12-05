@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -240,7 +241,7 @@ public class AgregarProveedor extends JDialog {
 								Tienda.getInstance().getPreciosCadaCompTemp().remove(index+1);
 							} catch (IndexOutOfBoundsException e) {
 							}
-							cargarComponentes();
+							cargarComponentes(auxProv);
 						}
 					});
 					btnAsignarPrecio.setBounds(248, 158, 121, 23);
@@ -267,7 +268,7 @@ public class AgregarProveedor extends JDialog {
 							System.out.println(model.getRowCount()+"     "+ Tienda.getInstance().getPreciosCadaCompTemp().size());
 							JOptionPane.showMessageDialog(null, "Todos los componentes deben tener un precio");
 						}
-						else if(Tienda.getInstance().findProveedrobyRNC(ftxtRNC.getText())!=null) {
+						else if(Tienda.getInstance().findProveedrobyRNC(ftxtRNC.getText())!=null&&auxProv==null) {
 							JOptionPane.showMessageDialog(null, "Ya existe un proveedor registrado con este RNC");
 						}
 						else {
@@ -276,10 +277,17 @@ public class AgregarProveedor extends JDialog {
 							}
 							else {
 								Proveedor aux = new Proveedor(txtNombre.getText(), ftxtTelefono.getText(), txtDireccion.getText(), ftxtRNC.getText(), ayudaComp, ayudaPrecio);
+								if(auxProv!=null) {
+								int posicion = Tienda.getInstance().getLosProveedores().indexOf(auxProv);
+								Tienda.getInstance().getLosProveedores().add(posicion,aux);
+								Tienda.getInstance().getLosProveedores().remove(posicion+1);
+								}
+								else {
 								Tienda.getInstance().getLosProveedores().add(aux);
+								}
 								Tienda.getInstance().getLosCompTemp().clear();
 								Tienda.getInstance().getPreciosCadaCompTemp().clear();
-								cargarComponentes();
+								cargarComponentes(auxProv);
 								limpiar();
 								JOptionPane.showMessageDialog(null, "Proveedor añadido con exito");
 							}
@@ -311,7 +319,17 @@ public class AgregarProveedor extends JDialog {
 			btnListado.setEnabled(false);
 		}
 		if(!Tienda.getInstance().getLosCompTemp().isEmpty()) {
-			cargarComponentes();
+			cargarComponentes(auxProv);
+		}
+		if(auxProv!=null) {
+			ftxtRNC.setText(auxProv.getCodigo());ftxtRNC.setEnabled(false);
+			ftxtTelefono.setText(auxProv.getTelefono());
+			txtDireccion.setText(auxProv.getDireccion());
+			txtNombre.setText(auxProv.getNombre());
+			Tienda.getInstance().getLosCompTemp().addAll((Collection<? extends Componente>) auxProv.getMisCompos().clone());
+			Tienda.getInstance().getPreciosCadaCompTemp().addAll((Collection<? extends Float>) auxProv.getPreciosCompos().clone());
+			cargarComponentes(auxProv);
+			
 		}
 
 	}
@@ -324,7 +342,7 @@ public class AgregarProveedor extends JDialog {
 		ArrayList<Float> precios = (ArrayList<Float>)Tienda.getInstance().getPreciosCadaCompTemp().clone() ;
 		return precios;
 	}
-	public static void cargarComponentes() {
+	public static void cargarComponentes(Proveedor auxProv) {
 		model.setRowCount(0);
 		row = new Object[model.getColumnCount()];
 		int i=0;
@@ -336,7 +354,7 @@ public class AgregarProveedor extends JDialog {
 					row[2] = aux.getMarca();
 					row[3] = aux.getModelo();
 					try {
-						row[4] = Tienda.getInstance().getPreciosCadaCompTemp().get(i).toString();
+						row[4] = Tienda.getInstance().getPreciosCadaCompTemp().get(i);
 					} catch (IndexOutOfBoundsException e) {
 						row[4] = "";
 					}

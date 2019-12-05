@@ -295,12 +295,22 @@ public class Tienda implements Serializable {
 
 	public void restaCantiComponentes(ArrayList<Componente> componentes, ArrayList<Integer> cantiCompo) {
 		int i=0;
+		boolean ordenCompra=true;
 		for (Componente componente : componentes) {
 			componente.setCantDisponible(componente.getCantDisponible()-cantiCompo.get(i));
 			i++;
 			if(componente.getCantDisponible()<componente.getCantMin()) {
+				for (OrdenCompra orden : Tienda.getInstance().getOrdenesSinProcesar()) {
+					if(orden.getCompCompra().equals(componente)) {
+						ordenCompra=false;
+					}
+					
+				}
+				if(ordenCompra) {
 				OrdenCompra aux = new OrdenCompra("OC-"+Tienda.getInstance().getGeneradorCodigoOrdenCompra(), componente, componente.getCantMax()-componente.getCantDisponible());
 				Tienda.getInstance().agregarOrden(aux);
+				}
+				
 			}
 		}
 	
