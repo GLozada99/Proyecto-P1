@@ -78,7 +78,7 @@ public class ListaComponentes extends JDialog {
 	 */
 	public ListaComponentes(boolean AgregarCompProveedores) {
 		setTitle("Lista Componentes");
-		setBounds(100, 100, 1253, 461);
+		setBounds(100, 100, 1250, 700);
 		setLocationRelativeTo(null);
 		setResizable(false);
 		getContentPane().setLayout(new BorderLayout());
@@ -89,12 +89,12 @@ public class ListaComponentes extends JDialog {
 		{	
 			JPanel panelList = new JPanel();
 			panelList.setBorder(null);
-			panelList.setBounds(15, 76, 1219, 302);
+			panelList.setBounds(15, 76, 1219, 558);
 			contentPanel.add(panelList);
 			panelList.setLayout(null);
 			{
 				JScrollPane scrollPane = new JScrollPane();
-				scrollPane.setBounds(0, 0, 1219, 302);
+				scrollPane.setBounds(0, 0, 1219, 558);
 				scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 				panelList.add(scrollPane);
 				{
@@ -149,7 +149,7 @@ public class ListaComponentes extends JDialog {
 					//btnEliminar.setEnabled(false);
 				}
 			});
-			cbxComp.setModel(new DefaultComboBoxModel<String>(new String[] {"Disco Duro", "Microprocesador", "Mother Board", "RAM"}));
+			cbxComp.setModel(new DefaultComboBoxModel(new String[] {"Disco Duro", "Microprocesador", "Motherboard", "RAM"}));
 			cbxComp.setBounds(12, 26, 169, 22);
 			panelComp.add(cbxComp);
 			cbxComp.setSelectedIndex(0);
