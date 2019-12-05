@@ -494,16 +494,13 @@ public class Tienda implements Serializable {
 	}
 	
 	public ArrayList<Integer> componenteMasVendidoTipo(){
-		ArrayList<Integer> masVendido= null;
+		ArrayList<Integer> masVendido= new ArrayList<>();
 		int disco=0;
 		int micro=0;
 		int Ram=0;
 		int MB=0;
 		
 		try {
-			
-		} catch (Exception e) {
-			// TODO: handle exception
 			for (Factura miFactura : lasFacturas) {
 				for (Componente miComponente : miFactura.getLosComponentes()) {
 					if(miComponente instanceof DiscoDuro) {
@@ -526,9 +523,11 @@ public class Tienda implements Serializable {
 			}
 				
 			}
+		
 			
-		}
-		return masVendido;
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+			
 	}
-
-}
+		return masVendido;
+}}
