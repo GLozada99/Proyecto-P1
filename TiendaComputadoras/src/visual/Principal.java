@@ -46,6 +46,8 @@ import logica.Persona;
 import logica.Proveedor;
 import logica.RAM;
 import logica.Tienda;
+import logica.Vendedor;
+
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import java.awt.Color;
@@ -483,7 +485,49 @@ public class Principal extends JFrame implements  Runnable  {
 	        hora =calendario.get(Calendar.HOUR_OF_DAY);
 	        minutos = calendario.get(Calendar.MINUTE);
 	        segundos = calendario.get(Calendar.SECOND);
+	        
+	        
+	        ArrayList<Persona> losVendedores = new ArrayList<>();
+	        for (Persona vendedor : Tienda.getInstance().getLosUsuarios()) {
+	        	if(vendedor instanceof Vendedor) {
+	        		losVendedores.add(vendedor);
+	        	}
+				
+			}
+	        //al salir de ese for, tienes un arreglo solo con vendedores
+	        ArrayList<Persona> organizados = new ArrayList<>();//este va a ser el arreglo del final, que tendra los vendedores organizados
+	        int i=0;
+	        for (Persona vendedor : losVendedores) {//recorremos el arreglo que tiene todos los vendedores
+	        	if(i<5) {
+	        		organizados.add(vendedor);//añadimos los primeros 5
+	        	}
+	        	else {
+	        		if(((Vendedor)vendedor).getVentas()>((Vendedor)organizados.get(0)).getVentas()){//luego de añadir los primeros 5, comparamos las ventas del vendedor actual (el 6)  
+	        			organizados.add(0, vendedor);												//con las del vendedor que esta en la posicion 0 (el primer vendedor)
+	        																						//si las ventas del actual son mayores, lo ponemos de primero.
+	        		}
+	        		else if(((Vendedor)vendedor).getVentas()>((Vendedor)organizados.get(1)).getVentas()){// si no son mayores, probamos con el segundo vendedor, y asi seguimos hasta el 5to
+	        			organizados.add(1, vendedor);
+	        			
+	        		}
+	        	}
+				
+			}
+	       
 	    }
 	
-
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
+
+

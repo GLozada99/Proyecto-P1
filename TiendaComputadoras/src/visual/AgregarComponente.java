@@ -114,7 +114,7 @@ public class AgregarComponente extends JDialog {
 	//@SuppressWarnings({ "rawtypes", "unchecked" })
 	public AgregarComponente(boolean b, Componente auxComp) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(AgregarComponente.class.getResource("/Imagenes/IconAgregarComponente.png")));
-		setLocationRelativeTo(null);
+		
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -128,6 +128,7 @@ public class AgregarComponente extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
+		setLocationRelativeTo(null);
 
 
 		JPanel panel_DatosGeneralesComponentes = new JPanel();
