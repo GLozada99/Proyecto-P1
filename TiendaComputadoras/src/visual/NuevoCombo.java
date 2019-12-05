@@ -59,7 +59,7 @@ public class NuevoCombo extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		try {
 			NuevoCombo dialog = new NuevoCombo();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -67,12 +67,12 @@ public class NuevoCombo extends JDialog {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 	/**
 	 * Create the dialog.
 	 */
-	public NuevoCombo() {
+	public NuevoCombo(Combo aux) {
 
 		setIconImage(Toolkit.getDefaultToolkit().getImage(NuevoCombo.class.getResource("/Imagenes/IconAgregarCombopng.png")));
 		setTitle("Nuevo Combo");
@@ -205,8 +205,13 @@ public class NuevoCombo extends JDialog {
 			DiscoDuroCbx();
 			MicroCbx();
 			RAMCbx();
-
+			if(aux!=null) {
+				txtNombre.setText(aux.getNombre());
+				txtPrecio.setText(""+aux.getPrecio());
+				spnDescuento.setValue(Integer.valueOf(aux.getDescuento()));
+			}
 		}
+		
 	}	
 	private ArrayList<Componente> componenteDevolver() {
 		int iDD=0;
