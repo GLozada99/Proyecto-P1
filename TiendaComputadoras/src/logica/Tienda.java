@@ -304,16 +304,16 @@ public class Tienda implements Serializable {
 					if(orden.getCompCompra().equals(componente)) {
 						ordenCompra=false;
 					}
-					
+
 				}
 				if(ordenCompra) {
-				OrdenCompra aux = new OrdenCompra("OC-"+Tienda.getInstance().getGeneradorCodigoOrdenCompra(), componente, componente.getCantMax()-componente.getCantDisponible());
-				Tienda.getInstance().agregarOrden(aux);
+					OrdenCompra aux = new OrdenCompra("OC-"+Tienda.getInstance().getGeneradorCodigoOrdenCompra(), componente, componente.getCantMax()-componente.getCantDisponible());
+					Tienda.getInstance().agregarOrden(aux);
 				}
-				
+
 			}
 		}
-	
+
 	}
 	public void restaCantiCombos(ArrayList<Combo> combos, ArrayList<Integer> cantiCombo) {
 		for (Combo combo : combos) {
@@ -492,42 +492,66 @@ public class Tienda implements Serializable {
 	public void setPreciosCadaCompTemp(ArrayList<Float> preciosCadaCompTemp) {
 		this.preciosCadaCompTemp = preciosCadaCompTemp;
 	}
-	
+
 	public ArrayList<Integer> componenteMasVendidoTipo(){
 		ArrayList<Integer> masVendido= new ArrayList<>();
 		int disco=0;
 		int micro=0;
 		int Ram=0;
 		int MB=0;
-		
+
 		try {
 			for (Factura miFactura : lasFacturas) {
 				for (Componente miComponente : miFactura.getLosComponentes()) {
 					if(miComponente instanceof DiscoDuro) {
-						disco++;
-						masVendido.add(0, disco);
-				}
+						disco+=miFactura.getCantiCompo(miComponente);
+						
+					}
 					if(miComponente instanceof Micro) {
-						micro++;
-						masVendido.add(1, micro);
-				}
+						micro+=miFactura.getCantiCompo(miComponente);
+						
+					}
 					if(miComponente instanceof RAM) {
-						Ram++;
-						masVendido.add(2, Ram);
-				}
+						Ram+=miFactura.getCantiCompo(miComponente);
+						
+					}
 					if(miComponente instanceof MotherBoard) {
-						MB++;
-						masVendido.add(3, MB);
-		}
-		
+						MB+=miFactura.getCantiCompo(miComponente);
+						
+					}
+
+				}
+				for (Combo miCombo : miFactura.getLosCombos()) {
+					for (Componente miComponente : miCombo.getComponentes()) {
+						if(miComponente instanceof DiscoDuro) {
+							disco+=miFactura.getCantiUnCombo(miCombo);
+							
+						}
+						if(miComponente instanceof Micro) {
+							micro+=miFactura.getCantiUnCombo(miCombo);
+							
+						}
+						if(miComponente instanceof RAM) {
+							Ram+=miFactura.getCantiUnCombo(miCombo);
+						
+						}
+						if(miComponente instanceof MotherBoard) {
+							MB+=miFactura.getCantiUnCombo(miCombo);
+						
+						}
+						
+					}
+					
+				}
+				masVendido.add(0, disco);masVendido.add(1, micro);masVendido.add(2, Ram);masVendido.add(3, MB);
+
 			}
-				
-			}
-		
 			
+
+
 		} catch (NullPointerException e) {
 			// TODO: handle exception
-			
-	}
+
+		}
 		return masVendido;
-}}
+	}}

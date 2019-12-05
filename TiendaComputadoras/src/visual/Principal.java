@@ -323,22 +323,22 @@ public class Principal extends JFrame implements  Runnable  {
 		
 		
 		 panel1 = new JPanel();
-		panel1.setBounds(29, 18, 635, 303);
+		panel1.setBounds(17, 14, 652, 308);
 		contentPane.add(panel1);
 		showGraf1();
 		
 		 panel2 = new JPanel();
-		panel2.setBounds(693, 18, 635, 303);
+		panel2.setBounds(686, 18, 652, 308);
 		contentPane.add(panel2);
 		showGraf2();
 		
 		 panel3 = new JPanel();
-		panel3.setBounds(29, 339, 635, 303);
+		panel3.setBounds(17, 336, 652, 308);
 		contentPane.add(panel3);
 		showGraf3();
 		
 		 panel4 = new JPanel();
-		panel4.setBounds(693, 339, 635, 303);
+		panel4.setBounds(686, 339, 652, 308);
 		contentPane.add(panel4);}
 	    //showGraf4();
 	
@@ -347,14 +347,37 @@ public class Principal extends JFrame implements  Runnable  {
 	        // Fuente de Datos
 	        DefaultPieDataset data = new DefaultPieDataset();
 	        ArrayList<Integer> componeteVenta= Tienda.getInstance().componenteMasVendidoTipo();
-	        
-            data.setValue("Disco Duro", componeteVenta.get(0));
-	        data.setValue("Microprocesador", componeteVenta.get(1));
-	        data.setValue("Memoria RAM", componeteVenta.get(2));
-	        data.setValue("Tarjeta Madre", componeteVenta.get(3));
+	       
+	      
+	       
+	        try {
+	        	data.setValue("Disco Duro", componeteVenta.get(0));
+		       
+			} catch (NullPointerException |IndexOutOfBoundsException e) {
+				System.out.println("Hola");
+			}
+	        try {
+	        	 data.setValue("Microprocesador", componeteVenta.get(1));
+		       
+			} catch (NullPointerException |IndexOutOfBoundsException e) {
+				System.out.println("Hola");
+			}
+	        try {
+	        	  data.setValue("Memoria RAM", componeteVenta.get(2));
+		       
+			} catch (NullPointerException |IndexOutOfBoundsException e) {
+				System.out.println("Hola");
+			}
+	        try {
+	        	 data.setValue("Tarjeta Madre", componeteVenta.get(3));
+		       
+			} catch (NullPointerException |IndexOutOfBoundsException e) {
+				System.out.println("Hola");
+			}
+            
 	 
 	        // Creando el Grafico
-	        JFreeChart chart = ChartFactory.createPieChart( "Componentes más vendidos",  data,  true, true, false);
+	        JFreeChart chart = ChartFactory.createPieChart( "Ventas de componentes por tipo",  data,  true, true, false);
 	        panel1.setLayout(null);
 	 
 	        // Crear el Panel del Grafico con ChartPanel
@@ -362,7 +385,7 @@ public class Principal extends JFrame implements  Runnable  {
 	        chartPanel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 	        chart.setBackgroundPaint( SystemColor.inactiveCaption);
 	      
-	        chartPanel.setBounds(0, 0, 507, 249);
+	        chartPanel.setBounds(0, 0, 652, 308);
 	        chartPanel.setPreferredSize(new java.awt.Dimension(panel1.getWidth(), panel1.getHeight()));
 	        panel1.add(chartPanel);
 	    }
@@ -397,7 +420,7 @@ public class Principal extends JFrame implements  Runnable  {
 	        chartPanel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 	      //  chart.getPlot().setBackgroundPaint( SystemColor.inactiveCaptionBorder );
 	      
-	        chartPanel.setBounds(0, 0, 507, 249);
+	        chartPanel.setBounds(0, 0, 635, 303);
 	        chartPanel.setPreferredSize(new java.awt.Dimension(panel2.getWidth(),panel2.getHeight()));
 	       panel2.add(chartPanel);
 	        
@@ -434,7 +457,7 @@ public class Principal extends JFrame implements  Runnable  {
 	        ChartPanel chartPanel = new ChartPanel(chart);
 	        chart.setBackgroundPaint( SystemColor.inactiveCaption);
 	        chartPanel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-	        chartPanel.setBounds(0, 0, 507, 249);
+	        chartPanel.setBounds(0, 0, 652, 308);
 	        panel3.add(chartPanel);
 	    }
 	    

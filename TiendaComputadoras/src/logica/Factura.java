@@ -107,6 +107,9 @@ public class Factura implements Serializable {
 	public ArrayList<Integer> getCantiCombos() {
 		return cantiCombos;
 	}
+	public int getCantiUnCombo(Combo aux) {
+		return cantiCombos.get(losCombos.lastIndexOf(aux));
+	}
 
 	public void setCantiCombos(ArrayList<Integer> cantiCombos) {
 		this.cantiCombos = cantiCombos;
