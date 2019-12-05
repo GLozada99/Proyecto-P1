@@ -139,7 +139,7 @@ public class Principal extends JFrame {
 		mntmNuevoCombo.setIcon(new ImageIcon(Principal.class.getResource("/Imagenes/IconAgregarCombopng.png")));
 		mntmNuevoCombo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				NuevoCombo aux = new NuevoCombo();
+				NuevoCombo aux = new NuevoCombo(null);
 				aux.setModal(true);
 				aux.setVisible(true);
 			}
