@@ -498,6 +498,7 @@ public class NuevaFactura extends JDialog {
 								cantidadesCompo.clear();
 								cantidadesCombo.clear();
 								JOptionPane.showMessageDialog(null, "La compra fue realizada con exito");
+								cargarCompras();
 								
 								if(Tienda.getInstance().getUsuarioActual() instanceof Vendedor) {
 									((Vendedor)Tienda.getInstance().getUsuarioActual()).setVentas(((Vendedor) Tienda.getInstance().getUsuarioActual()).getVentas()+Float.valueOf(txtPrecioTotal.getText()));
@@ -527,6 +528,8 @@ public class NuevaFactura extends JDialog {
 							cantidadesCompo.clear();
 							cantidadesCombo.clear();
 							JOptionPane.showMessageDialog(null, "La compra fue realizada con exito");
+							cargarCompras();
+							
 							
 							if(Tienda.getInstance().getUsuarioActual() instanceof Vendedor) {
 								((Vendedor)Tienda.getInstance().getUsuarioActual()).setVentas(((Vendedor) Tienda.getInstance().getUsuarioActual()).getVentas()+Float.valueOf(txtPrecioTotal.getText()));
