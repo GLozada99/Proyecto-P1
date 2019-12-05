@@ -194,7 +194,7 @@ public class NuevoCombo extends JDialog {
 								aux.setNombre(txtNombre.getText());
 								aux.setDescuento(Integer.valueOf(spnDescuento.getValue().toString()));
 								aux.setPrecio(Float.valueOf(txtPrecio.getText()));
-								aux.setComponentes(componenteDevolver());
+								aux.setComponentes(componenteDevolver()); 
 								
 							}
 						}
