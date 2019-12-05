@@ -83,6 +83,7 @@ public class NuevaFactura extends JDialog {
 	private static ArrayList<Integer> cantidadesCompo=new ArrayList<Integer>();
 	private static ArrayList<Integer> cantidadesCombo=new ArrayList<Integer>();
 	private static DefaultTableModel model2;
+	
 	private Integer cantidadC;
 	private Integer cantidad;
 	private Componente auxComponente;
@@ -229,6 +230,8 @@ public class NuevaFactura extends JDialog {
 					cantidadesCompo.remove(componentesVenta.lastIndexOf(auxComponente));
 					componentesVenta.remove(auxComponente);
 				}
+				txtTotalComponetes.setText(String.valueOf(Tienda.getInstance().cantComponentes(componentesVenta,cantidadesCompo)));
+				txtTotalCombos.setText(String.valueOf(Tienda.getInstance().cantCombos(combosVenta, cantidadesCombo)));
 				cargarCbx();
 				cargarCompras();
 			}
@@ -273,6 +276,8 @@ public class NuevaFactura extends JDialog {
 					}
 				}
 				txtPrecioTotal.setText(""+Tienda.getInstance().costoFactura(componentesVenta, cantidadesCompo, combosVenta, cantidadesCombo));
+				txtTotalComponetes.setText(String.valueOf(Tienda.getInstance().cantComponentes(componentesVenta,cantidadesCompo)));
+				txtTotalCombos.setText(String.valueOf(Tienda.getInstance().cantCombos(combosVenta, cantidadesCombo)));
 				/*if(cbxComponentes.getSelectedIndex()==0) {
 					model.setColumnIdentifiers(encabezadoCompo);
 					cargarComponentes();

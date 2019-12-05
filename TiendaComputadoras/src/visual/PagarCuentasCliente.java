@@ -213,7 +213,7 @@ public class PagarCuentasCliente extends JDialog {
 		panel.add(lblMontoAPagar);
 		
 		spnMonto = new JSpinner();
-		spnMonto.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
+		spnMonto.setModel(new SpinnerNumberModel(1, 1, 1000, 1));
 		spnMonto.setBounds(268, 25, 114, 22);
 		panel.add(spnMonto);
 	}

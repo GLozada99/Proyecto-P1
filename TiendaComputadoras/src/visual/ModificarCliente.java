@@ -55,6 +55,7 @@ public class ModificarCliente extends JDialog {
 	 * Create the dialog.
 	 */
 	public ModificarCliente(Cliente aux) {
+		setTitle("Modificar cliente");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ModificarCliente.class.getResource("/Imagenes/IconCliente.png")));
 		setBounds(100, 100, 297, 259);
 		getContentPane().setLayout(new BorderLayout());
@@ -71,7 +72,7 @@ public class ModificarCliente extends JDialog {
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(null);
 			{
-				JLabel lblCedula = new JLabel("Cedula");
+				JLabel lblCedula = new JLabel("C\u00E9dula");
 				lblCedula.setBounds(12, 27, 76, 22);
 				panel.add(lblCedula);
 			}
@@ -86,7 +87,7 @@ public class ModificarCliente extends JDialog {
 			panel.add(txtNombre);
 			txtNombre.setColumns(10);
 
-			JLabel lblDireccion = new JLabel("Direccion");
+			JLabel lblDireccion = new JLabel("Direcci\u00F3n");
 			lblDireccion.setBounds(12, 97, 76, 22);
 			panel.add(lblDireccion);
 
@@ -96,7 +97,7 @@ public class ModificarCliente extends JDialog {
 			txtDireccion.setBounds(100, 97, 157, 22);
 			panel.add(txtDireccion);
 
-			JLabel lblTelefono = new JLabel("Telefono");
+			JLabel lblTelefono = new JLabel("Tel\u00E9fono");
 			lblTelefono.setBounds(12, 132, 76, 22);
 			panel.add(lblTelefono);
 
@@ -179,13 +180,5 @@ public class ModificarCliente extends JDialog {
 		txtDireccion.setText(aux.getDireccion());
 		ftxtTelefono.setText(aux.getTelefono());
 	}
-
-
-	/*protected void limpiar() {
-		ftxtCedula.setText("");
-		txtNombre.setText("");
-		txtDireccion.setText("");
-		ftxtTelefono.setText("");
-	}*/
 }
 
