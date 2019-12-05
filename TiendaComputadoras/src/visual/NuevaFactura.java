@@ -483,7 +483,7 @@ public class NuevaFactura extends JDialog {
 								JOptionPane.showMessageDialog(null, "La compra fue realizada con exito");
 							}
 							else {
-								JOptionPane.showMessageDialog(null, "Este cliente no cumple con los requisitos para realizar la compra");
+								JOptionPane.showMessageDialog(null, "El cliente no cumple con los requisitos para la compra o no existen suficientes existencias de los componentes selecionados ");
 							}
 						}
 						else if(Tienda.getInstance().relacionFactura(Tienda.getInstance().findClientebyCedula(ftxtCedula.getText()), Float.valueOf(txtPrecioTotal.getText()), ayudaComponente, ayudaCantiComponente, ayudaCombos, ayudaCantiCombos, rdbtnCredito.isSelected())) {
