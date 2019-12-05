@@ -111,25 +111,27 @@ public class AgregarComponente extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	//@SuppressWarnings({ "rawtypes", "unchecked" })
 	public AgregarComponente(boolean b, Componente auxComp) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(AgregarComponente.class.getResource("/Imagenes/IconAgregarComponente.png")));
+		setLocationRelativeTo(null);
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				Tienda.getInstance().getLosQueVendenTemp().clear();	
 			}
 		});
-		setLocationRelativeTo(null);
 		setTitle("Crear Componente");
-		setBounds(100, 100, 575, 503);
+		setBounds(100, 100, 570, 503);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(new Color(234, 238, 249));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 
 
 		JPanel panel_DatosGeneralesComponentes = new JPanel();
+		panel_DatosGeneralesComponentes.setBackground(new Color(234, 238, 249));
 		panel_DatosGeneralesComponentes.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Datos generales del componente", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel_DatosGeneralesComponentes.setBounds(10, 11, 266, 161);
 		contentPanel.add(panel_DatosGeneralesComponentes);
@@ -166,6 +168,7 @@ public class AgregarComponente extends JDialog {
 		panel_DatosGeneralesComponentes.add(txtModelo);
 
 		JPanel panel_TipoComponente = new JPanel();
+		panel_TipoComponente.setBackground(new Color(234, 238, 249));
 		panel_TipoComponente.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Tipo de componente", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel_TipoComponente.setBounds(10, 183, 266, 150);
 		contentPanel.add(panel_TipoComponente);
@@ -252,12 +255,14 @@ public class AgregarComponente extends JDialog {
 		}
 
 		panel_DiscoDuro = new JPanel();
+		panel_DiscoDuro.setBackground(new Color(234, 238, 249));
 		panel_DiscoDuro.setVisible(false);
 
 		panel_RAM = new JPanel();
 		panel_RAM.setVisible(false);
 
 		panel_MotherBoard = new JPanel();
+		panel_MotherBoard.setBackground(new Color(234, 238, 249));
 		panel_MotherBoard.setVisible(false);
 		panel_MotherBoard.setLayout(null);
 		panel_MotherBoard.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Especificaciones", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -335,6 +340,7 @@ public class AgregarComponente extends JDialog {
 		ftxtVelocidad.setBounds(94, 25, 65, 20);
 
 		panel_Micro = new JPanel();
+		panel_Micro.setBackground(new Color(234, 238, 249));
 		panel_Micro.setVisible(false);
 		panel_Micro.setLayout(null);
 		panel_Micro.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Especificaciones", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
@@ -365,21 +371,22 @@ public class AgregarComponente extends JDialog {
 
 
 		JPanel panel_DatosTienda = new JPanel();
+		panel_DatosTienda.setBackground(new Color(234, 238, 249));
 		panel_DatosTienda.setLayout(null);
 		panel_DatosTienda.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Datos de la Tienda", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_DatosTienda.setBounds(288, 11, 266, 161);
+		panel_DatosTienda.setBounds(279, 11, 266, 161);
 		contentPanel.add(panel_DatosTienda);
 
 		JLabel lblCantidadMin = new JLabel("Cantidad M\u00EDnima:");
-		lblCantidadMin.setBounds(10, 33, 96, 14);
+		lblCantidadMin.setBounds(10, 33, 110, 14);
 		panel_DatosTienda.add(lblCantidadMin);
 
 		JLabel lblCantidadMax = new JLabel("Cantidad M\u00E1ximo: ");
-		lblCantidadMax.setBounds(10, 80, 96, 14);
+		lblCantidadMax.setBounds(10, 80, 110, 14);
 		panel_DatosTienda.add(lblCantidadMax);
 
 		JLabel lblPrecioVenta = new JLabel("Precio Venta: ");
-		lblPrecioVenta.setBounds(10, 127, 96, 14);
+		lblPrecioVenta.setBounds(10, 127, 110, 14);
 		panel_DatosTienda.add(lblPrecioVenta);
 
 		spnPrecioVenta = new JSpinner();
@@ -446,8 +453,9 @@ public class AgregarComponente extends JDialog {
 		rdbtnRAM.setSelected(false);
 
 		panel_Proveedor = new JPanel();
+		panel_Proveedor.setBackground(new Color(234, 238, 249));
 		panel_Proveedor.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Proveedor", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel_Proveedor.setBounds(288, 183, 266, 150);
+		panel_Proveedor.setBounds(279, 183, 266, 150);
 		contentPanel.add(panel_Proveedor);
 
 		btnAgregarVendedor = new JButton("Lista Proveedores");
@@ -524,6 +532,7 @@ public class AgregarComponente extends JDialog {
 		{
 
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(new Color(234, 238, 249));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{

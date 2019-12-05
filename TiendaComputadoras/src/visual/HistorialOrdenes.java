@@ -80,7 +80,7 @@ public class HistorialOrdenes extends JDialog {
 				{
 
 					model = new DefaultTableModel();
-					String[] header = {"Código Orden","No. Serie","Tipo de Componente","Marca","Modelo","Cantidad","RNC","Precio Total"};
+					String[] header = {"Código","No. Serie","Tipo de Componente","Marca","Modelo","Cantidad","RNC","Precio Total"};
 					model.setColumnIdentifiers(header);
 					table = new JTable();
 					table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

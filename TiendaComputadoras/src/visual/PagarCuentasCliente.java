@@ -58,6 +58,7 @@ public class PagarCuentasCliente extends JDialog {
 	 * Create the dialog.
 	 */
 	public PagarCuentasCliente() {
+		setTitle("Saldar cr\u00E9dito cliente");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(PagarCuentasCliente.class.getResource("/Imagenes/IconAbonarSaldo.png")));
 		setBounds(100, 100, 503, 279);
 		getContentPane().setLayout(new BorderLayout());
@@ -99,7 +100,7 @@ public class PagarCuentasCliente extends JDialog {
 			btnBuscar.setBounds(190, 27, 45, 22);
 			panel.add(btnBuscar);
 			{
-				JLabel lblCedula = new JLabel("Cedula:");
+				JLabel lblCedula = new JLabel("C\u00E9dula:");
 				lblCedula.setBounds(12, 27, 76, 22);
 				panel.add(lblCedula);
 			}
@@ -132,7 +133,7 @@ public class PagarCuentasCliente extends JDialog {
 					ftxtCedula.setBounds(78, 27, 100, 22);
 					panel.add(ftxtCedula);
 					
-					JLabel lblCredito = new JLabel("Credito:\r\n");
+					JLabel lblCredito = new JLabel("Cr\u00E9dito:\r\n");
 					lblCredito.setBounds(264, 27, 57, 22);
 					panel.add(lblCredito);
 					
@@ -144,7 +145,7 @@ public class PagarCuentasCliente extends JDialog {
 					txtCredito.setBounds(350, 27, 100, 22);
 					panel.add(txtCredito);
 					
-					JLabel lblLimCredito = new JLabel("Lim. Credito:");
+					JLabel lblLimCredito = new JLabel("L\u00EDm. Cr\u00E9dito:");
 					lblLimCredito.setBounds(264, 62, 76, 22);
 					panel.add(lblLimCredito);
 					
@@ -179,7 +180,7 @@ public class PagarCuentasCliente extends JDialog {
 							JOptionPane.showMessageDialog(null, "Pago Realizado con Exito","Notificación", JOptionPane.INFORMATION_MESSAGE);			
 						}
 						else {
-							JOptionPane.showMessageDialog(null, "La cantidad ingresada supera al credito","Notificación", JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(null, "La cantidad ingresada supera al crédito","Notificación", JOptionPane.INFORMATION_MESSAGE);
 						}
 						
 					}

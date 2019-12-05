@@ -167,13 +167,6 @@ public class OrdenesPorProcesar extends JDialog {
 	public static void cargarOrdenes() {
 		model.setRowCount(0);
 		row = new Object[model.getColumnCount()];
-		/*row[0] = "1";
-		row[1] = "22";
-		row[2] = "809";
-		row[3] = "Aqui";
-		row[4] = "1000";
-		model.addRow(row);*/
-
 		for (OrdenCompra aux : Tienda.getInstance().getOrdenesSinProcesar()) {
 			row[0] = aux.getCodigo();
 			row[1] = aux.getCompCompra().getNumeroSerie();

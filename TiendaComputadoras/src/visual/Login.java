@@ -26,6 +26,8 @@ import java.awt.TextField;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import java.awt.Button;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Login extends JFrame {
 
@@ -36,7 +38,7 @@ public class Login extends JFrame {
 	private JPanel contentPane;
 	private TextField txtUsuario;
 	private TextField txtContra;
-	
+
 	/**
 	 * Launch the application.
 	 */
@@ -68,7 +70,7 @@ public class Login extends JFrame {
 						// TODO Auto-generated catch block
 					}
 				} catch (IOException e) {
-	
+
 				} catch (ClassNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -122,6 +124,14 @@ public class Login extends JFrame {
 		panel.add(lblContrasea);
 
 		txtUsuario = new TextField();
+		txtUsuario.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				if (txtUsuario.getText().length() == 6) { 
+					e.consume(); 
+				}
+			} 
+		});
 		txtUsuario.setBounds(115, 20, 147, 20);
 		panel.add(txtUsuario);
 		txtUsuario.setColumns(10);
@@ -131,7 +141,7 @@ public class Login extends JFrame {
 		txtContra.setEchoChar('•');
 		panel.add(txtContra);
 		txtContra.setColumns(10);
-		
+
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (Tienda.getInstance().confirmarLogin(txtUsuario.getText(), txtContra.getText())) {

@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -87,7 +89,7 @@ public class HistorialFacturas extends JDialog {
 				{
 
 					model = new DefaultTableModel();
-					String[] header = {"Código Factura","Fecha","Cédula Cliente","Nombre Cliente","Cant. Total Componentes","Costo Total"};
+					String[] header = {"Código","Fecha","Cédula","Nombre del Cliente","Cantidad Total Componentes","Costo Total"};
 					model.setColumnIdentifiers(header);
 					table = new JTable();
 					table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -121,7 +123,7 @@ public class HistorialFacturas extends JDialog {
 
 		for (Factura aux : Tienda.getInstance().getLasFacturas()) {
 			row[0] = aux.getCodigo();
-			row[1] = aux.getFecha();
+			row[1] = new SimpleDateFormat("dd-MM-yyyy HH:mm a").format(aux.getFecha());
 			row[2] = aux.getElCliente().getCodigo();
 			row[3] = aux.getElCliente().getNombre();
 			row[4] = Tienda.getInstance().cantComponentes(aux.getLosComponentes(), aux.getCantiComponentes())+Tienda.getInstance().cantCombos(aux.getLosCombos(), aux.getCantiCombos());

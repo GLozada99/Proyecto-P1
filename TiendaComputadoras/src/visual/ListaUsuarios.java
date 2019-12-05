@@ -150,8 +150,6 @@ public class ListaUsuarios extends JDialog {
 	public static void cargarUsuarios() {
 		model.setRowCount(0);
 		row = new Object[model.getColumnCount()];
-
-		
 		for (Persona aux : Tienda.getInstance().getLosUsuarios()) {
 			row[0] = aux.getCodigo();
 			row[1] = aux.getNombre();
