@@ -68,7 +68,7 @@ public class Login extends JFrame {
 					} catch (FileNotFoundException e1) {
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
-					}
+					} 
 				} catch (IOException e) {
 
 				} catch (ClassNotFoundException e) {
