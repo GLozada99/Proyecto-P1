@@ -12,13 +12,27 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PiePlot3D;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.util.Rotation;
 
 import logica.Administrador;
 import logica.Cliente;
@@ -38,8 +52,9 @@ import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Rectangle;
+import java.awt.SystemColor;
 
-public class Principal extends JFrame {
+public class Principal extends JFrame implements  Runnable  {
 
 	/**
 	 * 
@@ -47,6 +62,14 @@ public class Principal extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private Dimension dim;
+	private JLabel lblHora ;
+	private int hora, minutos, segundos;
+    private Calendar calendario;
+    private Thread h1;
+    private JPanel panel1;
+    private JPanel panel2;
+    private JPanel panel3;
+    private JPanel panel4;
 
 	/**
 	 * Launch the application.
@@ -299,20 +322,145 @@ public class Principal extends JFrame {
 		contentPane.setLayout(null);
 		
 		
-		JPanel panel1 = new JPanel();
+		 panel1 = new JPanel();
 		panel1.setBounds(29, 18, 635, 303);
 		contentPane.add(panel1);
+		showGraf1();
 		
-		JPanel panel2 = new JPanel();
+		 panel2 = new JPanel();
 		panel2.setBounds(693, 18, 635, 303);
 		contentPane.add(panel2);
+		showGraf2();
 		
-		JPanel panel3 = new JPanel();
+		 panel3 = new JPanel();
 		panel3.setBounds(29, 339, 635, 303);
 		contentPane.add(panel3);
+		showGraf3();
 		
-		JPanel panel4 = new JPanel();
+		 panel4 = new JPanel();
 		panel4.setBounds(693, 339, 635, 303);
-		contentPane.add(panel4);
+		contentPane.add(panel4);}
+	    //showGraf4();
+	
+		private void showGraf1() {
+		      
+	        // Fuente de Datos
+	        DefaultPieDataset data = new DefaultPieDataset();
+	        ArrayList<Integer> componeteVenta= Tienda.getInstance().componenteMasVendidoTipo();
+	        
+            data.setValue("Disco Duro", componeteVenta.get(0));
+	        data.setValue("Microprocesador", componeteVenta.get(1));
+	        data.setValue("Memoria RAM", componeteVenta.get(2));
+	        data.setValue("Tarjeta Madre", componeteVenta.get(3));
+	 
+	        // Creando el Grafico
+	        JFreeChart chart = ChartFactory.createPieChart( "Componentes más vendidos",  data,  true, true, false);
+	        panel1.setLayout(null);
+	 
+	        // Crear el Panel del Grafico con ChartPanel
+	        ChartPanel chartPanel = new ChartPanel(chart);
+	        chartPanel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+	        chart.setBackgroundPaint( SystemColor.inactiveCaption);
+	      
+	        chartPanel.setBounds(0, 0, 507, 249);
+	        chartPanel.setPreferredSize(new java.awt.Dimension(panel1.getWidth(), panel1.getHeight()));
+	        panel1.add(chartPanel);
+	    }
+	    private void showGraf2() {
+	        
+	        
+	        // Fuente de Datos
+	        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+	        dataset.setValue(8, "Mujeres", "Lunes");
+	        dataset.setValue(7, "Hombres", "Lunes");
+	        dataset.setValue(9, "Mujeres", "Martes");
+	        dataset.setValue(4, "Hombres", "Martes");
+	        dataset.setValue(4, "Mujeres", "Miercoles");
+	        dataset.setValue(5, "Hombres", "Miercoles");
+	        dataset.setValue(8, "Mujeres", "Jueves");
+	        dataset.setValue(9, "Hombres", "Jueves");
+	        dataset.setValue(7, "Mujeres", "Viernes");
+	        dataset.setValue(8, "Hombres", "Viernes");
+	        
+	        // Creando el Grafico
+	        JFreeChart chart = ChartFactory.createBarChart3D
+	                ("Participacion por Genero","Genero", "Dias", 
+	                dataset, PlotOrientation.VERTICAL, true,true, false);
+	                chart.setBackgroundPaint(SystemColor.inactiveCaption);
+	                chart.getTitle().setPaint(Color.black); 
+	                CategoryPlot p = chart.getCategoryPlot(); 
+	                p.setRangeGridlinePaint(Color.red); 
+	       panel2.setLayout(null);
+	 
+	        // Crear el Panel del Grafico con ChartPanel
+	        ChartPanel chartPanel = new ChartPanel(chart);
+	        chartPanel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+	      //  chart.getPlot().setBackgroundPaint( SystemColor.inactiveCaptionBorder );
+	      
+	        chartPanel.setBounds(0, 0, 507, 249);
+	        chartPanel.setPreferredSize(new java.awt.Dimension(panel2.getWidth(),panel2.getHeight()));
+	       panel2.add(chartPanel);
+	        
+	        
+	        
+	        
+
+	    }
+	    
+	    private void showGraf3() {
+	        
+	        // Fuente de Datos
+	        DefaultPieDataset data = new DefaultPieDataset();
+	        data.setValue("C", 40);
+	        data.setValue("Java", 45);
+	        data.setValue("Python", 15);
+	 
+	        DefaultPieDataset defaultpiedataset = new DefaultPieDataset(); 
+	        defaultpiedataset.setValue("Programacion", new Double(41.200000000000003D)); 
+	        defaultpiedataset.setValue("Electronica", new Double(11D)); 
+	        defaultpiedataset.setValue("Hacking", new Double(19.5D)); 
+	        defaultpiedataset.setValue("SEO", new Double(30.5D)); 
+	        defaultpiedataset.setValue("Redes", new Double(2.0D)); 
+	 
+	        // Creando el Grafico
+	        JFreeChart chart = ChartFactory.createPieChart3D("Tematicas Blog", defaultpiedataset, true, true, false); 
+	        PiePlot3D pieplot3d = (PiePlot3D)chart.getPlot(); 
+	        pieplot3d.setDepthFactor(0.5); 
+	        pieplot3d.setStartAngle(290D); 
+	        pieplot3d.setDirection(Rotation.CLOCKWISE); 
+	        pieplot3d.setForegroundAlpha(0.5F); 
+	        panel3.setLayout(null);
+	        
+	        ChartPanel chartPanel = new ChartPanel(chart);
+	        chart.setBackgroundPaint( SystemColor.inactiveCaption);
+	        chartPanel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+	        chartPanel.setBounds(0, 0, 507, 249);
+	        panel3.add(chartPanel);
+	    }
+	    
+	    
+	    
+	    
+		@Override
+		public void run() {
+			Thread ct = Thread.currentThread();
+	        while (ct == h1) {
+	            calcula();
+	            lblHora.setText(hora + ":" + minutos + ":" + segundos);
+	            try {
+	                Thread.sleep(1000);
+	            } catch (InterruptedException e) {
+	            }
+	        }
+			
+		}
+		
+		public void calcula() {
+	        Calendar calendario = new GregorianCalendar();
+	        hora =calendario.get(Calendar.HOUR_OF_DAY);
+	        minutos = calendario.get(Calendar.MINUTE);
+	        segundos = calendario.get(Calendar.SECOND);
+	    }
+	
+
 	}
-}

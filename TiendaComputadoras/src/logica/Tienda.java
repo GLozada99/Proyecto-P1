@@ -492,5 +492,43 @@ public class Tienda implements Serializable {
 	public void setPreciosCadaCompTemp(ArrayList<Float> preciosCadaCompTemp) {
 		this.preciosCadaCompTemp = preciosCadaCompTemp;
 	}
+	
+	public ArrayList<Integer> componenteMasVendidoTipo(){
+		ArrayList<Integer> masVendido= null;
+		int disco=0;
+		int micro=0;
+		int Ram=0;
+		int MB=0;
+		
+		try {
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			for (Factura miFactura : lasFacturas) {
+				for (Componente miComponente : miFactura.getLosComponentes()) {
+					if(miComponente instanceof DiscoDuro) {
+						disco++;
+						masVendido.add(0, disco);
+				}
+					if(miComponente instanceof Micro) {
+						micro++;
+						masVendido.add(1, micro);
+				}
+					if(miComponente instanceof RAM) {
+						Ram++;
+						masVendido.add(2, Ram);
+				}
+					if(miComponente instanceof MotherBoard) {
+						MB++;
+						masVendido.add(3, MB);
+		}
+		
+			}
+				
+			}
+			
+		}
+		return masVendido;
+	}
 
 }
