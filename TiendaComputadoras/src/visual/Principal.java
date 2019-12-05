@@ -70,9 +70,8 @@ public class Principal extends JFrame implements  Runnable  {
 	private Thread h1;
 	private JPanel panel1;
 	private JPanel panel2;
-	private JPanel panel3;
-	private JPanel panel4;
 	private DefaultPieDataset data = new DefaultPieDataset();
+	private DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 	/**
 	 * Launch the application.
 	 */
@@ -325,7 +324,7 @@ public class Principal extends JFrame implements  Runnable  {
 
 
 		panel1 = new JPanel();
-		panel1.setBounds(17, 14, 652, 308);
+		panel1.setBounds(17, 14, 652, 631);
 		contentPane.add(panel1);
 		new Thread() {
 			int i=0;
@@ -351,19 +350,32 @@ public class Principal extends JFrame implements  Runnable  {
 		showGraf1();
 
 		panel2 = new JPanel();
-		panel2.setBounds(686, 18, 652, 308);
+		panel2.setBounds(686, 14, 652, 631);
 		contentPane.add(panel2);
+		new Thread() {
+			int i=0;
+			public void run() {
+				while (true) {
+
+					try {
+						Thread.sleep(100);
+						if(i>3) {
+							dataset.clear();
+							i=-1;
+							showGraf2();
+						}
+						i++;
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
+				}
+
+			}
+
+		}.start();
 		showGraf2();
+		}
 
-		panel3 = new JPanel();
-		panel3.setBounds(17, 336, 652, 308);
-		contentPane.add(panel3);
-		showGraf3();
-
-		panel4 = new JPanel();
-		panel4.setBounds(686, 339, 652, 308);
-		contentPane.add(panel4);}
-	//showGraf4();
 
 	private void showGraf1() {
 
@@ -412,7 +424,7 @@ public class Principal extends JFrame implements  Runnable  {
 		chartPanel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		chart.setBackgroundPaint( SystemColor.inactiveCaption);
 
-		chartPanel.setBounds(0, 0, 652, 308);
+		chartPanel.setBounds(0, 0, 652, 631);
 		chartPanel.setPreferredSize(new java.awt.Dimension(panel1.getWidth(), panel1.getHeight()));
 		panel1.add(chartPanel);
 	}
@@ -420,21 +432,39 @@ public class Principal extends JFrame implements  Runnable  {
 
 
 		// Fuente de Datos
-		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		dataset.setValue(8, "Mujeres", "Lunes");
-		dataset.setValue(7, "Hombres", "Lunes");
-		dataset.setValue(9, "Mujeres", "Martes");
-		dataset.setValue(4, "Hombres", "Martes");
-		dataset.setValue(4, "Mujeres", "Miercoles");
-		dataset.setValue(5, "Hombres", "Miercoles");
-		dataset.setValue(8, "Mujeres", "Jueves");
-		dataset.setValue(9, "Hombres", "Jueves");
-		dataset.setValue(7, "Mujeres", "Viernes");
-		dataset.setValue(8, "Hombres", "Viernes");
+		
+		ArrayList<Persona> vendedores = Tienda.getInstance().vendedoresMasVentas();
+		try {
+			dataset.addValue(((Vendedor)vendedores.get(0)).getVentas(),vendedores.get(0).getNombre(),"");
+		} catch (NullPointerException |IndexOutOfBoundsException e) {
+			// TODO: handle exception
+		}
+		try {
+			dataset.addValue(((Vendedor)vendedores.get(1)).getVentas(), vendedores.get(1).getNombre(), "");
+		} catch (NullPointerException |IndexOutOfBoundsException e) {
+			// TODO: handle exception
+		}
+		try {
+			dataset.addValue(((Vendedor)vendedores.get(2)).getVentas(), vendedores.get(2).getNombre(),"");
+		} catch (NullPointerException |IndexOutOfBoundsException e) {
+			// TODO: handle exception
+		}
+		try {
+			dataset.addValue(((Vendedor)vendedores.get(3)).getVentas(), vendedores.get(3).getNombre(),"");
+		} catch (NullPointerException |IndexOutOfBoundsException e) {
+			// TODO: handle exception
+		}
+		try {
+			
+			dataset.addValue(((Vendedor)vendedores.get(4)).getVentas(), vendedores.get(4).getNombre(),"" );
+		} catch (NullPointerException |IndexOutOfBoundsException e) {
+			// TODO: handle exception
+		}
+		
 
 		// Creando el Grafico
 		JFreeChart chart = ChartFactory.createBarChart3D
-				("Participacion por Genero","Genero", "Dias", 
+				("Vendedores con mas ventas","", "Nombre", 
 						dataset, PlotOrientation.VERTICAL, true,true, false);
 		chart.setBackgroundPaint(SystemColor.inactiveCaption);
 		chart.getTitle().setPaint(Color.black); 
@@ -447,63 +477,9 @@ public class Principal extends JFrame implements  Runnable  {
 		chartPanel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		//  chart.getPlot().setBackgroundPaint( SystemColor.inactiveCaptionBorder );
 
-		chartPanel.setBounds(0, 0, 635, 303);
+		chartPanel.setBounds(0, 0, 652, 631);
 		chartPanel.setPreferredSize(new java.awt.Dimension(panel2.getWidth(),panel2.getHeight()));
 		panel2.add(chartPanel);
-
-
-
-
-
-	}
-
-	private void showGraf3() {
-
-		// Fuente de Datos
-		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		dataset.setValue(8, "Mujeres", "Lunes");
-		dataset.setValue(7, "Hombres", "Lunes");
-		dataset.setValue(9, "Mujeres", "Martes");
-		dataset.setValue(4, "Hombres", "Martes");
-		dataset.setValue(4, "Mujeres", "Miercoles");
-		dataset.setValue(5, "Hombres", "Miercoles");
-		dataset.setValue(8, "Mujeres", "Jueves");
-		dataset.setValue(9, "Hombres", "Jueves");
-		dataset.setValue(7, "Mujeres", "Viernes");
-		dataset.setValue(8, "Hombres", "Viernes");
-
-		// Creando el Grafico
-		JFreeChart chart = ChartFactory.createBarChart("Participacion por Genero","Genero", "Dias", dataset, PlotOrientation.HORIZONTAL, true,true, false);
-		chart.setBackgroundPaint(SystemColor.inactiveCaption);
-		chart.getTitle().setPaint(Color.black); 
-		CategoryPlot p = chart.getCategoryPlot(); 
-		p.setRangeGridlinePaint(Color.red); 
-		panel3.setLayout(null);
-
-		// Crear el Panel del Grafico con ChartPanel
-		ChartPanel chartPanel = new ChartPanel(chart);
-		chartPanel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		chart.getPlot().setBackgroundPaint( SystemColor.inactiveCaptionBorder );
-
-		chartPanel.setBounds(0, 0, 635, 303);
-		chartPanel.setPreferredSize(new java.awt.Dimension(panel3.getWidth(),panel3.getHeight()));
-		panel3.add(chartPanel);
-	}
-
-
-
-
-	@Override
-	public void run() {
-		Thread ct = Thread.currentThread();
-		while (ct == h1) {
-			calcula();
-			lblHora.setText(hora + ":" + minutos + ":" + segundos);
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-			}
-		}
 
 	}
 
@@ -514,47 +490,21 @@ public class Principal extends JFrame implements  Runnable  {
 		segundos = calendario.get(Calendar.SECOND);
 
 
-		ArrayList<Persona> losVendedores = new ArrayList<>();
-		for (Persona vendedor : Tienda.getInstance().getLosUsuarios()) {
-			if(vendedor instanceof Vendedor) {
-				losVendedores.add(vendedor);
+		
 			}
 
-		}
-		//al salir de ese for, tienes un arreglo solo con vendedores
-		ArrayList<Persona> organizados = new ArrayList<>();//este va a ser el arreglo del final, que tendra los vendedores organizados
-		int i=0;
-		for (Persona vendedor : losVendedores) {//recorremos el arreglo que tiene todos los vendedores
-			if(i<5) {
-				organizados.add(vendedor);//añadimos los primeros 5
-			}
-			else {
-				if(((Vendedor)vendedor).getVentas()>((Vendedor)organizados.get(0)).getVentas()){//luego de añadir los primeros 5, comparamos las ventas del vendedor actual (el 6)  
-					organizados.add(0, vendedor);												//con las del vendedor que esta en la posicion 0 (el primer vendedor)
-					//si las ventas del actual son mayores, lo ponemos de primero.
-				}
-				else if(((Vendedor)vendedor).getVentas()>((Vendedor)organizados.get(1)).getVentas()){// si no son mayores, probamos con el segundo vendedor, y asi seguimos hasta el 5to
-					organizados.add(1, vendedor);
 
-				}
-			}
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
 
-		}
+		
 
 	}
 
 
 
-
-
-
-
-
-
-
-
-
-
-}
 
 

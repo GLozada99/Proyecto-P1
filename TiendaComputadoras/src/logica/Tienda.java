@@ -567,16 +567,16 @@ public class Tienda implements Serializable {
 					componente.add(miComponente);
 					if (componente.contains(miComponente)) {
 						if (true) {
-							
+
 						}
 					}
 				}
-				
-				
+
+
 			}
-		//masVendido.add(0, );
-		//masVendido.add(1, micro);
-		//masVendido.add(2, Ram);
+			//masVendido.add(0, );
+			//masVendido.add(1, micro);
+			//masVendido.add(2, Ram);
 
 
 		} catch (NullPointerException e) {
@@ -585,4 +585,43 @@ public class Tienda implements Serializable {
 		}
 		return (ArrayList<Integer>) masVendido.clone();
 	}	
+	public ArrayList<Persona> vendedoresMasVentas(){
+		ArrayList<Persona> losVendedores = new ArrayList<>();
+		for (Persona vendedorA : losUsuarios) {
+			if(vendedorA instanceof Vendedor) {
+				losVendedores.add(vendedorA);
+			}
+		}
+		ArrayList<Persona> organizados = new ArrayList<>();
+		int i=0;
+		for (Persona vendedor : losVendedores) {
+			if(i<5) {
+				organizados.add(vendedor);
+			}
+			else {
+				if(((Vendedor)vendedor).getVentas()>((Vendedor)organizados.get(0)).getVentas()){
+					organizados.add(0, vendedor);												
+				}
+				else if(((Vendedor)vendedor).getVentas()>((Vendedor)organizados.get(1)).getVentas()){
+					organizados.add(1, vendedor);
+
+				}
+				else if(((Vendedor)vendedor).getVentas()>((Vendedor)organizados.get(2)).getVentas()){
+					organizados.add(2, vendedor);
+
+				}
+				else if(((Vendedor)vendedor).getVentas()>((Vendedor)organizados.get(3)).getVentas()){
+					organizados.add(3, vendedor);
+
+				}
+				else if(((Vendedor)vendedor).getVentas()>((Vendedor)organizados.get(4)).getVentas()){
+					organizados.add(4, vendedor);
+
+				}
+			}
+
+		}
+		return organizados;
+
+	}
 }

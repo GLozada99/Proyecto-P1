@@ -120,7 +120,7 @@ public class NuevaFactura extends JDialog {
 		setBackground(new Color(169, 169, 169));
 		setIconImage(Toolkit.getDefaultToolkit().getImage(NuevaFactura.class.getResource("/Imagenes/IconFacturar.png")));
 		setTitle("Nueva Factura");
-		setBounds(100, 100, 1191, 733);
+		setBounds(100, 100, 1260, 733);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(234, 238, 249));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -133,7 +133,7 @@ public class NuevaFactura extends JDialog {
 		DatosCliente.setBackground(new Color(234, 238, 249));
 		DatosCliente.setLayout(null);
 		DatosCliente.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Datos del Cliente", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		DatosCliente.setBounds(12, 540, 618, 98);
+		DatosCliente.setBounds(12, 540, 649, 98);
 		contentPanel.add(DatosCliente);
 
 		JLabel lblCedula = new JLabel("C\u00E9dula: ");
@@ -222,7 +222,7 @@ public class NuevaFactura extends JDialog {
 		ElementosASeleccionar.setForeground(Color.BLACK);
 		ElementosASeleccionar.setLayout(null);
 		ElementosASeleccionar.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Elementos a seleccionar", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		ElementosASeleccionar.setBounds(12, 13, 1149, 514);
+		ElementosASeleccionar.setBounds(12, 13, 1218, 514);
 		contentPanel.add(ElementosASeleccionar);
 
 		JButton btnIzquierda = new JButton("<<");
@@ -246,7 +246,7 @@ public class NuevaFactura extends JDialog {
 			}
 		});
 		btnIzquierda.setEnabled(false);
-		btnIzquierda.setBounds(525, 264, 99, 43);
+		btnIzquierda.setBounds(568, 266, 79, 43);
 		ElementosASeleccionar.add(btnIzquierda);
 
 		JButton btnDerecha = new JButton(">>");
@@ -322,12 +322,12 @@ public class NuevaFactura extends JDialog {
 				cargarCbx();
 			}
 		});
-		btnDerecha.setBounds(525, 221, 100, 43);
+		btnDerecha.setBounds(568, 223, 79, 43);
 		ElementosASeleccionar.add(btnDerecha);
 
 		cbxComponentes = new JComboBox<String>();
 		cbxComponentes.setModel(new DefaultComboBoxModel(new String[] {"Componentes", "Combos", "Disco Duro", "Microprocesador", "Mother Board", "RAM"}));
-		cbxComponentes.setBounds(12, 24, 501, 22);
+		cbxComponentes.setBounds(22, 24, 537, 22);
 		ElementosASeleccionar.add(cbxComponentes);
 		cbxComponentes.setSelectedIndex(0);
 
@@ -363,11 +363,11 @@ public class NuevaFactura extends JDialog {
 
 
 		JLabel lblCarritoDeCompras = new JLabel("Carrito de Compras");
-		lblCarritoDeCompras.setBounds(636, 27, 501, 16);
+		lblCarritoDeCompras.setBounds(659, 27, 501, 16);
 		ElementosASeleccionar.add(lblCarritoDeCompras);
 
 		JScrollPane spStock = new JScrollPane();
-		spStock.setBounds(12, 59, 501, 442);
+		spStock.setBounds(22, 59, 537, 442);
 		ElementosASeleccionar.add(spStock);
 
 		model = new DefaultTableModel();
@@ -387,7 +387,7 @@ public class NuevaFactura extends JDialog {
 
 
 		JScrollPane spCarrito = new JScrollPane();
-		spCarrito.setBounds(636, 59, 501, 442);
+		spCarrito.setBounds(659, 59, 537, 442);
 		ElementosASeleccionar.add(spCarrito);
 
 		model2 = new DefaultTableModel();
@@ -413,7 +413,7 @@ public class NuevaFactura extends JDialog {
 		Factura.setForeground(Color.BLACK);
 		Factura.setLayout(null);
 		Factura.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Factura", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		Factura.setBounds(646, 540, 515, 98);
+		Factura.setBounds(673, 540, 557, 98);
 		contentPanel.add(Factura);
 
 		txtPrecioTotal = new JTextField();
@@ -488,7 +488,7 @@ public class NuevaFactura extends JDialog {
 							else if(Tienda.getInstance().relacionFactura(Tienda.getInstance().findClientebyCedula(ftxtCedula.getText()), Float.valueOf(txtPrecioTotal.getText()), ayudaComponente, ayudaCantiComponente, ayudaCombos, ayudaCantiCombos, rdbtnCredito.isSelected())) {
 								Factura aux= new Factura(txtCodigo.getText(), Float.valueOf(txtPrecioTotal.getText()), Tienda.getInstance().findClientebyCedula(ftxtCedula.getText()), ayudaComponente, ayudaCombos, ayudaCantiComponente, ayudaCantiCombos, rdbtnCredito.isSelected());
 								Tienda.getInstance().agregarFactura(aux);
-								clean();
+								
 								//ayudaComponente.clear();
 								//ayudaCombos.clear();
 								//ayudaCantiComponente.clear();
@@ -503,6 +503,7 @@ public class NuevaFactura extends JDialog {
 								if(Tienda.getInstance().getUsuarioActual() instanceof Vendedor) {
 									((Vendedor)Tienda.getInstance().getUsuarioActual()).setVentas(((Vendedor) Tienda.getInstance().getUsuarioActual()).getVentas()+Float.valueOf(txtPrecioTotal.getText()));
 								}
+								clean();
 									
 							}
 							else {
@@ -518,7 +519,7 @@ public class NuevaFactura extends JDialog {
 							Factura aux = new Factura(txtCodigo.getText(), Float.valueOf(txtPrecioTotal.getText()), auxCli, ayudaComponente, ayudaCombos, ayudaCantiComponente, ayudaCantiCombos, rdbtnCredito.isSelected());
 							Tienda.getInstance().getLosClientes().add(auxCli);
 							Tienda.getInstance().agregarFactura(aux);
-							clean();
+							
 							//ayudaComponente.clear();
 							//ayudaCombos.clear();
 							//ayudaCantiComponente.clear();
@@ -534,6 +535,7 @@ public class NuevaFactura extends JDialog {
 							if(Tienda.getInstance().getUsuarioActual() instanceof Vendedor) {
 								((Vendedor)Tienda.getInstance().getUsuarioActual()).setVentas(((Vendedor) Tienda.getInstance().getUsuarioActual()).getVentas()+Float.valueOf(txtPrecioTotal.getText()));
 							}
+							clean();
 							}
 							
 							else {
