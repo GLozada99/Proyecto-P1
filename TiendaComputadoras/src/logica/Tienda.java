@@ -505,19 +505,19 @@ public class Tienda implements Serializable {
 				for (Componente miComponente : miFactura.getLosComponentes()) {
 					if(miComponente instanceof DiscoDuro) {
 						disco+=miFactura.getCantiCompo(miComponente);
-						
+
 					}
 					if(miComponente instanceof Micro) {
 						micro+=miFactura.getCantiCompo(miComponente);
-						
+
 					}
 					if(miComponente instanceof RAM) {
 						Ram+=miFactura.getCantiCompo(miComponente);
-						
+
 					}
 					if(miComponente instanceof MotherBoard) {
 						MB+=miFactura.getCantiCompo(miComponente);
-						
+
 					}
 
 				}
@@ -525,26 +525,26 @@ public class Tienda implements Serializable {
 					for (Componente miComponente : miCombo.getComponentes()) {
 						if(miComponente instanceof DiscoDuro) {
 							disco+=miFactura.getCantiUnCombo(miCombo);
-							
+
 						}
 						if(miComponente instanceof Micro) {
 							micro+=miFactura.getCantiUnCombo(miCombo);
-							
+
 						}
 						if(miComponente instanceof RAM) {
 							Ram+=miFactura.getCantiUnCombo(miCombo);
-						
+
 						}
 						if(miComponente instanceof MotherBoard) {
 							MB+=miFactura.getCantiUnCombo(miCombo);
-						
+
 						}
-						
+
 					}
-					
+
 				}
-				
-				
+
+
 			}
 			masVendido.add(0, disco);masVendido.add(1, micro);masVendido.add(2, Ram);masVendido.add(3, MB);
 
@@ -554,4 +554,35 @@ public class Tienda implements Serializable {
 
 		}
 		return (ArrayList<Integer>) masVendido.clone();
-	}}
+	}
+
+	public ArrayList<Integer> componenteMasVendidoCantidad(){
+		ArrayList<Integer> masVendido= new ArrayList<>();
+		int compo=0;
+		ArrayList<Componente> componente= new ArrayList<>();
+		try {
+			for (Factura miFactura : lasFacturas) {
+				for (Componente miComponente : miFactura.getLosComponentes()) {
+					compo = miFactura.getCantiCompo(miComponente);
+					componente.add(miComponente);
+					if (componente.contains(miComponente)) {
+						if (true) {
+							
+						}
+					}
+				}
+				
+				
+			}
+		//masVendido.add(0, );
+		//masVendido.add(1, micro);
+		//masVendido.add(2, Ram);
+
+
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+
+		}
+		return (ArrayList<Integer>) masVendido.clone();
+	}	
+}

@@ -66,13 +66,13 @@ public class Principal extends JFrame implements  Runnable  {
 	private Dimension dim;
 	private JLabel lblHora ;
 	private int hora, minutos, segundos;
-    private Calendar calendario;
-    private Thread h1;
-    private JPanel panel1;
-    private JPanel panel2;
-    private JPanel panel3;
-    private JPanel panel4;
-    private DefaultPieDataset data = new DefaultPieDataset();
+	private Calendar calendario;
+	private Thread h1;
+	private JPanel panel1;
+	private JPanel panel2;
+	private JPanel panel3;
+	private JPanel panel4;
+	private DefaultPieDataset data = new DefaultPieDataset();
 	/**
 	 * Launch the application.
 	 */
@@ -240,20 +240,20 @@ public class Principal extends JFrame implements  Runnable  {
 				aux.setVisible(true);
 			}
 		});
-		
-				JMenuItem mntmListaUsuarios = new JMenuItem("Lista Usuarios");
-				mntmListaUsuarios.setForeground(new Color(86, 130, 163));
-				mntmListaUsuarios.setEnabled(false);
-				mntmListaUsuarios.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						ListaUsuarios aux = new ListaUsuarios();
-						aux.setModal(true);
-						aux.setVisible(true);
-					}
-				});
-				
-				mntmListaUsuarios.setIcon(new ImageIcon(Principal.class.getResource("/Imagenes/IconListaUsuario.png")));
-				mnListados.add(mntmListaUsuarios);
+
+		JMenuItem mntmListaUsuarios = new JMenuItem("Lista Usuarios");
+		mntmListaUsuarios.setForeground(new Color(86, 130, 163));
+		mntmListaUsuarios.setEnabled(false);
+		mntmListaUsuarios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListaUsuarios aux = new ListaUsuarios();
+				aux.setModal(true);
+				aux.setVisible(true);
+			}
+		});
+
+		mntmListaUsuarios.setIcon(new ImageIcon(Principal.class.getResource("/Imagenes/IconListaUsuario.png")));
+		mnListados.add(mntmListaUsuarios);
 		mnListados.add(mntmListaClientes);
 
 		JMenuItem mntmListaProveedores = new JMenuItem("Lista Proveedores");
@@ -269,7 +269,7 @@ public class Principal extends JFrame implements  Runnable  {
 		if(Tienda.getInstance().getUsuarioActual() instanceof Administrador) {			
 			mnAdministracion.setEnabled(true);
 			mntmListaUsuarios.setEnabled(true);
-			
+
 		}
 		mnListados.add(mntmListaProveedores);
 
@@ -322,237 +322,239 @@ public class Principal extends JFrame implements  Runnable  {
 		mnListados.add(mntmHistorialOrdenes);
 		getContentPane().setLayout(null);
 		contentPane.setLayout(null);
-		
-		
-		 panel1 = new JPanel();
+
+
+		panel1 = new JPanel();
 		panel1.setBounds(17, 14, 652, 308);
 		contentPane.add(panel1);
 		new Thread() {
 			int i=0;
 			public void run() {
 				while (true) {
-					
+
 					try {
 						Thread.sleep(100);
 						if(i>3) {
-						data.clear();
-						i=-1;
-						showGraf1();
+							data.clear();
+							i=-1;
+							showGraf1();
 						}
 						i++;
 					} catch (Exception e) {
 						// TODO: handle exception
 					}
 				}
-			
+
 			}
-			
+
 		}.start();
 		showGraf1();
-		
-		 panel2 = new JPanel();
+
+		panel2 = new JPanel();
 		panel2.setBounds(686, 18, 652, 308);
 		contentPane.add(panel2);
 		showGraf2();
-		
-		 panel3 = new JPanel();
+
+		panel3 = new JPanel();
 		panel3.setBounds(17, 336, 652, 308);
 		contentPane.add(panel3);
 		showGraf3();
-		
-		 panel4 = new JPanel();
+
+		panel4 = new JPanel();
 		panel4.setBounds(686, 339, 652, 308);
 		contentPane.add(panel4);}
-	    //showGraf4();
-	
-		private void showGraf1() {
-		      
-	        // Fuente de Datos
-	       // DefaultPieDataset data = new DefaultPieDataset();
-	        ArrayList<Integer> componeteVenta= Tienda.getInstance().componenteMasVendidoTipo();
-	       
-	      
-	       
-	        try {
-	        	if(componeteVenta.get(0)!=null)
-	        	data.setValue("Disco Duro", componeteVenta.get(0));
-		       
-			} catch (NullPointerException |IndexOutOfBoundsException e) {
-				
-			}
-	        try {
-	        	if(componeteVenta.get(1)!=null)
-	        	 data.setValue("Microprocesador", componeteVenta.get(1));
-		       
-			} catch (NullPointerException |IndexOutOfBoundsException e) {
-				
-			}
-	        try {
-	        	if(componeteVenta.get(2)!=null)
-	        	  data.setValue("Memoria RAM", componeteVenta.get(2));
-		       
-			} catch (NullPointerException |IndexOutOfBoundsException e) {
-				
-			}
-	        try {
-	        	if(componeteVenta.get(3)!=null)
-	        	 data.setValue("Tarjeta Madre", componeteVenta.get(3));
-		       
-			} catch (NullPointerException |IndexOutOfBoundsException e) {
-				
-			}
-            
-	 
-	        // Creando el Grafico
-	        JFreeChart chart = ChartFactory.createPieChart( "Ventas de componentes por tipo",  data,  true, true, false);
-	        panel1.setLayout(null);
-	 
-	        // Crear el Panel del Grafico con ChartPanel
-	        ChartPanel chartPanel = new ChartPanel(chart);
-	        chartPanel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-	        chart.setBackgroundPaint( SystemColor.inactiveCaption);
-	      
-	        chartPanel.setBounds(0, 0, 652, 308);
-	        chartPanel.setPreferredSize(new java.awt.Dimension(panel1.getWidth(), panel1.getHeight()));
-	        panel1.add(chartPanel);
-	    }
-	    private void showGraf2() {
-	        
-	        
-	        // Fuente de Datos
-	        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-	        dataset.setValue(8, "Mujeres", "Lunes");
-	        dataset.setValue(7, "Hombres", "Lunes");
-	        dataset.setValue(9, "Mujeres", "Martes");
-	        dataset.setValue(4, "Hombres", "Martes");
-	        dataset.setValue(4, "Mujeres", "Miercoles");
-	        dataset.setValue(5, "Hombres", "Miercoles");
-	        dataset.setValue(8, "Mujeres", "Jueves");
-	        dataset.setValue(9, "Hombres", "Jueves");
-	        dataset.setValue(7, "Mujeres", "Viernes");
-	        dataset.setValue(8, "Hombres", "Viernes");
-	        
-	        // Creando el Grafico
-	        JFreeChart chart = ChartFactory.createBarChart3D
-	                ("Participacion por Genero","Genero", "Dias", 
-	                dataset, PlotOrientation.VERTICAL, true,true, false);
-	                chart.setBackgroundPaint(SystemColor.inactiveCaption);
-	                chart.getTitle().setPaint(Color.black); 
-	                CategoryPlot p = chart.getCategoryPlot(); 
-	                p.setRangeGridlinePaint(Color.red); 
-	       panel2.setLayout(null);
-	 
-	        // Crear el Panel del Grafico con ChartPanel
-	        ChartPanel chartPanel = new ChartPanel(chart);
-	        chartPanel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-	      //  chart.getPlot().setBackgroundPaint( SystemColor.inactiveCaptionBorder );
-	      
-	        chartPanel.setBounds(0, 0, 635, 303);
-	        chartPanel.setPreferredSize(new java.awt.Dimension(panel2.getWidth(),panel2.getHeight()));
-	       panel2.add(chartPanel);
-	        
-	        
-	        
-	        
+	//showGraf4();
 
-	    }
-	    
-	    private void showGraf3() {
-	        
-	        // Fuente de Datos
-	        DefaultPieDataset data = new DefaultPieDataset();
-	        data.setValue("C", 40);
-	        data.setValue("Java", 45);
-	        data.setValue("Python", 15);
-	 
-	        DefaultPieDataset defaultpiedataset = new DefaultPieDataset(); 
-	        defaultpiedataset.setValue("Programacion", new Double(41.200000000000003D)); 
-	        defaultpiedataset.setValue("Electronica", new Double(11D)); 
-	        defaultpiedataset.setValue("Hacking", new Double(19.5D)); 
-	        defaultpiedataset.setValue("SEO", new Double(30.5D)); 
-	        defaultpiedataset.setValue("Redes", new Double(2.0D)); 
-	 
-	        // Creando el Grafico
-	        JFreeChart chart = ChartFactory.createPieChart3D("Tematicas Blog", defaultpiedataset, true, true, false); 
-	        PiePlot3D pieplot3d = (PiePlot3D)chart.getPlot(); 
-	        pieplot3d.setDepthFactor(0.5); 
-	        pieplot3d.setStartAngle(290D); 
-	        pieplot3d.setDirection(Rotation.CLOCKWISE); 
-	        pieplot3d.setForegroundAlpha(0.5F); 
-	        panel3.setLayout(null);
-	        
-	        ChartPanel chartPanel = new ChartPanel(chart);
-	        chart.setBackgroundPaint( SystemColor.inactiveCaption);
-	        chartPanel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-	        chartPanel.setBounds(0, 0, 652, 308);
-	        panel3.add(chartPanel);
-	    }
-	    
-	    
-	    
-	    
-		@Override
-		public void run() {
-			Thread ct = Thread.currentThread();
-	        while (ct == h1) {
-	            calcula();
-	            lblHora.setText(hora + ":" + minutos + ":" + segundos);
-	            try {
-	                Thread.sleep(1000);
-	            } catch (InterruptedException e) {
-	            }
-	        }
-			
+	private void showGraf1() {
+
+		// Fuente de Datos
+		// DefaultPieDataset data = new DefaultPieDataset();
+		ArrayList<Integer> componeteVenta= Tienda.getInstance().componenteMasVendidoTipo();
+
+
+
+		try {
+			if(componeteVenta.get(0)!=null)
+				data.setValue("Disco Duro", componeteVenta.get(0));
+
+		} catch (NullPointerException |IndexOutOfBoundsException e) {
+
 		}
-		
-		public void calcula() {
-	        Calendar calendario = new GregorianCalendar();
-	        hora =calendario.get(Calendar.HOUR_OF_DAY);
-	        minutos = calendario.get(Calendar.MINUTE);
-	        segundos = calendario.get(Calendar.SECOND);
-	        
-	        
-	        ArrayList<Persona> losVendedores = new ArrayList<>();
-	        for (Persona vendedor : Tienda.getInstance().getLosUsuarios()) {
-	        	if(vendedor instanceof Vendedor) {
-	        		losVendedores.add(vendedor);
-	        	}
-				
-			}
-	        //al salir de ese for, tienes un arreglo solo con vendedores
-	        ArrayList<Persona> organizados = new ArrayList<>();//este va a ser el arreglo del final, que tendra los vendedores organizados
-	        int i=0;
-	        for (Persona vendedor : losVendedores) {//recorremos el arreglo que tiene todos los vendedores
-	        	if(i<5) {
-	        		organizados.add(vendedor);//añadimos los primeros 5
-	        	}
-	        	else {
-	        		if(((Vendedor)vendedor).getVentas()>((Vendedor)organizados.get(0)).getVentas()){//luego de añadir los primeros 5, comparamos las ventas del vendedor actual (el 6)  
-	        			organizados.add(0, vendedor);												//con las del vendedor que esta en la posicion 0 (el primer vendedor)
-	        																						//si las ventas del actual son mayores, lo ponemos de primero.
-	        		}
-	        		else if(((Vendedor)vendedor).getVentas()>((Vendedor)organizados.get(1)).getVentas()){// si no son mayores, probamos con el segundo vendedor, y asi seguimos hasta el 5to
-	        			organizados.add(1, vendedor);
-	        			
-	        		}
-	        	}
-				
-			}
-	       
-	    }
-	
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		try {
+			if(componeteVenta.get(1)!=null)
+				data.setValue("Microprocesador", componeteVenta.get(1));
+
+		} catch (NullPointerException |IndexOutOfBoundsException e) {
+
+		}
+		try {
+			if(componeteVenta.get(2)!=null)
+				data.setValue("Memoria RAM", componeteVenta.get(2));
+
+		} catch (NullPointerException |IndexOutOfBoundsException e) {
+
+		}
+		try {
+			if(componeteVenta.get(3)!=null)
+				data.setValue("Tarjeta Madre", componeteVenta.get(3));
+
+		} catch (NullPointerException |IndexOutOfBoundsException e) {
+
+		}
+
+
+		// Creando el Grafico
+		JFreeChart chart = ChartFactory.createPieChart( "Ventas de componentes por tipo",  data,  true, true, false);
+		panel1.setLayout(null);
+
+		// Crear el Panel del Grafico con ChartPanel
+		ChartPanel chartPanel = new ChartPanel(chart);
+		chartPanel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		chart.setBackgroundPaint( SystemColor.inactiveCaption);
+
+		chartPanel.setBounds(0, 0, 652, 308);
+		chartPanel.setPreferredSize(new java.awt.Dimension(panel1.getWidth(), panel1.getHeight()));
+		panel1.add(chartPanel);
 	}
+	private void showGraf2() {
+
+
+		// Fuente de Datos
+		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+		dataset.setValue(8, "Mujeres", "Lunes");
+		dataset.setValue(7, "Hombres", "Lunes");
+		dataset.setValue(9, "Mujeres", "Martes");
+		dataset.setValue(4, "Hombres", "Martes");
+		dataset.setValue(4, "Mujeres", "Miercoles");
+		dataset.setValue(5, "Hombres", "Miercoles");
+		dataset.setValue(8, "Mujeres", "Jueves");
+		dataset.setValue(9, "Hombres", "Jueves");
+		dataset.setValue(7, "Mujeres", "Viernes");
+		dataset.setValue(8, "Hombres", "Viernes");
+
+		// Creando el Grafico
+		JFreeChart chart = ChartFactory.createBarChart3D
+				("Participacion por Genero","Genero", "Dias", 
+						dataset, PlotOrientation.VERTICAL, true,true, false);
+		chart.setBackgroundPaint(SystemColor.inactiveCaption);
+		chart.getTitle().setPaint(Color.black); 
+		CategoryPlot p = chart.getCategoryPlot(); 
+		p.setRangeGridlinePaint(Color.red); 
+		panel2.setLayout(null);
+
+		// Crear el Panel del Grafico con ChartPanel
+		ChartPanel chartPanel = new ChartPanel(chart);
+		chartPanel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		//  chart.getPlot().setBackgroundPaint( SystemColor.inactiveCaptionBorder );
+
+		chartPanel.setBounds(0, 0, 635, 303);
+		chartPanel.setPreferredSize(new java.awt.Dimension(panel2.getWidth(),panel2.getHeight()));
+		panel2.add(chartPanel);
+
+
+
+
+
+	}
+
+	private void showGraf3() {
+
+		// Fuente de Datos
+		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+		dataset.setValue(8, "Mujeres", "Lunes");
+		dataset.setValue(7, "Hombres", "Lunes");
+		dataset.setValue(9, "Mujeres", "Martes");
+		dataset.setValue(4, "Hombres", "Martes");
+		dataset.setValue(4, "Mujeres", "Miercoles");
+		dataset.setValue(5, "Hombres", "Miercoles");
+		dataset.setValue(8, "Mujeres", "Jueves");
+		dataset.setValue(9, "Hombres", "Jueves");
+		dataset.setValue(7, "Mujeres", "Viernes");
+		dataset.setValue(8, "Hombres", "Viernes");
+
+		// Creando el Grafico
+		JFreeChart chart = ChartFactory.createBarChart("Participacion por Genero","Genero", "Dias", dataset, PlotOrientation.HORIZONTAL, true,true, false);
+		chart.setBackgroundPaint(SystemColor.inactiveCaption);
+		chart.getTitle().setPaint(Color.black); 
+		CategoryPlot p = chart.getCategoryPlot(); 
+		p.setRangeGridlinePaint(Color.red); 
+		panel3.setLayout(null);
+
+		// Crear el Panel del Grafico con ChartPanel
+		ChartPanel chartPanel = new ChartPanel(chart);
+		chartPanel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+		chart.getPlot().setBackgroundPaint( SystemColor.inactiveCaptionBorder );
+
+		chartPanel.setBounds(0, 0, 635, 303);
+		chartPanel.setPreferredSize(new java.awt.Dimension(panel3.getWidth(),panel3.getHeight()));
+		panel3.add(chartPanel);
+	}
+
+
+
+
+	@Override
+	public void run() {
+		Thread ct = Thread.currentThread();
+		while (ct == h1) {
+			calcula();
+			lblHora.setText(hora + ":" + minutos + ":" + segundos);
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+			}
+		}
+
+	}
+
+	public void calcula() {
+		Calendar calendario = new GregorianCalendar();
+		hora =calendario.get(Calendar.HOUR_OF_DAY);
+		minutos = calendario.get(Calendar.MINUTE);
+		segundos = calendario.get(Calendar.SECOND);
+
+
+		ArrayList<Persona> losVendedores = new ArrayList<>();
+		for (Persona vendedor : Tienda.getInstance().getLosUsuarios()) {
+			if(vendedor instanceof Vendedor) {
+				losVendedores.add(vendedor);
+			}
+
+		}
+		//al salir de ese for, tienes un arreglo solo con vendedores
+		ArrayList<Persona> organizados = new ArrayList<>();//este va a ser el arreglo del final, que tendra los vendedores organizados
+		int i=0;
+		for (Persona vendedor : losVendedores) {//recorremos el arreglo que tiene todos los vendedores
+			if(i<5) {
+				organizados.add(vendedor);//añadimos los primeros 5
+			}
+			else {
+				if(((Vendedor)vendedor).getVentas()>((Vendedor)organizados.get(0)).getVentas()){//luego de añadir los primeros 5, comparamos las ventas del vendedor actual (el 6)  
+					organizados.add(0, vendedor);												//con las del vendedor que esta en la posicion 0 (el primer vendedor)
+					//si las ventas del actual son mayores, lo ponemos de primero.
+				}
+				else if(((Vendedor)vendedor).getVentas()>((Vendedor)organizados.get(1)).getVentas()){// si no son mayores, probamos con el segundo vendedor, y asi seguimos hasta el 5to
+					organizados.add(1, vendedor);
+
+				}
+			}
+
+		}
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
 
 
