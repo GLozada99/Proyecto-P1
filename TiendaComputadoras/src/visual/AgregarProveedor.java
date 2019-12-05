@@ -92,12 +92,14 @@ public class AgregarProveedor extends JDialog {
 		setTitle("Agregar Proveedor");
 		setBounds(100, 100, 654, 282);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(new Color(234, 238, 249));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		setLocationRelativeTo(null);
 		contentPanel.setLayout(null);
 		{
 			JPanel panel_RegistroProveedor = new JPanel();
+			panel_RegistroProveedor.setBackground(new Color(234, 238, 249));
 			panel_RegistroProveedor.setBounds(7, 5, 234, 195);
 			panel_RegistroProveedor.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Registro de Proveedor", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			contentPanel.add(panel_RegistroProveedor);
@@ -154,6 +156,7 @@ public class AgregarProveedor extends JDialog {
 					panel_RegistroProveedor.add(ftxtRNC);
 
 					panel_Componentes = new JPanel();
+					panel_Componentes.setBackground(new Color(234, 238, 249));
 					panel_Componentes.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Componentes Proporcionados", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 					panel_Componentes.setBounds(245, 5, 379, 195);
 					contentPanel.add(panel_Componentes);
@@ -256,6 +259,7 @@ public class AgregarProveedor extends JDialog {
 
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(new Color(234, 238, 249));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
