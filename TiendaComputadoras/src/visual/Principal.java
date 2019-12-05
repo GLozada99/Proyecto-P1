@@ -72,7 +72,7 @@ public class Principal extends JFrame implements  Runnable  {
     private JPanel panel2;
     private JPanel panel3;
     private JPanel panel4;
-
+    private DefaultPieDataset data = new DefaultPieDataset();
 	/**
 	 * Launch the application.
 	 */
@@ -327,6 +327,27 @@ public class Principal extends JFrame implements  Runnable  {
 		 panel1 = new JPanel();
 		panel1.setBounds(17, 14, 652, 308);
 		contentPane.add(panel1);
+		new Thread() {
+			int i=0;
+			public void run() {
+				while (true) {
+					
+					try {
+						Thread.sleep(100);
+						if(i>3) {
+						data.clear();
+						i=-1;
+						showGraf1();
+						}
+						i++;
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
+				}
+			
+			}
+			
+		}.start();
 		showGraf1();
 		
 		 panel2 = new JPanel();
@@ -347,34 +368,38 @@ public class Principal extends JFrame implements  Runnable  {
 		private void showGraf1() {
 		      
 	        // Fuente de Datos
-	        DefaultPieDataset data = new DefaultPieDataset();
+	       // DefaultPieDataset data = new DefaultPieDataset();
 	        ArrayList<Integer> componeteVenta= Tienda.getInstance().componenteMasVendidoTipo();
 	       
 	      
 	       
 	        try {
+	        	if(componeteVenta.get(0)!=null)
 	        	data.setValue("Disco Duro", componeteVenta.get(0));
 		       
 			} catch (NullPointerException |IndexOutOfBoundsException e) {
-				System.out.println("Hola");
+				
 			}
 	        try {
+	        	if(componeteVenta.get(1)!=null)
 	        	 data.setValue("Microprocesador", componeteVenta.get(1));
 		       
 			} catch (NullPointerException |IndexOutOfBoundsException e) {
-				System.out.println("Hola");
+				
 			}
 	        try {
+	        	if(componeteVenta.get(2)!=null)
 	        	  data.setValue("Memoria RAM", componeteVenta.get(2));
 		       
 			} catch (NullPointerException |IndexOutOfBoundsException e) {
-				System.out.println("Hola");
+				
 			}
 	        try {
+	        	if(componeteVenta.get(3)!=null)
 	        	 data.setValue("Tarjeta Madre", componeteVenta.get(3));
 		       
 			} catch (NullPointerException |IndexOutOfBoundsException e) {
-				System.out.println("Hola");
+				
 			}
             
 	 

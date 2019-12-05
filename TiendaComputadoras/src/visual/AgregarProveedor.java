@@ -230,7 +230,7 @@ public class AgregarProveedor extends JDialog {
 									num = Float.valueOf(JOptionPane.showInputDialog("Introduzca el precio del componente"));
 									bien = true;
 									btnAsignarPrecio.setEnabled(false);
-								} catch (NumberFormatException e) {
+								} catch (NumberFormatException |NullPointerException e) {
 									JOptionPane.showMessageDialog(null, "Debe introducir un numero");
 								}	
 							}
