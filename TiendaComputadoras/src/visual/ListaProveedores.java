@@ -145,7 +145,7 @@ public class ListaProveedores extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						Proveedor auxProv = Tienda.getInstance().findProveedrobyRNC(rnc);
 						int i=1;
-							i = JOptionPane.showConfirmDialog(null, "Está seguro que desea eliminar al proveedor "+auxProv.getNombre()+"?");
+						i = JOptionPane.showConfirmDialog(null, "Está seguro que desea eliminar al proveedor:"+" "+auxProv.getNombre()+"?");
 						if(i==0) {
 							Tienda.getInstance().getLosProveedores().remove(auxProv);
 							JOptionPane.showMessageDialog(null, "Proveedor eliminado con exito");

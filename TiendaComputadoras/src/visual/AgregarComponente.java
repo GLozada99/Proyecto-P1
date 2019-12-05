@@ -625,7 +625,7 @@ public class AgregarComponente extends JDialog {
 
 							if(!b) {
 								Tienda.getInstance().getLosCompTemp().add(aux);
-								AgregarProveedor.cargarComponentes(null);
+								AgregarProveedor.cargarComponentes();
 								dispose();
 							}
 

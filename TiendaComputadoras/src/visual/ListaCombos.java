@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -131,8 +132,13 @@ public class ListaCombos extends JDialog {
 				btnEliminar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						Combo aux = Tienda.getInstance().findCombobyCodigo(codigo);
-						Tienda.getInstance().getLosCombo().remove(aux);
-						cargarCombos();
+						int i=1;
+						i = JOptionPane.showConfirmDialog(null, "Está seguro que desea eliminar el combo:"+" "+aux.getNombre()+"?");
+						if(i==0) {
+							Tienda.getInstance().getLosCombo().remove(aux);
+							JOptionPane.showMessageDialog(null, "Combo eliminado con exito");
+							cargarCombos();
+						}
 					}
 				});
 				btnEliminar.setActionCommand("Cancel");

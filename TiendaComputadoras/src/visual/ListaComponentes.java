@@ -217,15 +217,20 @@ public class ListaComponentes extends JDialog {
 				btnEliminar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						Componente aux = Tienda.getInstance().findComponentebyNumeroSerie(codigo);
-						Tienda.getInstance().getLosComponentes().remove(aux);
-						if (aux instanceof DiscoDuro)
-							cargarComponentesDD();
-						if (aux instanceof Micro)
-							cargarComponentesMicro();
-						if (aux instanceof MotherBoard)
-							cargarComponentesMotherBoard();
-						if (aux instanceof RAM)
-							cargarComponentesRAM();
+						int i=1;
+						i = JOptionPane.showConfirmDialog(null, "Está seguro que desea eliminar el componente:"+" "+aux.getNumeroSerie()+"?");
+						if(i==0) {
+							Tienda.getInstance().getLosComponentes().remove(aux);
+							JOptionPane.showMessageDialog(null, "Componente eliminado con exito");
+							if (aux instanceof DiscoDuro)
+								cargarComponentesDD();
+							if (aux instanceof Micro)
+								cargarComponentesMicro();
+							if (aux instanceof MotherBoard)
+								cargarComponentesMotherBoard();
+							if (aux instanceof RAM)
+								cargarComponentesRAM();
+						}
 					}
 				});
 				btnEliminar.setActionCommand("Cancel");

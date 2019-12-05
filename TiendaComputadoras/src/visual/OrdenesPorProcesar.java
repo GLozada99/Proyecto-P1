@@ -150,8 +150,13 @@ public class OrdenesPorProcesar extends JDialog {
 				btnEliminar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						OrdenCompra aux = Tienda.getInstance().findOrdenComprabyCodigo(codigo);
-						Tienda.getInstance().getOrdenesSinProcesar().remove(aux);
-						cargarOrdenes();
+						int i=1;
+						i = JOptionPane.showConfirmDialog(null, "Está seguro que desea eliminar la orden de código:"+" "+aux.getCodigo()+"?");
+						if(i==0) {
+							Tienda.getInstance().getOrdenesSinProcesar().remove(aux);
+							JOptionPane.showMessageDialog(null, "Orden eliminado con exito");
+							cargarOrdenes();
+						}
 					}
 				});
 				btnEliminar.setEnabled(false);

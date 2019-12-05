@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -117,7 +118,7 @@ public class ListaUsuarios extends JDialog {
 					}
 				});
 				buttonPane.add(btnAceptar);
-		
+
 				btnModificar = new JButton("Modificar");
 				btnModificar.setEnabled(false);
 				btnModificar.addActionListener(new ActionListener() {
@@ -129,14 +130,20 @@ public class ListaUsuarios extends JDialog {
 					}
 				});
 				buttonPane.add(btnModificar);
-				
+
 				btnEliminar = new JButton("Eliminar");
 				btnEliminar.setEnabled(false);
 				btnEliminar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-					Persona aux = Tienda.getInstance().usuarioByCodigo(codigo);
-						Tienda.getInstance().getLosUsuarios().remove(aux);
-						cargarUsuarios();	
+						Persona aux = Tienda.getInstance().usuarioByCodigo(codigo);
+						int i=1;
+						i = JOptionPane.showConfirmDialog(null, "Está seguro que desea eliminar al usuario:"+" "+aux.getNombre()+"?");
+						if(i==0) {
+							Tienda.getInstance().getLosUsuarios().remove(aux);
+							JOptionPane.showMessageDialog(null, "Usuario eliminado con exito");
+							cargarUsuarios();
+							btnEliminar.setEnabled(false);
+						}	
 					}
 				});
 				buttonPane.add(btnEliminar);
@@ -160,7 +167,7 @@ public class ListaUsuarios extends JDialog {
 			} catch (ClassCastException e) {
 				row[4] = ((Vendedor)aux).getContraseña();
 			}
-			
+
 			if (aux instanceof Administrador) {
 				row[5] = "Administrador";
 			}else {

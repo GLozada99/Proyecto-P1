@@ -122,7 +122,7 @@ public class ListaClientes extends JDialog {
 					}
 				});
 				buttonPane.add(btnAceptar);
-		
+
 				btnModificar = new JButton("Modificar");
 				btnModificar.setEnabled(false);
 				btnModificar.addActionListener(new ActionListener() {
@@ -138,14 +138,19 @@ public class ListaClientes extends JDialog {
 					}
 				});
 				buttonPane.add(btnModificar);
-				
+
 				btnEliminar = new JButton("Eliminar");
 				btnEliminar.setEnabled(false);
 				btnEliminar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						Cliente aux = Tienda.getInstance().findClientebyCedula(codigo);
-						Tienda.getInstance().getLosClientes().remove(aux);
-						cargarClientes();
+						int i=1;
+						i = JOptionPane.showConfirmDialog(null, "Está seguro que desea eliminar al cliente:"+" "+aux.getNombre()+"?");
+						if(i==0) {
+							Tienda.getInstance().getLosClientes().remove(aux);
+							JOptionPane.showMessageDialog(null, "Cliente eliminado con exito");
+							cargarClientes();
+						}
 					}
 				});
 				buttonPane.add(btnEliminar);
