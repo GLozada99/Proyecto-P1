@@ -55,7 +55,7 @@ public class HistorialOrdenes extends JDialog {
 	 */
 
 
-
+ 
 
 	public HistorialOrdenes() {
 		setTitle("Historial Ordenes de Compra");
