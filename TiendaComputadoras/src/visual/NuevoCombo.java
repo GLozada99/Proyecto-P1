@@ -181,10 +181,25 @@ public class NuevoCombo extends JDialog {
 				btnCrear.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if(cbxDiscoDuro.getSelectedIndex()!=0&&cbxMicro.getSelectedIndex()!=0&&cbxMotherBoard.getSelectedIndex()!=0&&cbxRAM.getSelectedIndex()!=0) {
-						Combo aux= new Combo(componenteDevolver(),txtNombre.getText(), Integer.valueOf(spnDescuento.getValue().toString()), Integer.valueOf(txtPrecio.getText()));
-						Tienda.getInstance().agregarCombo(aux);
-						JOptionPane.showMessageDialog(null, "Combo creado con exito");
+							if(aux==null&&Tienda.getInstance().findCombobyCodigo(txtNombre.getText())!=null) {
+								JOptionPane.showMessageDialog(null, "Ya existe un combo con ese nombre");
+							}
+							else {
+								Combo aux= new Combo(componenteDevolver(),txtNombre.getText(), Integer.valueOf(spnDescuento.getValue().toString()), Integer.valueOf(txtPrecio.getText()));
+								Tienda.getInstance().agregarCombo(aux);
+								cbxDiscoDuro.setSelectedIndex(0);cbxMicro.setSelectedIndex(0);cbxMotherBoard.setSelectedIndex(0);cbxRAM.setSelectedIndex(0);
+								JOptionPane.showMessageDialog(null, "Combo creado con exito");
+							}
+							if(aux!=null) {
+								aux.setNombre(txtNombre.getText());
+								aux.setDescuento(Integer.valueOf(spnDescuento.getValue().toString()));
+								aux.setPrecio(Float.valueOf(txtPrecio.getText()));
+								aux.setComponentes(componenteDevolver());
+								
+							}
 						}
+
+
 					}
 				});
 				btnCrear.setActionCommand("OK");
@@ -209,9 +224,36 @@ public class NuevoCombo extends JDialog {
 				txtNombre.setText(aux.getNombre());
 				txtPrecio.setText(""+aux.getPrecio());
 				spnDescuento.setValue(Integer.valueOf(aux.getDescuento()));
+				for (Componente componente : aux.getComponentes()) {
+					for (int i = 0; i < cbxDiscoDuro.getItemCount(); i++) {
+						Componente auxComp= Tienda.getInstance().findComponentebyNumeroSerie(cbxDiscoDuro.getItemAt(i).split(":")[0]);
+						if(componente.equals(auxComp)) {
+							cbxDiscoDuro.setSelectedIndex(i);
+						}
+					}
+					for (int i = 0; i < cbxMicro.getItemCount(); i++) {
+						Componente auxComp= Tienda.getInstance().findComponentebyNumeroSerie(cbxMicro.getItemAt(i).split(":")[0]);
+						if(componente.equals(auxComp)) {
+							cbxMicro.setSelectedIndex(i);
+						}
+					}
+					for (int i = 0; i < cbxRAM.getItemCount(); i++) {
+						Componente auxComp= Tienda.getInstance().findComponentebyNumeroSerie(cbxRAM.getItemAt(i).split(":")[0]);
+						if(componente.equals(auxComp)) {
+							cbxRAM.setSelectedIndex(i);
+						}
+					}
+					for (int i = 0; i < cbxMotherBoard.getItemCount(); i++) {
+						Componente auxComp= Tienda.getInstance().findComponentebyNumeroSerie(cbxMotherBoard.getItemAt(i).split(":")[0]);
+						if(componente.equals(auxComp)) {
+							cbxMotherBoard.setSelectedIndex(i);
+						}
+					}
+
+				}
 			}
 		}
-		
+
 	}	
 	private ArrayList<Componente> componenteDevolver() {
 		int iDD=0;
