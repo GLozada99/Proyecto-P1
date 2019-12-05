@@ -543,15 +543,15 @@ public class Tienda implements Serializable {
 					}
 					
 				}
-				masVendido.add(0, disco);masVendido.add(1, micro);masVendido.add(2, Ram);masVendido.add(3, MB);
-
+				
+				
 			}
-			
+			masVendido.add(0, disco);masVendido.add(1, micro);masVendido.add(2, Ram);masVendido.add(3, MB);
 
 
 		} catch (NullPointerException e) {
 			// TODO: handle exception
 
 		}
-		return masVendido;
+		return (ArrayList<Integer>) masVendido.clone();
 	}}

@@ -54,7 +54,7 @@ public class Proveedor extends Persona implements Serializable {
 	}
 	
 	public float getPrecioCompo(Componente aux) {
-		return preciosCompos.get(misCompos.lastIndexOf(aux));
+		return preciosCompos.get(misCompos.indexOf(aux));
 	}
 	
 	public void insertComponenteyPrecio(Componente aux, float aux1) {

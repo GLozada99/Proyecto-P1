@@ -50,6 +50,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Toolkit;
 import javax.swing.JRadioButton;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class NuevaFactura extends JDialog {
 
@@ -94,7 +96,7 @@ public class NuevaFactura extends JDialog {
 	 * Launch the application.
 	 */
 
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		try {
 			NuevaFactura dialog = new NuevaFactura();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -109,6 +111,12 @@ public class NuevaFactura extends JDialog {
 	 */
 
 	public NuevaFactura() {
+		/*addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				Principal.showGraf1();	
+			}
+		});*/
 		setBackground(new Color(169, 169, 169));
 		setIconImage(Toolkit.getDefaultToolkit().getImage(NuevaFactura.class.getResource("/Imagenes/IconFacturar.png")));
 		setTitle("Nueva Factura");
@@ -539,6 +547,13 @@ public class NuevaFactura extends JDialog {
 		}
 		{
 			JButton cancelButton = new JButton("Cancel");
+			cancelButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+			//	Principal.showGraf1();	
+				dispose();
+					
+				}
+			});
 			cancelButton.setActionCommand("Cancel");
 			buttonPane.add(cancelButton);
 		}

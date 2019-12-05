@@ -563,7 +563,7 @@ public class AgregarComponente extends JDialog {
 									String capacidadAlma = cbxAlmacenamiento.getSelectedItem().toString();
 									String tipoConexionDD = cbxTipoConexionDD.getSelectedItem().toString();
 									aux = new DiscoDuro(numeroSerie, marca, modelo, cantMin, cantMax, precioVentaI, capacidadAlma, tipoConexionDD);
-									clean();
+									
 								}else {
 									JOptionPane.showMessageDialog(null, "Escoja una capacidad de alma ó un tipo de conexión validos","Notificación", JOptionPane.INFORMATION_MESSAGE);
 								}
@@ -574,7 +574,7 @@ public class AgregarComponente extends JDialog {
 									String tipoConexionMicro = cbxTipoConexionMicro.getSelectedItem().toString();
 									String velocidad = ftxtVelocidad.getText();
 									aux = new Micro(numeroSerie, marca, modelo, cantMin, cantMax, precioVentaI, tipoConexionMicro, velocidad);
-									clean();
+									
 								}else {
 									JOptionPane.showMessageDialog(null, "Escoja una velocidad ó un tipo de conexión validos","Notificación", JOptionPane.INFORMATION_MESSAGE);
 								}
@@ -585,7 +585,7 @@ public class AgregarComponente extends JDialog {
 									String tipoConectorMB = cbxTipoConectorMB.getSelectedItem().toString();
 									String tipoRAM = cbxTipoRAM.getSelectedItem().toString();
 									aux = new MotherBoard(numeroSerie, marca, modelo, cantMin, cantMax, precioVentaI, tipoConectorMB, tipoRAM);
-									clean();
+									
 								}else {
 									JOptionPane.showMessageDialog(null, "Escoja un tipo de RAM ó un tipo de conexión validos","Notificación", JOptionPane.INFORMATION_MESSAGE);
 								}
@@ -595,7 +595,7 @@ public class AgregarComponente extends JDialog {
 									String tipo = cbxTipo.getSelectedItem().toString();
 									String cantMemoria = ftxtCantMemoria.getText();
 									aux = new RAM(numeroSerie, marca, modelo, cantMin, cantMax, precioVentaI, cantMemoria, tipo);
-									clean();
+									
 								}else {
 									JOptionPane.showMessageDialog(null, "Escoja una cantidad de memoria ó un tipo validos","Notificación", JOptionPane.INFORMATION_MESSAGE);
 								}
@@ -639,9 +639,11 @@ public class AgregarComponente extends JDialog {
 						if(auxComp!=null) {
 							dispose();
 							JOptionPane.showMessageDialog(null, "Componente modificado con exito","Notificación", JOptionPane.INFORMATION_MESSAGE);	
+							
 						}
 						else {
-							JOptionPane.showMessageDialog(null, "Componente añadido con exito","Notificación", JOptionPane.INFORMATION_MESSAGE);	
+							JOptionPane.showMessageDialog(null, "Componente añadido con exito","Notificación", JOptionPane.INFORMATION_MESSAGE);
+							clean();
 						}
 					}
 
