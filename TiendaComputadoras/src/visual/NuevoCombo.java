@@ -183,7 +183,7 @@ public class NuevoCombo extends JDialog {
 						if(cbxDiscoDuro.getSelectedIndex()!=0&&cbxMicro.getSelectedIndex()!=0&&cbxMotherBoard.getSelectedIndex()!=0&&cbxRAM.getSelectedIndex()!=0) {
 						Combo aux= new Combo(componenteDevolver(),txtNombre.getText(), Integer.valueOf(spnDescuento.getValue().toString()), Integer.valueOf(txtPrecio.getText()));
 						Tienda.getInstance().agregarCombo(aux);
-						JOptionPane.showMessageDialog(null, "");
+						JOptionPane.showMessageDialog(null, "Combo creado con exito");
 						}
 					}
 				});

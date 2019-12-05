@@ -263,21 +263,29 @@ public class NuevaFactura extends JDialog {
 				else {
 
 					auxComponente = Tienda.getInstance().findComponentebyNumeroSerie(codigo);
-					cantidad = Integer.valueOf(JOptionPane.showInputDialog("La cantidad real es de: "+auxComponente.getCantDisponible()+". Introduzca cantidad deseada"));
-					if(componentesVenta.contains(auxComponente)) {
-						cantidadesCompo.add(componentesVenta.indexOf(auxComponente), cantidadesCompo.get(componentesVenta.indexOf(auxComponente))+cantidad);
-						cantidadesCompo.remove(componentesVenta.indexOf(auxComponente)+1);
-						cargarCompras();
+					try {
+						cantidad = Integer.valueOf(JOptionPane.showInputDialog("La cantidad real es de: "+auxComponente.getCantDisponible()+". Introduzca cantidad deseada"));
+						if(componentesVenta.contains(auxComponente)) {
+							cantidadesCompo.add(componentesVenta.indexOf(auxComponente), cantidadesCompo.get(componentesVenta.indexOf(auxComponente))+cantidad);
+							cantidadesCompo.remove(componentesVenta.indexOf(auxComponente)+1);
+							cargarCompras();
+						}
+						else {
+							cantidadesCompo.add(cantidad);
+							componentesVenta.add(auxComponente);
+							cargarCompras();
+						}
+					} catch (NumberFormatException e2) {
+						// TODO: handle exception
 					}
-					else {
-						cantidadesCompo.add(cantidad);
-						componentesVenta.add(auxComponente);
-						cargarCompras();
-					}
+					
+					
 				}
+				if(cantidad!=null) {
 				txtPrecioTotal.setText(""+Tienda.getInstance().costoFactura(componentesVenta, cantidadesCompo, combosVenta, cantidadesCombo));
 				txtTotalComponetes.setText(String.valueOf(Tienda.getInstance().cantComponentes(componentesVenta,cantidadesCompo)));
 				txtTotalCombos.setText(String.valueOf(Tienda.getInstance().cantCombos(combosVenta, cantidadesCombo)));
+				}
 				/*if(cbxComponentes.getSelectedIndex()==0) {
 					model.setColumnIdentifiers(encabezadoCompo);
 					cargarComponentes();

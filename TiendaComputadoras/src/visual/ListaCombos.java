@@ -116,10 +116,10 @@ public class ListaCombos extends JDialog {
 				btnModificar.setEnabled(false);
 				btnModificar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						/*	NuevoCombo aux = new NuevoCombo(Tienda.getInstance().findClientebyCedula(codigo));
+							/*NuevoCombo aux = new NuevoCombo(Tienda.getInstance().findCombobyCodigo(codigo));
 						aux.setModal(true);
 						aux.setVisible(true);
-						cargarClientes();*/
+						cargarCombos();*/
 					}
 				});
 				btnModificar.setActionCommand("OK");
