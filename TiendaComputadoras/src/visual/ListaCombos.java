@@ -135,7 +135,7 @@ public class ListaCombos extends JDialog {
 						int i=1;
 						i = JOptionPane.showConfirmDialog(null, "Está seguro que desea eliminar el combo:"+" "+aux.getNombre()+"?");
 						if(i==0) {
-							Tienda.getInstance().getLosCombo().remove(aux);
+							Tienda.getInstance().eliminarCombo(aux);
 							JOptionPane.showMessageDialog(null, "Combo eliminado con exito");
 							cargarCombos();
 						}

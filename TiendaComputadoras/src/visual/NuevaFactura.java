@@ -257,7 +257,6 @@ public class NuevaFactura extends JDialog {
 					auxCombo = Tienda.getInstance().findCombobyCodigo(codigo);
 					cantidadC = Integer.valueOf(JOptionPane.showInputDialog("Introduzca cantidad deseada"));
 					if(combosVenta.contains(auxCombo)) {
-
 						cantidadesCombo.add(combosVenta.indexOf(auxCombo), cantidadesCombo.get(combosVenta.indexOf(auxCombo))+cantidadC);
 						cantidadesCombo.remove(combosVenta.indexOf(auxCombo)+1);
 						cargarCompras();
@@ -597,15 +596,23 @@ public void cargarCbx(){
 public static void cargarCompras() {
 	model2.setRowCount(0);
 	row = new Object[model.getColumnCount()];
+	int i = 0;
 	if(!componentesVenta.isEmpty()) {
-		int i = 0;
 		for (Componente componente : componentesVenta) {
 			row[0] = componente.getNumeroSerie();
 			row[1] = componente.getClass().getSimpleName();
 			row[2] = componente.getMarca()+" : "+componente.getModelo()+" : "+cantidadesCompo.get(i);
 			i++;
 			model2.addRow(row);
-
+		}
+	}
+	if(!combosVenta.isEmpty()) {
+		for (Combo combo : combosVenta) {
+			row[0] = combo.getNombre();
+			row[1] = "Combo";
+			row[2] = "Precio: "+combo.getPrecio()+"/Descuento: "+combo.getDescuento()+"%";
+			i++;
+			model2.addRow(row);
 		}
 	}
 

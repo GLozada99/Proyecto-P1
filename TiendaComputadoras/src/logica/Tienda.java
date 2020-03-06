@@ -176,6 +176,10 @@ public class Tienda implements Serializable {
 		losCombo.add(aux);
 		generadorCodigoCombo++;
 	}
+	public void eliminarCombo(Combo aux) {
+		losCombo.remove(aux);
+		generadorCodigoCombo--;
+	}
 
 	public Cliente findClientebyCedula(String cedula) {
 		Cliente clienteFound = null;
