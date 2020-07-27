@@ -101,10 +101,6 @@ public class OrdenesPorProcesar extends JDialog {
 								btnProcesar.setEnabled(true);
 								btnEliminar.setEnabled(true);
 								codigo = String.valueOf(table.getValueAt(index, 0));
-
-
-
-
 							}
 						}
 					});
@@ -131,6 +127,8 @@ public class OrdenesPorProcesar extends JDialog {
 						choose.setModal(true);
 						choose.setVisible(true);
 						cargarOrdenes();
+						btnProcesar.setEnabled(false);
+						btnEliminar.setEnabled(false);
 						/*dispose();
 						OrdenesPorProcesar refresh = new OrdenesPorProcesar();
 						refresh.setModal(true);

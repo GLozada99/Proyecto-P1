@@ -208,8 +208,13 @@ public class NuevoCombo extends JDialog {
 			buttonPane.setBackground(new Color(234, 238, 249));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
-			{
-				JButton btnCrear = new JButton("Crear");
+			{	
+				JButton btnCrear = null;
+				if(aux==null) {
+					btnCrear = new JButton("Crear");	
+				}else {
+					btnCrear = new JButton("Modificar");
+				}
 				btnCrear.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if(cbxDiscoDuro.getSelectedIndex()!=0&&cbxMicro.getSelectedIndex()!=0&&cbxMotherBoard.getSelectedIndex()!=0&&cbxRAM.getSelectedIndex()!=0) {
@@ -232,6 +237,7 @@ public class NuevoCombo extends JDialog {
 								aux.setPrecio(Float.valueOf(txtPrecio.getText()));
 								aux.setComponentes(componenteDevolver());*/ 
 								JOptionPane.showMessageDialog(null, "Combo modificado con exito");
+								dispose();
 								
 							}
 						}
