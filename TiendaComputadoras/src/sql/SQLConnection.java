@@ -125,9 +125,8 @@ public class SQLConnection {
 						Proveedor auxProv = Tienda.getInstance().findProveedrobyRNC(rs.getString("CodigoProveedor"));
 						Componente auxComp = Tienda.getInstance().findComponentebyNumeroSerie(rs.getString("NumeroSerie"));
 						auxProv.getMisCompos().add(auxComp);
-						auxProv.getPreciosCompos().add(rs.getFloat("Precio"));
+						auxProv.getPreciosCompos().add(rs.getFloat("PrecioCompra"));
 						auxComp.getLosQueVenden().add(auxProv);
-
 					}
 				}
 			}
@@ -143,7 +142,7 @@ public class SQLConnection {
 				Proveedor auxProv = Tienda.getInstance().findProveedrobyRNC(rs.getString("CodigoProveedor"));
 				auxOrd.setCostoTotal(auxOrd.getCantiCompos()*auxProv.getPrecioCompo(auxOrd.getCompCompra()));
 				auxOrd.setRealizada(true);
-
+				
 				Tienda.getInstance().getLasOrdenes().add(auxOrd);
 				auxProv.getMisOrdenes().add(auxOrd);
 				Tienda.getInstance().getOrdenesSinProcesar().remove(auxOrd);
@@ -177,7 +176,9 @@ public class SQLConnection {
 				
 				
 				Factura aux = new Factura(rs.getString("Codigo"),rs.getFloat("Costo"), Tienda.getInstance().findClientebyCedula(rs.getString("CodCliente")), auxCompos, auxCombos, cantiCompos, cantiCombos, rs.getBoolean("Tipo"));
-				aux.setFecha(rs.getDate("Fecha"));
+				//System.out.println(rs.getDate("Fecha"));
+				aux.setFecha(rs.getString("Fecha"));
+				Tienda.getInstance().agregarFactura(aux);
 			}
 			
 			for (Factura aux : Tienda.getInstance().getLasFacturas()) {

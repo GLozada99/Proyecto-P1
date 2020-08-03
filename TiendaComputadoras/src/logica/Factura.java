@@ -66,7 +66,8 @@ public class Factura implements Serializable {
 		
 		Integer hour = Integer.valueOf(hourMinuteSecond.split(":")[0]);
 		Integer minute = Integer.valueOf(hourMinuteSecond.split(":")[1]);
-		Integer second = Integer.valueOf(hourMinuteSecond.split(":")[2]);
+		Float secondF = Float.valueOf(hourMinuteSecond.split(":")[2]);
+		Integer second = secondF.intValue();
 		Date auxfecha = new Date(year, month, day, hour, minute, second);
 		
 		this.fecha = auxfecha;

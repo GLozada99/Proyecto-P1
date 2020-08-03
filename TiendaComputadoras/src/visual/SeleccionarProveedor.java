@@ -137,6 +137,7 @@ public class SeleccionarProveedor extends JDialog {
 		row = new Object[model.getColumnCount()];
 
 		for (Proveedor proveedor : Tienda.getInstance().getLosProveedores()) {
+			
 			if(proveedor.getMisCompos().contains(aux.getCompCompra())) {
 				row[0] = proveedor.getCodigo(); 
 				row[1] = proveedor.getNombre();
