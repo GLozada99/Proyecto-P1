@@ -131,6 +131,7 @@ public class HistorialOrdenes extends JDialog {
 					row[6] = prov.getCodigo();
 					encontrado=true;
 				}
+				i++;
 			}
 			row[7] = aux.getCostoTotal();
 			model.addRow(row);

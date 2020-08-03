@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 import logica.OrdenCompra;
 import logica.Proveedor;
 import logica.Tienda;
+import sql.SQLConnection;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -107,6 +108,7 @@ public class SeleccionarProveedor extends JDialog {
 					public void actionPerformed(ActionEvent arg0) {
 						Proveedor prov = Tienda.getInstance().findProveedrobyRNC(rnc);
 						Tienda.getInstance().hacerCompra(aux, prov);
+						SQLConnection.processOrdenCompra(aux, prov);
 						JOptionPane.showMessageDialog(null, "La orden fue procesada exitosamente");
 						btnAceptar.setEnabled(false);
 						dispose();

@@ -18,11 +18,7 @@ public class Combo implements Serializable{
 		this.componentes = componentes;
 		this.nombre = nombre;
 		this.precio = precio;
-		this.descuento = descuento;
-		
-		
-	
-		
+		this.descuento = descuento;	
 	}
 
 	public ArrayList<Componente> getComponentes() {

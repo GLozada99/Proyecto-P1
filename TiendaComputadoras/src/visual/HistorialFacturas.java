@@ -123,7 +123,7 @@ public class HistorialFacturas extends JDialog {
 
 		for (Factura aux : Tienda.getInstance().getLasFacturas()) {
 			row[0] = aux.getCodigo();
-			row[1] = new SimpleDateFormat("dd-MM-yyyy HH:mm a").format(aux.getFecha());
+			row[1] = new SimpleDateFormat("yyyy-MM-dd HH:mm a").format(aux.getFecha());
 			row[2] = aux.getElCliente().getCodigo();
 			row[3] = aux.getElCliente().getNombre();
 			row[4] = Tienda.getInstance().cantComponentes(aux.getLosComponentes(), aux.getCantiComponentes())+Tienda.getInstance().cantCombos(aux.getLosCombos(), aux.getCantiCombos());

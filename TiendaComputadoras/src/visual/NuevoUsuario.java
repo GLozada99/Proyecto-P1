@@ -20,6 +20,7 @@ import logica.Cliente;
 import logica.Persona;
 import logica.Tienda;
 import logica.Vendedor;
+import sql.SQLConnection;
 
 import javax.swing.JFormattedTextField;
 import java.awt.event.ActionListener;
@@ -180,26 +181,33 @@ public class NuevoUsuario extends JDialog {
 							JOptionPane.showMessageDialog(null, "El usuario ingresado ya está registrado");
 						}
 						else {
+							boolean save = false;
 							if(!rdnAdministrador.isSelected() && !rdnVendedor.isSelected()) {
 								JOptionPane.showMessageDialog(null, "Seleccione su tipo de usuario");
 							}
 							else if(rdnAdministrador.isSelected()) {
+								save = true;
 								usuario1= new Administrador(txtNombre.getText(), ftxtTelefono.getText(), txtDireccion.getText(), ftxtCedula.getText(), txtContra.getText());
+								//SQLConnection.insertUpdateAdmin((Administrador) usuario1, aux==null); 
+								//aux==null means inserting, aux!=null means updating
 							}
 							else if(rdnVendedor.isSelected()) {
+								save = true;
 								usuario1= new Vendedor(txtNombre.getText(), ftxtTelefono.getText(), txtDireccion.getText() , ftxtCedula.getText(), txtContra.getText(), 0);
+								//SQLConnection.insertUpdateVendedor((Vendedor) usuario1, aux==null); 
 							}
-							if(aux==null) {
-								Tienda.getInstance().getLosUsuarios().add(usuario1);
-								JOptionPane.showMessageDialog(null, "Usuario registrado con exito");
-								clean();
-							}
-							else {
-								Tienda.getInstance().getLosUsuarios().add(Tienda.getInstance().getLosUsuarios().indexOf(aux), usuario1);
-								Tienda.getInstance().getLosUsuarios().remove(Tienda.getInstance().getLosUsuarios().lastIndexOf(aux));
-								JOptionPane.showMessageDialog(null, "Usuario modificado con exito");
-								dispose();
-
+							if(save) {
+								if(aux==null) {
+									Tienda.getInstance().getLosUsuarios().add(usuario1);
+									JOptionPane.showMessageDialog(null, "Usuario registrado con exito");
+									clean();
+								}
+								else {
+									Tienda.getInstance().getLosUsuarios().add(Tienda.getInstance().getLosUsuarios().indexOf(aux), usuario1);
+									Tienda.getInstance().getLosUsuarios().remove(Tienda.getInstance().getLosUsuarios().lastIndexOf(aux));
+									JOptionPane.showMessageDialog(null, "Usuario modificado con exito");
+									dispose();
+								}
 							}
 						}
 					}
@@ -220,8 +228,13 @@ public class NuevoUsuario extends JDialog {
 				buttonPane.add(btnRegistrar);
 				getRootPane().setDefaultButton(btnRegistrar);
 			}
-			{
+			{	
 				JButton cancelButton = new JButton("Cancel");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						dispose();
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
@@ -240,8 +253,17 @@ public class NuevoUsuario extends JDialog {
 				rdnVendedor.setSelected(true);
 			}
 			txtDireccion.setText(aux.getDireccion());
-			rdnAdministrador.setSelected(false);
-			rdnVendedor.setSelected(false);
+			if(aux instanceof Administrador) {
+				rdnAdministrador.setSelected(true);
+				rdnVendedor.setSelected(false);
+				
+			}else {
+				rdnVendedor.setSelected(true);
+				rdnAdministrador.setSelected(false);
+				
+			}
+			rdnAdministrador.setEnabled(false);
+			rdnVendedor.setEnabled(false);
 		}
 	}
 
@@ -256,5 +278,5 @@ public class NuevoUsuario extends JDialog {
 		rdnAdministrador.setSelected(false);
 		rdnVendedor.setSelected(false);
 	}
-	
+
 }

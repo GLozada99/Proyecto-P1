@@ -28,6 +28,8 @@ import logica.MotherBoard;
 import logica.Proveedor;
 import logica.RAM;
 import logica.Tienda;
+import sql.SQLConnection;
+
 import java.awt.Color;
 
 import javax.swing.border.LineBorder;
@@ -114,7 +116,7 @@ public class AgregarComponente extends JDialog {
 	//@SuppressWarnings({ "rawtypes", "unchecked" })
 	public AgregarComponente(boolean b, Componente auxComp) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(AgregarComponente.class.getResource("/Imagenes/IconAgregarComponente.png")));
-		
+
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -260,203 +262,158 @@ public class AgregarComponente extends JDialog {
 		}
 		ftxtVelocidad = new JFormattedTextField(mascaraVelocidad);
 		ftxtVelocidad.setBounds(94, 23, 65, 20);
-		
-				panel_Micro = new JPanel();
-				panel_Micro.setBackground(new Color(234, 238, 249));
-				panel_Micro.setVisible(false);
-				
-						panel_MotherBoard = new JPanel();
-						panel_MotherBoard.setBackground(new Color(234, 238, 249));
-						panel_MotherBoard.setVisible(false);
-						
-								panel_RAM = new JPanel();
-								panel_RAM.setBackground(new Color(234, 238, 249));
-								panel_RAM.setVisible(false);
-								
-										panel_DiscoDuro = new JPanel();
-										panel_DiscoDuro.setBackground(new Color(234, 238, 249));
-										panel_DiscoDuro.setVisible(false);
-										panel_DiscoDuro.setLayout(null);
-										panel_DiscoDuro.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Especificaciones", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-										panel_DiscoDuro.setBounds(10, 344, 535, 70);
-										contentPanel.add(panel_DiscoDuro);
-										
-												lblAlmacenamiento = new JLabel("Almacenamiento: ");
-												lblAlmacenamiento.setBounds(12, 27, 104, 14);
-												panel_DiscoDuro.add(lblAlmacenamiento);
-												
-														lblTipoConexion = new JLabel("Tipo Conexi\u00F3n:");
-														lblTipoConexion.setBounds(316, 27, 91, 14);
-														panel_DiscoDuro.add(lblTipoConexion);
-														
-																cbxAlmacenamiento = new JComboBox();
-																cbxAlmacenamiento.setModel(new DefaultComboBoxModel(new String[] {"<Escoja>", "256 GB", "512 GB", "1 TB", "2 TB"}));
-																cbxAlmacenamiento.setBounds(128, 23, 80, 22);
-																panel_DiscoDuro.add(cbxAlmacenamiento);
-																
-																		cbxTipoConexionDD = new JComboBox();
-																		cbxTipoConexionDD.setModel(new DefaultComboBoxModel(new String[] {"<Escoja>", "IDE", "SATA", "SCSI", "SAS"}));
-																		cbxTipoConexionDD.setBounds(419, 23, 104, 22);
-																		panel_DiscoDuro.add(cbxTipoConexionDD);
-																		panel_DiscoDuro.setVisible(true);
-								panel_RAM.setBounds(10, 344, 535, 70);
-								contentPanel.add(panel_RAM);
-								panel_RAM.setLayout(null);
-								panel_RAM.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Especificaciones", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-								
-										JLabel lblTipo = new JLabel("Tipo:");
-										lblTipo.setBounds(347, 27, 49, 14);
-										panel_RAM.add(lblTipo);
-										
-												JLabel lblCantidadDeMemoria = new JLabel("Cantidad de Memoria: ");
-												lblCantidadDeMemoria.setBounds(12, 27, 131, 14);
-												panel_RAM.add(lblCantidadDeMemoria);
-												
-														cbxTipo = new JComboBox();
-														cbxTipo.setModel(new DefaultComboBoxModel(new String[] {"<Escoja>", "DDR SDRAM", "DDR2 SDRAM", "DDR3 SDRAM ", "DDR4 SDRAM"}));
-														cbxTipo.setBounds(396, 23, 127, 22);
-														panel_RAM.add(cbxTipo);
-														ftxtCantMemoria = new JFormattedTextField(mascaraCantMemoria);
-														ftxtCantMemoria.setBounds(155, 23, 58, 22);
-														
-																panel_RAM.add(ftxtCantMemoria);
-																
-																		JLabel lblGb = new JLabel("GB");
-																		lblGb.setBounds(225, 27, 39, 14);
-																		panel_RAM.add(lblGb);
-																		panel_RAM.setVisible(false);
-						panel_MotherBoard.setLayout(null);
-						panel_MotherBoard.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Especificaciones", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-						panel_MotherBoard.setBounds(10, 344, 535, 70);
-						contentPanel.add(panel_MotherBoard);
-						
-								JLabel lblTipoConector = new JLabel("Tipo Conector");
-								lblTipoConector.setBounds(12, 27, 88, 14);
-								panel_MotherBoard.add(lblTipoConector);
-								
-										JLabel lblTipoRam = new JLabel("Tipo RAM");
-										lblTipoRam.setBounds(332, 27, 65, 14);
-										panel_MotherBoard.add(lblTipoRam);
-										
-												cbxTipoConectorMB = new JComboBox();
-												cbxTipoConectorMB.setModel(new DefaultComboBoxModel(new String[] {"<Escoja>", "Socket 423", "Socket mPGA478", "Socket 479", "Socket A", "Socket 754", "Socket 939"}));
-												cbxTipoConectorMB.setBounds(112, 23, 104, 22);
-												panel_MotherBoard.add(cbxTipoConectorMB);
-												
-														cbxTipoRAM = new JComboBox();
-														cbxTipoRAM.setModel(new DefaultComboBoxModel(new String[] {"<Escoja>", "VESA", "PCI", "AMR", "CNR", "AGP", "PCIe"}));
-														cbxTipoRAM.setBounds(409, 23, 114, 22);
-														panel_MotherBoard.add(cbxTipoRAM);
-														panel_MotherBoard.setVisible(false);
-				panel_Micro.setLayout(null);
-				panel_Micro.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Especificaciones", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-				panel_Micro.setBounds(10, 344, 535, 70);
-				contentPanel.add(panel_Micro);
-				
-						JLabel lblVelocidad = new JLabel("Velocidad:");
-						lblVelocidad.setBounds(12, 27, 70, 14);
-						panel_Micro.add(lblVelocidad);
-						
-								JLabel lblTipoConexin = new JLabel("Tipo Conexi\u00F3n:");
-								lblTipoConexin.setBounds(316, 27, 91, 14);
-								panel_Micro.add(lblTipoConexin);
-								
-										cbxTipoConexionMicro = new JComboBox();
-										cbxTipoConexionMicro.setModel(new DefaultComboBoxModel(new String[] {"<Escoja>", "PGA", "BGA", "LGA"}));
-										cbxTipoConexionMicro.setBounds(419, 23, 104, 22);
-										panel_Micro.add(cbxTipoConexionMicro);
-										
-										
-												panel_Micro.add(ftxtVelocidad);
-												
-														JLabel lblGhz = new JLabel("GHz");
-														lblGhz.setBounds(160, 27, 30, 14);
-														panel_Micro.add(lblGhz);
-														panel_Micro.setVisible(false);
 
-		if(auxComp!=null) {
-			txtNoSerie.setText(auxComp.getNumeroSerie());txtNoSerie.setEnabled(false);
-			txtModelo.setText(auxComp.getModelo());txtModelo.setEnabled(true);
-			txtMarca.setText(auxComp.getMarca());txtMarca.setEnabled(true);
-			spnCantMax.setValue(auxComp.getCantMax());spnCantMax.setEnabled(true);
-			spnCantMin.setValue(auxComp.getCantMin());spnCantMin.setEnabled(true);
-			spnPrecioVenta.setValue(auxComp.getPrecioVentaActual());spnPrecioVenta.setEnabled(true);
-			//Tienda.getInstance().getLosQueVendenTemp().addAll(auxComp.getLosQueVenden());
+		panel_Micro = new JPanel();
+		panel_Micro.setBackground(new Color(234, 238, 249));
+		panel_Micro.setVisible(false);
+
+		panel_MotherBoard = new JPanel();
+		panel_MotherBoard.setBackground(new Color(234, 238, 249));
+		panel_MotherBoard.setVisible(false);
+
+		panel_RAM = new JPanel();
+		panel_RAM.setBackground(new Color(234, 238, 249));
+		panel_RAM.setVisible(false);
+
+		panel_DiscoDuro = new JPanel();
+		panel_DiscoDuro.setBackground(new Color(234, 238, 249));
+		panel_DiscoDuro.setVisible(false);
+		panel_DiscoDuro.setLayout(null);
+		panel_DiscoDuro.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Especificaciones", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_DiscoDuro.setBounds(10, 344, 535, 70);
+		contentPanel.add(panel_DiscoDuro);
+
+		lblAlmacenamiento = new JLabel("Almacenamiento: ");
+		lblAlmacenamiento.setBounds(12, 27, 104, 14);
+		panel_DiscoDuro.add(lblAlmacenamiento);
+
+		lblTipoConexion = new JLabel("Tipo Conexi\u00F3n:");
+		lblTipoConexion.setBounds(316, 27, 91, 14);
+		panel_DiscoDuro.add(lblTipoConexion);
+
+		cbxAlmacenamiento = new JComboBox();
+		cbxAlmacenamiento.setModel(new DefaultComboBoxModel(new String[] {"<Escoja>", "256 GB", "512 GB", "1 TB", "2 TB"}));
+		cbxAlmacenamiento.setBounds(128, 23, 80, 22);
+		panel_DiscoDuro.add(cbxAlmacenamiento);
+
+		cbxTipoConexionDD = new JComboBox();
+		cbxTipoConexionDD.setModel(new DefaultComboBoxModel(new String[] {"<Escoja>", "IDE", "SATA", "SCSI", "SAS"}));
+		cbxTipoConexionDD.setBounds(419, 23, 104, 22);
+		panel_DiscoDuro.add(cbxTipoConexionDD);
+		panel_DiscoDuro.setVisible(true);
+		panel_RAM.setBounds(10, 344, 535, 70);
+		contentPanel.add(panel_RAM);
+		panel_RAM.setLayout(null);
+		panel_RAM.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Especificaciones", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+
+		JLabel lblTipo = new JLabel("Tipo:");
+		lblTipo.setBounds(347, 27, 49, 14);
+		panel_RAM.add(lblTipo);
+
+		JLabel lblCantidadDeMemoria = new JLabel("Cantidad de Memoria: ");
+		lblCantidadDeMemoria.setBounds(12, 27, 131, 14);
+		panel_RAM.add(lblCantidadDeMemoria);
+
+		cbxTipo = new JComboBox();
+		cbxTipo.setModel(new DefaultComboBoxModel(new String[] {"<Escoja>", "DDR SDRAM", "DDR2 SDRAM", "DDR3 SDRAM ", "DDR4 SDRAM"}));
+		cbxTipo.setBounds(396, 23, 127, 22);
+		panel_RAM.add(cbxTipo);
+		ftxtCantMemoria = new JFormattedTextField(mascaraCantMemoria);
+		ftxtCantMemoria.setBounds(155, 23, 58, 22);
+
+		panel_RAM.add(ftxtCantMemoria);
+
+		JLabel lblGb = new JLabel("GB");
+		lblGb.setBounds(225, 27, 39, 14);
+		panel_RAM.add(lblGb);
+		panel_RAM.setVisible(false);
+		panel_MotherBoard.setLayout(null);
+		panel_MotherBoard.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Especificaciones", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_MotherBoard.setBounds(10, 344, 535, 70);
+		contentPanel.add(panel_MotherBoard);
+
+		JLabel lblTipoConector = new JLabel("Tipo Conector");
+		lblTipoConector.setBounds(12, 27, 88, 14);
+		panel_MotherBoard.add(lblTipoConector);
+
+		JLabel lblTipoRam = new JLabel("Tipo RAM");
+		lblTipoRam.setBounds(332, 27, 65, 14);
+		panel_MotherBoard.add(lblTipoRam);
+
+		cbxTipoConectorMB = new JComboBox();
+		cbxTipoConectorMB.setModel(new DefaultComboBoxModel(new String[] {"<Escoja>", "Socket 423", "Socket mPGA478", "Socket 479", "Socket A", "Socket 754", "Socket 939"}));
+		cbxTipoConectorMB.setBounds(112, 23, 104, 22);
+		panel_MotherBoard.add(cbxTipoConectorMB);
+
+		cbxTipoRAM = new JComboBox();
+		cbxTipoRAM.setModel(new DefaultComboBoxModel(new String[] {"<Escoja>", "VESA", "PCI", "AMR", "CNR", "AGP", "PCIe"}));
+		cbxTipoRAM.setBounds(409, 23, 114, 22);
+		panel_MotherBoard.add(cbxTipoRAM);
+		panel_MotherBoard.setVisible(false);
+		panel_Micro.setLayout(null);
+		panel_Micro.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Especificaciones", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_Micro.setBounds(10, 344, 535, 70);
+		contentPanel.add(panel_Micro);
+
+		JLabel lblVelocidad = new JLabel("Velocidad:");
+		lblVelocidad.setBounds(12, 27, 70, 14);
+		panel_Micro.add(lblVelocidad);
+
+		JLabel lblTipoConexin = new JLabel("Tipo Conexi\u00F3n:");
+		lblTipoConexin.setBounds(316, 27, 91, 14);
+		panel_Micro.add(lblTipoConexin);
+
+		cbxTipoConexionMicro = new JComboBox();
+		cbxTipoConexionMicro.setModel(new DefaultComboBoxModel(new String[] {"<Escoja>", "PGA", "BGA", "LGA"}));
+		cbxTipoConexionMicro.setBounds(419, 23, 104, 22);
+		panel_Micro.add(cbxTipoConexionMicro);
 
 
-			if(!auxComp.getLosQueVenden().isEmpty()) {
-				Tienda.getInstance().getLosQueVendenTemp().addAll(auxComp.getLosQueVenden());
-			}
+		panel_Micro.add(ftxtVelocidad);
 
-			if(auxComp instanceof DiscoDuro) {
-				rdbtnDiscoDuro.setSelected(true);
-				rdbtnMicro.setSelected(false);
-				rdbtnMotherBoard.setSelected(false);
-				rdbtnRAM.setSelected(false);
-			}
-			if(auxComp instanceof Micro) {
-				rdbtnDiscoDuro.setSelected(false);
-				rdbtnMicro.setSelected(true);
-				rdbtnMotherBoard.setSelected(false);
-				rdbtnRAM.setSelected(false);
-			}
-			if(auxComp instanceof MotherBoard) {
-				rdbtnDiscoDuro.setSelected(false);
-				rdbtnMicro.setSelected(false);
-				rdbtnMotherBoard.setSelected(true);
-				rdbtnRAM.setSelected(false);
-			}
-			if(auxComp instanceof RAM) {
-				rdbtnDiscoDuro.setSelected(false);
-				rdbtnMicro.setSelected(false);
-				rdbtnMotherBoard.setSelected(false);
-				rdbtnRAM.setSelected(true);
-			}
-			cargarProveedoresVentaComp();
-		}
-
-
+		JLabel lblGhz = new JLabel("GHz");
+		lblGhz.setBounds(160, 27, 30, 14);
+		panel_Micro.add(lblGhz);
+		panel_Micro.setVisible(false);
 
 		rdbtnDiscoDuro.setSelected(true);
 		rdbtnMicro.setSelected(false);
 		rdbtnMotherBoard.setSelected(false);
 		rdbtnRAM.setSelected(false);
-		
-		
-		
-				JPanel panel_DatosTienda = new JPanel();
-				panel_DatosTienda.setBackground(new Color(234, 238, 249));
-				panel_DatosTienda.setLayout(null);
-				panel_DatosTienda.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Datos de la Tienda", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-				panel_DatosTienda.setBounds(279, 11, 266, 161);
-				contentPanel.add(panel_DatosTienda);
-				
-						JLabel lblCantidadMin = new JLabel("Cantidad M\u00EDnima:");
-						lblCantidadMin.setBounds(10, 33, 110, 14);
-						panel_DatosTienda.add(lblCantidadMin);
-						
-								JLabel lblCantidadMax = new JLabel("Cantidad M\u00E1ximo: ");
-								lblCantidadMax.setBounds(10, 80, 110, 14);
-								panel_DatosTienda.add(lblCantidadMax);
-								
-										JLabel lblPrecioVenta = new JLabel("Precio Venta: ");
-										lblPrecioVenta.setBounds(10, 127, 110, 14);
-										panel_DatosTienda.add(lblPrecioVenta);
-										
-												spnPrecioVenta = new JSpinner();
-												spnPrecioVenta.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
-												spnPrecioVenta.setBounds(192, 123, 64, 22);
-												panel_DatosTienda.add(spnPrecioVenta);
-												
-														spnCantMax = new JSpinner();
-														spnCantMax.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));		
-														spnCantMax.setBounds(192, 76, 64, 22);
-														panel_DatosTienda.add(spnCantMax);
-														
-																spnCantMin = new JSpinner();
-																spnCantMin.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
-																spnCantMin.setBounds(192, 29, 64, 22);
-																panel_DatosTienda.add(spnCantMin);
+
+		JPanel panel_DatosTienda = new JPanel();
+		panel_DatosTienda.setBackground(new Color(234, 238, 249));
+		panel_DatosTienda.setLayout(null);
+		panel_DatosTienda.setBorder(new TitledBorder(new LineBorder(new Color(0, 0, 0)), "Datos de la Tienda", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel_DatosTienda.setBounds(279, 11, 266, 161);
+		contentPanel.add(panel_DatosTienda);
+
+		JLabel lblCantidadMin = new JLabel("Cantidad M\u00EDnima:");
+		lblCantidadMin.setBounds(10, 33, 110, 14);
+		panel_DatosTienda.add(lblCantidadMin);
+
+		JLabel lblCantidadMax = new JLabel("Cantidad M\u00E1ximo: ");
+		lblCantidadMax.setBounds(10, 80, 110, 14);
+		panel_DatosTienda.add(lblCantidadMax);
+
+		JLabel lblPrecioVenta = new JLabel("Precio Venta: ");
+		lblPrecioVenta.setBounds(10, 127, 110, 14);
+		panel_DatosTienda.add(lblPrecioVenta);
+
+		spnPrecioVenta = new JSpinner();
+		spnPrecioVenta.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
+		spnPrecioVenta.setBounds(192, 123, 64, 22);
+		panel_DatosTienda.add(spnPrecioVenta);
+
+		spnCantMax = new JSpinner();
+		spnCantMax.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));		
+		spnCantMax.setBounds(192, 76, 64, 22);
+		panel_DatosTienda.add(spnCantMax);
+
+		spnCantMin = new JSpinner();
+		spnCantMin.setModel(new SpinnerNumberModel(new Integer(1), new Integer(1), null, new Integer(1)));
+		spnCantMin.setBounds(192, 29, 64, 22);
+		panel_DatosTienda.add(spnCantMin);
 
 		panel_Proveedor = new JPanel();
 		panel_Proveedor.setBackground(new Color(234, 238, 249));
@@ -481,7 +438,7 @@ public class AgregarComponente extends JDialog {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				if(table.getSelectedRow()>-1){
-					int index = table.getSelectedRow();
+					index = table.getSelectedRow();
 
 					btnAsignarPrecio.setEnabled(true);
 					codigo = String.valueOf(table.getValueAt(index, 0));
@@ -560,55 +517,61 @@ public class AgregarComponente extends JDialog {
 						if (auxComp !=null) {
 							cantReal = auxComp.getCantDisponible();
 						}
+						if(!modelo.equalsIgnoreCase("")&&!marca.equalsIgnoreCase("")) {
+							if (cantMax>=cantMin) {
+								if (rdbtnDiscoDuro.isSelected()) {
+									if(cbxAlmacenamiento.getSelectedIndex() != 0 && cbxTipoConexionDD.getSelectedIndex() !=0) {
+										String capacidadAlma = cbxAlmacenamiento.getSelectedItem().toString();
+										String tipoConexionDD = cbxTipoConexionDD.getSelectedItem().toString();
+										aux = new DiscoDuro(numeroSerie, marca, modelo, cantMin, cantMax, precioVentaI, capacidadAlma, tipoConexionDD);
 
+									}else {
+										JOptionPane.showMessageDialog(null, "Escoja una capacidad de alma ó un tipo de conexión validos","Notificación", JOptionPane.INFORMATION_MESSAGE);
+										return;
+									}
 
+								}
+								if (rdbtnMicro.isSelected()) {
+									if (cbxTipoConexionMicro.getSelectedIndex() !=0 && ftxtVelocidad.getText() != "") {
+										String tipoConexionMicro = cbxTipoConexionMicro.getSelectedItem().toString();
+										String velocidad = ftxtVelocidad.getText();
+										aux = new Micro(numeroSerie, marca, modelo, cantMin, cantMax, precioVentaI, tipoConexionMicro, velocidad);
 
-						if (cantMax>=cantMin) {
-							if (rdbtnDiscoDuro.isSelected()) {
-								if(cbxAlmacenamiento.getSelectedIndex() != 0 && cbxTipoConexionDD.getSelectedIndex() !=0) {
-									String capacidadAlma = cbxAlmacenamiento.getSelectedItem().toString();
-									String tipoConexionDD = cbxTipoConexionDD.getSelectedItem().toString();
-									aux = new DiscoDuro(numeroSerie, marca, modelo, cantMin, cantMax, precioVentaI, capacidadAlma, tipoConexionDD);
-									
-								}else {
-									JOptionPane.showMessageDialog(null, "Escoja una capacidad de alma ó un tipo de conexión validos","Notificación", JOptionPane.INFORMATION_MESSAGE);
+									}else {
+										JOptionPane.showMessageDialog(null, "Escoja una velocidad ó un tipo de conexión validos","Notificación", JOptionPane.INFORMATION_MESSAGE);
+										return;
+									}
+
+								}
+								if (rdbtnMotherBoard.isSelected()) {
+									if (cbxTipoRAM.getSelectedIndex() !=0 && cbxTipoConectorMB.getSelectedIndex() !=0) {
+										String tipoConectorMB = cbxTipoConectorMB.getSelectedItem().toString();
+										String tipoRAM = cbxTipoRAM.getSelectedItem().toString();
+										aux = new MotherBoard(numeroSerie, marca, modelo, cantMin, cantMax, precioVentaI, tipoConectorMB, tipoRAM);
+
+									}else {
+										JOptionPane.showMessageDialog(null, "Escoja un tipo de RAM ó un tipo de conexión validos","Notificación", JOptionPane.INFORMATION_MESSAGE);
+										return;
+									}
+								}
+								if (rdbtnRAM.isSelected()) {
+									if (cbxTipo.getSelectedIndex() != 0 && ftxtCantMemoria.getText() != "") {
+										String tipo = cbxTipo.getSelectedItem().toString();
+										String cantMemoria = ftxtCantMemoria.getText();
+										aux = new RAM(numeroSerie, marca, modelo, cantMin, cantMax, precioVentaI, cantMemoria, tipo);
+
+									}else {
+										JOptionPane.showMessageDialog(null, "Escoja una cantidad de memoria ó un tipo validos","Notificación", JOptionPane.INFORMATION_MESSAGE);
+										return;
+									}
 								}
 
+							} else {
+								JOptionPane.showMessageDialog(null, "Coloque una cantidad máxima superior a la mínima","Notificación", JOptionPane.INFORMATION_MESSAGE);
 							}
-							if (rdbtnMicro.isSelected()) {
-								if (cbxTipoConexionMicro.getSelectedIndex() !=0 && ftxtVelocidad.getText() != "") {
-									String tipoConexionMicro = cbxTipoConexionMicro.getSelectedItem().toString();
-									String velocidad = ftxtVelocidad.getText();
-									aux = new Micro(numeroSerie, marca, modelo, cantMin, cantMax, precioVentaI, tipoConexionMicro, velocidad);
-									
-								}else {
-									JOptionPane.showMessageDialog(null, "Escoja una velocidad ó un tipo de conexión validos","Notificación", JOptionPane.INFORMATION_MESSAGE);
-								}
-
-							}
-							if (rdbtnMotherBoard.isSelected()) {
-								if (cbxTipoRAM.getSelectedIndex() !=0 && cbxTipoConectorMB.getSelectedIndex() !=0) {
-									String tipoConectorMB = cbxTipoConectorMB.getSelectedItem().toString();
-									String tipoRAM = cbxTipoRAM.getSelectedItem().toString();
-									aux = new MotherBoard(numeroSerie, marca, modelo, cantMin, cantMax, precioVentaI, tipoConectorMB, tipoRAM);
-									
-								}else {
-									JOptionPane.showMessageDialog(null, "Escoja un tipo de RAM ó un tipo de conexión validos","Notificación", JOptionPane.INFORMATION_MESSAGE);
-								}
-							}
-							if (rdbtnRAM.isSelected()) {
-								if (cbxTipo.getSelectedIndex() != 0 && ftxtCantMemoria.getText() != "") {
-									String tipo = cbxTipo.getSelectedItem().toString();
-									String cantMemoria = ftxtCantMemoria.getText();
-									aux = new RAM(numeroSerie, marca, modelo, cantMin, cantMax, precioVentaI, cantMemoria, tipo);
-									
-								}else {
-									JOptionPane.showMessageDialog(null, "Escoja una cantidad de memoria ó un tipo validos","Notificación", JOptionPane.INFORMATION_MESSAGE);
-								}
-							}
-
-						} else {
-							JOptionPane.showMessageDialog(null, "Coloque una cantidad máxima superior a la mínima","Notificación", JOptionPane.INFORMATION_MESSAGE);
+						}else {
+							JOptionPane.showMessageDialog(null, "Los campos 'Marca' y 'Modelo' deben estar llenos","Notificación", JOptionPane.INFORMATION_MESSAGE);
+							
 						}
 						if(auxComp!=null) {
 							Tienda.getInstance().getLosComponentes().remove(auxComp);
@@ -620,14 +583,14 @@ public class AgregarComponente extends JDialog {
 							for (Proveedor proveedor : aux.getLosQueVenden()) {
 								proveedor.getMisCompos().add(aux);
 								proveedor.getPreciosCompos().add(((ArrayList<Float>) Tienda.getInstance().getPreciosLosQueVendenTemp().clone()).get(i));
+								i++;
 							}
 						}
-						if(auxComp==null) {
+						if(auxComp==null && aux!=null) {
 							Tienda.getInstance().primeraOrdenCompra(aux);
 						}
 						if(auxComp!=null) {
 							aux.setCantDisponible(cantReal);
-
 
 							if(!b) {
 								Tienda.getInstance().getLosCompTemp().add(aux);
@@ -641,16 +604,20 @@ public class AgregarComponente extends JDialog {
 
 							clean();
 						}
-						Tienda.getInstance().agregarComponente(aux);
-						if(auxComp!=null) {
-							dispose();
-							JOptionPane.showMessageDialog(null, "Componente modificado con exito","Notificación", JOptionPane.INFORMATION_MESSAGE);	
+						if(aux!=null) {
+							Tienda.getInstance().agregarComponente(aux);
+							if(auxComp!=null) {
+								dispose();
+								JOptionPane.showMessageDialog(null, "Componente modificado con exito","Notificación", JOptionPane.INFORMATION_MESSAGE);	
+							}
+							else {
+								JOptionPane.showMessageDialog(null, "Componente añadido con exito","Notificación", JOptionPane.INFORMATION_MESSAGE);
+								clean();
+							}
 							
 						}
-						else {
-							JOptionPane.showMessageDialog(null, "Componente añadido con exito","Notificación", JOptionPane.INFORMATION_MESSAGE);
-							clean();
-						}
+
+
 					}
 
 
@@ -675,6 +642,59 @@ public class AgregarComponente extends JDialog {
 			btnAgregarVendedor.setEnabled(false);
 		}
 
+
+
+		if(auxComp!=null) {
+			txtNoSerie.setText(auxComp.getNumeroSerie());txtNoSerie.setEnabled(false);
+			txtModelo.setText(auxComp.getModelo());txtModelo.setEnabled(true);
+			txtMarca.setText(auxComp.getMarca());txtMarca.setEnabled(true);
+			spnCantMax.setValue(Integer.valueOf(auxComp.getCantMax()));spnCantMax.setEnabled(true);
+			spnCantMin.setValue(Integer.valueOf(auxComp.getCantMin()));spnCantMin.setEnabled(true);
+			spnPrecioVenta.setValue(Float.valueOf(auxComp.getPrecioVentaActual()));spnPrecioVenta.setEnabled(true);
+
+			if(!auxComp.getLosQueVenden().isEmpty()) {
+				Tienda.getInstance().getLosQueVendenTemp().addAll(auxComp.getLosQueVenden());
+				for (Proveedor prov : Tienda.getInstance().getLosQueVendenTemp()) {
+					for (Componente comp : prov.getMisCompos()) {
+						if(comp == auxComp) {
+							float precio = prov.getPrecioCompo(comp);
+							Tienda.getInstance().getPreciosLosQueVendenTemp().add(precio);
+							break;
+						}	
+					}
+				}
+			}
+
+			if(auxComp instanceof DiscoDuro) {
+				rdbtnDiscoDuro.setSelected(true);
+				rdbtnMicro.setSelected(false);
+				rdbtnMotherBoard.setSelected(false);
+				rdbtnRAM.setSelected(false);
+			}
+			if(auxComp instanceof Micro) {
+				rdbtnDiscoDuro.setSelected(false);
+				rdbtnMicro.setSelected(true);
+				rdbtnMotherBoard.setSelected(false);
+				rdbtnRAM.setSelected(false);
+			}
+			if(auxComp instanceof MotherBoard) {
+				rdbtnDiscoDuro.setSelected(false);
+				rdbtnMicro.setSelected(false);
+				rdbtnMotherBoard.setSelected(true);
+				rdbtnRAM.setSelected(false);
+			}
+			if(auxComp instanceof RAM) {
+				rdbtnDiscoDuro.setSelected(false);
+				rdbtnMicro.setSelected(false);
+				rdbtnMotherBoard.setSelected(false);
+				rdbtnRAM.setSelected(true);
+			}
+			rdbtnDiscoDuro.setEnabled(false);
+			rdbtnMicro.setEnabled(false);
+			rdbtnMotherBoard.setEnabled(false);
+			rdbtnRAM.setEnabled(false);
+			cargarProveedoresVentaComp();
+		}
 
 	}
 	public static ArrayList<Proveedor> arregloProveedores() {

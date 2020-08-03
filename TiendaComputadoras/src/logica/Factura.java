@@ -55,6 +55,23 @@ public class Factura implements Serializable {
 		return fecha;
 	}
 
+	@SuppressWarnings("deprecation")
+	public void setFecha(String fecha) {
+		//("yyyy-MM-dd HH:mm:ss");
+		String yearMonthDay = fecha.split(" ")[0];
+		String hourMinuteSecond = fecha.split(" ")[1];
+		Integer year = Integer.valueOf(yearMonthDay.split("-")[0]);
+		Integer month = Integer.valueOf(yearMonthDay.split("-")[1]);
+		Integer day = Integer.valueOf(yearMonthDay.split("-")[2]);
+		
+		Integer hour = Integer.valueOf(hourMinuteSecond.split(":")[0]);
+		Integer minute = Integer.valueOf(hourMinuteSecond.split(":")[1]);
+		Integer second = Integer.valueOf(hourMinuteSecond.split(":")[2]);
+		Date auxfecha = new Date(year, month, day, hour, minute, second);
+		
+		this.fecha = auxfecha;
+	}
+	
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
@@ -113,8 +130,10 @@ public class Factura implements Serializable {
 
 	public void setCantiCombos(ArrayList<Integer> cantiCombos) {
 		this.cantiCombos = cantiCombos;
+		
 	}
-
+	
+	
 
 
 

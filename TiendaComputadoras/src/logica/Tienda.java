@@ -11,18 +11,18 @@ public class Tienda implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private ArrayList<Componente> losComponentes;
+	private ArrayList<Componente> losComponentes;//bien
 	private ArrayList<Componente> losCompTemp;
-	private ArrayList <Cliente> losClientes;
-	private ArrayList <Persona> losUsuarios;
-	private ArrayList<Factura> lasFacturas;
+	private ArrayList <Cliente> losClientes;//bien
+	private ArrayList <Persona> losUsuarios;//bien
+	private ArrayList<Factura> lasFacturas;//bien
 	private ArrayList<Proveedor> losQueVendenTemp;
 	private ArrayList<Float> preciosLosQueVendenTemp;
 	private ArrayList<Float> preciosCadaCompTemp;
-	private ArrayList<Combo> losCombo;
-	private ArrayList<Proveedor> losProveedores;
-	private ArrayList<OrdenCompra> lasOrdenes;
-	private ArrayList<OrdenCompra> ordenesSinProcesar;
+	private ArrayList<Combo> losCombo;//bien
+	private ArrayList<Proveedor> losProveedores;//bien
+	private ArrayList<OrdenCompra> lasOrdenes;//bien
+	private ArrayList<OrdenCompra> ordenesSinProcesar;//bien
 	private Persona usuarioActual;
 	private int generadorCodigoCombo;
 	private int generadorCodigoFactura;
@@ -160,6 +160,10 @@ public class Tienda implements Serializable {
 	public void agregarComponente(Componente aux) {
 		losComponentes.add(aux);
 		generadorCodigoComponentes++;
+	}
+	public void eliminarComponente(Componente aux) {
+		losComponentes.remove(aux);
+		generadorCodigoComponentes--;
 	}
 
 	public void agregarFactura(Factura aux) {
@@ -370,6 +374,8 @@ public class Tienda implements Serializable {
 	}
 	public void hacerCompra(OrdenCompra orden,Proveedor aux) {
 		orden.getCompCompra().getPrecios().add(new Precio(orden.getCompCompra().getPrecioVentaActual(), aux.getPrecioCompo(orden.getCompCompra()),false));//getPreciosCompos().get(aux.getMisCompos().lastIndexOf(orden.getCompCompra())), false));
+		orden.getCompCompra().setPVActual(orden.getCompCompra().getPrecioVentaActual());
+		orden.getCompCompra().setPCActual(aux.getPrecioCompo(orden.getCompCompra()));
 		aux.setDebito(orden.getCantiCompos()*aux.getPrecioCompo(orden.getCompCompra()));
 		orden.setCostoTotal(orden.getCantiCompos()*aux.getPrecioCompo(orden.getCompCompra()));
 		orden.setRealizada(true);

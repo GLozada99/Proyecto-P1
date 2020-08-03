@@ -17,10 +17,12 @@ public abstract class Componente implements Serializable{
 	protected ArrayList<Precio> precios;
 	protected ArrayList<Proveedor> losQueVenden;
 	protected int cantidadVentas;
+	protected float PVActual;
+	protected float PCActual;
+	
 
 	public Componente(String numeroSerie, String marca, String modelo, int cantMin, int cantMax, float precioVentaI) {
 		super();
-		
 		this.modelo = modelo;
 		this.numeroSerie = numeroSerie;
 		this.marca = marca;
@@ -29,8 +31,26 @@ public abstract class Componente implements Serializable{
 		this.cantMax = cantMax;
 		precios=new ArrayList<Precio>();
 		precios.add(new Precio(precioVentaI, 0, false));
+		PVActual = precioVentaI;
+		PCActual = 0;
 		losQueVenden = new ArrayList<Proveedor>();
 		cantidadVentas= 0;
+	}
+
+	public float getPVActual() {
+		return PVActual;
+	}
+
+	public void setPVActual(float pVActual) {
+		PVActual = pVActual;
+	}
+
+	public float getPCActual() {
+		return PCActual;
+	}
+
+	public void setPCActual(float pCActual) {
+		PCActual = pCActual;
 	}
 
 	public String getModelo() {
@@ -97,10 +117,12 @@ public abstract class Componente implements Serializable{
 	}
 
 	public float getPrecioCompraActual() {
-		return precios.get(precios.size()-1).getPrecioCompra();
+		//return precios.get(precios.size()-1).getPrecioCompra();
+		return PCActual;
 	}
 	public float getPrecioVentaActual() {
-		return precios.get(precios.size()-1).getPrecioVenta();
+		//return precios.get(precios.size()-1).getPrecioVenta();
+		return PVActual;
 	}
 	public float ganancia() {
 		float gain = getPrecioVentaActual()-getPrecioCompraActual();

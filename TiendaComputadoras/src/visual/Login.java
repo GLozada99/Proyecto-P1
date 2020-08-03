@@ -16,6 +16,8 @@ import javax.swing.border.EmptyBorder;
 import logica.Administrador;
 import logica.Persona;
 import logica.Tienda;
+import sql.SQLConnection;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -45,6 +47,18 @@ public class Login extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				try {
+					SQLConnection.setConnectionURL("LAPTOP-TPPBSJFQ", "Proyecto");
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				SQLConnection.getData();
+				
+				
+				
+				
+				/*
 				FileInputStream tienda=null;
 				FileOutputStream tienda2=null;
 				ObjectInputStream tiendaRead=null;
@@ -74,7 +88,7 @@ public class Login extends JFrame {
 				} catch (ClassNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				}
+				}*/
 
 				try {
 					Login frame = new Login();
@@ -89,8 +103,9 @@ public class Login extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws ClassNotFoundException 
 	 */
-	public Login() {
+	public Login(){
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/Imagenes/IconPrincipal.png")));
 		setTitle("Iniciar sesi\u00F3n");
 

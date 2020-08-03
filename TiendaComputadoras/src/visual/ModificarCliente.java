@@ -14,6 +14,7 @@ import javax.swing.text.MaskFormatter;
 
 import logica.Cliente;
 import logica.Tienda;
+import sql.SQLConnection;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -155,6 +156,8 @@ public class ModificarCliente extends JDialog {
 							aux.setNombre(txtNombre.getText());
 							aux.setDireccion(txtDireccion.getText());
 							aux.setTelefono(ftxtTelefono.getText());
+							
+							
 							JOptionPane.showMessageDialog(null, "Modificacion Realizada","Notificación", JOptionPane.INFORMATION_MESSAGE);
 							dispose();
 						}
@@ -180,5 +183,7 @@ public class ModificarCliente extends JDialog {
 		txtDireccion.setText(aux.getDireccion());
 		ftxtTelefono.setText(aux.getTelefono());
 	}
+
+	
 }
 

@@ -7,6 +7,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -22,6 +27,7 @@ import logica.Administrador;
 import logica.Cliente;
 import logica.Persona;
 import logica.Tienda;
+import sql.SQLConnection;
 
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
@@ -47,7 +53,7 @@ public class ListaClientes extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		try {
 			ListaClientes dialog = new ListaClientes();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -148,6 +154,7 @@ public class ListaClientes extends JDialog {
 						i = JOptionPane.showConfirmDialog(null, "Está seguro que desea eliminar al cliente:"+" "+aux.getNombre()+"?");
 						if(i==0) {
 							Tienda.getInstance().getLosClientes().remove(aux);
+							SQLConnection.EliminarCliente(aux);
 							JOptionPane.showMessageDialog(null, "Cliente eliminado con exito");
 							cargarClientes();
 						}
@@ -158,12 +165,11 @@ public class ListaClientes extends JDialog {
 		}
 		cargarClientes();
 	}
-	{
 
-	}
+	
 	public static void cargarClientes() {
 		model.setRowCount(0);
-		row = new Object[model.getColumnCount()];
+		row = new Object[model.getColumnCount()];	
 		for (Cliente aux : Tienda.getInstance().getLosClientes()) {
 			row[0] = aux.getCodigo();
 			row[1] = aux.getNombre();

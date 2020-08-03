@@ -18,6 +18,7 @@ import logica.MotherBoard;
 import logica.Proveedor;
 import logica.RAM;
 import logica.Tienda;
+import sql.SQLConnection;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -180,6 +181,10 @@ public class ListaComponentes extends JDialog {
 				});
 				btnAceptar.setActionCommand("OK");
 				buttonPane.add(btnAceptar);
+				btnAceptar.setEnabled(false);
+				if (AgregarCompProveedores) {
+					btnAceptar.setEnabled(true);
+				}
 			}
 			{
 				btnModificar = new JButton("Modificar");
@@ -221,6 +226,7 @@ public class ListaComponentes extends JDialog {
 						i = JOptionPane.showConfirmDialog(null, "Está seguro que desea eliminar el componente:"+" "+aux.getNumeroSerie()+"?");
 						if(i==0) {
 							Tienda.getInstance().getLosComponentes().remove(aux);
+							SQLConnection.EliminarComponente(aux);
 							JOptionPane.showMessageDialog(null, "Componente eliminado con exito");
 							if (aux instanceof DiscoDuro)
 								cargarComponentesDD();

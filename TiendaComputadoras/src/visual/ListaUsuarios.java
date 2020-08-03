@@ -24,6 +24,8 @@ import logica.Cliente;
 import logica.Persona;
 import logica.Tienda;
 import logica.Vendedor;
+import sql.SQLConnection;
+
 import java.awt.Color;
 
 public class ListaUsuarios extends JDialog {
@@ -93,9 +95,15 @@ public class ListaUsuarios extends JDialog {
 								btnEliminar.setEnabled(true);
 								btnModificar.setEnabled(true);
 								codigo = String.valueOf(table.getValueAt(index, 0));
-
-
+							}else {
+								btnEliminar.setEnabled(false);
+								btnModificar.setEnabled(false);
 							}
+							if(codigo.equalsIgnoreCase("Admin")) {
+								btnEliminar.setEnabled(false);
+								btnModificar.setEnabled(false);
+							}
+							
 						}
 					});
 					table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -140,6 +148,7 @@ public class ListaUsuarios extends JDialog {
 						i = JOptionPane.showConfirmDialog(null, "Está seguro que desea eliminar al usuario:"+" "+aux.getNombre()+"?");
 						if(i==0) {
 							Tienda.getInstance().getLosUsuarios().remove(aux);
+							SQLConnection.EliminarUsuario(aux);
 							JOptionPane.showMessageDialog(null, "Usuario eliminado con exito");
 							cargarUsuarios();
 							btnEliminar.setEnabled(false);
@@ -162,15 +171,11 @@ public class ListaUsuarios extends JDialog {
 			row[1] = aux.getNombre();
 			row[2] = aux.getTelefono();
 			row[3] = aux.getDireccion();
-			try {
-				row[4] = ((Administrador)aux).getContraseña();
-			} catch (ClassCastException e) {
-				row[4] = ((Vendedor)aux).getContraseña();
-			}
-
 			if (aux instanceof Administrador) {
+				row[4] = ((Administrador)aux).getContraseña();
 				row[5] = "Administrador";
-			}else {
+			}else if(aux instanceof Vendedor) {
+				row[4] = ((Vendedor)aux).getContraseña();
 				row[5] = "Vendedor";
 			} 
 			model.addRow(row);

@@ -21,6 +21,7 @@ import logica.MotherBoard;
 import logica.RAM;
 import logica.Tienda;
 import logica.Vendedor;
+import sql.SQLConnection;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -515,14 +516,12 @@ public class NuevaFactura extends JDialog {
 							}
 							else if(Tienda.getInstance().relacionFactura(Tienda.getInstance().findClientebyCedula(ftxtCedula.getText()), Float.valueOf(txtPrecioTotal.getText()), ayudaComponente, ayudaCantiComponente, ayudaCombos, ayudaCantiCombos, rdbtnCredito.isSelected())) {
 							Cliente auxCli = new Cliente(txtNombre.getText(), ftxtTelefono.getText(), txtDireccion.getText(), ftxtCedula.getText());
+							
 							Factura aux = new Factura(txtCodigo.getText(), Float.valueOf(txtPrecioTotal.getText()), auxCli, ayudaComponente, ayudaCombos, ayudaCantiComponente, ayudaCantiCombos, rdbtnCredito.isSelected());
 							Tienda.getInstance().getLosClientes().add(auxCli);
 							Tienda.getInstance().agregarFactura(aux);
 							
-							//ayudaComponente.clear();
-							//ayudaCombos.clear();
-							//ayudaCantiComponente.clear();
-							//ayudaCantiCombos.clear();
+							
 							componentesVenta.clear();
 							combosVenta.clear();
 							cantidadesCompo.clear();

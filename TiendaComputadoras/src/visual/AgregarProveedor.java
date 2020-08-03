@@ -225,7 +225,7 @@ public class AgregarProveedor extends JDialog {
 							boolean bien=false;
 							Float num=(float) 0;
 							while(!bien) {
-								
+
 								try {
 									num = Float.valueOf(JOptionPane.showInputDialog("Introduzca el precio del componente"));
 									bien = true;
@@ -239,7 +239,7 @@ public class AgregarProveedor extends JDialog {
 							} catch (Exception e) {
 								JOptionPane.showMessageDialog(null, "Los Precios deben ser ingresados en orden");
 							}
-							
+
 							try {
 								Tienda.getInstance().getPreciosCadaCompTemp().remove(index+1);
 							} catch (IndexOutOfBoundsException e) {
@@ -283,15 +283,25 @@ public class AgregarProveedor extends JDialog {
 								Proveedor aux = new Proveedor(txtNombre.getText(), ftxtTelefono.getText(), txtDireccion.getText(), ftxtRNC.getText(), ayudaComp, ayudaPrecio);
 								if(auxProv!=null) {
 									aux.setDebito(auxProv.getDebito());
-								int posicion = Tienda.getInstance().getLosProveedores().indexOf(auxProv);
-								Tienda.getInstance().getLosProveedores().add(posicion,aux);
-								Tienda.getInstance().getLosProveedores().remove(posicion+1);
+									int posicion = Tienda.getInstance().getLosProveedores().indexOf(auxProv);
+									Tienda.getInstance().getLosProveedores().add(posicion,aux);
+									Tienda.getInstance().getLosProveedores().remove(posicion+1);
 								}
 								else {
-								Tienda.getInstance().getLosProveedores().add(aux);
+									Tienda.getInstance().getLosProveedores().add(aux);
 								}
 								Tienda.getInstance().getLosCompTemp().clear();
 								Tienda.getInstance().getPreciosCadaCompTemp().clear();
+
+								for (Componente componente : ayudaComp) {
+									for (Componente componente2 : Tienda.getInstance().getLosComponentes()) {
+										if(componente == componente2 && !componente2.getLosQueVenden().contains(aux) && !componente.getLosQueVenden().contains(aux) ) {
+											componente2.getLosQueVenden().add(aux);
+											break;
+										}
+									}
+								}
+								
 								cargarComponentes();
 								limpiar();
 								JOptionPane.showMessageDialog(null, "Proveedor añadido con exito");
@@ -311,7 +321,7 @@ public class AgregarProveedor extends JDialog {
 				JButton btnCancelar = new JButton("Cancelar");
 				btnCancelar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						
+
 						Tienda.getInstance().getLosCompTemp().clear();
 						Tienda.getInstance().getPreciosCadaCompTemp().clear();
 						dispose();
@@ -337,7 +347,7 @@ public class AgregarProveedor extends JDialog {
 			Tienda.getInstance().getLosCompTemp().addAll((Collection<? extends Componente>) auxProv.getMisCompos().clone());
 			Tienda.getInstance().getPreciosCadaCompTemp().addAll((Collection<? extends Float>) auxProv.getPreciosCompos().clone());
 			cargarComponentes();
-			
+
 		}
 
 	}
@@ -345,7 +355,7 @@ public class AgregarProveedor extends JDialog {
 		ArrayList<Componente> compos = (ArrayList<Componente>) Tienda.getInstance().getLosCompTemp().clone();
 		return compos;
 	}
-	
+
 	public static ArrayList<Float> arregloPrecios() {
 		ArrayList<Float> precios = (ArrayList<Float>)Tienda.getInstance().getPreciosCadaCompTemp().clone() ;
 		return precios;

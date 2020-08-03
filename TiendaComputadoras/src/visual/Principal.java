@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -32,12 +33,23 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 
+import com.microsoft.sqlserver.jdbc.SQLServerException;
+
 import logica.Administrador;
-
+import logica.Cliente;
+import logica.Combo;
+import logica.Componente;
+import logica.DiscoDuro;
+import logica.Factura;
+import logica.Micro;
+import logica.MotherBoard;
+import logica.OrdenCompra;
 import logica.Persona;
-
+import logica.Proveedor;
+import logica.RAM;
 import logica.Tienda;
 import logica.Vendedor;
+import sql.SQLConnection;
 
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
@@ -89,6 +101,7 @@ public class Principal extends JFrame implements  Runnable  {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
+				/*
 				FileOutputStream tienda2;
 				ObjectOutputStream tiendaWrite;
 				try {
@@ -101,7 +114,49 @@ public class Principal extends JFrame implements  Runnable  {
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
+				}*/
+				for (Persona aux : Tienda.getInstance().getLosUsuarios()) {//Usuarios
+					if(aux instanceof Administrador) {
+						SQLConnection.insertUpdateAdmin((Administrador) aux); 
+					}else if(aux instanceof Vendedor) {
+						SQLConnection.insertUpdateVendedor((Vendedor) aux);
+					}
 				}
+				for (Cliente aux : Tienda.getInstance().getLosClientes()) {//Clientes
+					SQLConnection.insertUpdateCliente(aux);
+				}
+				for (Proveedor aux : Tienda.getInstance().getLosProveedores()) {//Proveedores
+					SQLConnection.insertUpdateProveedor(aux);
+				}
+				
+				for (Componente aux : Tienda.getInstance().getLosComponentes()) {//Componentes
+					if(aux instanceof DiscoDuro) {
+						SQLConnection.insertUpdateDiscoDuro(aux);
+					}else if(aux instanceof Micro) {
+						SQLConnection.insertUpdateMicro(aux);
+					}else if(aux instanceof MotherBoard) {
+						SQLConnection.insertUpdateMotherBoard(aux);
+					}else if(aux instanceof RAM) {
+						SQLConnection.insertUpdateRAM(aux);
+					}
+					SQLConnection.insertUpdatePrecio(aux);
+					SQLConnection.insertUpdateRelacionProveedorComponente(aux);
+				}
+				for (OrdenCompra aux : Tienda.getInstance().getOrdenesSinProcesar()) {//Ordenes por procesar
+					SQLConnection.insertOrdenCompra(aux);
+				}
+				
+				for (Combo aux : Tienda.getInstance().getLosCombo()) {//Combos
+					SQLConnection.insertUpdateCombo(aux);
+				}
+				
+				for (Factura aux : Tienda.getInstance().getLasFacturas()) {//Facturas
+					SQLConnection.insertFactura(aux);
+				}
+				
+				
+				
+
 
 			}
 		});

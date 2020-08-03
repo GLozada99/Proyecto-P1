@@ -2,6 +2,8 @@ package logica;
 
 import java.io.Serializable;
 
+import sql.SQLConnection;
+
 public class Cliente extends Persona implements Serializable {
 	/**
 	 * 
@@ -14,6 +16,7 @@ public class Cliente extends Persona implements Serializable {
 		super(nombre, telefono, direccion, cedula);
 		credito = 0;
 		limCredito = 1000;
+		
 	}
 	
 	public float getCredito() {
