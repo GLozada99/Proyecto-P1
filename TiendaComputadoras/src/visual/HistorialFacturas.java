@@ -45,6 +45,9 @@ public class HistorialFacturas extends JDialog {
 	private JButton btnAceptar;
 	private static DefaultTableModel model;
 	private static Object[] row;
+	private JButton btnDetalleCompo = null;
+	private JButton btnDetalleCombo = null;
+	private String codigo = "";
 
 	/**
 	 * Launch the application.
@@ -84,6 +87,17 @@ public class HistorialFacturas extends JDialog {
 			panel.setLayout(new BorderLayout(0, 0));
 			{
 				JScrollPane scrollPane = new JScrollPane();
+				scrollPane.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent arg0) {
+						if(table.getSelectedRow()>-1){
+							int index = table.getSelectedRow();
+							btnDetalleCompo.setEnabled(true);
+							btnDetalleCombo.setEnabled(true);
+							codigo = String.valueOf(table.getValueAt(index, 0));
+						}
+					}
+				});
 				scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 				panel.add(scrollPane, BorderLayout.CENTER);
 				{
@@ -110,6 +124,35 @@ public class HistorialFacturas extends JDialog {
 					dispose();
 				}
 			});
+			{
+				btnDetalleCompo = new JButton("Detalle Componentes");
+				btnDetalleCompo.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						Factura auxFact = Tienda.getInstance().findFacturabyCodigo(codigo);
+						ListaComponentesFactura aux = new ListaComponentesFactura(auxFact);
+						aux.setModal(true);
+						aux.setVisible(true);
+						btnDetalleCompo.setEnabled(false);
+						
+					}
+				});
+				buttonPane.add(btnDetalleCompo);
+				
+				btnDetalleCombo = new JButton("Detalle Combos");
+				btnDetalleCombo.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						Factura auxFact = Tienda.getInstance().findFacturabyCodigo(codigo);
+						ListaCombosFactura aux = new ListaCombosFactura(auxFact);
+						aux.setModal(true);
+						aux.setVisible(true);
+						btnDetalleCombo.setEnabled(false);
+					}
+				});
+				buttonPane.add(btnDetalleCombo);
+				
+				btnDetalleCombo.setEnabled(false);
+				btnDetalleCompo.setEnabled(false);
+			}
 			buttonPane.add(btnAceptar);
 		}
 		cargarFacturas();

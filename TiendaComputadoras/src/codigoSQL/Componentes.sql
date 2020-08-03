@@ -1,3 +1,4 @@
+USE Proyecto
 GO
 CREATE PROCEDURE SP_Crear_Modificar_DiscoDuro @Modelo varchar(25),
 @NumeroSerie varchar(10),@Marca varchar(25),

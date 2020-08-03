@@ -72,7 +72,7 @@ public class NuevoCombo extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public NuevoCombo(Combo aux) {
+	public NuevoCombo(Combo aux,boolean inspectCombos) {
 
 		setIconImage(Toolkit.getDefaultToolkit().getImage(NuevoCombo.class.getResource("/Imagenes/IconAgregarCombopng.png")));
 		setTitle("Nuevo Combo");
@@ -245,6 +245,9 @@ public class NuevoCombo extends JDialog {
 				});
 				btnCrear.setActionCommand("OK");
 				buttonPane.add(btnCrear);
+				if(inspectCombos) {
+					btnCrear.setEnabled(false);
+				}
 				getRootPane().setDefaultButton(btnCrear);
 			}
 			{
@@ -292,6 +295,13 @@ public class NuevoCombo extends JDialog {
 					}
 
 				}
+				txtNombre.setEditable(!inspectCombos);
+				txtPrecio.setEditable(!inspectCombos);
+				spnDescuento.setEnabled(!inspectCombos);
+				cbxDiscoDuro.setEnabled(!inspectCombos);
+				cbxMicro.setEnabled(!inspectCombos);
+				cbxRAM.setEnabled(!inspectCombos);
+				cbxMotherBoard.setEnabled(!inspectCombos);
 			}
 		}
 

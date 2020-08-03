@@ -198,6 +198,21 @@ public class Tienda implements Serializable {
 		}
 		return clienteFound;
 	}
+	
+	public Factura findFacturabyCodigo(String codigo) {
+		Factura facturaFound = null;
+		boolean find = false;
+		int i=0;
+		while (i<lasFacturas.size()&&!find) {
+			if(lasFacturas.get(i).getCodigo().equalsIgnoreCase(codigo)){
+				facturaFound = lasFacturas.get(i);
+				find = true;
+			}
+			i++;
+		}
+		return facturaFound;
+	}
+	
 	public Persona usuarioByCodigo(String cedula) {
 		Persona usuarioFound = null;
 		boolean find = false;
@@ -342,8 +357,8 @@ public class Tienda implements Serializable {
 			for (Componente componente : combo.getComponentes()) {
 				guardarCantidades.add(componente.getCantDisponible());
 				componente.setCantDisponible(componente.getCantDisponible()-1*cantCombos.get(i));
-				i++;
 			}	
+			i++;
 		}
 
 		for (Componente elComponente : misComponentes) {

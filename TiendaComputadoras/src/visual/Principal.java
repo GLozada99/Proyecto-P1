@@ -208,7 +208,7 @@ public class Principal extends JFrame implements  Runnable  {
 		mntmNuevoCombo.setIcon(new ImageIcon(Principal.class.getResource("/Imagenes/IconAgregarCombopng.png")));
 		mntmNuevoCombo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				NuevoCombo aux = new NuevoCombo(null);
+				NuevoCombo aux = new NuevoCombo(null,false);
 				aux.setModal(true);
 				aux.setVisible(true);
 			}

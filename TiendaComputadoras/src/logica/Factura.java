@@ -13,10 +13,10 @@ public class Factura implements Serializable {
 	private float costo;
 	private Date fecha;
 	private Cliente elCliente;
-	private ArrayList<Componente> losComponentes;
-	private ArrayList<Combo> losCombos;
-	private ArrayList<Integer> cantiComponentes;
-	private ArrayList<Integer> cantiCombos;
+	private ArrayList<Componente> losComponentes = null;
+	private ArrayList<Combo> losCombos = null;
+	private ArrayList<Integer> cantiComponentes = null;
+	private ArrayList<Integer> cantiCombos = null;
 	private boolean tipo; //si es false, la factura es pagada, si es true, la factura es a credito;
 
 	public Factura(String codigo,float costo, Cliente elCliente, ArrayList<Componente> losComponentes,
@@ -31,6 +31,20 @@ public class Factura implements Serializable {
 		this.cantiComponentes=cantiComponentes;
 		this.cantiCombos=cantiCombos;
 		this.tipo = tipo;
+		
+		/*if(this.losComponentes == null) {
+			this.losComponentes = new ArrayList<Componente>();
+		}
+		if(this.losCombos == null) {
+			this.losCombos = new ArrayList<Combo>();
+		}
+		if(this.cantiComponentes == null) {
+			this.cantiComponentes = new ArrayList<Integer>();
+		}
+		if(this.cantiComponentes == null) {
+			this.cantiCombos = new ArrayList<Integer>();
+		}*/
+		
 
 		Tienda.getInstance().restaCantiComponentes(losComponentes, cantiComponentes);
 	}

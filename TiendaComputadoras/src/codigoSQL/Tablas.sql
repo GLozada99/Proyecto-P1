@@ -1,4 +1,5 @@
 USE Proyecto
+DROP DATABASE Proyecto
 
 CREATE TABLE Tipo_Persona(
 	Codigo_Tipo varchar(4) PRIMARY KEY,

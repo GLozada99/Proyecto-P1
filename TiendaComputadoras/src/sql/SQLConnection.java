@@ -146,7 +146,6 @@ public class SQLConnection {
 				Tienda.getInstance().getLasOrdenes().add(auxOrd);
 				auxProv.getMisOrdenes().add(auxOrd);
 				Tienda.getInstance().getOrdenesSinProcesar().remove(auxOrd);
-				System.out.println("Hola");
 			}
 
 			rs = stmt.executeQuery("SELECT * FROM F_Obtener_Combo()");//OrdenesCompraProcesadas
@@ -179,15 +178,17 @@ public class SQLConnection {
 				//System.out.println(rs.getDate("Fecha"));
 				aux.setFecha(rs.getString("Fecha"));
 				Tienda.getInstance().agregarFactura(aux);
+				System.out.println("Facturas");
 			}
 			
 			for (Factura aux : Tienda.getInstance().getLasFacturas()) {
+				System.out.println("Numero");
 				rs = stmt.executeQuery("SELECT * FROM F_Obtener_Componentes_Factura('"+aux.getCodigo()+"')");
 				while(rs.next()) {
 					Componente auxComp = Tienda.getInstance().findComponentebyNumeroSerie(rs.getString("NumeroSerieComponente"));
 					aux.getLosComponentes().add(auxComp);
 					aux.getCantiComponentes().add(rs.getInt("CantidadComponente"));
-
+					System.out.println("Hola");
 				}
 				rs = stmt.executeQuery("SELECT * FROM F_Obtener_Combos_Factura('"+aux.getCodigo()+"')");
 				while(rs.next()) {
