@@ -115,49 +115,8 @@ public class Principal extends JFrame implements  Runnable  {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}*/
-				for (Persona aux : Tienda.getInstance().getLosUsuarios()) {//Usuarios
-					if(aux instanceof Administrador) {
-						SQLConnection.insertUpdateAdmin((Administrador) aux); 
-					}else if(aux instanceof Vendedor) {
-						SQLConnection.insertUpdateVendedor((Vendedor) aux);
-					}
-				}
-				for (Cliente aux : Tienda.getInstance().getLosClientes()) {//Clientes
-					SQLConnection.insertUpdateCliente(aux);
-				}
-				for (Proveedor aux : Tienda.getInstance().getLosProveedores()) {//Proveedores
-					SQLConnection.insertUpdateProveedor(aux);
-				}
+				setData();
 				
-				for (Componente aux : Tienda.getInstance().getLosComponentes()) {//Componentes
-					if(aux instanceof DiscoDuro) {
-						SQLConnection.insertUpdateDiscoDuro(aux);
-					}else if(aux instanceof Micro) {
-						SQLConnection.insertUpdateMicro(aux);
-					}else if(aux instanceof MotherBoard) {
-						SQLConnection.insertUpdateMotherBoard(aux);
-					}else if(aux instanceof RAM) {
-						SQLConnection.insertUpdateRAM(aux);
-					}
-					SQLConnection.insertUpdatePrecio(aux);
-					SQLConnection.insertUpdateRelacionProveedorComponente(aux);
-				}
-				for (OrdenCompra aux : Tienda.getInstance().getOrdenesSinProcesar()) {//Ordenes por procesar
-					SQLConnection.insertOrdenCompra(aux);
-				}
-				
-				for (Combo aux : Tienda.getInstance().getLosCombo()) {//Combos
-					SQLConnection.insertUpdateCombo(aux);
-				}
-				
-				for (Factura aux : Tienda.getInstance().getLasFacturas()) {//Facturas
-					SQLConnection.insertFactura(aux);
-				}
-				
-				
-				
-
-
 			}
 		});
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -418,6 +377,64 @@ public class Principal extends JFrame implements  Runnable  {
 
 		}.start();
 		showGraf2();
+		
+		new Thread() {
+			public void run() {
+				while(true) {
+					try {
+						Thread.sleep(5000);
+						setData();
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
+				}
+			}
+		}.start();
+	}
+	
+	
+
+
+	protected void setData() {
+		for (Persona aux : Tienda.getInstance().getLosUsuarios()) {//Usuarios
+			if(aux instanceof Administrador) {
+				SQLConnection.insertUpdateAdmin((Administrador) aux); 
+			}else if(aux instanceof Vendedor) {
+				SQLConnection.insertUpdateVendedor((Vendedor) aux);
+			}
+		}
+		for (Cliente aux : Tienda.getInstance().getLosClientes()) {//Clientes
+			SQLConnection.insertUpdateCliente(aux);
+		}
+		for (Proveedor aux : Tienda.getInstance().getLosProveedores()) {//Proveedores
+			SQLConnection.insertUpdateProveedor(aux);
+		}
+		
+		for (Componente aux : Tienda.getInstance().getLosComponentes()) {//Componentes
+			if(aux instanceof DiscoDuro) {
+				SQLConnection.insertUpdateDiscoDuro(aux);
+			}else if(aux instanceof Micro) {
+				SQLConnection.insertUpdateMicro(aux);
+			}else if(aux instanceof MotherBoard) {
+				SQLConnection.insertUpdateMotherBoard(aux);
+			}else if(aux instanceof RAM) {
+				SQLConnection.insertUpdateRAM(aux);
+			}
+			SQLConnection.insertUpdatePrecio(aux);
+			SQLConnection.insertUpdateRelacionProveedorComponente(aux);
+		}
+		for (OrdenCompra aux : Tienda.getInstance().getOrdenesSinProcesar()) {//Ordenes por procesar
+			SQLConnection.insertOrdenCompra(aux);
+		}
+		
+		for (Combo aux : Tienda.getInstance().getLosCombo()) {//Combos
+			SQLConnection.insertUpdateCombo(aux);
+		}
+		
+		for (Factura aux : Tienda.getInstance().getLasFacturas()) {//Facturas
+			SQLConnection.insertFactura(aux);
+		}
+		
 	}
 
 
@@ -430,8 +447,10 @@ public class Principal extends JFrame implements  Runnable  {
 
 
 		try {
-			if(componeteVenta.get(0)!=null)
+			if(componeteVenta.get(0)!=null) {
 				data.setValue("Disco Duro", componeteVenta.get(0));
+				data.setValue("Disco Duro", componeteVenta.get(0));
+			}
 
 		} catch (NullPointerException |IndexOutOfBoundsException e) {
 

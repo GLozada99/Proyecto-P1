@@ -87,17 +87,6 @@ public class HistorialFacturas extends JDialog {
 			panel.setLayout(new BorderLayout(0, 0));
 			{
 				JScrollPane scrollPane = new JScrollPane();
-				scrollPane.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent arg0) {
-						if(table.getSelectedRow()>-1){
-							int index = table.getSelectedRow();
-							btnDetalleCompo.setEnabled(true);
-							btnDetalleCombo.setEnabled(true);
-							codigo = String.valueOf(table.getValueAt(index, 0));
-						}
-					}
-				});
 				scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 				panel.add(scrollPane, BorderLayout.CENTER);
 				{
@@ -106,6 +95,18 @@ public class HistorialFacturas extends JDialog {
 					String[] header = {"Código","Fecha","Cédula","Nombre del Cliente","Cantidad Total Componentes","Costo Total"};
 					model.setColumnIdentifiers(header);
 					table = new JTable();
+					table.addMouseListener(new MouseAdapter() {
+						@Override
+						public void mouseClicked(MouseEvent arg0) {
+							if(table.getSelectedRow()>-1){
+								int index = table.getSelectedRow();
+								btnDetalleCompo.setEnabled(true);
+								btnDetalleCombo.setEnabled(true);
+								codigo = String.valueOf(table.getValueAt(index, 0));
+							}
+						}
+					});
+					
 					table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 					table.setModel(model);
 					scrollPane.setViewportView(table);
@@ -132,7 +133,7 @@ public class HistorialFacturas extends JDialog {
 						ListaComponentesFactura aux = new ListaComponentesFactura(auxFact);
 						aux.setModal(true);
 						aux.setVisible(true);
-						btnDetalleCompo.setEnabled(false);
+					//	btnDetalleCompo.setEnabled(false);
 						
 					}
 				});
@@ -145,7 +146,7 @@ public class HistorialFacturas extends JDialog {
 						ListaCombosFactura aux = new ListaCombosFactura(auxFact);
 						aux.setModal(true);
 						aux.setVisible(true);
-						btnDetalleCombo.setEnabled(false);
+					//	btnDetalleCombo.setEnabled(false);
 					}
 				});
 				buttonPane.add(btnDetalleCombo);

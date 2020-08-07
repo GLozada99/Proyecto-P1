@@ -128,8 +128,8 @@ public class ListaComponentes extends JDialog {
 			cbxComp = new JComboBox();
 			cbxComp.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					
-					
+
+
 					if(cbxComp.getSelectedIndex()==0) {
 						model.setColumnIdentifiers(encabezadoDD);
 						cargarComponentesDD();
@@ -146,7 +146,7 @@ public class ListaComponentes extends JDialog {
 						model.setColumnIdentifiers(encabezadoRAM);
 						cargarComponentesRAM();
 					}
-				//	btnModificar.setEnabled(false);
+					//	btnModificar.setEnabled(false);
 					//btnEliminar.setEnabled(false);
 				}
 			});
@@ -169,9 +169,9 @@ public class ListaComponentes extends JDialog {
 						if (AgregarCompProveedores) {
 							Componente aux = Tienda.getInstance().findComponentebyNumeroSerie(codigo);
 							if(!Tienda.getInstance().getLosCompTemp().contains(aux)) {
-							Tienda.getInstance().getLosCompTemp().add(aux);
-							AgregarProveedor.cargarComponentes();
-							dispose();
+								Tienda.getInstance().getLosCompTemp().add(aux);
+								AgregarProveedor.cargarComponentes();
+								dispose();
 							}
 							else {
 								JOptionPane.showMessageDialog(null, "El Componente seleccionado ya se encuentra en la lista");
@@ -225,17 +225,21 @@ public class ListaComponentes extends JDialog {
 						int i=1;
 						i = JOptionPane.showConfirmDialog(null, "Está seguro que desea eliminar el componente:"+" "+aux.getNumeroSerie()+"?");
 						if(i==0) {
-							Tienda.getInstance().getLosComponentes().remove(aux);
-							SQLConnection.EliminarComponente(aux);
-							JOptionPane.showMessageDialog(null, "Componente eliminado con exito");
-							if (aux instanceof DiscoDuro)
-								cargarComponentesDD();
-							if (aux instanceof Micro)
-								cargarComponentesMicro();
-							if (aux instanceof MotherBoard)
-								cargarComponentesMotherBoard();
-							if (aux instanceof RAM)
-								cargarComponentesRAM();
+							boolean result = Tienda.getInstance().eliminarComponente(aux);
+							if(result) {
+								SQLConnection.EliminarComponente(aux);
+								JOptionPane.showMessageDialog(null, "Componente eliminado con exito");
+								if (aux instanceof DiscoDuro)
+									cargarComponentesDD();
+								if (aux instanceof Micro)
+									cargarComponentesMicro();
+								if (aux instanceof MotherBoard)
+									cargarComponentesMotherBoard();
+								if (aux instanceof RAM)
+									cargarComponentesRAM();
+							}else {
+								JOptionPane.showMessageDialog(null, "El componente pertenece a un combo. Debe eliminar o modificar el combo");
+							}
 						}
 					}
 				});

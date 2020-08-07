@@ -73,7 +73,6 @@ public class NuevoCombo extends JDialog {
 	 * Create the dialog.
 	 */
 	public NuevoCombo(Combo aux,boolean inspectCombos) {
-
 		setIconImage(Toolkit.getDefaultToolkit().getImage(NuevoCombo.class.getResource("/Imagenes/IconAgregarCombopng.png")));
 		setTitle("Nuevo Combo");
 		setBounds(100, 100, 576, 405);
@@ -226,6 +225,10 @@ public class NuevoCombo extends JDialog {
 								Tienda.getInstance().agregarCombo(aux);
 								cbxDiscoDuro.setSelectedIndex(0);cbxMicro.setSelectedIndex(0);cbxMotherBoard.setSelectedIndex(0);cbxRAM.setSelectedIndex(0);
 								JOptionPane.showMessageDialog(null, "Combo creado con exito");
+								txtNombre.setText("");
+								txtPrecio.setText("");
+								spnDescuento.setValue(0);
+								
 							}
 							else{
 								Tienda.getInstance().eliminarCombo(aux);

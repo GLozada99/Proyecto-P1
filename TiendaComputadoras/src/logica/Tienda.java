@@ -161,9 +161,20 @@ public class Tienda implements Serializable {
 		losComponentes.add(aux);
 		generadorCodigoComponentes++;
 	}
-	public void eliminarComponente(Componente aux) {
-		losComponentes.remove(aux);
-		generadorCodigoComponentes--;
+	public boolean eliminarComponente(Componente aux) {
+		boolean done = true;
+		for (Combo combo : losCombo) {
+			for (Componente componente  : combo.getComponentes()) {
+				if(componente == aux) {
+					done = false;
+				}
+			}
+		}
+		if(done) {
+			losComponentes.remove(aux);
+			generadorCodigoComponentes--;
+		}
+		return done;
 	}
 
 	public void agregarFactura(Factura aux) {
@@ -198,7 +209,7 @@ public class Tienda implements Serializable {
 		}
 		return clienteFound;
 	}
-	
+
 	public Factura findFacturabyCodigo(String codigo) {
 		Factura facturaFound = null;
 		boolean find = false;
@@ -212,7 +223,7 @@ public class Tienda implements Serializable {
 		}
 		return facturaFound;
 	}
-	
+
 	public Persona usuarioByCodigo(String cedula) {
 		Persona usuarioFound = null;
 		boolean find = false;
@@ -391,7 +402,7 @@ public class Tienda implements Serializable {
 		orden.getCompCompra().getPrecios().add(new Precio(orden.getCompCompra().getPrecioVentaActual(), aux.getPrecioCompo(orden.getCompCompra()),false));//getPreciosCompos().get(aux.getMisCompos().lastIndexOf(orden.getCompCompra())), false));
 		orden.getCompCompra().setPVActual(orden.getCompCompra().getPrecioVentaActual());
 		orden.getCompCompra().setPCActual(aux.getPrecioCompo(orden.getCompCompra()));
-		aux.setDebito(orden.getCantiCompos()*aux.getPrecioCompo(orden.getCompCompra()));
+		aux.setDebito(aux.getDebito() + orden.getCantiCompos()*aux.getPrecioCompo(orden.getCompCompra()));
 		orden.setCostoTotal(orden.getCantiCompos()*aux.getPrecioCompo(orden.getCompCompra()));
 		orden.setRealizada(true);
 		orden.getCompCompra().setCantDisponible(orden.getCompCompra().getCantDisponible()+orden.getCantiCompos());

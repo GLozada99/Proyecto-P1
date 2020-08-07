@@ -52,7 +52,7 @@ public class SQLConnection {
 				Tienda.getInstance().getLosUsuarios().add(aux);
 			}
 			if(Tienda.getInstance().getLosUsuarios().isEmpty()) {
-				Persona aux = new Administrador("Admin", "(000)000-0000", "N/A", "Admin", "Admin");
+				Persona aux = new Administrador("Admin", "(000) 000-0000", "N/A", "Admin", "Admin");
 				Tienda.getInstance().getLosUsuarios().add(aux);
 				insertUpdateAdmin((Administrador) aux);
 			}

@@ -659,6 +659,7 @@ public class AgregarComponente extends JDialog {
 						if(comp == auxComp) {
 							float precio = prov.getPrecioCompo(comp);
 							Tienda.getInstance().getPreciosLosQueVendenTemp().add(precio);
+							
 							break;
 						}	
 					}
@@ -666,24 +667,32 @@ public class AgregarComponente extends JDialog {
 			}
 
 			if(auxComp instanceof DiscoDuro) {
+				cbxAlmacenamiento.setSelectedItem(((DiscoDuro) auxComp).getCapacidadAlma());
+				cbxTipoConexionDD.setSelectedItem(((DiscoDuro) auxComp).getTipoConexion());
 				rdbtnDiscoDuro.setSelected(true);
 				rdbtnMicro.setSelected(false);
 				rdbtnMotherBoard.setSelected(false);
 				rdbtnRAM.setSelected(false);
 			}
 			if(auxComp instanceof Micro) {
+				cbxTipoConexionMicro.setSelectedItem(((Micro) auxComp).getTipoConexion());
+				ftxtVelocidad.setText(((Micro) auxComp).getVelocidad());
 				rdbtnDiscoDuro.setSelected(false);
 				rdbtnMicro.setSelected(true);
 				rdbtnMotherBoard.setSelected(false);
 				rdbtnRAM.setSelected(false);
 			}
 			if(auxComp instanceof MotherBoard) {
+				cbxTipoConectorMB.setSelectedItem(((MotherBoard) auxComp).getTipoConector());
+				cbxTipoRAM.setSelectedItem(((MotherBoard) auxComp).getTipoRAM());
 				rdbtnDiscoDuro.setSelected(false);
 				rdbtnMicro.setSelected(false);
 				rdbtnMotherBoard.setSelected(true);
 				rdbtnRAM.setSelected(false);
 			}
 			if(auxComp instanceof RAM) {
+				cbxTipo.setSelectedItem(((RAM) auxComp).getTipoMemoria());
+				ftxtCantMemoria.setText(((RAM) auxComp).getCantMemoria());
 				rdbtnDiscoDuro.setSelected(false);
 				rdbtnMicro.setSelected(false);
 				rdbtnMotherBoard.setSelected(false);
@@ -735,7 +744,7 @@ public class AgregarComponente extends JDialog {
 		spnCantMin.setValue(1);
 		spnPrecioVenta.setValue(1);
 		cbxAlmacenamiento.setSelectedIndex(0);
-		cbxTipoConexionDD.setSelectedIndex(0);;
+		cbxTipoConexionDD.setSelectedIndex(0);
 		cbxTipoConexionMicro.setSelectedIndex(0);
 		cbxTipoConectorMB.setSelectedIndex(0);
 		cbxTipoRAM.setSelectedIndex(0);
