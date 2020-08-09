@@ -26,6 +26,11 @@ import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.border.TitledBorder;
@@ -254,6 +259,26 @@ public class ListaComponentes extends JDialog {
 	public static void cargarComponentesDD() {
 		model.setRowCount(0);
 		row = new Object[model.getColumnCount()];
+		
+		try (Connection con = DriverManager.getConnection(SQLConnection.getConnectionURL()); Statement stmt = con.createStatement();) {
+			ResultSet rs = stmt.executeQuery("SELECT * FROM F_Obtener_DiscoDuro()");//Discos Duros
+			while (rs.next()) {
+				row[0] = rs.getString("NumeroSerie");
+				row[1] = rs.getString("Marca");
+				row[2] = rs.getString("Modelo");
+				row[3] = rs.getFloat("PVActual");
+				row[4] = rs.getFloat("PCActual");
+				row[5] = rs.getInt("CantDisponible");
+				row[6] = rs.getInt("CantMin");
+				row[7] = rs.getInt("CantMax");
+				row[8] = rs.getString("CapAlmacenamiento");
+				row[9] = rs.getString("TipoConexion");
+				model.addRow(row);
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}	
+		/*
 		for (Componente componente : Tienda.getInstance().getLosComponentes()) {
 			if (componente instanceof DiscoDuro) {
 				row[0] = componente.getNumeroSerie();
@@ -268,14 +293,33 @@ public class ListaComponentes extends JDialog {
 				row[9] = ((DiscoDuro)componente).getTipoConexion();
 				model.addRow(row);
 			}
-		}
-
+		}*/
 	}
 
 	public static void cargarComponentesMicro() {
 		model.setRowCount(0);
 		row = new Object[model.getColumnCount()];
-		for (Componente componente : Tienda.getInstance().getLosComponentes()) {
+		
+		try (Connection con = DriverManager.getConnection(SQLConnection.getConnectionURL()); Statement stmt = con.createStatement();) {
+			ResultSet rs = stmt.executeQuery("SELECT * FROM F_Obtener_Micro()");//Discos Duros
+			while (rs.next()) {
+				row[0] = rs.getString("NumeroSerie");
+				row[1] = rs.getString("Marca");
+				row[2] = rs.getString("Modelo");
+				row[3] = rs.getFloat("PVActual");
+				row[4] = rs.getFloat("PCActual");
+				row[5] = rs.getInt("CantDisponible");
+				row[6] = rs.getInt("CantMin");
+				row[7] = rs.getInt("CantMax");
+				row[8] = rs.getString("Velocidad")+" GHz";
+				row[9] = rs.getString("TipoConexion");
+				model.addRow(row);
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}	
+		
+		/*for (Componente componente : Tienda.getInstance().getLosComponentes()) {
 			if (componente instanceof Micro) {
 				row[0] = componente.getNumeroSerie();
 				row[1] = componente.getMarca();
@@ -285,17 +329,38 @@ public class ListaComponentes extends JDialog {
 				row[5] = componente.getCantDisponible();
 				row[6] = componente.getCantMin();
 				row[7] = componente.getCantMax();
-				row[8] = ((Micro)componente).getVelocidad();
+				row[8] = ((Micro)componente).getVelocidad()+" GHz";
 				row[9] = ((Micro)componente).getTipoConexion();
 				model.addRow(row);
 			}
-		}
+		}*/
 
 	}
 
 	public static void cargarComponentesMotherBoard() {
 		model.setRowCount(0);
 		row = new Object[model.getColumnCount()];
+		
+		try (Connection con = DriverManager.getConnection(SQLConnection.getConnectionURL()); Statement stmt = con.createStatement();) {
+			ResultSet rs = stmt.executeQuery("SELECT * FROM F_Obtener_Motherboard()");//Discos Duros
+			while (rs.next()) {
+				row[0] = rs.getString("NumeroSerie");
+				row[1] = rs.getString("Marca");
+				row[2] = rs.getString("Modelo");
+				row[3] = rs.getFloat("PVActual");
+				row[4] = rs.getFloat("PCActual");
+				row[5] = rs.getInt("CantDisponible");
+				row[6] = rs.getInt("CantMin");
+				row[7] = rs.getInt("CantMax");
+				row[8] = rs.getString("TipoConector");
+				row[9] = rs.getString("TipoRAM");
+				model.addRow(row);
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		/*
 		for (Componente componente : Tienda.getInstance().getLosComponentes()) {
 			if (componente instanceof MotherBoard) {
 				row[0] = componente.getNumeroSerie();
@@ -310,13 +375,33 @@ public class ListaComponentes extends JDialog {
 				row[9] = ((MotherBoard)componente).getTipoRAM();
 				model.addRow(row);
 			}
-		}
+		}*/
 
 	}
 
 	public static void cargarComponentesRAM() {
 		model.setRowCount(0);
 		row = new Object[model.getColumnCount()];
+		
+		try (Connection con = DriverManager.getConnection(SQLConnection.getConnectionURL()); Statement stmt = con.createStatement();) {
+			ResultSet rs = stmt.executeQuery("SELECT * FROM F_Obtener_RAM()");//Discos Duros
+			while (rs.next()) {
+				row[0] = rs.getString("NumeroSerie");
+				row[1] = rs.getString("Marca");
+				row[2] = rs.getString("Modelo");
+				row[3] = rs.getFloat("PVActual");
+				row[4] = rs.getFloat("PCActual");
+				row[5] = rs.getInt("CantDisponible");
+				row[6] = rs.getInt("CantMin");
+				row[7] = rs.getInt("CantMax");
+				row[8] = rs.getString("CantMemoria");
+				row[9] = rs.getString("TipoMemoria");
+				model.addRow(row);
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		/*
 		for (Componente componente : Tienda.getInstance().getLosComponentes()) {
 			if (componente instanceof RAM) {
 				row[0] = componente.getNumeroSerie();
@@ -331,7 +416,7 @@ public class ListaComponentes extends JDialog {
 				row[9] = ((RAM)componente).getTipoMemoria();
 				model.addRow(row);
 			}
-		}
+		}*/
 
 	}
 

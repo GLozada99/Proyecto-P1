@@ -53,6 +53,7 @@ public class Login extends JFrame {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				
 				SQLConnection.getData();
 				
 				
