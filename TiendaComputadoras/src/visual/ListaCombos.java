@@ -228,25 +228,15 @@ public class ListaCombos extends JDialog {
 					}
 				}
 			}else {
-
-				ResultSet rs = stmt.executeQuery("SELECT * FROM F_Obtener_Combo()");//Cambiar eso por la funcion de Angel
-				while (rs.next()) {
-					boolean found = false;
-					int cantidad = 0;
-					for (Combo combo : auxFact.getLosCombos()) {
-						if(rs.getString("Nombre").equalsIgnoreCase(combo.getNombre())) {
-							found = true;
-							cantidad = auxFact.getCantiUnCombo(combo);
-							break;
-						}
-					}
-					if(found) {
-						row[0] = rs.getString("Nombre");
-						row[1] = rs.getFloat("Precio");
-						row[2] = cantidad;
-						row[3] = cantidad*rs.getFloat("Precio");
-						model.addRow(row);
-					}
+				
+				ResultSet rs = stmt.executeQuery("SELECT * FROM F_Obtener_Combos_Factura('"+auxFact.getCodigo()+"')");
+				while(rs.next()) {
+					Combo auxCombo = Tienda.getInstance().findCombobyCodigo(rs.getString("NombreCombo"));
+					row[0] = auxCombo.getNombre();
+					row[1] = auxCombo.getPrecio();
+					row[2] = rs.getInt("CantidadCombo");
+					row[3] = rs.getInt("CantidadCombo")*auxCombo.getPrecio();
+					model.addRow(row);
 				}
 			}
 		}catch (SQLException e) {
