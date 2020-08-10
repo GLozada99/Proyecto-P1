@@ -236,7 +236,7 @@ public class ListaComponentesFactura extends JDialog {
 		}
 	}
 
-	public static void cargarComponentesRAM( Factura auxFactura) {
+	public static void cargarComponentesRAM(Factura auxFactura) {
 		model.setRowCount(0);
 		row = new Object[model.getColumnCount()];
 		if(auxFactura.getLosComponentes()!=null) {

@@ -56,9 +56,6 @@ public class Login extends JFrame {
 				
 				SQLConnection.getData();
 				
-				
-				
-				
 				/*
 				FileInputStream tienda=null;
 				FileOutputStream tienda2=null;

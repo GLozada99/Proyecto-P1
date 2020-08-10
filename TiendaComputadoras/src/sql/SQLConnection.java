@@ -133,7 +133,7 @@ public class SQLConnection {
 			rs = stmt.executeQuery("SELECT * FROM F_Obtener_OrdenCompra()");//OrdenesCompra
 			while (rs.next()) {
 				OrdenCompra aux = new OrdenCompra(rs.getString("Codigo"), Tienda.getInstance().findComponentebyNumeroSerie(rs.getString("NumeroSerieComponente")), rs.getInt("CantiCompos"));
-				Tienda.getInstance().agregarOrden(aux);;
+				Tienda.getInstance().agregarOrden(aux);
 			}
 
 			rs = stmt.executeQuery("SELECT * FROM F_Obtener_OrdenCompraProcesada()");//OrdenesCompraProcesadas
@@ -280,7 +280,7 @@ public class SQLConnection {
 		}
 	}
 
-	public static void insertUpdatePrecio(Componente aux) {
+	public static void insertUpdatePrecio(Componente aux){
 		try (Connection con = DriverManager.getConnection(getConnectionURL()); Statement stmt = con.createStatement();) {
 
 			for (Precio auxPrecio : aux.getPrecios()) {
@@ -516,9 +516,7 @@ public class SQLConnection {
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 	}
-
 
 	public static void insertFactura(Factura aux) {
 		try (Connection con = DriverManager.getConnection(getConnectionURL()); Statement stmt = con.createStatement();) {

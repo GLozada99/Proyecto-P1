@@ -49,6 +49,7 @@ public class ListaClientes extends JDialog {
 	private JButton btnModificar;
 	private JButton btnEliminar;
 	private String codigo="";
+	private JButton btnFacturas;
 
 	/**
 	 * Launch the application.
@@ -102,6 +103,7 @@ public class ListaClientes extends JDialog {
 								int index = table.getSelectedRow();
 								btnEliminar.setEnabled(true);
 								btnModificar.setEnabled(true);
+								btnFacturas.setEnabled(true);
 								codigo = String.valueOf(table.getValueAt(index, 0));
 
 
@@ -137,12 +139,20 @@ public class ListaClientes extends JDialog {
 						aux.setModal(true);
 						aux.setVisible(true);
 						cargarClientes();
-						/*dispose();
-						ListaClientes refresh = new ListaClientes();
-						refresh.setModal(true);
-						refresh.setVisible(true);*/
 					}
 				});
+				{
+					btnFacturas = new JButton("Facturas");
+					btnFacturas.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent arg0) {
+							HistorialFacturas aux = new HistorialFacturas(Tienda.getInstance().findClientebyCedula(codigo));
+							aux.setModal(true);
+							aux.setVisible(true);
+						}
+					});
+					buttonPane.add(btnFacturas);
+					btnFacturas.setEnabled(false);
+				}
 				buttonPane.add(btnModificar);
 
 				btnEliminar = new JButton("Eliminar");
@@ -169,15 +179,30 @@ public class ListaClientes extends JDialog {
 	
 	public static void cargarClientes() {
 		model.setRowCount(0);
-		row = new Object[model.getColumnCount()];	
-		for (Cliente aux : Tienda.getInstance().getLosClientes()) {
+		row = new Object[model.getColumnCount()];
+		
+		try (Connection con = DriverManager.getConnection(SQLConnection.getConnectionURL()); Statement stmt = con.createStatement();) {
+			ResultSet rs = stmt.executeQuery("SELECT * FROM F_Obtener_Cliente()");//Discos Duros
+			while (rs.next()) {
+				row[0] = rs.getString("Codigo");
+				row[1] = rs.getString("Nombre");
+				row[2] = rs.getString("Telefono");
+				row[3] = rs.getString("Direccion");
+				row[4] = rs.getFloat("Credito");
+				model.addRow(row);
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}	
+		
+		/*for (Cliente aux : Tienda.getInstance().getLosClientes()) {
 			row[0] = aux.getCodigo();
 			row[1] = aux.getNombre();
 			row[2] = aux.getTelefono();
 			row[3] = aux.getDireccion();
 			row[4] = aux.getCredito();
 			model.addRow(row);
-		}
+		}*/
 
 	}
 }

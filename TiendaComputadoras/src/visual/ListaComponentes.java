@@ -13,6 +13,7 @@ import logica.Administrador;
 import logica.Combo;
 import logica.Componente;
 import logica.DiscoDuro;
+import logica.Factura;
 import logica.Micro;
 import logica.MotherBoard;
 import logica.Proveedor;
@@ -41,6 +42,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.JRadioButton;
+import java.awt.SystemColor;
 
 public class ListaComponentes extends JDialog {
 
@@ -61,7 +64,7 @@ public class ListaComponentes extends JDialog {
 	private String[] encabezadoMicro = {"No. Serie","Marca","Modelo","Precio Venta Act.","Precio Compra Act.","Cant. Real","Cant. Min","Cant. Max","Velocidad","Tipo Conexión" };
 	private String[] encabezadoMother = {"No. Serie","Marca","Modelo","Precio Venta Act.","Precio Compra Act.","Cant. Real","Cant. Min","Cant. Max","Tipo Conector","Tipo RAM" };
 	private String[] encabezadoRAM = {"No. Serie","Marca","Modelo","Precio Venta Act.","Precio Compra Act.","Cant. Real","Cant. Min","Cant. Max","Cant Memoria","Tipo Memoria" };
-
+	private JRadioButton rdbtnSoloMostrarDisponibles = new JRadioButton("Solo Mostrar Disponibles");
 
 	/**
 	 * Launch the application.
@@ -83,7 +86,8 @@ public class ListaComponentes extends JDialog {
 	 * Create the dialog.
 	 */
 	public ListaComponentes(boolean AgregarCompProveedores) {
-		setTitle("Lista Componentes");
+		setTitle("Lista Componentes");	
+
 		setBounds(100, 100, 1250, 700);
 		setLocationRelativeTo(null);
 		setResizable(false);
@@ -134,22 +138,21 @@ public class ListaComponentes extends JDialog {
 			cbxComp.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 
-
 					if(cbxComp.getSelectedIndex()==0) {
 						model.setColumnIdentifiers(encabezadoDD);
-						cargarComponentesDD();
+						cargarComponentesDD(rdbtnSoloMostrarDisponibles.isSelected());
 					}
-					if(cbxComp.getSelectedIndex()==1) {
+					else if(cbxComp.getSelectedIndex()==1) {
 						model.setColumnIdentifiers(encabezadoMicro);
-						cargarComponentesMicro();
+						cargarComponentesMicro(rdbtnSoloMostrarDisponibles.isSelected());
 					}
-					if(cbxComp.getSelectedIndex()==2) {
+					else if(cbxComp.getSelectedIndex()==2) {
 						model.setColumnIdentifiers(encabezadoMother);
-						cargarComponentesMotherBoard();
+						cargarComponentesMotherBoard(rdbtnSoloMostrarDisponibles.isSelected());
 					}
-					if(cbxComp.getSelectedIndex()==3) {
+					else if(cbxComp.getSelectedIndex()==3) {
 						model.setColumnIdentifiers(encabezadoRAM);
-						cargarComponentesRAM();
+						cargarComponentesRAM(rdbtnSoloMostrarDisponibles.isSelected());
 					}
 					//	btnModificar.setEnabled(false);
 					//btnEliminar.setEnabled(false);
@@ -159,6 +162,32 @@ public class ListaComponentes extends JDialog {
 			cbxComp.setBounds(12, 26, 169, 22);
 			panelComp.add(cbxComp);
 			cbxComp.setSelectedIndex(0);
+
+			rdbtnSoloMostrarDisponibles = new JRadioButton("Solo Mostrar Disponibles");
+			rdbtnSoloMostrarDisponibles.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					//rdbtnSoloMostrarDisponibles.setSelected(!rdbtnSoloMostrarDisponibles.isSelected());
+					if(cbxComp.getSelectedIndex()==0) {
+						model.setColumnIdentifiers(encabezadoDD);
+						cargarComponentesDD(rdbtnSoloMostrarDisponibles.isSelected());
+					}
+					if(cbxComp.getSelectedIndex()==1) {
+						model.setColumnIdentifiers(encabezadoMicro);
+						cargarComponentesMicro(rdbtnSoloMostrarDisponibles.isSelected());
+					}
+					if(cbxComp.getSelectedIndex()==2) {
+						model.setColumnIdentifiers(encabezadoMother);
+						cargarComponentesMotherBoard(rdbtnSoloMostrarDisponibles.isSelected());
+					}
+					if(cbxComp.getSelectedIndex()==3) {
+						model.setColumnIdentifiers(encabezadoRAM);
+						cargarComponentesRAM(rdbtnSoloMostrarDisponibles.isSelected());
+					}
+				}
+			});
+			rdbtnSoloMostrarDisponibles.setBackground(new Color(230, 230, 250));
+			rdbtnSoloMostrarDisponibles.setBounds(1042, 25, 169, 25);
+			panelComp.add(rdbtnSoloMostrarDisponibles);
 		}
 
 
@@ -200,16 +229,16 @@ public class ListaComponentes extends JDialog {
 						aux.setModal(true);
 						aux.setVisible(true);
 						if(cbxComp.getSelectedIndex()==0) {
-							cargarComponentesDD();
+							cargarComponentesDD(rdbtnSoloMostrarDisponibles.isSelected());
 						}
 						if(cbxComp.getSelectedIndex()==1) {
-							cargarComponentesMicro();
+							cargarComponentesMicro(rdbtnSoloMostrarDisponibles.isSelected());
 						}
 						if(cbxComp.getSelectedIndex()==2) {
-							cargarComponentesMotherBoard();
+							cargarComponentesMotherBoard(rdbtnSoloMostrarDisponibles.isSelected());
 						}
 						if(cbxComp.getSelectedIndex()==3) {
-							cargarComponentesRAM();
+							cargarComponentesRAM(rdbtnSoloMostrarDisponibles.isSelected());
 						}
 
 
@@ -235,13 +264,13 @@ public class ListaComponentes extends JDialog {
 								SQLConnection.EliminarComponente(aux);
 								JOptionPane.showMessageDialog(null, "Componente eliminado con exito");
 								if (aux instanceof DiscoDuro)
-									cargarComponentesDD();
+									cargarComponentesDD(rdbtnSoloMostrarDisponibles.isSelected());
 								if (aux instanceof Micro)
-									cargarComponentesMicro();
+									cargarComponentesMicro(rdbtnSoloMostrarDisponibles.isSelected());
 								if (aux instanceof MotherBoard)
-									cargarComponentesMotherBoard();
+									cargarComponentesMotherBoard(rdbtnSoloMostrarDisponibles.isSelected());
 								if (aux instanceof RAM)
-									cargarComponentesRAM();
+									cargarComponentesRAM(rdbtnSoloMostrarDisponibles.isSelected());
 							}else {
 								JOptionPane.showMessageDialog(null, "El componente pertenece a un combo. Debe eliminar o modificar el combo");
 							}
@@ -253,16 +282,21 @@ public class ListaComponentes extends JDialog {
 				getRootPane().setDefaultButton(btnEliminar);
 			}
 		}
-		cargarComponentesDD();
+		cargarComponentesDD(rdbtnSoloMostrarDisponibles.isSelected());
 	}
 
-	public static void cargarComponentesDD() {
+	public static void cargarComponentesDD(boolean justAviable) {
 		model.setRowCount(0);
 		row = new Object[model.getColumnCount()];
-		
+
 		try (Connection con = DriverManager.getConnection(SQLConnection.getConnectionURL()); Statement stmt = con.createStatement();) {
 			ResultSet rs = stmt.executeQuery("SELECT * FROM F_Obtener_DiscoDuro()");//Discos Duros
 			while (rs.next()) {
+				if(justAviable) {
+					if(rs.getInt("CantDisponible")==0) {
+						break;
+					}
+				}
 				row[0] = rs.getString("NumeroSerie");
 				row[1] = rs.getString("Marca");
 				row[2] = rs.getString("Modelo");
@@ -296,13 +330,19 @@ public class ListaComponentes extends JDialog {
 		}*/
 	}
 
-	public static void cargarComponentesMicro() {
+	public static void cargarComponentesMicro(boolean justAviable) {
 		model.setRowCount(0);
 		row = new Object[model.getColumnCount()];
-		
+
 		try (Connection con = DriverManager.getConnection(SQLConnection.getConnectionURL()); Statement stmt = con.createStatement();) {
 			ResultSet rs = stmt.executeQuery("SELECT * FROM F_Obtener_Micro()");//Discos Duros
 			while (rs.next()) {
+				if(justAviable) {
+					if(rs.getInt("CantDisponible")==0) {
+						break;
+					}
+				}
+
 				row[0] = rs.getString("NumeroSerie");
 				row[1] = rs.getString("Marca");
 				row[2] = rs.getString("Modelo");
@@ -318,7 +358,7 @@ public class ListaComponentes extends JDialog {
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}	
-		
+
 		/*for (Componente componente : Tienda.getInstance().getLosComponentes()) {
 			if (componente instanceof Micro) {
 				row[0] = componente.getNumeroSerie();
@@ -337,13 +377,18 @@ public class ListaComponentes extends JDialog {
 
 	}
 
-	public static void cargarComponentesMotherBoard() {
+	public static void cargarComponentesMotherBoard(boolean justAviable) {
 		model.setRowCount(0);
 		row = new Object[model.getColumnCount()];
-		
+
 		try (Connection con = DriverManager.getConnection(SQLConnection.getConnectionURL()); Statement stmt = con.createStatement();) {
 			ResultSet rs = stmt.executeQuery("SELECT * FROM F_Obtener_Motherboard()");//Discos Duros
 			while (rs.next()) {
+				if(justAviable) {
+					if(rs.getInt("CantDisponible")==0) {
+						break;
+					}
+				}	
 				row[0] = rs.getString("NumeroSerie");
 				row[1] = rs.getString("Marca");
 				row[2] = rs.getString("Modelo");
@@ -359,7 +404,7 @@ public class ListaComponentes extends JDialog {
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		/*
 		for (Componente componente : Tienda.getInstance().getLosComponentes()) {
 			if (componente instanceof MotherBoard) {
@@ -379,13 +424,19 @@ public class ListaComponentes extends JDialog {
 
 	}
 
-	public static void cargarComponentesRAM() {
+	public static void cargarComponentesRAM(boolean justAviable) {
 		model.setRowCount(0);
 		row = new Object[model.getColumnCount()];
-		
+
 		try (Connection con = DriverManager.getConnection(SQLConnection.getConnectionURL()); Statement stmt = con.createStatement();) {
 			ResultSet rs = stmt.executeQuery("SELECT * FROM F_Obtener_RAM()");//Discos Duros
 			while (rs.next()) {
+				if(justAviable) {
+					if(rs.getInt("CantDisponible")==0) {
+						break;
+					}
+				}
+
 				row[0] = rs.getString("NumeroSerie");
 				row[1] = rs.getString("Marca");
 				row[2] = rs.getString("Modelo");
@@ -397,6 +448,7 @@ public class ListaComponentes extends JDialog {
 				row[8] = rs.getString("CantMemoria");
 				row[9] = rs.getString("TipoMemoria");
 				model.addRow(row);
+
 			}
 		}catch (SQLException e) {
 			e.printStackTrace();
@@ -419,5 +471,4 @@ public class ListaComponentes extends JDialog {
 		}*/
 
 	}
-
 }

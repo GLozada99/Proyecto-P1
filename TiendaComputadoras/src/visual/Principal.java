@@ -292,7 +292,7 @@ public class Principal extends JFrame implements  Runnable  {
 		mntmListaCombos.setIcon(new ImageIcon(Principal.class.getResource("/Imagenes/IconListaCombos.png")));
 		mntmListaCombos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ListaCombos aux = new ListaCombos();
+				ListaCombos aux = new ListaCombos(false,null);
 				aux.setModal(true);
 				aux.setVisible(true);
 			}
@@ -304,7 +304,7 @@ public class Principal extends JFrame implements  Runnable  {
 		mntmHistorialFacturas.setIcon(new ImageIcon(Principal.class.getResource("/Imagenes/IconListaFacturar.png")));
 		mntmHistorialFacturas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				HistorialFacturas aux = new HistorialFacturas();
+				HistorialFacturas aux = new HistorialFacturas(null);
 				aux.setModal(true);
 				aux.setVisible(true);
 			}
@@ -322,8 +322,18 @@ public class Principal extends JFrame implements  Runnable  {
 			}
 		});
 		mnListados.add(mntmHistorialOrdenes);
-		getContentPane().setLayout(null);
-		contentPane.setLayout(null);
+		
+		JMenuItem mntmCombosMasVendidos = new JMenuItem("Combos mas vendidos");
+		mntmCombosMasVendidos.setForeground(new Color(86, 130, 163));
+		mntmCombosMasVendidos.setIcon(new ImageIcon(Principal.class.getResource("/Imagenes/IconListaCombos.png")));
+		mntmCombosMasVendidos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListaCombos aux = new ListaCombos(true,null);
+				aux.setModal(true);
+				aux.setVisible(true);
+			}
+		});
+		mnListados.add(mntmCombosMasVendidos);
 
 
 		panel1 = new JPanel();

@@ -7,6 +7,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -27,6 +32,7 @@ import logica.Factura;
 import logica.OrdenCompra;
 import logica.Proveedor;
 import logica.Tienda;
+import sql.SQLConnection;
 
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
@@ -69,9 +75,12 @@ public class HistorialFacturas extends JDialog {
 
 
 
-	public HistorialFacturas() {
-		setTitle("Historial Facturas");
-
+	public HistorialFacturas(Cliente auxCli) {
+		if(auxCli==null) {
+			setTitle("Historial Facturas");
+		}else {
+			setTitle("Historial de Facturas de "+auxCli.getNombre()+" Cedula: "+auxCli.getCodigo());
+		}
 		setResizable(false);
 		setBounds(100, 100, 1250, 700);
 		setLocationRelativeTo(null);
@@ -92,7 +101,7 @@ public class HistorialFacturas extends JDialog {
 				{
 
 					model = new DefaultTableModel();
-					String[] header = {"Código","Fecha","Cédula","Nombre del Cliente","Cantidad Total Componentes","Costo Total"};
+					String[] header = {"Código","Fecha","Cédula","Nombre del Cliente","Costo Total"};
 					model.setColumnIdentifiers(header);
 					table = new JTable();
 					table.addMouseListener(new MouseAdapter() {
@@ -106,7 +115,6 @@ public class HistorialFacturas extends JDialog {
 							}
 						}
 					});
-					
 					table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 					table.setModel(model);
 					scrollPane.setViewportView(table);
@@ -133,48 +141,67 @@ public class HistorialFacturas extends JDialog {
 						ListaComponentesFactura aux = new ListaComponentesFactura(auxFact);
 						aux.setModal(true);
 						aux.setVisible(true);
-					//	btnDetalleCompo.setEnabled(false);
-						
+						//	btnDetalleCompo.setEnabled(false);
+
 					}
 				});
 				buttonPane.add(btnDetalleCompo);
-				
+
 				btnDetalleCombo = new JButton("Detalle Combos");
 				btnDetalleCombo.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						Factura auxFact = Tienda.getInstance().findFacturabyCodigo(codigo);
-						ListaCombosFactura aux = new ListaCombosFactura(auxFact);
+						//ListaCombosFactura aux = new ListaCombosFactura(auxFact);
+						ListaCombos aux = new ListaCombos(false,auxFact);
 						aux.setModal(true);
 						aux.setVisible(true);
-					//	btnDetalleCombo.setEnabled(false);
+						//	btnDetalleCombo.setEnabled(false);
 					}
 				});
 				buttonPane.add(btnDetalleCombo);
-				
+
 				btnDetalleCombo.setEnabled(false);
 				btnDetalleCompo.setEnabled(false);
 			}
 			buttonPane.add(btnAceptar);
 		}
-		cargarFacturas();
+		cargarFacturas(auxCli);
 	}
 	{
 
 	}
-	public static void cargarFacturas() {
+	public static void cargarFacturas(Cliente auxCli) {
 		model.setRowCount(0);
 		row = new Object[model.getColumnCount()];
 
-		for (Factura aux : Tienda.getInstance().getLasFacturas()) {
-			row[0] = aux.getCodigo();
-			row[1] = new SimpleDateFormat("yyyy-MM-dd HH:mm a").format(aux.getFecha());
-			row[2] = aux.getElCliente().getCodigo();
-			row[3] = aux.getElCliente().getNombre();
-			row[4] = Tienda.getInstance().cantComponentes(aux.getLosComponentes(), aux.getCantiComponentes())+Tienda.getInstance().cantCombos(aux.getLosCombos(), aux.getCantiCombos());
-			row[5] = aux.getCosto();
-			model.addRow(row);
-		}
+		try (Connection con = DriverManager.getConnection(SQLConnection.getConnectionURL()); Statement stmt = con.createStatement();) {
+			ResultSet rs = stmt.executeQuery("SELECT * FROM F_Obtener_Factura()");
+			while (rs.next()) {
+				Cliente cliente = Tienda.getInstance().findClientebyCedula(rs.getString("CodCliente"));
+				if(auxCli==cliente || auxCli==null) {
+					row[0] = rs.getString("Codigo");
+					row[1] = rs.getString("Fecha");
+					row[2] = rs.getString("CodCliente");
+					row[3] = cliente.getNombre();
+					row[4] = rs.getFloat("Costo");
+					model.addRow(row);
+				}
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}	
 
+		/*for (Factura aux : Tienda.getInstance().getLasFacturas()) {
+			if(auxCli==aux.getElCliente() || auxCli==null) {
+				row[0] = aux.getCodigo();
+				row[1] = new SimpleDateFormat("yyyy-MM-dd HH:mm a").format(aux.getFecha());
+				row[2] = aux.getElCliente().getCodigo();
+				row[3] = aux.getElCliente().getNombre();
+				//row[4] = Tienda.getInstance().cantComponentes(aux.getLosComponentes(), aux.getCantiComponentes())+Tienda.getInstance().cantCombos(aux.getLosCombos(), aux.getCantiCombos());
+				row[4] = aux.getCosto();
+				model.addRow(row);
+			}
+		}*/
 	}
 }
 
