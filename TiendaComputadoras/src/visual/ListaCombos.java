@@ -217,13 +217,12 @@ public class ListaCombos extends JDialog {
 						model.addRow(row);
 					}
 				}else {
-					ResultSet rs = stmt.executeQuery("SELECT * FROM F_Obtener_Combo()");//Cambiar eso por la funcion de Angel
+					ResultSet rs = stmt.executeQuery("SELECT * FROM F_Combos_Mas_Vendidos()");
 					while (rs.next()) {
-
-						row[0] = rs.getString("Nombre");
-						row[1] = "Aqui deberia ir la cantidad de ventas";
+						row[0] = rs.getString("NombreCombo");
+						row[1] = rs.getInt("CantidadesVendidas");
 						row[2] = rs.getFloat("Precio");
-						row[3] = "Aqui deberia ir el dinero generado total, que seria: cantidad de ventas * precio";
+						row[3] = rs.getInt("CantidadesVendidas")*rs.getFloat("Precio");
 						model.addRow(row);
 					}
 				}

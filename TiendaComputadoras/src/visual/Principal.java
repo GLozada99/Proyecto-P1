@@ -70,8 +70,8 @@ public class Principal extends JFrame implements  Runnable  {
 	private int hora, minutos, segundos;
 	private Calendar calendario;
 	private Thread h1;
-	private JPanel panel1;
-	private JPanel panel2;
+	private JPanel panel1 = new JPanel();
+	private JPanel panel2 = new JPanel();
 	private DefaultPieDataset data = new DefaultPieDataset();
 	private DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 	/**
@@ -89,7 +89,6 @@ public class Principal extends JFrame implements  Runnable  {
 			}
 		});
 	}
-
 	/**
 	 * Create the frame.
 	 */
@@ -116,7 +115,7 @@ public class Principal extends JFrame implements  Runnable  {
 					e1.printStackTrace();
 				}*/
 				setData();
-				
+
 			}
 		});
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -126,6 +125,12 @@ public class Principal extends JFrame implements  Runnable  {
 		contentPane.setBackground(Color.LIGHT_GRAY);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		
+		panel1.setBounds(3, 0, 652, 631);
+		contentPane.add(panel1);
+		
+		panel2.setBounds(686-14, 14-14, 652, 631);
+		contentPane.add(panel2);
 
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBackground(new Color(86, 130, 163));
@@ -322,7 +327,7 @@ public class Principal extends JFrame implements  Runnable  {
 			}
 		});
 		mnListados.add(mntmHistorialOrdenes);
-		
+
 		JMenuItem mntmCombosMasVendidos = new JMenuItem("Combos mas vendidos");
 		mntmCombosMasVendidos.setForeground(new Color(86, 130, 163));
 		mntmCombosMasVendidos.setIcon(new ImageIcon(Principal.class.getResource("/Imagenes/IconListaCombos.png")));
@@ -336,58 +341,45 @@ public class Principal extends JFrame implements  Runnable  {
 		mnListados.add(mntmCombosMasVendidos);
 
 
-		panel1 = new JPanel();
-		panel1.setBounds(17, 14, 652, 631);
-		contentPane.add(panel1);
-		new Thread() {
-			int i=0;
-			public void run() {
-				while (true) {
-
-					try {
-						Thread.sleep(10000);
-						if(i>3) {
-							data.clear();
-							i=-1;
-							showGraf1();
-						}
-						i++;
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
-				}
-
-			}
-
-		}.start();
-		showGraf1();
-
-		panel2 = new JPanel();
-		panel2.setBounds(686, 14, 652, 631);
-		contentPane.add(panel2);
-		new Thread() {
-			int i=0;
-			public void run() {
-				while (true) {
-
-					try {
-						Thread.sleep(10000);
-						if(i>3) {
-							dataset.clear();
-							i=-1;
-							showGraf2();
-						}
-						i++;
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
-				}
-
-			}
-
-		}.start();
-		showGraf2();
 		
+		showGraf1();
+		new Thread() {
+			public void run() {
+				while (true) {
+
+					try {
+						Thread.sleep(10000);
+						data.clear();
+						showGraf1();
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
+				}
+
+			}
+
+		}.start();
+		
+
+		showGraf2();
+		new Thread() {
+			public void run() {
+				while (true) {
+
+					try {
+						Thread.sleep(10000);
+						dataset.clear();
+						showGraf2();
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
+				}
+
+			}
+
+		}.start();
+		
+
 		new Thread() {
 			public void run() {
 				while(true) {
@@ -401,8 +393,8 @@ public class Principal extends JFrame implements  Runnable  {
 			}
 		}.start();
 	}
-	
-	
+
+
 
 
 	protected void setData() {
@@ -419,7 +411,7 @@ public class Principal extends JFrame implements  Runnable  {
 		for (Proveedor aux : Tienda.getInstance().getLosProveedores()) {//Proveedores
 			SQLConnection.insertUpdateProveedor(aux);
 		}
-		
+
 		for (Componente aux : Tienda.getInstance().getLosComponentes()) {//Componentes
 			if(aux instanceof DiscoDuro) {
 				SQLConnection.insertUpdateDiscoDuro(aux);
@@ -436,15 +428,15 @@ public class Principal extends JFrame implements  Runnable  {
 		for (OrdenCompra aux : Tienda.getInstance().getOrdenesSinProcesar()) {//Ordenes por procesar
 			SQLConnection.insertOrdenCompra(aux);
 		}
-		
+
 		for (Combo aux : Tienda.getInstance().getLosCombo()) {//Combos
 			SQLConnection.insertUpdateCombo(aux);
 		}
-		
+
 		for (Factura aux : Tienda.getInstance().getLasFacturas()) {//Facturas
 			SQLConnection.insertFactura(aux);
 		}
-		
+
 	}
 
 
@@ -453,8 +445,6 @@ public class Principal extends JFrame implements  Runnable  {
 		// Fuente de Datos
 		// DefaultPieDataset data = new DefaultPieDataset();
 		ArrayList<Integer> componeteVenta= Tienda.getInstance().componenteMasVendidoTipo();
-
-
 
 		try {
 			if(componeteVenta.get(0)!=null) {
@@ -497,9 +487,12 @@ public class Principal extends JFrame implements  Runnable  {
 		chartPanel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		chart.setBackgroundPaint( SystemColor.inactiveCaption);
 
-		chartPanel.setBounds(0, 0, 652, 631);
+		//chartPanel.setBounds(0, 0, 652, 631);
 		chartPanel.setPreferredSize(new java.awt.Dimension(panel1.getWidth(), panel1.getHeight()));
-		panel1.add(chartPanel);
+	//	panel1.add(chartPanel);
+		contentPane.remove(chartPanel);
+		contentPane.add(chartPanel);
+		
 	}
 	private void showGraf2() {
 
@@ -507,31 +500,16 @@ public class Principal extends JFrame implements  Runnable  {
 		// Fuente de Datos
 
 		ArrayList<Persona> vendedores = Tienda.getInstance().vendedoresMasVentas();
-		try {
-			dataset.addValue(((Vendedor)vendedores.get(0)).getVentas(),vendedores.get(0).getNombre(),"");
-		} catch (NullPointerException |IndexOutOfBoundsException e) {
-			// TODO: handle exception
-		}
-		try {
-			dataset.addValue(((Vendedor)vendedores.get(1)).getVentas(), vendedores.get(1).getNombre(), "");
-		} catch (NullPointerException |IndexOutOfBoundsException e) {
-			// TODO: handle exception
-		}
-		try {
-			dataset.addValue(((Vendedor)vendedores.get(2)).getVentas(), vendedores.get(2).getNombre(),"");
-		} catch (NullPointerException |IndexOutOfBoundsException e) {
-			// TODO: handle exception
-		}
-		try {
-			dataset.addValue(((Vendedor)vendedores.get(3)).getVentas(), vendedores.get(3).getNombre(),"");
-		} catch (NullPointerException |IndexOutOfBoundsException e) {
-			// TODO: handle exception
-		}
-		try {
-
-			dataset.addValue(((Vendedor)vendedores.get(4)).getVentas(), vendedores.get(4).getNombre(),"" );
-		} catch (NullPointerException |IndexOutOfBoundsException e) {
-			// TODO: handle exception
+		int i = 0;
+		for (Persona persona : vendedores) {
+			try {
+				dataset.addValue(((Vendedor)persona).getVentas(),persona.getNombre(),"");
+				i++;
+				if(i==4)
+					break;
+			} catch (NullPointerException |IndexOutOfBoundsException e) {
+				// TODO: handle exception
+			}
 		}
 
 
@@ -548,17 +526,14 @@ public class Principal extends JFrame implements  Runnable  {
 		chartPanel.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		//  chart.getPlot().setBackgroundPaint( SystemColor.inactiveCaptionBorder );
 
-		chartPanel.setBounds(0, 0, 652, 631);
+		//schartPanel.setBounds(0, 0, 652, 631);
 		chartPanel.setPreferredSize(new java.awt.Dimension(panel2.getWidth(),panel2.getHeight()));
-		panel2.add(chartPanel);
+	//	panel2.add(chartPanel);
+	//	panel2.setVisible(true);
+		contentPane.remove(chartPanel);
+		contentPane.add(chartPanel);
+		//chartPanel.setBounds(0, 0, 652, 631);
 
-	}
-
-	public void calcula() {
-		Calendar calendario = new GregorianCalendar();
-		hora =calendario.get(Calendar.HOUR_OF_DAY);
-		minutos = calendario.get(Calendar.MINUTE);
-		segundos = calendario.get(Calendar.SECOND);		
 	}
 
 	@Override
@@ -567,8 +542,3 @@ public class Principal extends JFrame implements  Runnable  {
 	}
 
 }
-
-
-
-
-
