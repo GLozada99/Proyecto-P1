@@ -93,7 +93,7 @@ public class ListaClientes extends JDialog {
 				{
 
 					model = new DefaultTableModel();
-					String[] header = {"Cédula","Nombre","Teléfono","Dirección","Crédito"};
+					String[] header = {"Cï¿½dula","Nombre","Telï¿½fono","Direcciï¿½n","Crï¿½dito"};
 					model.setColumnIdentifiers(header);
 					table = new JTable();
 					table.addMouseListener(new MouseAdapter() {
@@ -161,7 +161,7 @@ public class ListaClientes extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						Cliente aux = Tienda.getInstance().findClientebyCedula(codigo);
 						int i=1;
-						i = JOptionPane.showConfirmDialog(null, "Está seguro que desea eliminar al cliente:"+" "+aux.getNombre()+"?");
+						i = JOptionPane.showConfirmDialog(null, "Estï¿½ seguro que desea eliminar al cliente:"+" "+aux.getNombre()+"?");
 						if(i==0) {
 							Tienda.getInstance().getLosClientes().remove(aux);
 							SQLConnection.EliminarCliente(aux);
@@ -181,7 +181,7 @@ public class ListaClientes extends JDialog {
 		model.setRowCount(0);
 		row = new Object[model.getColumnCount()];
 		
-		try (Connection con = DriverManager.getConnection(SQLConnection.getConnectionURL()); Statement stmt = con.createStatement();) {
+		/*try (Connection con = DriverManager.getConnection(SQLConnection.getConnectionURL()); Statement stmt = con.createStatement();) {
 			ResultSet rs = stmt.executeQuery("SELECT * FROM F_Obtener_Cliente()");//Discos Duros
 			while (rs.next()) {
 				row[0] = rs.getString("Codigo");
@@ -193,16 +193,16 @@ public class ListaClientes extends JDialog {
 			}
 		}catch (SQLException e) {
 			e.printStackTrace();
-		}	
+		}	*/
 		
-		/*for (Cliente aux : Tienda.getInstance().getLosClientes()) {
+		for (Cliente aux : Tienda.getInstance().getLosClientes()) {
 			row[0] = aux.getCodigo();
 			row[1] = aux.getNombre();
 			row[2] = aux.getTelefono();
 			row[3] = aux.getDireccion();
 			row[4] = aux.getCredito();
 			model.addRow(row);
-		}*/
+		}
 
 	}
 }

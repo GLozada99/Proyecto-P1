@@ -47,14 +47,18 @@ public class Login extends JFrame {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				try {
+				/*try {
 					SQLConnection.setConnectionURL("LAPTOP-TPPBSJFQ", "Proyecto");
+					SQLConnection.getData();
 				} catch (ClassNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				*/
 				
-				SQLConnection.getData();
+				Persona admin = new Administrador("Admin1", "000-000-0000", "PUCMM", "Admin", "Admin");
+				Tienda.getInstance().getLosUsuarios().add(0,admin);
+				
 				
 				/*
 				FileInputStream tienda=null;
@@ -121,7 +125,7 @@ public class Login extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 
-		JButton btnLogin = new JButton("Iniciar Sesión");
+		JButton btnLogin = new JButton("Iniciar Sesiï¿½n");
 		getRootPane().setDefaultButton(btnLogin);;
 		btnLogin.setBounds(68, 100, 135, 25);
 		panel.add(btnLogin);
@@ -151,7 +155,7 @@ public class Login extends JFrame {
 
 		txtContra = new TextField();
 		txtContra.setBounds(115, 60, 147, 20);
-		txtContra.setEchoChar('•');
+		txtContra.setEchoChar('ï¿½');
 		panel.add(txtContra);
 		txtContra.setColumns(10);
 
@@ -164,7 +168,7 @@ public class Login extends JFrame {
 					frame.setVisible(true);
 				}
 				else {
-					JOptionPane.showMessageDialog(null, "El usuario o la contraseña son incorrectos");
+					JOptionPane.showMessageDialog(null, "El usuario o la contraseï¿½a son incorrectos");
 				}
 			}
 		});

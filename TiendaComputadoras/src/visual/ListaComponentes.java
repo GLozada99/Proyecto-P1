@@ -60,8 +60,8 @@ public class ListaComponentes extends JDialog {
 	private JButton btnAceptar;
 	private String codigo;
 	private JComboBox <String> cbxComp;
-	private String[] encabezadoDD = {"No. Serie","Marca","Modelo","Precio Venta Act.","Precio Compra Act.","Cant. Real","Cant. Min","Cant. Max","Almacenamiento","Tipo Conexión" };
-	private String[] encabezadoMicro = {"No. Serie","Marca","Modelo","Precio Venta Act.","Precio Compra Act.","Cant. Real","Cant. Min","Cant. Max","Velocidad","Tipo Conexión" };
+	private String[] encabezadoDD = {"No. Serie","Marca","Modelo","Precio Venta Act.","Precio Compra Act.","Cant. Real","Cant. Min","Cant. Max","Almacenamiento","Tipo Conexiï¿½n" };
+	private String[] encabezadoMicro = {"No. Serie","Marca","Modelo","Precio Venta Act.","Precio Compra Act.","Cant. Real","Cant. Min","Cant. Max","Velocidad","Tipo Conexiï¿½n" };
 	private String[] encabezadoMother = {"No. Serie","Marca","Modelo","Precio Venta Act.","Precio Compra Act.","Cant. Real","Cant. Min","Cant. Max","Tipo Conector","Tipo RAM" };
 	private String[] encabezadoRAM = {"No. Serie","Marca","Modelo","Precio Venta Act.","Precio Compra Act.","Cant. Real","Cant. Min","Cant. Max","Cant Memoria","Tipo Memoria" };
 	private JRadioButton rdbtnSoloMostrarDisponibles = new JRadioButton("Solo Mostrar Disponibles");
@@ -257,7 +257,7 @@ public class ListaComponentes extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						Componente aux = Tienda.getInstance().findComponentebyNumeroSerie(codigo);
 						int i=1;
-						i = JOptionPane.showConfirmDialog(null, "Está seguro que desea eliminar el componente:"+" "+aux.getNumeroSerie()+"?");
+						i = JOptionPane.showConfirmDialog(null, "Estï¿½ seguro que desea eliminar el componente:"+" "+aux.getNumeroSerie()+"?");
 						if(i==0) {
 							boolean result = Tienda.getInstance().eliminarComponente(aux);
 							if(result) {
@@ -289,7 +289,7 @@ public class ListaComponentes extends JDialog {
 		model.setRowCount(0);
 		row = new Object[model.getColumnCount()];
 
-		try (Connection con = DriverManager.getConnection(SQLConnection.getConnectionURL()); Statement stmt = con.createStatement();) {
+		/*try (Connection con = DriverManager.getConnection(SQLConnection.getConnectionURL()); Statement stmt = con.createStatement();) {
 			ResultSet rs = stmt.executeQuery("SELECT * FROM F_Obtener_DiscoDuro()");//Discos Duros
 			while (rs.next()) {
 				if(justAviable) {
@@ -311,8 +311,8 @@ public class ListaComponentes extends JDialog {
 			}
 		}catch (SQLException e) {
 			e.printStackTrace();
-		}	
-		/*
+		}*/	
+		
 		for (Componente componente : Tienda.getInstance().getLosComponentes()) {
 			if (componente instanceof DiscoDuro) {
 				row[0] = componente.getNumeroSerie();
@@ -327,14 +327,14 @@ public class ListaComponentes extends JDialog {
 				row[9] = ((DiscoDuro)componente).getTipoConexion();
 				model.addRow(row);
 			}
-		}*/
+		}
 	}
 
 	public static void cargarComponentesMicro(boolean justAviable) {
 		model.setRowCount(0);
 		row = new Object[model.getColumnCount()];
 
-		try (Connection con = DriverManager.getConnection(SQLConnection.getConnectionURL()); Statement stmt = con.createStatement();) {
+		/*try (Connection con = DriverManager.getConnection(SQLConnection.getConnectionURL()); Statement stmt = con.createStatement();) {
 			ResultSet rs = stmt.executeQuery("SELECT * FROM F_Obtener_Micro()");//Discos Duros
 			while (rs.next()) {
 				if(justAviable) {
@@ -357,9 +357,9 @@ public class ListaComponentes extends JDialog {
 			}
 		}catch (SQLException e) {
 			e.printStackTrace();
-		}	
+		}	*/
 
-		/*for (Componente componente : Tienda.getInstance().getLosComponentes()) {
+		for (Componente componente : Tienda.getInstance().getLosComponentes()) {
 			if (componente instanceof Micro) {
 				row[0] = componente.getNumeroSerie();
 				row[1] = componente.getMarca();
@@ -373,7 +373,7 @@ public class ListaComponentes extends JDialog {
 				row[9] = ((Micro)componente).getTipoConexion();
 				model.addRow(row);
 			}
-		}*/
+		}
 
 	}
 
@@ -381,7 +381,7 @@ public class ListaComponentes extends JDialog {
 		model.setRowCount(0);
 		row = new Object[model.getColumnCount()];
 
-		try (Connection con = DriverManager.getConnection(SQLConnection.getConnectionURL()); Statement stmt = con.createStatement();) {
+		/*try (Connection con = DriverManager.getConnection(SQLConnection.getConnectionURL()); Statement stmt = con.createStatement();) {
 			ResultSet rs = stmt.executeQuery("SELECT * FROM F_Obtener_Motherboard()");//Discos Duros
 			while (rs.next()) {
 				if(justAviable) {
@@ -403,9 +403,9 @@ public class ListaComponentes extends JDialog {
 			}
 		}catch (SQLException e) {
 			e.printStackTrace();
-		}
+		}*/
 
-		/*
+		
 		for (Componente componente : Tienda.getInstance().getLosComponentes()) {
 			if (componente instanceof MotherBoard) {
 				row[0] = componente.getNumeroSerie();
@@ -420,7 +420,7 @@ public class ListaComponentes extends JDialog {
 				row[9] = ((MotherBoard)componente).getTipoRAM();
 				model.addRow(row);
 			}
-		}*/
+		}
 
 	}
 
@@ -428,7 +428,7 @@ public class ListaComponentes extends JDialog {
 		model.setRowCount(0);
 		row = new Object[model.getColumnCount()];
 
-		try (Connection con = DriverManager.getConnection(SQLConnection.getConnectionURL()); Statement stmt = con.createStatement();) {
+		/*try (Connection con = DriverManager.getConnection(SQLConnection.getConnectionURL()); Statement stmt = con.createStatement();) {
 			ResultSet rs = stmt.executeQuery("SELECT * FROM F_Obtener_RAM()");//Discos Duros
 			while (rs.next()) {
 				if(justAviable) {
@@ -452,8 +452,7 @@ public class ListaComponentes extends JDialog {
 			}
 		}catch (SQLException e) {
 			e.printStackTrace();
-		}
-		/*
+		}*/
 		for (Componente componente : Tienda.getInstance().getLosComponentes()) {
 			if (componente instanceof RAM) {
 				row[0] = componente.getNumeroSerie();
@@ -468,7 +467,7 @@ public class ListaComponentes extends JDialog {
 				row[9] = ((RAM)componente).getTipoMemoria();
 				model.addRow(row);
 			}
-		}*/
+		}
 
 	}
 }

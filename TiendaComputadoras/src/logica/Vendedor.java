@@ -7,21 +7,21 @@ public class Vendedor extends Persona implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String contraseña;
+	private String contrasena;
 	private float ventas;
 	
-	public Vendedor(String nombre, String telefono, String direccion, String codigo, String contraseña, float ventas) {
+	public Vendedor(String nombre, String telefono, String direccion, String codigo, String contrasena, float ventas) {
 		super(nombre, telefono, direccion, codigo);
-		this.contraseña=contraseña;
+		this.contrasena=contrasena;
 		this.ventas=ventas;
 	}
 
-	public String getContraseña() {
-		return contraseña;
+	public String getContrasena() {
+		return contrasena;
 	}
 
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
 	}
 
 	public float getVentas() {

@@ -174,7 +174,7 @@ public class ListaCombos extends JDialog {
 						public void actionPerformed(ActionEvent e) {
 							Combo aux = Tienda.getInstance().findCombobyCodigo(codigo);
 							int i=1;
-							i = JOptionPane.showConfirmDialog(null, "Está seguro que desea eliminar el combo:"+" "+aux.getNombre()+"?");
+							i = JOptionPane.showConfirmDialog(null, "Estï¿½ seguro que desea eliminar el combo:"+" "+aux.getNombre()+"?");
 							if(i==0) {
 								Tienda.getInstance().eliminarCombo(aux);
 								JOptionPane.showMessageDialog(null, "Combo eliminado con exito");
@@ -205,7 +205,7 @@ public class ListaCombos extends JDialog {
 	public static void cargarCombos(boolean masVendidos,Factura auxFact) {
 		model.setRowCount(0);
 		row = new Object[model.getColumnCount()];
-		try (Connection con = DriverManager.getConnection(SQLConnection.getConnectionURL()); Statement stmt = con.createStatement();) {
+		/*try (Connection con = DriverManager.getConnection(SQLConnection.getConnectionURL()); Statement stmt = con.createStatement();) {
 			if(auxFact==null) {
 				if(!masVendidos) {
 					ResultSet rs = stmt.executeQuery("SELECT * FROM F_Obtener_Combo()");
@@ -240,14 +240,16 @@ public class ListaCombos extends JDialog {
 			}
 		}catch (SQLException e) {
 			e.printStackTrace();
-		}	
-
-		/*
+		}	*/
+		
 		for (Combo combo : Tienda.getInstance().getLosCombo()) {
 			row[0] = combo.getNombre();
 			row[1] = combo.getDescuento()+"%";
 			row[2] = combo.precioCombo();
 			model.addRow(row);
-		}*/
+		}	
+		
+		
+		
 	}
 }

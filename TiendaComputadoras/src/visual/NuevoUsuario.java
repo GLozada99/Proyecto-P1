@@ -178,7 +178,7 @@ public class NuevoUsuario extends JDialog {
 					public void actionPerformed(ActionEvent arg0) {
 						Persona usuario1=null;
 						if(Tienda.getInstance().getLosUsuarios().contains(Tienda.getInstance().usuarioByCodigo(ftxtCedula.getText()))&&aux==null) {
-							JOptionPane.showMessageDialog(null, "El usuario ingresado ya está registrado");
+							JOptionPane.showMessageDialog(null, "El usuario ingresado ya estï¿½ registrado");
 						}
 						else {
 							boolean save = false;
@@ -218,9 +218,9 @@ public class NuevoUsuario extends JDialog {
 					txtDireccion.setText(aux.getDireccion());
 					ftxtTelefono.setText(aux.getTelefono());
 					try {
-						txtContra.setText(((Administrador)aux).getContraseña());	
+						txtContra.setText(((Administrador)aux).getContrasena());	
 					} catch (ClassCastException e) {
-						txtContra.setText(((Vendedor)aux).getContraseña());	
+						txtContra.setText(((Vendedor)aux).getContrasena());	
 					}
 				}
 
@@ -244,11 +244,11 @@ public class NuevoUsuario extends JDialog {
 			ftxtCedula.setText(aux.getCodigo());ftxtCedula.setEditable(false);
 			ftxtTelefono.setText(aux.getTelefono());
 			try {
-				txtContra.setText(((Administrador)aux).getContraseña());
+				txtContra.setText(((Administrador)aux).getContrasena());
 				rdnAdministrador.setSelected(true);
 				rdnVendedor.setSelected(false);
 			} catch (Exception e) {
-				txtContra.setText(((Vendedor)aux).getContraseña());
+				txtContra.setText(((Vendedor)aux).getContrasena());
 				rdnAdministrador.setSelected(false);
 				rdnVendedor.setSelected(true);
 			}

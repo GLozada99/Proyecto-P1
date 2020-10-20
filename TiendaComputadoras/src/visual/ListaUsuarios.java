@@ -84,7 +84,7 @@ public class ListaUsuarios extends JDialog {
 				{
 
 					model = new DefaultTableModel();
-					String[] header = {"Código","Nombre","Teléfono","Dirección","Contraseña", "Tipo"};
+					String[] header = {"Cï¿½digo","Nombre","Telï¿½fono","Direcciï¿½n","Contraseï¿½a", "Tipo"};
 					model.setColumnIdentifiers(header);
 					table = new JTable();
 					table.addMouseListener(new MouseAdapter() {
@@ -145,7 +145,7 @@ public class ListaUsuarios extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						Persona aux = Tienda.getInstance().usuarioByCodigo(codigo);
 						int i=1;
-						i = JOptionPane.showConfirmDialog(null, "Está seguro que desea eliminar al usuario:"+" "+aux.getNombre()+"?");
+						i = JOptionPane.showConfirmDialog(null, "Estï¿½ seguro que desea eliminar al usuario:"+" "+aux.getNombre()+"?");
 						if(i==0) {
 							Tienda.getInstance().getLosUsuarios().remove(aux);
 							SQLConnection.EliminarUsuario(aux);
@@ -172,10 +172,10 @@ public class ListaUsuarios extends JDialog {
 			row[2] = aux.getTelefono();
 			row[3] = aux.getDireccion();
 			if (aux instanceof Administrador) {
-				row[4] = ((Administrador)aux).getContraseña();
+				row[4] = ((Administrador)aux).getContrasena();
 				row[5] = "Administrador";
 			}else if(aux instanceof Vendedor) {
-				row[4] = ((Vendedor)aux).getContraseña();
+				row[4] = ((Vendedor)aux).getContrasena();
 				row[5] = "Vendedor";
 			} 
 			model.addRow(row);

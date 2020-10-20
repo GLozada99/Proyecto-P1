@@ -487,13 +487,13 @@ public class Tienda implements Serializable {
 			usuario = losUsuarios.get(i);
 			if(usuario instanceof Administrador || usuario instanceof Vendedor) {
 				try {
-					if(usuario.getCodigo().equals(codigo)&&((((Administrador)usuario).getContraseña().equals(contrasena)))){
+					if(usuario.getCodigo().equals(codigo)&&((((Administrador)usuario).getContrasena().equals(contrasena)))){
 						setUsuarioActual(usuario);
 						login = true;
 					}
 				}
 				catch (ClassCastException e) {
-					if(usuario.getCodigo().equals(codigo)&&((((Vendedor)usuario).getContraseña().equals(contrasena)))){
+					if(usuario.getCodigo().equals(codigo)&&((((Vendedor)usuario).getContrasena().equals(contrasena)))){
 						setUsuarioActual(usuario);
 						login = true;
 					}

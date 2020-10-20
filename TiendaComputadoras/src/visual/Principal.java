@@ -114,7 +114,9 @@ public class Principal extends JFrame implements  Runnable  {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}*/
-				setData();
+				
+				
+				//setData(); uncoment when fixing database problem
 
 			}
 		});
@@ -385,7 +387,7 @@ public class Principal extends JFrame implements  Runnable  {
 				while(true) {
 					try {
 						Thread.sleep(5000);
-						setData();
+						//setData(); uncoment when fixing database problem
 					} catch (Exception e) {
 						// TODO: handle exception
 					}
@@ -514,7 +516,7 @@ public class Principal extends JFrame implements  Runnable  {
 
 
 		// Creando el Grafico
-		JFreeChart chart = ChartFactory.createBarChart3D("Vendedores con más ventas","", "Ventas", dataset, PlotOrientation.VERTICAL, true,true, false);
+		JFreeChart chart = ChartFactory.createBarChart3D("Vendedores con mï¿½s ventas","", "Ventas", dataset, PlotOrientation.VERTICAL, true,true, false);
 		chart.setBackgroundPaint(SystemColor.inactiveCaption);
 		chart.getTitle().setPaint(Color.black); 
 		CategoryPlot p = chart.getCategoryPlot(); 

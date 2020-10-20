@@ -7,19 +7,19 @@ public class Administrador extends Persona implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String contraseña;
+	private String contrasena;
 	
-	public Administrador(String nombre, String telefono, String direccion, String codigo, String contraseña) {
+	public Administrador(String nombre, String telefono, String direccion, String codigo, String contrasena) {
 		super(nombre, telefono, direccion, codigo);
-		this.contraseña=contraseña;
+		this.contrasena=contrasena;
 	}
 
-	public String getContraseña() {
-		return contraseña;
+	public String getContrasena() {
+		return contrasena;
 	}
 
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
 	}
 
 	
