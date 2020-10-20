@@ -101,7 +101,7 @@ public class HistorialFacturas extends JDialog {
 				{
 
 					model = new DefaultTableModel();
-					String[] header = {"Código","Fecha","Cédula","Nombre del Cliente","Costo Total"};
+					String[] header = {"Cï¿½digo","Fecha","Cï¿½dula","Nombre del Cliente","Costo Total"};
 					model.setColumnIdentifiers(header);
 					table = new JTable();
 					table.addMouseListener(new MouseAdapter() {
@@ -174,7 +174,7 @@ public class HistorialFacturas extends JDialog {
 		model.setRowCount(0);
 		row = new Object[model.getColumnCount()];
 
-		try (Connection con = DriverManager.getConnection(SQLConnection.getConnectionURL()); Statement stmt = con.createStatement();) {
+	/*	try (Connection con = DriverManager.getConnection(SQLConnection.getConnectionURL()); Statement stmt = con.createStatement();) {
 			ResultSet rs = stmt.executeQuery("SELECT * FROM F_Obtener_Factura()");
 			while (rs.next()) {
 				Cliente cliente = Tienda.getInstance().findClientebyCedula(rs.getString("CodCliente"));
@@ -189,9 +189,9 @@ public class HistorialFacturas extends JDialog {
 			}
 		}catch (SQLException e) {
 			e.printStackTrace();
-		}	
+		}	*/
 
-		/*for (Factura aux : Tienda.getInstance().getLasFacturas()) {
+		for (Factura aux : Tienda.getInstance().getLasFacturas()) {
 			if(auxCli==aux.getElCliente() || auxCli==null) {
 				row[0] = aux.getCodigo();
 				row[1] = new SimpleDateFormat("yyyy-MM-dd HH:mm a").format(aux.getFecha());
@@ -201,7 +201,7 @@ public class HistorialFacturas extends JDialog {
 				row[4] = aux.getCosto();
 				model.addRow(row);
 			}
-		}*/
+		}
 	}
 }
 
